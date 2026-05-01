@@ -1,5 +1,13 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import phoneImg from "@assets/Phone_1777633894261.png";
+import shoesImg from "@assets/Shoes_1777633894262.png";
+import tableImg from "@assets/Table_1777633894262.png";
+import airpodMaxImg from "@assets/Airpod_max_1777633894262.png";
+import airpodImg from "@assets/Airpod_1777633894263.png";
+import candleImg from "@assets/candle_1777633894263.png";
+import chairImg from "@assets/Chair_1777633894263.png";
+import earringsImg from "@assets/Earrings_1777633894263.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -13,7 +21,16 @@ const SCRAMBLE_SPEED_MS = 100;
 
 const TOTAL_CARDS = 9;
 const FEATURED_INDEX = 4;
-const portraitSeeds = [10, 25, 37, 48, 75, 88, 99, 113];
+const portraitImages = [
+  phoneImg,
+  shoesImg,
+  tableImg,
+  airpodMaxImg,
+  airpodImg,
+  candleImg,
+  chairImg,
+  earringsImg,
+];
 const featuredSeed = 210;
 
 const denseCharIndex = ASCII_CHARS.lastIndexOf(".");
@@ -233,8 +250,7 @@ export default function LookGallery() {
         div.className = "img";
         const img = document.createElement("img");
         img.className = "ascii-reveal";
-        img.crossOrigin = "anonymous";
-        img.src = `https://picsum.photos/seed/${portraitSeeds[seedIdx]}/400/500`;
+        img.src = portraitImages[seedIdx]!;
         div.appendChild(img);
       }
       gallery.appendChild(div);
