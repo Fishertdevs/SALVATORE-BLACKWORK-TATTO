@@ -276,24 +276,28 @@ export default function LookGallery() {
       }
     });
 
-    // Featured card ASCII effect — uses LEFT crop of 16:9 source
+    // Featured card ASCII effect — stretches full source into the ASCII grid
     const runEffectLeftCrop = (
       img: HTMLImageElement,
       canvas: HTMLCanvasElement,
       delay: number,
       onDone?: () => void,
     ) => {
-      const targetAspect = ASPECT_W / ASPECT_H;
-      const cropW = img.naturalHeight * targetAspect;
-      const cropX = 0;
-      const cropY = 0;
-      const cropH = img.naturalHeight;
-
       const sc = document.createElement("canvas");
       sc.width = ASCII_COLS;
       sc.height = ASCII_ROWS;
       const sctx = sc.getContext("2d")!;
-      sctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, ASCII_COLS, ASCII_ROWS);
+      sctx.drawImage(
+        img,
+        0,
+        0,
+        img.naturalWidth,
+        img.naturalHeight,
+        0,
+        0,
+        ASCII_COLS,
+        ASCII_ROWS,
+      );
       const { data } = sctx.getImageData(0, 0, ASCII_COLS, ASCII_ROWS);
 
       const ag: string[][] = [];
@@ -352,7 +356,6 @@ export default function LookGallery() {
       expandedRef.current = true;
 
       const rect = featured.getBoundingClientRect();
-      const fullImg = fullSection.querySelector<HTMLImageElement>("#fullscreen-img");
 
       gsap.set(fullSection, {
         opacity: 1,
@@ -367,7 +370,6 @@ export default function LookGallery() {
         scaleX: 1,
         scaleY: 1,
       });
-      if (fullImg) gsap.set(fullImg, { objectPosition: "left center" });
       gsap.set(fullContent, { opacity: 0, y: 24 });
       gsap.set(backBtn, { opacity: 0, pointerEvents: "none" });
 
@@ -387,13 +389,6 @@ export default function LookGallery() {
           },
           0,
         );
-      if (fullImg) {
-        tl.to(
-          fullImg,
-          { objectPosition: "center center", duration: 0.8, ease: "expo.inOut" },
-          0,
-        );
-      }
       tl.to(
         fullContent,
         { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
@@ -421,7 +416,6 @@ export default function LookGallery() {
       if (!expandedRef.current) return;
 
       const rect = featured.getBoundingClientRect();
-      const fullImg = fullSection.querySelector<HTMLImageElement>("#fullscreen-img");
 
       const tl = gsap
         .timeline({
@@ -460,9 +454,6 @@ export default function LookGallery() {
           },
           "-=0.05",
         );
-      if (fullImg) {
-        tl.to(fullImg, { objectPosition: "left center", duration: 0.72 }, "<");
-      }
       tl.to(fullSection, { opacity: 0, duration: 0.2 }, "-=0.15")
         .to(gallery, { opacity: 1, duration: 0.35 }, "-=0.2")
         .to(featured, { opacity: 1, duration: 0.25 }, "-=0.2");

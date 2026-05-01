@@ -426,7 +426,8 @@
 }
 .look-root .img.featured { cursor: pointer; }
 .look-root #featured-img-el {
-  object-position: left center !important;
+  object-fit: fill !important;
+  object-position: center center !important;
   transition: none;
 }
 .look-root .img img {
@@ -476,8 +477,8 @@
 .look-root #fullscreen-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: left center;
+  object-fit: fill;
+  object-position: center center;
   display: block;
 }
 .look-root #fullscreen-content {
