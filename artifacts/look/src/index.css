@@ -447,15 +447,15 @@
 .look-root .img.revealed canvas { display: none; }
 .look-root .img.revealed img    { display: block; }
 
-/* 9 cards on a 7-col × 3-row grid, featured at col 4 row 2 */
+/* 9 cards on a 7-col × 3-row grid; featured alone in row 2 */
 .look-root .img:nth-child(1) { grid-column: 1; grid-row: 1; }
-.look-root .img:nth-child(2) { grid-column: 4; grid-row: 1; }
-.look-root .img:nth-child(3) { grid-column: 7; grid-row: 1; }
-.look-root .img:nth-child(4) { grid-column: 2; grid-row: 2; }
+.look-root .img:nth-child(2) { grid-column: 3; grid-row: 1; }
+.look-root .img:nth-child(3) { grid-column: 5; grid-row: 1; }
+.look-root .img:nth-child(4) { grid-column: 7; grid-row: 1; }
 .look-root .img:nth-child(5) { grid-column: 4; grid-row: 2; } /* featured */
-.look-root .img:nth-child(6) { grid-column: 6; grid-row: 2; }
-.look-root .img:nth-child(7) { grid-column: 1; grid-row: 3; }
-.look-root .img:nth-child(8) { grid-column: 4; grid-row: 3; }
+.look-root .img:nth-child(6) { grid-column: 1; grid-row: 3; }
+.look-root .img:nth-child(7) { grid-column: 3; grid-row: 3; }
+.look-root .img:nth-child(8) { grid-column: 5; grid-row: 3; }
 .look-root .img:nth-child(9) { grid-column: 7; grid-row: 3; }
 
 .look-root #fullscreen-section {
