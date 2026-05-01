@@ -491,11 +491,7 @@ export default function LookGallery() {
 
       <div id="fullscreen-section" ref={fullSectionRef}>
         <img id="fullscreen-img" src={mainImg} alt="" />
-        <div id="fullscreen-content" ref={fullContentRef}>
-          <h2>Look Into The Future</h2>
-          <p>SS 2025 — Eyewear &amp; Apparel Collection</p>
-          <button id="fullscreen-cta">Explore Collection →</button>
-        </div>
+        <div id="fullscreen-content" ref={fullContentRef} />
       </div>
 
       <button id="back-btn" ref={backBtnRef}>
