@@ -222,6 +222,7 @@ export default function LookGallery() {
       if (i === FEATURED_INDEX) {
         div.className = "img featured";
         const img = document.createElement("img");
+        img.id = "featured-img-el";
         img.crossOrigin = "anonymous";
         img.src = `https://picsum.photos/seed/${featuredSeed}/1600/900`;
         div.appendChild(img);
@@ -253,13 +254,55 @@ export default function LookGallery() {
       }
     });
 
-    // Featured card ASCII effect
+    // Featured card ASCII effect — uses LEFT crop of 16:9 source
+    const runEffectLeftCrop = (
+      img: HTMLImageElement,
+      canvas: HTMLCanvasElement,
+      delay: number,
+      onDone?: () => void,
+    ) => {
+      const targetAspect = ASPECT_W / ASPECT_H;
+      const cropW = img.naturalHeight * targetAspect;
+      const cropX = 0;
+      const cropY = 0;
+      const cropH = img.naturalHeight;
+
+      const sc = document.createElement("canvas");
+      sc.width = ASCII_COLS;
+      sc.height = ASCII_ROWS;
+      const sctx = sc.getContext("2d")!;
+      sctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, ASCII_COLS, ASCII_ROWS);
+      const { data } = sctx.getImageData(0, 0, ASCII_COLS, ASCII_ROWS);
+
+      const ag: string[][] = [];
+      const bg: number[][] = [];
+      for (let r = 0; r < ASCII_ROWS; r++) {
+        const ar: string[] = [];
+        const br: number[] = [];
+        for (let c = 0; c < ASCII_COLS; c++) {
+          const pi = (r * ASCII_COLS + c) * 4;
+          const lum =
+            (data[pi]! * 0.299 + data[pi + 1]! * 0.587 + data[pi + 2]! * 0.114) / 255;
+          const ci = Math.min(
+            ASCII_CHARS.length - 1,
+            Math.floor((1 - lum) * ASCII_CHARS.length),
+          );
+          ar.push(ASCII_CHARS[ci]!);
+          br.push(ci);
+        }
+        ag.push(ar);
+        bg.push(br);
+      }
+      prepareCanvas(canvas, ASCII_COLS, ASCII_ROWS);
+      animateCells(canvas, ag, bg, delay, ASCII_COLS, ASCII_ROWS, onDone);
+    };
+
     if (featuredCard) {
       const featuredImgEl = featuredCard.querySelector("img")!;
       const canvas = document.createElement("canvas");
       featuredCard.appendChild(canvas);
       const run = () =>
-        runEffect(featuredImgEl, canvas, 500, () => {
+        runEffectLeftCrop(featuredImgEl, canvas, 500, () => {
           featuredCard!.classList.add("revealed");
         });
       if (featuredImgEl.complete && featuredImgEl.naturalWidth) {
@@ -287,60 +330,64 @@ export default function LookGallery() {
       expandedRef.current = true;
 
       const rect = featured.getBoundingClientRect();
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const scaleX = rect.width / vw;
-      const scaleY = rect.height / vh;
-      const tx = rect.left + rect.width / 2 - vw / 2;
-      const ty = rect.top + rect.height / 2 - vh / 2;
+      const fullImg = fullSection.querySelector<HTMLImageElement>("#fullscreen-img");
 
       gsap.set(fullSection, {
         opacity: 1,
         pointerEvents: "all",
-        scaleX,
-        scaleY,
-        x: tx,
-        y: ty,
-        transformOrigin: "center center",
+        width: rect.width,
+        height: rect.height,
+        left: rect.left,
+        top: rect.top,
         borderRadius: "4px",
-        overflow: "hidden",
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
       });
+      if (fullImg) gsap.set(fullImg, { objectPosition: "left center" });
       gsap.set(fullContent, { opacity: 0, y: 24 });
       gsap.set(backBtn, { opacity: 0, pointerEvents: "none" });
 
-      gsap
+      const tl = gsap
         .timeline({ defaults: { ease: "expo.inOut" } })
         .to(gallery, { opacity: 0.12, duration: 0.5 }, 0)
         .to(featured, { opacity: 0, duration: 0.2 }, 0)
         .to(
           fullSection,
           {
-            scaleX: 1,
-            scaleY: 1,
-            x: 0,
-            y: 0,
+            width: "100vw",
+            height: "100vh",
+            left: 0,
+            top: 0,
             borderRadius: "0px",
             duration: 0.8,
           },
           0,
-        )
-        .to(
-          fullContent,
-          { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
-          "-=0.2",
-        )
-        .to(
-          backBtn,
-          {
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-            onStart: () => {
-              backBtn.style.pointerEvents = "all";
-            },
-          },
-          "-=0.15",
         );
+      if (fullImg) {
+        tl.to(
+          fullImg,
+          { objectPosition: "center center", duration: 0.8, ease: "expo.inOut" },
+          0,
+        );
+      }
+      tl.to(
+        fullContent,
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
+        "-=0.2",
+      ).to(
+        backBtn,
+        {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          onStart: () => {
+            backBtn.style.pointerEvents = "all";
+          },
+        },
+        "-=0.15",
+      );
     }
 
     function collapseSection() {
@@ -352,14 +399,9 @@ export default function LookGallery() {
       if (!expandedRef.current) return;
 
       const rect = featured.getBoundingClientRect();
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const scaleX = rect.width / vw;
-      const scaleY = rect.height / vh;
-      const tx = rect.left + rect.width / 2 - vw / 2;
-      const ty = rect.top + rect.height / 2 - vh / 2;
+      const fullImg = fullSection.querySelector<HTMLImageElement>("#fullscreen-img");
 
-      gsap
+      const tl = gsap
         .timeline({
           defaults: { ease: "expo.inOut" },
           onComplete: () => {
@@ -367,10 +409,10 @@ export default function LookGallery() {
             gsap.set(fullSection, {
               opacity: 0,
               pointerEvents: "none",
-              scaleX: 1,
-              scaleY: 1,
-              x: 0,
-              y: 0,
+              width: "100%",
+              height: "100%",
+              top: 0,
+              left: 0,
               borderRadius: "0px",
             });
           },
@@ -387,16 +429,19 @@ export default function LookGallery() {
         .to(
           fullSection,
           {
-            scaleX,
-            scaleY,
-            x: tx,
-            y: ty,
+            width: rect.width,
+            height: rect.height,
+            left: rect.left,
+            top: rect.top,
             borderRadius: "4px",
             duration: 0.72,
           },
           "-=0.05",
-        )
-        .to(fullSection, { opacity: 0, duration: 0.2 }, "-=0.15")
+        );
+      if (fullImg) {
+        tl.to(fullImg, { objectPosition: "left center", duration: 0.72 }, "<");
+      }
+      tl.to(fullSection, { opacity: 0, duration: 0.2 }, "-=0.15")
         .to(gallery, { opacity: 1, duration: 0.35 }, "-=0.2")
         .to(featured, { opacity: 1, duration: 0.25 }, "-=0.2");
     }
