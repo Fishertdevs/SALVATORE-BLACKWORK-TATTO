@@ -114,6 +114,10 @@ export default function LookGallery() {
     const ASCII_ROWS = Math.round(
       ASCII_COLS * (ASPECT_H / ASPECT_W) * (charWidth / charHeight),
     );
+    const FEATURED_ASCII_COLS = 50;
+    const FEATURED_ASCII_ROWS = Math.round(
+      FEATURED_ASCII_COLS * (9 / 16) * (charWidth / charHeight),
+    );
 
     const gallery = galleryRef.current;
     if (!gallery) return;
@@ -276,37 +280,43 @@ export default function LookGallery() {
       }
     });
 
-    // Featured card ASCII effect — stretches full source into the ASCII grid
+    // Featured card ASCII effect — 16:9 grid, source covered (cropped) to fit
     const runEffectLeftCrop = (
       img: HTMLImageElement,
       canvas: HTMLCanvasElement,
       delay: number,
       onDone?: () => void,
     ) => {
+      const cols = FEATURED_ASCII_COLS;
+      const rows = FEATURED_ASCII_ROWS;
+      const targetAspect = 16 / 9;
+      const srcAspect = img.naturalWidth / img.naturalHeight;
+      let cropW = img.naturalWidth;
+      let cropH = img.naturalHeight;
+      let cropX = 0;
+      let cropY = 0;
+      if (srcAspect > targetAspect) {
+        cropW = img.naturalHeight * targetAspect;
+        cropX = (img.naturalWidth - cropW) / 2;
+      } else {
+        cropH = img.naturalWidth / targetAspect;
+        cropY = (img.naturalHeight - cropH) / 2;
+      }
+
       const sc = document.createElement("canvas");
-      sc.width = ASCII_COLS;
-      sc.height = ASCII_ROWS;
+      sc.width = cols;
+      sc.height = rows;
       const sctx = sc.getContext("2d")!;
-      sctx.drawImage(
-        img,
-        0,
-        0,
-        img.naturalWidth,
-        img.naturalHeight,
-        0,
-        0,
-        ASCII_COLS,
-        ASCII_ROWS,
-      );
-      const { data } = sctx.getImageData(0, 0, ASCII_COLS, ASCII_ROWS);
+      sctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, cols, rows);
+      const { data } = sctx.getImageData(0, 0, cols, rows);
 
       const ag: string[][] = [];
       const bg: number[][] = [];
-      for (let r = 0; r < ASCII_ROWS; r++) {
+      for (let r = 0; r < rows; r++) {
         const ar: string[] = [];
         const br: number[] = [];
-        for (let c = 0; c < ASCII_COLS; c++) {
-          const pi = (r * ASCII_COLS + c) * 4;
+        for (let c = 0; c < cols; c++) {
+          const pi = (r * cols + c) * 4;
           const lum =
             (data[pi]! * 0.299 + data[pi + 1]! * 0.587 + data[pi + 2]! * 0.114) / 255;
           const ci = Math.min(
@@ -319,8 +329,8 @@ export default function LookGallery() {
         ag.push(ar);
         bg.push(br);
       }
-      prepareCanvas(canvas, ASCII_COLS, ASCII_ROWS);
-      animateCells(canvas, ag, bg, delay, ASCII_COLS, ASCII_ROWS, onDone);
+      prepareCanvas(canvas, cols, rows);
+      animateCells(canvas, ag, bg, delay, cols, rows, onDone);
     };
 
     if (featuredCard) {
