@@ -11,8 +11,9 @@ const CELL_APPEAR_MS = 2;
 const SCRAMBLE_COUNT = 10;
 const SCRAMBLE_SPEED_MS = 100;
 
-const FEATURED_INDEX = 6;
-const portraitSeeds = [10, 25, 37, 48, 62, 75, 88, 99, 113, 127, 140, 155, 168, 182, 197];
+const TOTAL_CARDS = 9;
+const FEATURED_INDEX = 4;
+const portraitSeeds = [10, 25, 37, 48, 75, 88, 99, 113];
 const featuredSeed = 210;
 
 const denseCharIndex = ASCII_CHARS.lastIndexOf(".");
@@ -216,8 +217,8 @@ export default function LookGallery() {
       animateCells(canvas, asciiGrid, brightnessGrid, delay, ASCII_COLS, ASCII_ROWS, onDone);
     };
 
-    // Build 16 cards
-    for (let i = 0; i < 16; i++) {
+    // Build cards
+    for (let i = 0; i < TOTAL_CARDS; i++) {
       const div = document.createElement("div");
       if (i === FEATURED_INDEX) {
         div.className = "img featured";
