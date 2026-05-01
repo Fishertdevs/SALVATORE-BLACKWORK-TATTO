@@ -8,6 +8,9 @@ import airpodImg from "@assets/Airpod_1777633894263.png";
 import candleImg from "@assets/candle_1777633894263.png";
 import chairImg from "@assets/Chair_1777633894263.png";
 import earringsImg from "@assets/Earrings_1777633894263.png";
+import glasses2Img from "@assets/Glasses_2_1777634693808.png";
+import nailImg from "@assets/Nail_1777634693809.png";
+import glasses1Img from "@assets/Glasses_1_1777634693810.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -19,7 +22,7 @@ const CELL_APPEAR_MS = 2;
 const SCRAMBLE_COUNT = 10;
 const SCRAMBLE_SPEED_MS = 100;
 
-const TOTAL_CARDS = 9;
+const TOTAL_CARDS = 12;
 const FEATURED_INDEX = 4;
 const portraitImages = [
   phoneImg,
@@ -30,6 +33,9 @@ const portraitImages = [
   candleImg,
   chairImg,
   earringsImg,
+  glasses2Img,
+  nailImg,
+  glasses1Img,
 ];
 const featuredSeed = 210;
 
