@@ -11,6 +11,7 @@ import earringsImg from "@assets/Earrings_1777633894263.png";
 import glasses2Img from "@assets/Glasses_2_1777634693808.png";
 import nailImg from "@assets/Nail_1777634693809.png";
 import glasses1Img from "@assets/Glasses_1_1777634693810.png";
+import mainImg from "@assets/Main_1777634895154.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -37,7 +38,6 @@ const portraitImages = [
   nailImg,
   glasses1Img,
 ];
-const featuredSeed = 210;
 
 const denseCharIndex = ASCII_CHARS.lastIndexOf(".");
 const denseChars = ASCII_CHARS.slice(denseCharIndex + 1).split("");
@@ -247,8 +247,7 @@ export default function LookGallery() {
         div.className = "img featured";
         const img = document.createElement("img");
         img.id = "featured-img-el";
-        img.crossOrigin = "anonymous";
-        img.src = `https://picsum.photos/seed/${featuredSeed}/1600/900`;
+        img.src = mainImg;
         div.appendChild(img);
         featuredCard = div;
       } else {
@@ -490,11 +489,7 @@ export default function LookGallery() {
       <div id="gallery-layer" ref={galleryRef} />
 
       <div id="fullscreen-section" ref={fullSectionRef}>
-        <img
-          id="fullscreen-img"
-          src={`https://picsum.photos/seed/${featuredSeed}/1600/900`}
-          alt=""
-        />
+        <img id="fullscreen-img" src={mainImg} alt="" />
         <div id="fullscreen-content" ref={fullContentRef}>
           <h2>Look Into The Future</h2>
           <p>SS 2025 — Eyewear &amp; Apparel Collection</p>
