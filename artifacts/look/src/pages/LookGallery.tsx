@@ -234,7 +234,8 @@ export default function LookGallery() {
       animateCells(canvas, asciiGrid, brightnessGrid, delay, ASCII_COLS, ASCII_ROWS, onDone);
     };
 
-    // Build cards
+    // Build cards (sub-images in random order)
+    const shuffledPortraits = shuffle([...portraitImages]);
     for (let i = 0; i < TOTAL_CARDS; i++) {
       const div = document.createElement("div");
       if (i === FEATURED_INDEX) {
@@ -250,7 +251,7 @@ export default function LookGallery() {
         div.className = "img";
         const img = document.createElement("img");
         img.className = "ascii-reveal";
-        img.src = portraitImages[seedIdx]!;
+        img.src = shuffledPortraits[seedIdx]!;
         div.appendChild(img);
       }
       gallery.appendChild(div);
