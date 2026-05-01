@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "LOOK — ASCII Reveal"
+version = "1.0.0"
+id = "artifacts/look"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18775
+
+[services.development]
+run = "pnpm --filter @workspace/look run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/look", "run", "build" ]
+publicDir = "artifacts/look/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18775"
+BASE_PATH = "/"
