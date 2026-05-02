@@ -588,7 +588,8 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 1.4;
-  color: #1a1a1a;
+  color: #E63027;
+  text-align: right;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;
