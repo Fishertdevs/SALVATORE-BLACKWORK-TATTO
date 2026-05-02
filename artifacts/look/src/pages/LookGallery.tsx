@@ -664,9 +664,15 @@ export default function LookGallery() {
                   <span className="archive-caption-name">FLUX BENCH</span>
                 </figcaption>
               </figure>
-              <div className="archive-img">
-                <img src={shoesImg} alt="Chrome heels" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={shoesImg} alt="Chrome heels" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-04</span>
+                  <span className="archive-caption-name">SCYTHE STILETTOS</span>
+                </figcaption>
+              </figure>
             </div>
             <div className="archive-col archive-col-2">
               <figure className="archive-item">
@@ -678,9 +684,15 @@ export default function LookGallery() {
                   <span className="archive-caption-name">MOLTEN CORE</span>
                 </figcaption>
               </figure>
-              <div className="archive-img">
-                <img src={earringsImg} alt="Sculptural ear cuff" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={earringsImg} alt="Sculptural ear cuff" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-05</span>
+                  <span className="archive-caption-name">SYMBIOTE CUFF</span>
+                </figcaption>
+              </figure>
             </div>
             <div className="archive-col archive-col-3">
               <figure className="archive-item">
@@ -692,9 +704,15 @@ export default function LookGallery() {
                   <span className="archive-caption-name">EXO-POD</span>
                 </figcaption>
               </figure>
-              <div className="archive-img">
-                <img src={airpodMaxImg} alt="Sculptural headphones" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={airpodMaxImg} alt="Sculptural headphones" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-06</span>
+                  <span className="archive-caption-name">VALKYRIE CANS</span>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
