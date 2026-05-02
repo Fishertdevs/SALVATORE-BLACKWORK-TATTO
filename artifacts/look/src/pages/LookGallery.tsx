@@ -596,6 +596,41 @@ export default function LookGallery() {
       <button id="back-btn" ref={backBtnRef}>
         ← Back
       </button>
+
+      <section className="archive-section">
+        <header className="archive-header">
+          <span>MORPH</span>
+          <span>NEW COLLECTION 2026'</span>
+          <span>66 PRODUCTS</span>
+          <span>MORPH</span>
+        </header>
+        <div className="archive-grid">
+          <div className="archive-col archive-col-1">
+            <div className="archive-img">
+              <img src={chairImg} alt="Chrome bench" />
+            </div>
+            <div className="archive-img">
+              <img src={shoesImg} alt="Chrome heels" />
+            </div>
+          </div>
+          <div className="archive-col archive-col-2">
+            <div className="archive-img">
+              <img src={candleImg} alt="Chrome candle holder" />
+            </div>
+            <div className="archive-img">
+              <img src={earringsImg} alt="Sculptural ear cuff" />
+            </div>
+          </div>
+          <div className="archive-col archive-col-3">
+            <div className="archive-img">
+              <img src={airpodImg} alt="Translucent case" />
+            </div>
+            <div className="archive-img">
+              <img src={airpodMaxImg} alt="Sculptural headphones" />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

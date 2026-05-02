@@ -400,8 +400,9 @@
 }
 .look-root {
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #111;
 }
 
@@ -650,4 +651,51 @@
   width: clamp(16px, 0.833vw, 21.33px);
   height: 1.5px;
   background: #1a1a1a;
+}
+
+/* Archive section — sits below hero in normal document flow.
+   margin-top: 100vh reserves viewport space for the (position:fixed) hero
+   so the archive doesn't overlap the intro/gallery at scroll = 0. */
+.look-root .archive-section {
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh;
+  background: #ffffff;
+  padding: 4rem clamp(40px, 4vw, 100px);
+  color: #1a1a1a;
+}
+.look-root .archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courier New', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+}
+.look-root .archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  gap: 16px;
+}
+.look-root .archive-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.look-root .archive-col-1 { margin-top: 0; }
+.look-root .archive-col-2 { margin-top: clamp(60px, 6vw, 120px); }
+.look-root .archive-col-3 { margin-top: clamp(120px, 12vw, 240px); }
+.look-root .archive-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.look-root .archive-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
