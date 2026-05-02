@@ -731,9 +731,9 @@
   flex-direction: column;
   gap: 200px;
 }
-.look-root .archive-col-1 { padding-top: 190px; }
-.look-root .archive-col-2 { padding-top: 290px; margin-left: 258px; }
-.look-root .archive-col-3 { padding-top: 390px; margin-left: 258px; }
+.look-root .archive-col-1 { padding-top: 130px; }
+.look-root .archive-col-2 { padding-top: 230px; margin-left: 258px; }
+.look-root .archive-col-3 { padding-top: 330px; margin-left: 258px; }
 .look-root .archive-img {
   width: 428px;
   aspect-ratio: 428 / 535;
