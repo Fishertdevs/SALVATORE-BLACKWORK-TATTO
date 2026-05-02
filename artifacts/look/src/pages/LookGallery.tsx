@@ -594,11 +594,30 @@ export default function LookGallery() {
         </div>
 
         <section className="archive-section">
-          <header className="archive-header">
-            <span>MORPH</span>
-            <span>NEW COLLECTION 2026'</span>
-            <span>66 PRODUCTS</span>
-            <span>MORPH</span>
+          <header className="archive-header" aria-label="MORPH — NEW COLLECTION 2026' — 66 PRODUCTS">
+            <div className="archive-marquee-track">
+              {[
+                "MORPH",
+                "NEW COLLECTION 2026'",
+                "66 PRODUCTS",
+                "MORPH",
+                "MORPH",
+                "NEW COLLECTION 2026'",
+                "66 PRODUCTS",
+                "MORPH",
+              ].map((label, i) => (
+                <span
+                  key={i}
+                  className="archive-marquee-item"
+                  aria-hidden={i >= 4}
+                >
+                  {label}
+                  <span className="archive-marquee-sep" aria-hidden="true">
+                    ▶
+                  </span>
+                </span>
+              ))}
+            </div>
           </header>
           <div className="archive-grid">
             <div className="archive-col archive-col-1">

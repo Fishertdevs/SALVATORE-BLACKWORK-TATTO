@@ -700,15 +700,47 @@
   padding: 4rem clamp(40px, 4vw, 100px);
   color: #1a1a1a;
 }
+/* Infinite-scroll marquee: track holds two identical copies of the
+   sequence, animated from translateX(0) to translateX(-50%) so the
+   second copy lands exactly where the first started — seamless loop. */
 .look-root .archive-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Courier New', ui-monospace, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  height: 60px;
   margin-bottom: 4rem;
+  overflow: hidden;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #1a1a1a;
+}
+.look-root .archive-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  width: max-content;
+  height: 100%;
+  animation: archive-marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+.look-root .archive-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4rem;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.look-root .archive-marquee-sep {
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+@keyframes archive-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .look-root .archive-marquee-track {
+    animation: none;
+  }
 }
 .look-root .archive-grid {
   display: grid;
