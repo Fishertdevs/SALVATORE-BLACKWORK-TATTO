@@ -743,10 +743,8 @@
   }
 }
 .look-root .archive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: start;
-  gap: 16px;
+  display: flex;
+  align-items: flex-start;
   padding: 0 60px;
 }
 .look-root .archive-col {
@@ -755,10 +753,10 @@
   gap: 16px;
 }
 .look-root .archive-col-1 { padding-top: 190px; }
-.look-root .archive-col-2 { padding-top: 290px; }
-.look-root .archive-col-3 { padding-top: 390px; }
+.look-root .archive-col-2 { padding-top: 290px; margin-left: 258px; }
+.look-root .archive-col-3 { padding-top: 390px; margin-left: 258px; }
 .look-root .archive-img {
-  width: 100%;
+  width: 428px;
   aspect-ratio: 428 / 535;
   overflow: hidden;
 }
