@@ -121,40 +121,66 @@ export default function LookGallery() {
 
   useEffect(() => {
     const root = fullSectionRef.current;
-    const images = Array.from(
+    const archiveImages = Array.from(
       document.querySelectorAll<HTMLElement>(".archive-section .archive-img"),
     );
-    if (!images.length) return;
+    const featuredTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        ".product-video-section .featured-label, .product-video-section .featured-about-text p, .product-video-section .product-video-wrap, .product-video-section .featured-headline",
+      ),
+    );
+    const targets: { el: HTMLElement; threshold: number }[] = [
+      ...archiveImages.map((el) => ({ el, threshold: 0.1 })),
+      ...featuredTargets.map((el) => ({ el, threshold: 0.15 })),
+    ];
+    if (!targets.length) return;
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      for (const { el } of targets) {
+        const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
+        el.style.transition = "none";
+        el.style.clipPath = to;
+      }
+      return;
+    }
     const revealed = new WeakSet<HTMLElement>();
     const reveal = (el: HTMLElement) => {
       if (revealed.has(el)) return;
       revealed.add(el);
       const delay = el.dataset.delay ?? "0s";
+      const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
       el.style.transition = `clip-path 1s cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
-      el.style.clipPath = "inset(0 0% 0 0)";
+      el.style.clipPath = to;
     };
+    const thresholdFor = new WeakMap<HTMLElement, number>();
+    targets.forEach((t) => thresholdFor.set(t.el, t.threshold));
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          reveal(entry.target as HTMLElement);
-          observer.unobserve(entry.target);
+          const el = entry.target as HTMLElement;
+          const minRatio = thresholdFor.get(el) ?? 0.1;
+          if (!entry.isIntersecting || entry.intersectionRatio < minRatio) continue;
+          reveal(el);
+          observer.unobserve(el);
         }
       },
-      { threshold: 0.1 },
+      { threshold: [0.1, 0.15] },
     );
-    images.forEach((img) => observer.observe(img));
+    targets.forEach(({ el }) => observer.observe(el));
     const checkAll = () => {
       const vh = window.innerHeight;
-      for (const img of images) {
-        if (revealed.has(img)) continue;
-        const rect = img.getBoundingClientRect();
+      for (const { el, threshold } of targets) {
+        if (revealed.has(el)) continue;
+        const rect = el.getBoundingClientRect();
         const visible =
           Math.max(0, Math.min(vh, rect.bottom) - Math.max(0, rect.top));
         const ratio = rect.height ? visible / rect.height : 0;
-        if (ratio >= 0.1) {
-          reveal(img);
-          observer.unobserve(img);
+        if (ratio >= threshold) {
+          reveal(el);
+          observer.unobserve(el);
         }
       }
     };
@@ -690,24 +716,24 @@ export default function LookGallery() {
         </div>
 
         <section className="product-video-section" aria-label="MORPH featured object">
-          <img className="featured-label" src={featuredLabelImg} alt="Featured" />
+          <img className="featured-label" src={featuredLabelImg} alt="Featured" data-delay="0s" />
           <div className="featured-grid">
             <div className="featured-col-left" aria-hidden="true" />
-            <div className="featured-col-right">
-              <p>
+            <div className="featured-about-text">
+              <p data-delay="0.2s">
                 MORPH operates at the intersection of fashion, sculpture, and material research.
                 Each object is conceived as a wearable artifact — shaped by algorithmic precision
                 and finished by hand. The collection draws from industrial processes, biological
                 structures, and the aesthetics of liquid metal in motion.
               </p>
-              <p>
+              <p data-delay="0.35s">
                 Founded with a singular obsession: to dissolve the boundary between the body and
                 the object it carries. MORPH does not follow seasonal cycles. Each piece exists as
                 a numbered edition, documented and archived as part of an ongoing material study.
               </p>
             </div>
           </div>
-          <div className="featured-video-wrap">
+          <div className="product-video-wrap" data-delay="0.5s">
             <video
               className="product-video"
               autoPlay
@@ -720,7 +746,7 @@ export default function LookGallery() {
               <source src={productVideoMp4} type="video/mp4" />
             </video>
           </div>
-          <h3 className="featured-headline">MORPH OBJECT 01 — WHERE JEWELRY BECOMES ARCHITECTURE</h3>
+          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">MORPH OBJECT 01 — WHERE JEWELRY BECOMES ARCHITECTURE</h3>
         </section>
         <section className="archive-section">
           <header className="archive-header" aria-label="MORPH — NEW COLLECTION 2026' — 66 PRODUCTS">
