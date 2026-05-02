@@ -603,7 +603,7 @@ export default function LookGallery() {
           <div className="archive-grid">
             <div className="archive-col archive-col-1">
               <div className="archive-img">
-                <img src={chairImg} alt="Chrome bench" />
+                <img src={tableImg} alt="Chrome table" />
               </div>
               <div className="archive-img">
                 <img src={shoesImg} alt="Chrome heels" />
