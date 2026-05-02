@@ -103,8 +103,10 @@ export default function LookGallery() {
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
   const backBtnRef = useRef<HTMLButtonElement>(null);
+  const navbarRef = useRef<HTMLElement>(null);
   const featuredCardRef = useRef<HTMLDivElement | null>(null);
   const expandedRef = useRef(false);
+  const activeTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const measureCtx = document.createElement("canvas").getContext("2d")!;
@@ -360,10 +362,12 @@ export default function LookGallery() {
       const fullSection = fullSectionRef.current;
       const fullContent = fullContentRef.current;
       const backBtn = backBtnRef.current;
+      const navbar = navbarRef.current;
       const featured = featuredCardRef.current;
       if (!fullSection || !fullContent || !backBtn || !featured) return;
       if (expandedRef.current) return;
       expandedRef.current = true;
+      activeTimelineRef.current?.kill();
 
       const rect = featured.getBoundingClientRect();
 
@@ -382,6 +386,7 @@ export default function LookGallery() {
       });
       gsap.set(fullContent, { opacity: 0, y: 24 });
       gsap.set(backBtn, { opacity: 0, pointerEvents: "none" });
+      if (navbar) gsap.set(navbar, { y: "-100%", autoAlpha: 0 });
 
       const tl = gsap
         .timeline({ defaults: { ease: "expo.inOut" } })
@@ -399,6 +404,7 @@ export default function LookGallery() {
           },
           0,
         );
+      activeTimelineRef.current = tl;
       tl.to(
         fullContent,
         { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
@@ -415,15 +421,24 @@ export default function LookGallery() {
         },
         "-=0.15",
       );
+      if (navbar) {
+        tl.to(
+          navbar,
+          { y: "0%", autoAlpha: 1, duration: 0.55, ease: "expo.out" },
+          "-=0.5",
+        );
+      }
     }
 
     function collapseSection() {
       const fullSection = fullSectionRef.current;
       const fullContent = fullContentRef.current;
       const backBtn = backBtnRef.current;
+      const navbar = navbarRef.current;
       const featured = featuredCardRef.current;
       if (!fullSection || !fullContent || !backBtn || !featured) return;
       if (!expandedRef.current) return;
+      activeTimelineRef.current?.kill();
 
       const rect = featured.getBoundingClientRect();
 
@@ -432,6 +447,7 @@ export default function LookGallery() {
           defaults: { ease: "expo.inOut" },
           onComplete: () => {
             expandedRef.current = false;
+            activeTimelineRef.current = null;
             gsap.set(fullSection, {
               opacity: 0,
               pointerEvents: "none",
@@ -451,22 +467,30 @@ export default function LookGallery() {
             backBtn.style.pointerEvents = "none";
           },
         })
-        .to(fullContent, { opacity: 0, y: 16, duration: 0.22, ease: "power2.in" }, "<")
-        .to(
-          fullSection,
-          {
-            width: rect.width,
-            height: rect.height,
-            left: rect.left,
-            top: rect.top,
-            borderRadius: "4px",
-            duration: 0.72,
-          },
-          "-=0.05",
+        .to(fullContent, { opacity: 0, y: 16, duration: 0.22, ease: "power2.in" }, "<");
+      if (navbar) {
+        tl.to(
+          navbar,
+          { y: "-100%", autoAlpha: 0, duration: 0.35, ease: "power2.in" },
+          "<",
         );
-      tl.to(fullSection, { opacity: 0, duration: 0.2 }, "-=0.15")
+      }
+      tl.to(
+        fullSection,
+        {
+          width: rect.width,
+          height: rect.height,
+          left: rect.left,
+          top: rect.top,
+          borderRadius: "4px",
+          duration: 0.72,
+        },
+        "-=0.05",
+      )
+        .to(fullSection, { opacity: 0, duration: 0.2 }, "-=0.15")
         .to(gallery, { opacity: 1, duration: 0.35 }, "-=0.2")
         .to(featured, { opacity: 1, duration: 0.25 }, "-=0.2");
+      activeTimelineRef.current = tl;
     }
 
     const handleBack = () => collapseSection();
@@ -491,6 +515,33 @@ export default function LookGallery() {
 
       <div id="fullscreen-section" ref={fullSectionRef}>
         <img id="fullscreen-img" src={mainImg} alt="" />
+        <nav id="hero-navbar" ref={navbarRef}>
+          <div className="nav-left">
+            <span className="nav-dot" />
+            <span>GMT +9, CANADA</span>
+          </div>
+          <ul className="nav-links">
+            <li>
+              <span className="nav-plus">+</span>
+              <span>STUDIO SESSION</span>
+            </li>
+            <li>
+              <span className="nav-plus">+</span>
+              <span>LABORATORY</span>
+            </li>
+            <li>
+              <span className="nav-plus">+</span>
+              <span>OUR VISIONARY</span>
+            </li>
+          </ul>
+          <div className="nav-right">
+            <span>MENU</span>
+            <button className="nav-burger" aria-label="Open menu">
+              <span />
+              <span />
+            </button>
+          </div>
+        </nav>
         <div id="fullscreen-content" ref={fullContentRef} />
       </div>
 
