@@ -15,12 +15,6 @@ import mainImg from "@assets/hero_new_image_1777693117619.png";
 import eps26Img from "@assets/EPS_26_1777694909337.png";
 import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
 import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
-import archiveChair from "@assets/Chair_1777633894263.png";
-import archiveShoes from "@assets/Shoes_1777633894262.png";
-import archiveCandle from "@assets/candle_1777633894263.png";
-import archiveEarrings from "@assets/Earrings_1777633894263.png";
-import archiveAirpod from "@assets/Airpod_1777633894263.png";
-import archiveAirpodMax from "@assets/Airpod_max_1777633894262.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -602,29 +596,6 @@ export default function LookGallery() {
       <button id="back-btn" ref={backBtnRef}>
         ← Back
       </button>
-
-      <section id="archive-section">
-        <header className="archive-header">
-          <span>MORPH</span>
-          <span>NEW COLLECTION 2026</span>
-          <span>66 PRODUCTS</span>
-          <span>MORPH</span>
-        </header>
-        <div className="archive-grid">
-          <div className="archive-col">
-            <div className="archive-img"><img src={archiveChair} alt="" /></div>
-            <div className="archive-img"><img src={archiveShoes} alt="" /></div>
-          </div>
-          <div className="archive-col">
-            <div className="archive-img"><img src={archiveCandle} alt="" /></div>
-            <div className="archive-img"><img src={archiveEarrings} alt="" /></div>
-          </div>
-          <div className="archive-col">
-            <div className="archive-img"><img src={archiveAirpod} alt="" /></div>
-            <div className="archive-img"><img src={archiveAirpodMax} alt="" /></div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

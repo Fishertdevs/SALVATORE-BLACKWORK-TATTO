@@ -399,15 +399,15 @@
   box-sizing: border-box;
 }
 .look-root {
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   background: #111;
 }
 
 .look-root #gallery-layer {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   padding: 1.6rem;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -650,66 +650,4 @@
   width: clamp(16px, 0.833vw, 21.33px);
   height: 1.5px;
   background: #1a1a1a;
-}
-
-/* === Archive Section === */
-#archive-section {
-  background: #ffffff;
-  padding: 4rem clamp(40px, 4vw, 100px);
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-#archive-section .archive-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4rem;
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #1a1a1a;
-}
-#archive-section .archive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  align-items: start;
-}
-#archive-section .archive-col {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-#archive-section .archive-col:nth-child(1) { margin-top: 0; }
-#archive-section .archive-col:nth-child(2) { margin-top: clamp(60px, 6vw, 120px); }
-#archive-section .archive-col:nth-child(3) { margin-top: clamp(120px, 12vw, 240px); }
-#archive-section .archive-img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: #f4f4f4;
-}
-#archive-section .archive-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-@media (max-width: 900px) {
-  #archive-section .archive-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  #archive-section .archive-col:nth-child(3) { margin-top: 0; }
-}
-@media (max-width: 600px) {
-  #archive-section .archive-grid {
-    grid-template-columns: 1fr;
-  }
-  #archive-section .archive-col:nth-child(1),
-  #archive-section .archive-col:nth-child(2),
-  #archive-section .archive-col:nth-child(3) {
-    margin-top: 0;
-  }
 }
