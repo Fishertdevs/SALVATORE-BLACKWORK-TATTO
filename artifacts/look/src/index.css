@@ -2,6 +2,43 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+/* Helvetica Neue family — self-hosted from attached_assets */
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../../../attached_assets/HelveticaNeueThin_1777708019211.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../../../attached_assets/HelveticaNeueLight_1777708019212.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../../../attached_assets/HelveticaNeueMedium_1777708019211.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../../../attached_assets/HelveticaNeueBold_1777708019212.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../../../attached_assets/HelveticaNeueHeavy_1777708019212.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
