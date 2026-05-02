@@ -488,7 +488,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0;
+  opacity: 1;
 }
 .look-root .hero-left {
   position: absolute;
@@ -502,11 +502,15 @@
   display: block;
   width: clamp(290px, 15.104vw, 386.67px);
   height: auto;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root .hero-look {
   display: block;
   width: clamp(380px, 19.792vw, 506.67px);
   height: auto;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root .hero-future {
   position: absolute;
@@ -515,6 +519,8 @@
   width: clamp(460px, 23.958vw, 613.33px);
   height: auto;
   display: block;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;

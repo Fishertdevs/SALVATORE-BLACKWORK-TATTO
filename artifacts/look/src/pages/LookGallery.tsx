@@ -110,6 +110,9 @@ export default function LookGallery() {
   const featuredCardRef = useRef<HTMLDivElement | null>(null);
   const expandedRef = useRef(false);
   const activeTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const heroEpsRef = useRef<HTMLImageElement>(null);
+  const heroLookRef = useRef<HTMLImageElement>(null);
+  const heroFutureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const measureCtx = document.createElement("canvas").getContext("2d")!;
@@ -387,10 +390,17 @@ export default function LookGallery() {
         scaleX: 1,
         scaleY: 1,
       });
-      gsap.set(fullContent, { opacity: 0, y: 24 });
+      gsap.set(fullContent, { opacity: 1, y: 0 });
       gsap.set(backBtn, { opacity: 0, pointerEvents: "none" });
       if (navbar) gsap.set(navbar, { y: "-100%", autoAlpha: 0 });
+      const heroOverlays = [
+        heroEpsRef.current,
+        heroLookRef.current,
+        heroFutureRef.current,
+      ].filter((el): el is HTMLImageElement => el !== null);
+      gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
 
+      const ZOOM_DURATION = 0.8;
       const tl = gsap
         .timeline({ defaults: { ease: "expo.inOut" } })
         .to(gallery, { opacity: 0.12, duration: 0.5 }, 0)
@@ -403,16 +413,12 @@ export default function LookGallery() {
             left: 0,
             top: 0,
             borderRadius: "0px",
-            duration: 0.8,
+            duration: ZOOM_DURATION,
           },
           0,
         );
       activeTimelineRef.current = tl;
       tl.to(
-        fullContent,
-        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
-        "-=0.2",
-      ).to(
         backBtn,
         {
           opacity: 1,
@@ -422,14 +428,31 @@ export default function LookGallery() {
             backBtn.style.pointerEvents = "all";
           },
         },
-        "-=0.15",
+        ZOOM_DURATION - 0.15,
       );
       if (navbar) {
         tl.to(
           navbar,
           { y: "0%", autoAlpha: 1, duration: 0.55, ease: "expo.out" },
-          "-=0.5",
+          ZOOM_DURATION - 0.3,
         );
+      }
+      const REVEAL_DURATION = 0.85;
+      const REVEAL_EASE = "power3.out";
+      const REVEAL_FROM = { clipPath: "inset(0px 100% 0px 0px)" };
+      const REVEAL_TO = {
+        clipPath: "inset(0px 0% 0px 0px)",
+        duration: REVEAL_DURATION,
+        ease: REVEAL_EASE,
+      };
+      if (heroEpsRef.current) {
+        tl.fromTo(heroEpsRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.5);
+      }
+      if (heroLookRef.current) {
+        tl.fromTo(heroLookRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.7);
+      }
+      if (heroFutureRef.current) {
+        tl.fromTo(heroFutureRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.9);
       }
     }
 
@@ -444,6 +467,12 @@ export default function LookGallery() {
       activeTimelineRef.current?.kill();
 
       const rect = featured.getBoundingClientRect();
+
+      const heroOverlays = [
+        heroEpsRef.current,
+        heroLookRef.current,
+        heroFutureRef.current,
+      ].filter((el): el is HTMLImageElement => el !== null);
 
       const tl = gsap
         .timeline({
@@ -460,6 +489,7 @@ export default function LookGallery() {
               left: 0,
               borderRadius: "0px",
             });
+            gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
           },
         })
         .to(backBtn, {
@@ -470,7 +500,16 @@ export default function LookGallery() {
             backBtn.style.pointerEvents = "none";
           },
         })
-        .to(fullContent, { opacity: 0, y: 16, duration: 0.22, ease: "power2.in" }, "<");
+        .to(
+          heroOverlays,
+          {
+            clipPath: "inset(0 100% 0 0)",
+            duration: 0.35,
+            ease: "power2.in",
+            stagger: 0.04,
+          },
+          "<",
+        );
       if (navbar) {
         tl.to(
           navbar,
@@ -547,10 +586,10 @@ export default function LookGallery() {
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-left">
-            <img className="hero-eps" src={eps26Img} alt="EPS - 26" />
-            <img className="hero-look" src={lookIntoImg} alt="LOOK INTO" />
+            <img className="hero-eps" ref={heroEpsRef} src={eps26Img} alt="EPS - 26" />
+            <img className="hero-look" ref={heroLookRef} src={lookIntoImg} alt="LOOK INTO" />
           </div>
-          <img className="hero-future" src={theFutureImg} alt="THE FUTURE" />
+          <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
         </div>
       </div>
 
