@@ -39,6 +39,22 @@
   font-display: swap;
 }
 
+/* Beautique Display family — self-hosted from attached_assets */
+@font-face {
+  font-family: 'Beautique Display';
+  src: url('../../../attached_assets/BeautiqueDisplay-Light_1777712082984.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Beautique Display';
+  src: url('../../../attached_assets/BeautiqueDisplay-Regular_1777712082985.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
