@@ -115,6 +115,67 @@ export default function LookGallery() {
   const heroFutureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const fs = fullSectionRef.current;
+      if (!fs || !expandedRef.current) return;
+      e.preventDefault();
+      fs.scrollTop += e.deltaY;
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      const fs = fullSectionRef.current;
+      if (!fs || !expandedRef.current) return;
+      const step = fs.clientHeight;
+      switch (e.key) {
+        case "ArrowDown":
+          fs.scrollTop += 80;
+          break;
+        case "ArrowUp":
+          fs.scrollTop -= 80;
+          break;
+        case "PageDown":
+        case " ":
+          fs.scrollTop += step * 0.9;
+          break;
+        case "PageUp":
+          fs.scrollTop -= step * 0.9;
+          break;
+        case "Home":
+          fs.scrollTop = 0;
+          break;
+        case "End":
+          fs.scrollTop = fs.scrollHeight;
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    };
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0]?.clientY ?? 0;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      const fs = fullSectionRef.current;
+      if (!fs || !expandedRef.current) return;
+      const y = e.touches[0]?.clientY ?? 0;
+      const dy = touchStartY - y;
+      touchStartY = y;
+      fs.scrollTop += dy;
+      e.preventDefault();
+    };
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("keydown", handleKey);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
+  useEffect(() => {
     const measureCtx = document.createElement("canvas").getContext("2d")!;
     measureCtx.font = `${FONT_SIZE}px monospace`;
     const charWidth = Math.ceil(measureCtx.measureText("M").width);
