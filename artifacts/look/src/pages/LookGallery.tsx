@@ -655,25 +655,43 @@ export default function LookGallery() {
           </header>
           <div className="archive-grid">
             <div className="archive-col archive-col-1">
-              <div className="archive-img">
-                <img src={tableImg} alt="Chrome table" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={tableImg} alt="Chrome table" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-01</span>
+                  <span className="archive-caption-name">FLUX BENCH</span>
+                </figcaption>
+              </figure>
               <div className="archive-img">
                 <img src={shoesImg} alt="Chrome heels" />
               </div>
             </div>
             <div className="archive-col archive-col-2">
-              <div className="archive-img">
-                <img src={candleImg} alt="Chrome candle holder" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={candleImg} alt="Chrome candle holder" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-02</span>
+                  <span className="archive-caption-name">MOLTEN CORE</span>
+                </figcaption>
+              </figure>
               <div className="archive-img">
                 <img src={earringsImg} alt="Sculptural ear cuff" />
               </div>
             </div>
             <div className="archive-col archive-col-3">
-              <div className="archive-img">
-                <img src={airpodImg} alt="Translucent case" />
-              </div>
+              <figure className="archive-item">
+                <div className="archive-img">
+                  <img src={airpodImg} alt="Translucent case" />
+                </div>
+                <figcaption className="archive-caption">
+                  <span className="archive-caption-code">OBJ-03</span>
+                  <span className="archive-caption-name">EXO-POD</span>
+                </figcaption>
+              </figure>
               <div className="archive-img">
                 <img src={airpodMaxImg} alt="Sculptural headphones" />
               </div>

@@ -753,6 +753,24 @@
 .look-root .archive-col-1 { padding-top: 130px; }
 .look-root .archive-col-2 { padding-top: 230px; margin-left: 258px; }
 .look-root .archive-col-3 { padding-top: 330px; margin-left: 258px; }
+.look-root .archive-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.look-root .archive-caption {
+  width: 428px;
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: #000;
+  text-transform: uppercase;
+}
 .look-root .archive-img {
   width: 428px;
   aspect-ratio: 428 / 535;
