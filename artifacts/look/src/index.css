@@ -718,13 +718,9 @@
   box-sizing: border-box;
 }
 .look-root .featured-label {
-  margin: 0;
-  font-family: 'Playfair Display', 'Beautique Display', 'Times New Roman', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 1;
-  color: #E63027;
+  display: block;
+  height: 64px;
+  width: auto;
 }
 .look-root .featured-grid {
   display: grid;

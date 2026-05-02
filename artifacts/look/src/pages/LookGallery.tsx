@@ -16,6 +16,7 @@ import eps26Img from "@assets/EPS_26_1777694909337.png";
 import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
 import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
+import featuredLabelImg from "@assets/Featured_1777721133168.png";
 
 const productVideoMp4 = `${import.meta.env.BASE_URL}product-video.mp4`;
 const productVideoWebm = `${import.meta.env.BASE_URL}product-video.webm`;
@@ -689,7 +690,7 @@ export default function LookGallery() {
         </div>
 
         <section className="product-video-section" aria-label="MORPH featured object">
-          <h2 className="featured-label">Featured</h2>
+          <img className="featured-label" src={featuredLabelImg} alt="Featured" />
           <div className="featured-grid">
             <div className="featured-col-left" aria-hidden="true" />
             <div className="featured-col-right">
