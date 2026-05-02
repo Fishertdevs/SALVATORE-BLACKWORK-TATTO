@@ -411,19 +411,23 @@
   left: 0;
   right: 0;
   height: 56px;
-  z-index: 50;
+  z-index: 200;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 1.6rem;
-  background: transparent;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #d8d8d8;
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateY(-100%);
   pointer-events: none;
+  will-change: transform;
 }
 .look-root #look-nav > * { pointer-events: auto; }
 
@@ -492,7 +496,7 @@
 
 .look-root #gallery-layer {
   position: fixed;
-  inset: 56px 0 0 0;
+  inset: 0;
   padding: 1.6rem;
   display: grid;
   grid-template-columns: repeat(10, 1fr);

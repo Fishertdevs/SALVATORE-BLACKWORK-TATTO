@@ -103,6 +103,7 @@ export default function LookGallery() {
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
   const backBtnRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
   const featuredCardRef = useRef<HTMLDivElement | null>(null);
   const expandedRef = useRef(false);
 
@@ -361,6 +362,7 @@ export default function LookGallery() {
       const fullContent = fullContentRef.current;
       const backBtn = backBtnRef.current;
       const featured = featuredCardRef.current;
+      const nav = navRef.current;
       if (!fullSection || !fullContent || !backBtn || !featured) return;
       if (expandedRef.current) return;
       expandedRef.current = true;
@@ -399,6 +401,20 @@ export default function LookGallery() {
           },
           0,
         );
+      if (nav) {
+        tl.to(
+          nav,
+          {
+            yPercent: 0,
+            duration: 0.7,
+            ease: "expo.out",
+            onStart: () => {
+              nav.style.pointerEvents = "auto";
+            },
+          },
+          0.15,
+        );
+      }
       tl.to(
         fullContent,
         { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" },
@@ -422,6 +438,7 @@ export default function LookGallery() {
       const fullContent = fullContentRef.current;
       const backBtn = backBtnRef.current;
       const featured = featuredCardRef.current;
+      const nav = navRef.current;
       if (!fullSection || !fullContent || !backBtn || !featured) return;
       if (!expandedRef.current) return;
 
@@ -451,7 +468,22 @@ export default function LookGallery() {
             backBtn.style.pointerEvents = "none";
           },
         })
-        .to(fullContent, { opacity: 0, y: 16, duration: 0.22, ease: "power2.in" }, "<")
+        .to(fullContent, { opacity: 0, y: 16, duration: 0.22, ease: "power2.in" }, "<");
+      if (nav) {
+        tl.to(
+          nav,
+          {
+            yPercent: -100,
+            duration: 0.55,
+            ease: "expo.in",
+            onComplete: () => {
+              nav.style.pointerEvents = "none";
+            },
+          },
+          "<",
+        );
+      }
+      tl
         .to(
           fullSection,
           {
@@ -487,7 +519,7 @@ export default function LookGallery() {
 
   return (
     <div className="look-root">
-      <nav id="look-nav">
+      <nav id="look-nav" ref={navRef}>
         <div className="nav-left">
           <span className="dot" />
           <span>GMT +9, CANADA</span>
