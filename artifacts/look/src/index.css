@@ -581,28 +581,6 @@
   border-color: #fff;
   background: rgba(255,255,255,0.06);
 }
-.look-root #back-btn {
-  position: fixed;
-  top: 2rem; left: 2rem;
-  z-index: 101;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  font-family: monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: background 0.2s;
-}
-.look-root #back-btn:hover { background: rgba(255,255,255,0.12); }
-
 /* Hero navbar — slides down when featured image expands */
 .look-root #hero-navbar {
   position: absolute;

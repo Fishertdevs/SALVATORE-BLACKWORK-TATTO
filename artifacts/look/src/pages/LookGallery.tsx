@@ -105,7 +105,6 @@ export default function LookGallery() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
-  const backBtnRef = useRef<HTMLButtonElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
   const featuredCardRef = useRef<HTMLDivElement | null>(null);
   const expandedRef = useRef(false);
@@ -425,10 +424,9 @@ export default function LookGallery() {
     function expandSection() {
       const fullSection = fullSectionRef.current;
       const fullContent = fullContentRef.current;
-      const backBtn = backBtnRef.current;
       const navbar = navbarRef.current;
       const featured = featuredCardRef.current;
-      if (!fullSection || !fullContent || !backBtn || !featured) return;
+      if (!fullSection || !fullContent || !featured) return;
       if (expandedRef.current) return;
       expandedRef.current = true;
       activeTimelineRef.current?.kill();
@@ -449,7 +447,6 @@ export default function LookGallery() {
         scaleY: 1,
       });
       gsap.set(fullContent, { opacity: 1, y: 0 });
-      gsap.set(backBtn, { opacity: 0, pointerEvents: "none" });
       if (navbar) gsap.set(navbar, { y: "-100%", autoAlpha: 0 });
       const heroOverlays = [
         heroEpsRef.current,
@@ -476,18 +473,6 @@ export default function LookGallery() {
           0,
         );
       activeTimelineRef.current = tl;
-      tl.to(
-        backBtn,
-        {
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.out",
-          onStart: () => {
-            backBtn.style.pointerEvents = "all";
-          },
-        },
-        ZOOM_DURATION - 0.15,
-      );
       if (navbar) {
         tl.to(
           navbar,
@@ -517,10 +502,9 @@ export default function LookGallery() {
     function collapseSection() {
       const fullSection = fullSectionRef.current;
       const fullContent = fullContentRef.current;
-      const backBtn = backBtnRef.current;
       const navbar = navbarRef.current;
       const featured = featuredCardRef.current;
-      if (!fullSection || !fullContent || !backBtn || !featured) return;
+      if (!fullSection || !fullContent || !featured) return;
       if (!expandedRef.current) return;
       activeTimelineRef.current?.kill();
 
@@ -554,24 +538,12 @@ export default function LookGallery() {
             gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
           },
         })
-        .to(backBtn, {
-          opacity: 0,
-          duration: 0.18,
+        .to(heroOverlays, {
+          clipPath: "inset(0 100% 0 0)",
+          duration: 0.35,
           ease: "power2.in",
-          onStart: () => {
-            backBtn.style.pointerEvents = "none";
-          },
-        })
-        .to(
-          heroOverlays,
-          {
-            clipPath: "inset(0 100% 0 0)",
-            duration: 0.35,
-            ease: "power2.in",
-            stagger: 0.04,
-          },
-          "<",
-        );
+          stagger: 0.04,
+        });
       if (navbar) {
         tl.to(
           navbar,
@@ -597,13 +569,10 @@ export default function LookGallery() {
       activeTimelineRef.current = tl;
     }
 
-    const handleBack = () => collapseSection();
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") collapseSection();
     };
-    backBtnRef.current?.addEventListener("click", handleBack);
     document.addEventListener("keydown", handleKey);
-    cleanups.push(() => backBtnRef.current?.removeEventListener("click", handleBack));
     cleanups.push(() => document.removeEventListener("keydown", handleKey));
 
     return () => {
@@ -709,9 +678,6 @@ export default function LookGallery() {
         </section>
       </div>
 
-      <button id="back-btn" ref={backBtnRef}>
-        ← Back
-      </button>
     </div>
   );
 }
