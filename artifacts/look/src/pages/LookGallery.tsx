@@ -11,7 +11,7 @@ import earringsImg from "@assets/Earrings_1777633894263.png";
 import glasses2Img from "@assets/Glasses_2_1777634693808.png";
 import nailImg from "@assets/Nail_1777634693809.png";
 import glasses1Img from "@assets/Glasses_1_1777634693810.png";
-import mainImg from "@assets/Main_1777634895154.png";
+import mainImg from "@assets/hero_new_image_1777693117619.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
