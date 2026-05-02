@@ -697,7 +697,7 @@
   position: relative;
   z-index: 2;
   background: #ffffff;
-  padding: 4rem clamp(40px, 4vw, 100px);
+  padding: 0;
   color: #1a1a1a;
 }
 /* Infinite-scroll marquee: track holds two identical copies of the
@@ -715,7 +715,7 @@
 .look-root .archive-marquee-track {
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 200px;
   width: max-content;
   height: 100%;
   animation: archive-marquee-scroll 40s linear infinite;
@@ -724,7 +724,7 @@
 .look-root .archive-marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: 4rem;
+  gap: 200px;
   white-space: nowrap;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -747,6 +747,7 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: start;
   gap: 16px;
+  padding: 0 clamp(40px, 4vw, 100px) 4rem;
 }
 .look-root .archive-col {
   display: flex;
