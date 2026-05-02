@@ -555,8 +555,8 @@
 }
 .look-root .hero-eps {
   display: block;
-  width: clamp(290px, 15.104vw, 386.67px);
-  height: auto;
+  height: 150px;
+  width: auto;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }
