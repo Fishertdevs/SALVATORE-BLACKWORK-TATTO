@@ -487,6 +487,34 @@ export default function LookGallery() {
 
   return (
     <div className="look-root">
+      <nav id="look-nav">
+        <div className="nav-left">
+          <span className="dot" />
+          <span>GMT +9, CANADA</span>
+        </div>
+        <ul className="nav-center">
+          <li>
+            <span className="plus">+</span>
+            <span>STUDIO SESSION</span>
+          </li>
+          <li>
+            <span className="plus">+</span>
+            <span>LABORATORY</span>
+          </li>
+          <li>
+            <span className="plus">+</span>
+            <span>OUR VISIONARY</span>
+          </li>
+        </ul>
+        <div className="nav-right">
+          <span>MENU</span>
+          <button type="button" className="menu-btn" aria-label="Open menu">
+            <span />
+            <span />
+          </button>
+        </div>
+      </nav>
+
       <div id="gallery-layer" ref={galleryRef} />
 
       <div id="fullscreen-section" ref={fullSectionRef}>
