@@ -17,6 +17,9 @@ import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
 import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
+const productVideoMp4 = `${import.meta.env.BASE_URL}product-video.mp4`;
+const productVideoWebm = `${import.meta.env.BASE_URL}product-video.webm`;
+
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
 const ASPECT_W = 4;
@@ -685,6 +688,19 @@ export default function LookGallery() {
           </div>
         </div>
 
+        <section className="product-video-section" aria-label="MORPH product film">
+          <video
+            className="product-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src={productVideoWebm} type="video/webm" />
+            <source src={productVideoMp4} type="video/mp4" />
+          </video>
+        </section>
         <section className="archive-section">
           <header className="archive-header" aria-label="MORPH — NEW COLLECTION 2026' — 66 PRODUCTS">
             <div className="archive-marquee-track">
