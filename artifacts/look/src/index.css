@@ -750,7 +750,7 @@
 .look-root .archive-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 200px;
 }
 .look-root .archive-col-1 { padding-top: 190px; }
 .look-root .archive-col-2 { padding-top: 290px; margin-left: 258px; }
