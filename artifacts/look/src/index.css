@@ -567,15 +567,28 @@
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }
-.look-root .hero-future {
+.look-root .hero-future-wrap {
   position: absolute;
   top: clamp(540px, 28.125vw, 720px);
   right: clamp(60px, 3.125vw, 80px);
   width: clamp(460px, 23.958vw, 613.33px);
+  display: flex;
+  flex-direction: column;
+}
+.look-root .hero-future {
+  width: 100%;
   height: auto;
   display: block;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
+}
+.look-root .hero-future-desc {
+  margin: clamp(24px, 1.667vw, 36px) 0 0 0;
+  font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4;
+  color: #1a1a1a;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;

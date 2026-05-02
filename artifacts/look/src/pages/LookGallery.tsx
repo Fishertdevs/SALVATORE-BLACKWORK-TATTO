@@ -669,7 +669,14 @@ export default function LookGallery() {
             <img className="hero-eps" ref={heroEpsRef} src={eps26Img} alt="EPS - 26" />
             <img className="hero-look" ref={heroLookRef} src={lookIntoImg} alt="LOOK INTO" />
           </div>
-          <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
+          <div className="hero-future-wrap">
+            <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
+            <p className="hero-future-desc">
+              The flawless fusion of ultra-light Liquid Titanium alloy and multi-layered Holographic
+              lenses creates a design architecture that shatters all norms. Engineered with
+              sophisticated precision
+            </p>
+          </div>
         </div>
 
         <section className="archive-section">
