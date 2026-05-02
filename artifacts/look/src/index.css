@@ -625,20 +625,21 @@
 .look-root #hero-navbar .nav-left {
   display: flex;
   align-items: center;
-  gap: clamp(0.55rem, 0.458vw, 0.733rem);
+  gap: clamp(2rem, 1.667vw, 2.667rem);
   font-weight: 500;
 }
-.look-root #hero-navbar .nav-dot {
-  width: clamp(6px, 0.3125vw, 8px);
-  height: clamp(6px, 0.3125vw, 8px);
-  border-radius: 50%;
-  background: #1a1a1a;
-  display: inline-block;
+.look-root #hero-navbar .nav-logo {
+  font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.95rem, 0.833vw, 1.333rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1a1a1a;
 }
 .look-root #hero-navbar .nav-links {
   display: flex;
   align-items: center;
-  gap: clamp(3.2rem, 2.667vw, 4.267rem);
+  gap: clamp(2rem, 1.667vw, 2.667rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -646,9 +647,9 @@
 .look-root #hero-navbar .nav-links li {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: clamp(0.25rem, 0.208vw, 0.333rem);
+  gap: clamp(0.4rem, 0.333vw, 0.533rem);
   cursor: pointer;
   font-weight: 500;
 }
@@ -662,7 +663,10 @@
 .look-root #hero-navbar .nav-right {
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 0.75vw, 1.2rem);
+  gap: clamp(1.6rem, 1.333vw, 2.133rem);
+  font-weight: 500;
+}
+.look-root #hero-navbar .nav-menu {
   font-weight: 500;
 }
 .look-root #hero-navbar .nav-burger {

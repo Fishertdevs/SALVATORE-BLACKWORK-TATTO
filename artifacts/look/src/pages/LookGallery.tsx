@@ -639,25 +639,25 @@ export default function LookGallery() {
         <img id="fullscreen-img" src={mainImg} alt="" />
         <nav id="hero-navbar" ref={navbarRef}>
           <div className="nav-left">
-            <span className="nav-dot" />
+            <span className="nav-logo">MORPH</span>
             <span>GMT +9, CANADA</span>
           </div>
-          <ul className="nav-links">
-            <li>
-              <span className="nav-plus">+</span>
-              <span>STUDIO SESSION</span>
-            </li>
-            <li>
-              <span className="nav-plus">+</span>
-              <span>LABORATORY</span>
-            </li>
-            <li>
-              <span className="nav-plus">+</span>
-              <span>OUR VISIONARY</span>
-            </li>
-          </ul>
           <div className="nav-right">
-            <span>MENU</span>
+            <ul className="nav-links">
+              <li>
+                <span className="nav-plus">+</span>
+                <span>COLLECTION</span>
+              </li>
+              <li>
+                <span className="nav-plus">+</span>
+                <span>UNIVERSE</span>
+              </li>
+              <li>
+                <span className="nav-plus">+</span>
+                <span>MANIFESTO</span>
+              </li>
+            </ul>
+            <span className="nav-menu">MENU</span>
             <button className="nav-burger" aria-label="Open menu">
               <span />
               <span />
