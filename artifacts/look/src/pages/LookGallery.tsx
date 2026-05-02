@@ -115,6 +115,54 @@ export default function LookGallery() {
   const heroFutureRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
+    const root = fullSectionRef.current;
+    const images = Array.from(
+      document.querySelectorAll<HTMLElement>(".archive-section .archive-img"),
+    );
+    if (!images.length) return;
+    const revealed = new WeakSet<HTMLElement>();
+    const reveal = (el: HTMLElement) => {
+      if (revealed.has(el)) return;
+      revealed.add(el);
+      const delay = el.dataset.delay ?? "0s";
+      el.style.transition = `clip-path 1s cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
+      el.style.clipPath = "inset(0 0% 0 0)";
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          reveal(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 },
+    );
+    images.forEach((img) => observer.observe(img));
+    const checkAll = () => {
+      const vh = window.innerHeight;
+      for (const img of images) {
+        if (revealed.has(img)) continue;
+        const rect = img.getBoundingClientRect();
+        const visible =
+          Math.max(0, Math.min(vh, rect.bottom) - Math.max(0, rect.top));
+        const ratio = rect.height ? visible / rect.height : 0;
+        if (ratio >= 0.1) {
+          reveal(img);
+          observer.unobserve(img);
+        }
+      }
+    };
+    root?.addEventListener("scroll", checkAll, { passive: true });
+    const rafId = requestAnimationFrame(checkAll);
+    return () => {
+      cancelAnimationFrame(rafId);
+      root?.removeEventListener("scroll", checkAll);
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       const fs = fullSectionRef.current;
       if (!fs || !expandedRef.current) return;
@@ -656,7 +704,7 @@ export default function LookGallery() {
           <div className="archive-grid">
             <div className="archive-col archive-col-1">
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.5s">
                   <img src={tableImg} alt="Chrome table" />
                 </div>
                 <figcaption className="archive-caption">
@@ -665,7 +713,7 @@ export default function LookGallery() {
                 </figcaption>
               </figure>
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.5s">
                   <img src={shoesImg} alt="Chrome heels" />
                 </div>
                 <figcaption className="archive-caption">
@@ -676,7 +724,7 @@ export default function LookGallery() {
             </div>
             <div className="archive-col archive-col-2">
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.7s">
                   <img src={candleImg} alt="Chrome candle holder" />
                 </div>
                 <figcaption className="archive-caption">
@@ -685,7 +733,7 @@ export default function LookGallery() {
                 </figcaption>
               </figure>
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.7s">
                   <img src={earringsImg} alt="Sculptural ear cuff" />
                 </div>
                 <figcaption className="archive-caption">
@@ -696,7 +744,7 @@ export default function LookGallery() {
             </div>
             <div className="archive-col archive-col-3">
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.9s">
                   <img src={airpodImg} alt="Translucent case" />
                 </div>
                 <figcaption className="archive-caption">
@@ -705,7 +753,7 @@ export default function LookGallery() {
                 </figcaption>
               </figure>
               <figure className="archive-item">
-                <div className="archive-img">
+                <div className="archive-img" data-delay="0.9s">
                   <img src={airpodMaxImg} alt="Sculptural headphones" />
                 </div>
                 <figcaption className="archive-caption">

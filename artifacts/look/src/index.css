@@ -775,6 +775,8 @@
   width: 428px;
   aspect-ratio: 428 / 535;
   overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root .archive-img img {
   width: 100%;
