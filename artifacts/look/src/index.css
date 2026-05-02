@@ -754,8 +754,6 @@
   aspect-ratio: 3 / 4;
   margin: 60px auto 0;
   overflow: hidden;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
 }
 .look-root .product-video {
   width: 100%;
@@ -878,7 +876,6 @@
 @media (prefers-reduced-motion: reduce) {
   .look-root .featured-label,
   .look-root .featured-about-text p,
-  .look-root .product-video-wrap,
   .look-root .archive-img {
     clip-path: inset(0 0 0 0) !important;
     transition: none !important;

@@ -126,7 +126,7 @@ export default function LookGallery() {
     );
     const featuredTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".product-video-section .featured-label, .product-video-section .featured-about-text p, .product-video-section .product-video-wrap, .product-video-section .featured-headline",
+        ".product-video-section .featured-label, .product-video-section .featured-about-text p, .product-video-section .featured-headline",
       ),
     );
     const targets: { el: HTMLElement; threshold: number }[] = [
@@ -733,7 +733,7 @@ export default function LookGallery() {
               </p>
             </div>
           </div>
-          <div className="product-video-wrap" data-delay="0.5s">
+          <div className="product-video-wrap">
             <video
               className="product-video"
               autoPlay
