@@ -15,6 +15,7 @@ import mainImg from "@assets/hero_new_image_1777693117619.png";
 import eps26Img from "@assets/EPS_26_1777694909337.png";
 import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
 import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
+import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -642,9 +643,12 @@ export default function LookGallery() {
                   aria-hidden={i >= 4}
                 >
                   {label}
-                  <span className="archive-marquee-sep" aria-hidden="true">
-                    ▶
-                  </span>
+                  <img
+                    src={marqueeStarImg}
+                    alt=""
+                    aria-hidden="true"
+                    className="archive-marquee-sep"
+                  />
                 </span>
               ))}
             </div>

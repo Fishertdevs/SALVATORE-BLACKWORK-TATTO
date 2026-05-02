@@ -709,8 +709,11 @@
   letter-spacing: 0.05em;
 }
 .look-root .archive-marquee-sep {
-  font-size: 0.7em;
-  opacity: 0.6;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 @keyframes archive-marquee-scroll {
   from { transform: translateX(0); }
