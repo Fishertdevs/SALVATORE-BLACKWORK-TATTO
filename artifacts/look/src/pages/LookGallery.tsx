@@ -348,20 +348,17 @@ export default function LookGallery() {
       const run = () =>
         runEffectLeftCrop(featuredImgEl, canvas, 500, () => {
           featuredCard!.classList.add("revealed");
+          // Tự động expand sau 0.4s
+          const t = window.setTimeout(() => {
+            expandSection();
+          }, 400);
+          timeouts.push(t);
         });
       if (featuredImgEl.complete && featuredImgEl.naturalWidth) {
         run();
       } else {
         featuredImgEl.addEventListener("load", run);
       }
-    }
-
-    // Click handler for featured card
-    const handleFeaturedClick = () => expandSection();
-
-    if (featuredCard) {
-      featuredCard.addEventListener("click", handleFeaturedClick);
-      cleanups.push(() => featuredCard!.removeEventListener("click", handleFeaturedClick));
     }
 
     function expandSection() {
@@ -465,6 +462,10 @@ export default function LookGallery() {
       if (!fullSection || !fullContent || !backBtn || !featured) return;
       if (!expandedRef.current) return;
       activeTimelineRef.current?.kill();
+
+      // Reset scroll so the collapse animation always originates from the hero,
+      // not from wherever the user scrolled to inside the archive.
+      fullSection.scrollTop = 0;
 
       const rect = featured.getBoundingClientRect();
 
@@ -591,46 +592,46 @@ export default function LookGallery() {
           </div>
           <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
         </div>
+
+        <section className="archive-section">
+          <header className="archive-header">
+            <span>MORPH</span>
+            <span>NEW COLLECTION 2026'</span>
+            <span>66 PRODUCTS</span>
+            <span>MORPH</span>
+          </header>
+          <div className="archive-grid">
+            <div className="archive-col archive-col-1">
+              <div className="archive-img">
+                <img src={chairImg} alt="Chrome bench" />
+              </div>
+              <div className="archive-img">
+                <img src={shoesImg} alt="Chrome heels" />
+              </div>
+            </div>
+            <div className="archive-col archive-col-2">
+              <div className="archive-img">
+                <img src={candleImg} alt="Chrome candle holder" />
+              </div>
+              <div className="archive-img">
+                <img src={earringsImg} alt="Sculptural ear cuff" />
+              </div>
+            </div>
+            <div className="archive-col archive-col-3">
+              <div className="archive-img">
+                <img src={airpodImg} alt="Translucent case" />
+              </div>
+              <div className="archive-img">
+                <img src={airpodMaxImg} alt="Sculptural headphones" />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <button id="back-btn" ref={backBtnRef}>
         ← Back
       </button>
-
-      <section className="archive-section">
-        <header className="archive-header">
-          <span>MORPH</span>
-          <span>NEW COLLECTION 2026'</span>
-          <span>66 PRODUCTS</span>
-          <span>MORPH</span>
-        </header>
-        <div className="archive-grid">
-          <div className="archive-col archive-col-1">
-            <div className="archive-img">
-              <img src={chairImg} alt="Chrome bench" />
-            </div>
-            <div className="archive-img">
-              <img src={shoesImg} alt="Chrome heels" />
-            </div>
-          </div>
-          <div className="archive-col archive-col-2">
-            <div className="archive-img">
-              <img src={candleImg} alt="Chrome candle holder" />
-            </div>
-            <div className="archive-img">
-              <img src={earringsImg} alt="Sculptural ear cuff" />
-            </div>
-          </div>
-          <div className="archive-col archive-col-3">
-            <div className="archive-img">
-              <img src={airpodImg} alt="Translucent case" />
-            </div>
-            <div className="archive-img">
-              <img src={airpodMaxImg} alt="Sculptural headphones" />
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

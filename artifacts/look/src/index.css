@@ -400,9 +400,8 @@
 }
 .look-root {
   width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  height: 100vh;
+  overflow: hidden;
   background: #111;
 }
 
@@ -476,7 +475,8 @@
   background: #0a0a0a;
   pointer-events: none;
   opacity: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .look-root #fullscreen-img {
   width: 100%;
@@ -653,13 +653,12 @@
   background: #1a1a1a;
 }
 
-/* Archive section — sits below hero in normal document flow.
-   margin-top: 100vh reserves viewport space for the (position:fixed) hero
-   so the archive doesn't overlap the intro/gallery at scroll = 0. */
+/* Archive section — lives inside #fullscreen-section, in flow after
+   #fullscreen-img (which takes 100vh and acts as the hero spacer).
+   The fullscreen-section is the scroll container. */
 .look-root .archive-section {
   position: relative;
   z-index: 2;
-  margin-top: 100vh;
   background: #ffffff;
   padding: 4rem clamp(40px, 4vw, 100px);
   color: #1a1a1a;
