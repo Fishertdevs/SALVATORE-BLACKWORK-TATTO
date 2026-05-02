@@ -590,6 +590,8 @@
   line-height: 1.4;
   color: #E63027;
   text-align: right;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;

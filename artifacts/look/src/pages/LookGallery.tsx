@@ -113,6 +113,7 @@ export default function LookGallery() {
   const heroEpsRef = useRef<HTMLImageElement>(null);
   const heroLookRef = useRef<HTMLImageElement>(null);
   const heroFutureRef = useRef<HTMLImageElement>(null);
+  const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const root = fullSectionRef.current;
@@ -501,7 +502,8 @@ export default function LookGallery() {
         heroEpsRef.current,
         heroLookRef.current,
         heroFutureRef.current,
-      ].filter((el): el is HTMLImageElement => el !== null);
+        heroFutureDescRef.current,
+      ].filter((el): el is HTMLImageElement | HTMLParagraphElement => el !== null);
       gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
 
       const ZOOM_DURATION = 0.8;
@@ -546,6 +548,9 @@ export default function LookGallery() {
       if (heroFutureRef.current) {
         tl.fromTo(heroFutureRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.9);
       }
+      if (heroFutureDescRef.current) {
+        tl.fromTo(heroFutureDescRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 1.1);
+      }
     }
 
     function collapseSection() {
@@ -567,7 +572,8 @@ export default function LookGallery() {
         heroEpsRef.current,
         heroLookRef.current,
         heroFutureRef.current,
-      ].filter((el): el is HTMLImageElement => el !== null);
+        heroFutureDescRef.current,
+      ].filter((el): el is HTMLImageElement | HTMLParagraphElement => el !== null);
 
       const tl = gsap
         .timeline({
@@ -671,7 +677,7 @@ export default function LookGallery() {
           </div>
           <div className="hero-future-wrap">
             <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
-            <p className="hero-future-desc">
+            <p className="hero-future-desc" ref={heroFutureDescRef}>
               The flawless fusion of ultra-light Liquid Titanium alloy and multi-layered Holographic
               lenses creates a design architecture that shatters all norms. Engineered with
               sophisticated precision
