@@ -688,18 +688,38 @@ export default function LookGallery() {
           </div>
         </div>
 
-        <section className="product-video-section" aria-label="MORPH product film">
-          <video
-            className="product-video"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-          >
-            <source src={productVideoWebm} type="video/webm" />
-            <source src={productVideoMp4} type="video/mp4" />
-          </video>
+        <section className="product-video-section" aria-label="MORPH featured object">
+          <h2 className="featured-label">Featured</h2>
+          <div className="featured-grid">
+            <div className="featured-col-left" aria-hidden="true" />
+            <div className="featured-col-right">
+              <p>
+                MORPH operates at the intersection of fashion, sculpture, and material research.
+                Each object is conceived as a wearable artifact — shaped by algorithmic precision
+                and finished by hand. The collection draws from industrial processes, biological
+                structures, and the aesthetics of liquid metal in motion.
+              </p>
+              <p>
+                Founded with a singular obsession: to dissolve the boundary between the body and
+                the object it carries. MORPH does not follow seasonal cycles. Each piece exists as
+                a numbered edition, documented and archived as part of an ongoing material study.
+              </p>
+            </div>
+          </div>
+          <div className="featured-video-wrap">
+            <video
+              className="product-video"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            >
+              <source src={productVideoWebm} type="video/webm" />
+              <source src={productVideoMp4} type="video/mp4" />
+            </video>
+          </div>
+          <h3 className="featured-headline">MORPH OBJECT 01 — WHERE JEWELRY BECOMES ARCHITECTURE</h3>
         </section>
         <section className="archive-section">
           <header className="archive-header" aria-label="MORPH — NEW COLLECTION 2026' — 66 PRODUCTS">
