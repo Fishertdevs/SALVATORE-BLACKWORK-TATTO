@@ -487,29 +487,34 @@
 .look-root #fullscreen-content {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 4rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
+  pointer-events: none;
   opacity: 0;
 }
-.look-root #fullscreen-content h2 {
-  font-family: 'Georgia', serif;
-  font-size: clamp(2.5rem, 6vw, 6rem);
-  font-style: italic;
-  color: #fff;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
+.look-root .hero-left {
+  position: absolute;
+  top: 180px;
+  left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 84px;
 }
-.look-root #fullscreen-content p {
-  font-family: monospace;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-  margin-bottom: 2.5rem;
+.look-root .hero-eps {
+  display: block;
+  width: 290px;
+  height: auto;
+}
+.look-root .hero-look {
+  display: block;
+  width: 380px;
+  height: auto;
+}
+.look-root .hero-future {
+  position: absolute;
+  top: 540px;
+  right: 60px;
+  width: 460px;
+  height: auto;
+  display: block;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;

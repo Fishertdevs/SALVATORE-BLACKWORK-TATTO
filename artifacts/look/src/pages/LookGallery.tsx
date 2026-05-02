@@ -12,6 +12,9 @@ import glasses2Img from "@assets/Glasses_2_1777634693808.png";
 import nailImg from "@assets/Nail_1777634693809.png";
 import glasses1Img from "@assets/Glasses_1_1777634693810.png";
 import mainImg from "@assets/hero_new_image_1777693117619.png";
+import eps26Img from "@assets/EPS_26_1777694909337.png";
+import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
+import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
 
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
@@ -542,7 +545,13 @@ export default function LookGallery() {
             </button>
           </div>
         </nav>
-        <div id="fullscreen-content" ref={fullContentRef} />
+        <div id="fullscreen-content" ref={fullContentRef}>
+          <div className="hero-left">
+            <img className="hero-eps" src={eps26Img} alt="EPS - 26" />
+            <img className="hero-look" src={lookIntoImg} alt="LOOK INTO" />
+          </div>
+          <img className="hero-future" src={theFutureImg} alt="THE FUTURE" />
+        </div>
       </div>
 
       <button id="back-btn" ref={backBtnRef}>
