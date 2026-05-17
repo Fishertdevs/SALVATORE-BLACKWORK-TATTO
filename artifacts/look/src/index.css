@@ -547,6 +547,17 @@
   opacity: 1;
   overflow: hidden;
 }
+.look-root #fullscreen-img {
+  pointer-events: none;
+}
+.look-root .site-footer {
+  pointer-events: none;
+}
+.look-root .site-footer a,
+.look-root .site-footer button,
+.look-root .site-footer input {
+  pointer-events: auto;
+}
 .look-root .hero-left {
   position: absolute;
   top: clamp(180px, 9.375vw, 240px);
