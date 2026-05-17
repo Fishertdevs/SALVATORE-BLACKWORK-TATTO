@@ -840,6 +840,79 @@ export default function LookGallery() {
             </div>
           </div>
         </section>
+
+        <footer className="site-footer" aria-label="Site footer">
+          <div className="footer-top">
+            <div className="footer-cta">
+              <p className="footer-eyebrow">NEWSLETTER — N° 01</p>
+              <h2 className="footer-headline">
+                BECOME PART<br />OF THE <em>archive</em>.
+              </h2>
+              <form
+                className="footer-form"
+                onSubmit={(e) => e.preventDefault()}
+                aria-label="Newsletter signup"
+              >
+                <input
+                  type="email"
+                  className="footer-input"
+                  placeholder="ENTER YOUR EMAIL"
+                  aria-label="Email address"
+                />
+                <button type="submit" className="footer-submit" aria-label="Subscribe">
+                  SUBSCRIBE →
+                </button>
+              </form>
+            </div>
+
+            <nav className="footer-nav" aria-label="Footer navigation">
+              <div className="footer-col">
+                <h3 className="footer-col-title">+ SHOP</h3>
+                <ul>
+                  <li><a href="#">New Arrivals</a></li>
+                  <li><a href="#">Objects</a></li>
+                  <li><a href="#">Editions</a></li>
+                  <li><a href="#">Archive Sale</a></li>
+                </ul>
+              </div>
+              <div className="footer-col">
+                <h3 className="footer-col-title">+ UNIVERSE</h3>
+                <ul>
+                  <li><a href="#">Manifesto</a></li>
+                  <li><a href="#">Studio</a></li>
+                  <li><a href="#">Process</a></li>
+                  <li><a href="#">Editorial</a></li>
+                </ul>
+              </div>
+              <div className="footer-col">
+                <h3 className="footer-col-title">+ SUPPORT</h3>
+                <ul>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">Shipping</a></li>
+                  <li><a href="#">Returns</a></li>
+                  <li><a href="#">FAQ</a></li>
+                </ul>
+              </div>
+              <div className="footer-col">
+                <h3 className="footer-col-title">+ CONNECT</h3>
+                <ul>
+                  <li><a href="#">Instagram</a></li>
+                  <li><a href="#">Are.na</a></li>
+                  <li><a href="#">Tumblr</a></li>
+                  <li><a href="#">Spotify</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+          <div className="footer-wordmark" aria-hidden="true">MORPH</div>
+
+          <div className="footer-bottom">
+            <span>© 2026 MORPH STUDIO — ALL RIGHTS RESERVED</span>
+            <span>EPS — 26 / LOOK INTO THE FUTURE</span>
+            <span>GMT +9 CANADA</span>
+          </div>
+        </footer>
       </div>
 
     </div>
