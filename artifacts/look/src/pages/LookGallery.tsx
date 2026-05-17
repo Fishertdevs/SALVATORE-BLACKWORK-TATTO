@@ -130,7 +130,7 @@ export default function LookGallery() {
       ),
     );
     const footerTargets = Array.from(
-      document.querySelectorAll<HTMLElement>(".site-footer .footer-wordmark-fill"),
+      document.querySelectorAll<HTMLElement>(".site-footer .footer-wordmark"),
     );
     const targets: { el: HTMLElement; threshold: number }[] = [
       ...archiveImages.map((el) => ({ el, threshold: 0.1 })),
@@ -156,9 +156,14 @@ export default function LookGallery() {
       revealed.add(el);
       const delay = el.dataset.delay ?? "0s";
       const duration = el.dataset.duration ?? "1s";
+      const prop = el.dataset.revealProperty ?? "clip-path";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
-      el.style.transition = `clip-path ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
-      el.style.clipPath = to;
+      el.style.transition = `${prop} ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
+      if (prop === "background-position") {
+        el.style.backgroundPosition = to;
+      } else {
+        el.style.clipPath = to;
+      }
     };
     const thresholdFor = new WeakMap<HTMLElement, number>();
     targets.forEach((t) => thresholdFor.set(t.el, t.threshold));
@@ -910,15 +915,15 @@ export default function LookGallery() {
             </nav>
           </div>
 
-          <div className="footer-wordmark" aria-hidden="true">
-            <span className="footer-wordmark-base">MORPH</span>
-            <span
-              className="footer-wordmark-fill"
-              data-delay="0.1s"
-              data-duration="1.6s"
-            >
-              MORPH
-            </span>
+          <div
+            className="footer-wordmark"
+            aria-hidden="true"
+            data-delay="0.1s"
+            data-duration="1.6s"
+            data-reveal-property="background-position"
+            data-reveal-to="0% 0%"
+          >
+            MORPH
           </div>
 
           <div className="footer-bottom">

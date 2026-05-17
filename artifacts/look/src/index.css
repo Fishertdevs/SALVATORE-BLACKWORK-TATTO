@@ -876,9 +876,13 @@
 @media (prefers-reduced-motion: reduce) {
   .look-root .featured-label,
   .look-root .featured-about-text p,
-  .look-root .archive-img,
-  .look-root .footer-wordmark-fill {
+  .look-root .archive-img {
     clip-path: inset(0 0 0 0) !important;
+    transition: none !important;
+    will-change: auto;
+  }
+  .look-root .footer-wordmark {
+    background-position: 0% 0% !important;
     transition: none !important;
     will-change: auto;
   }
@@ -1004,7 +1008,6 @@
   color: #ffffff;
 }
 .look-root .footer-wordmark {
-  position: relative;
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   font-size: clamp(140px, 22vw, 360px);
@@ -1013,24 +1016,21 @@
   text-align: center;
   padding: 40px 0;
   user-select: none;
-}
-.look-root .footer-wordmark-base,
-.look-root .footer-wordmark-fill {
-  display: block;
-  line-height: inherit;
-}
-.look-root .footer-wordmark-base {
-  color: #ffffff;
-}
-.look-root .footer-wordmark-fill {
-  position: absolute;
-  top: 40px;
-  left: 0;
-  right: 0;
-  color: #E63027;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
-  pointer-events: none;
+  background-image: linear-gradient(
+    to right,
+    #E63027 0%,
+    #E63027 50%,
+    #ffffff 50%,
+    #ffffff 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  will-change: background-position;
 }
 .look-root .footer-bottom {
   display: flex;
