@@ -129,9 +129,13 @@ export default function LookGallery() {
         ".product-video-section .featured-label, .product-video-section .featured-about-text p, .product-video-section .featured-headline",
       ),
     );
+    const footerTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(".site-footer .footer-wordmark-fill"),
+    );
     const targets: { el: HTMLElement; threshold: number }[] = [
       ...archiveImages.map((el) => ({ el, threshold: 0.1 })),
       ...featuredTargets.map((el) => ({ el, threshold: 0.15 })),
+      ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
     ];
     if (!targets.length) return;
     const reduceMotion =
@@ -151,8 +155,9 @@ export default function LookGallery() {
       if (revealed.has(el)) return;
       revealed.add(el);
       const delay = el.dataset.delay ?? "0s";
+      const duration = el.dataset.duration ?? "1s";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
-      el.style.transition = `clip-path 1s cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
+      el.style.transition = `clip-path ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
       el.style.clipPath = to;
     };
     const thresholdFor = new WeakMap<HTMLElement, number>();
@@ -167,7 +172,7 @@ export default function LookGallery() {
           observer.unobserve(el);
         }
       },
-      { threshold: [0.1, 0.15] },
+      { threshold: [0.1, 0.15, 0.2] },
     );
     targets.forEach(({ el }) => observer.observe(el));
     const checkAll = () => {
@@ -905,7 +910,16 @@ export default function LookGallery() {
             </nav>
           </div>
 
-          <div className="footer-wordmark" aria-hidden="true">MORPH</div>
+          <div className="footer-wordmark" aria-hidden="true">
+            <span className="footer-wordmark-base">MORPH</span>
+            <span
+              className="footer-wordmark-fill"
+              data-delay="0.1s"
+              data-duration="1.6s"
+            >
+              MORPH
+            </span>
+          </div>
 
           <div className="footer-bottom">
             <span>© 2026 MORPH STUDIO — ALL RIGHTS RESERVED</span>
