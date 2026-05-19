@@ -173,7 +173,7 @@ function MobileLookGallery() {
           <p style={{
             fontFamily: "'Beautique Display', serif",
             fontSize: "clamp(40px, 10vw, 72px)",
-            fontWeight: 400, color: "#ffffff",
+            fontWeight: 400, color: "#E63027",
             lineHeight: 1, margin: 0, textTransform: "uppercase",
           }}>LOOK INTO<br />THE FUTURE</p>
         </div>
