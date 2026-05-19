@@ -1,0 +1,51 @@
+Fix MobileLookGallery() — 2 changes only:
+
+FIX 1 — Move hero text UP so it's not cut off at bottom:
+Find the hero text div with style={{ position: "absolute", bottom: 32, left: 24, right: 24 }}
+Change bottom: 32 to bottom: "15vh"
+This moves the text higher so it's fully visible above the safe area.
+
+FIX 2 — Add hamburger menu to navbar:
+Add useState for menuOpen:
+const [menuOpen, setMenuOpen] = useState(false)
+
+Add hamburger button to the right of the navbar (replace the GMT span):
+<button onClick={() => setMenuOpen(true)} style={{
+  background: "none", border: "none", cursor: "pointer",
+  display: "flex", flexDirection: "column", gap: 5,
+  padding: 8,
+}}>
+  <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
+  <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
+</button>
+
+Add fullscreen menu overlay right after the nav tag:
+{menuOpen && (
+  <div style={{
+    position: "fixed", inset: 0, backgroundColor: "#ffffff",
+    zIndex: 100, display: "flex", flexDirection: "column",
+    alignItems: "center", justifyContent: "center", gap: 40,
+  }}>
+    <button onClick={() => setMenuOpen(false)} style={{
+      position: "absolute", top: 20, right: 24,
+      background: "none", border: "none",
+      fontSize: 32, color: "#1a1a1a", cursor: "pointer", lineHeight: 1,
+    }}>×</button>
+    <span style={{
+      fontFamily: "'Helvetica Neue', sans-serif",
+      fontSize: 10, letterSpacing: "0.18em",
+      textTransform: "uppercase", color: "#999",
+    }}>GMT +9, CANADA</span>
+    {[["+ COLLECTION", "#"], ["+ UNIVERSE", "#"], ["+ MANIFESTO", "#"]].map(([label, href]) => (
+      <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
+        fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
+        fontSize: 32, fontWeight: 400, color: "#1a1a1a",
+        textDecoration: "none", letterSpacing: "0.02em",
+        textTransform: "uppercase",
+      }}>{label}</a>
+    ))}
+  </div>
+)}
+
+Do NOT change anything else.
+TypeScript, no type errors.

@@ -107,6 +107,7 @@ function imageToAsciiGrid(
 }
 
 function MobileLookGallery() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div style={{ width: "100%", backgroundColor: "#0a0a0a", color: "#ffffff", overflowX: "hidden" }}>
 
@@ -122,18 +123,48 @@ function MobileLookGallery() {
           fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
           fontSize: 18, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
         }}>MORPH</span>
-        <span style={{
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 10, letterSpacing: "0.18em", color: "#1a1a1a", textTransform: "uppercase",
-        }}>GMT +9, CANADA</span>
+        <button onClick={() => setMenuOpen(true)} style={{
+          background: "none", border: "none", cursor: "pointer",
+          display: "flex", flexDirection: "column", gap: 5,
+          padding: 8,
+        }}>
+          <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
+          <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
+        </button>
       </nav>
+      {menuOpen && (
+        <div style={{
+          position: "fixed", inset: 0, backgroundColor: "#ffffff",
+          zIndex: 100, display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center", gap: 40,
+        }}>
+          <button onClick={() => setMenuOpen(false)} style={{
+            position: "absolute", top: 20, right: 24,
+            background: "none", border: "none",
+            fontSize: 32, color: "#1a1a1a", cursor: "pointer", lineHeight: 1,
+          }}>×</button>
+          <span style={{
+            fontFamily: "'Helvetica Neue', sans-serif",
+            fontSize: 10, letterSpacing: "0.18em",
+            textTransform: "uppercase", color: "#999",
+          }}>GMT +9, CANADA</span>
+          {[["+ COLLECTION", "#"], ["+ UNIVERSE", "#"], ["+ MANIFESTO", "#"]].map(([label, href]) => (
+            <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
+              fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
+              fontSize: 32, fontWeight: 400, color: "#1a1a1a",
+              textDecoration: "none", letterSpacing: "0.02em",
+              textTransform: "uppercase",
+            }}>{label}</a>
+          ))}
+        </div>
+      )}
 
       {/* HERO */}
       <div style={{ width: "100%", height: "100vh", position: "relative" }}>
         <img src={mainImg} alt="MORPH" style={{
           width: "100%", height: "100%", objectFit: "cover", display: "block"
         }} />
-        <div style={{ position: "absolute", bottom: 32, left: 24, right: 24 }}>
+        <div style={{ position: "absolute", bottom: "15vh", left: 24, right: 24 }}>
           <p style={{
             fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 11, letterSpacing: "0.2em",
