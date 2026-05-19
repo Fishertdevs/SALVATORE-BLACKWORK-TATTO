@@ -582,9 +582,10 @@
 }
 .look-root .hero-future-wrap {
   position: absolute;
-  top: clamp(540px, 28.125vw, 720px);
+  bottom: clamp(80px, 8vh, 200px);
   right: clamp(60px, 3.125vw, 80px);
-  width: clamp(460px, 23.958vw, 613.33px);
+  width: clamp(380px, 23.958vw, 613.33px);
+  max-width: calc(100vw - clamp(120px, 6.25vw, 160px));
   display: flex;
   flex-direction: column;
 }
