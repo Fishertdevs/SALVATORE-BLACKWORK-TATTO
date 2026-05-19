@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import phoneImg from "@assets/Phone_1777633894261.png";
 import shoesImg from "@assets/Shoes_1777633894262.png";
@@ -106,7 +106,490 @@ function imageToAsciiGrid(
   return { asciiGrid: ag, brightnessGrid: bg };
 }
 
+function MobileLookGallery() {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div
+      style={{
+        width: "100vw",
+        minHeight: "100vh",
+        background: "#111",
+        overflowX: "hidden",
+        overflowY: expanded ? "auto" : "hidden",
+      }}
+    >
+      {!expanded && (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "repeat(4, auto)",
+            gap: "8px",
+            padding: "8px",
+            height: "100vh",
+          }}
+        >
+          {portraitImages.slice(0, 8).map((img, i) => (
+            <div
+              key={i}
+              style={{
+                aspectRatio: "4/5",
+                overflow: "hidden",
+                backgroundColor: "#222",
+              }}
+            >
+              <img
+                src={img}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </div>
+          ))}
+          <div
+            onClick={() => setExpanded(true)}
+            style={{
+              gridColumn: "1 / span 2",
+              aspectRatio: "16/9",
+              overflow: "hidden",
+              backgroundColor: "#222",
+              cursor: "pointer",
+              position: "relative",
+            }}
+          >
+            <img
+              src={mainImg}
+              alt="Featured"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "rgba(0,0,0,0.3)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Helvetica Neue', sans-serif",
+                  fontSize: 11,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "#ffffff",
+                  border: "1px solid rgba(255,255,255,0.6)",
+                  padding: "8px 16px",
+                }}
+              >
+                TAP TO EXPLORE
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {expanded && (
+        <div style={{ width: "100%", backgroundColor: "#0a0a0a", color: "#ffffff" }}>
+          <nav
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 50,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "16px 24px",
+              background: "rgba(245,245,245,0.9)",
+              backdropFilter: "blur(4px)",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
+                fontSize: 18,
+                color: "#1a1a1a",
+                letterSpacing: "0.04em",
+              }}
+            >
+              MORPH
+            </span>
+            <button
+              onClick={() => setExpanded(false)}
+              style={{
+                background: "none",
+                border: "1px solid rgba(0,0,0,0.2)",
+                padding: "6px 12px",
+                cursor: "pointer",
+                fontFamily: "'Helvetica Neue', sans-serif",
+                fontSize: 10,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "#1a1a1a",
+              }}
+            >
+              ← BACK
+            </button>
+          </nav>
+
+          <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+            <img
+              src={mainImg}
+              alt="MORPH"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+            <div style={{ position: "absolute", bottom: 32, left: 24, right: 24 }}>
+              <p
+                style={{
+                  fontFamily: "'Helvetica Neue', sans-serif",
+                  fontSize: 11,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "#E63027",
+                  marginBottom: 8,
+                }}
+              >
+                EPS — 26
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Beautique Display', serif",
+                  fontSize: "clamp(48px, 12vw, 80px)",
+                  fontWeight: 400,
+                  color: "#ffffff",
+                  lineHeight: 1,
+                  margin: 0,
+                  textTransform: "uppercase",
+                }}
+              >
+                LOOK INTO
+                <br />
+                THE FUTURE
+              </p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              color: "#1a1a1a",
+              padding: "48px 24px",
+            }}
+          >
+            <img
+              src={featuredLabelImg}
+              alt="Featured"
+              style={{ height: 40, marginBottom: 32 }}
+            />
+            <p
+              style={{
+                fontFamily: "'Helvetica Neue', sans-serif",
+                fontSize: 14,
+                fontWeight: 300,
+                lineHeight: 1.6,
+                color: "#1a1a1a",
+                marginBottom: 16,
+              }}
+            >
+              MORPH operates at the intersection of fashion, sculpture, and material
+              research. Each object is conceived as a wearable artifact.
+            </p>
+            <div
+              style={{
+                width: "100%",
+                aspectRatio: "3/4",
+                overflow: "hidden",
+                margin: "32px 0",
+              }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              >
+                <source src={productVideoWebm} type="video/webm" />
+                <source src={productVideoMp4} type="video/mp4" />
+              </video>
+            </div>
+            <h3
+              style={{
+                fontFamily: "'Beautique Display', serif",
+                fontSize: "clamp(28px, 7vw, 48px)",
+                fontWeight: 400,
+                color: "#000000",
+                lineHeight: 1.1,
+                textTransform: "uppercase",
+                margin: 0,
+              }}
+            >
+              MORPH OBJECT 01 —
+              <br />
+              WHERE JEWELRY BECOMES ARCHITECTURE
+            </h3>
+          </div>
+
+          <div style={{ backgroundColor: "#ffffff", padding: "48px 24px" }}>
+            <div style={{ overflow: "hidden", marginBottom: 32 }}>
+              <p
+                style={{
+                  fontFamily: "'Helvetica Neue', sans-serif",
+                  fontSize: 14,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#1a1a1a",
+                }}
+              >
+                MORPH — NEW COLLECTION 2026' — 66 PRODUCTS
+              </p>
+            </div>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
+            >
+              {[
+                { img: tableImg, code: "OBJ-01", name: "FLUX BENCH" },
+                { img: shoesImg, code: "OBJ-04", name: "SCYTHE STILETTOS" },
+                { img: candleImg, code: "OBJ-02", name: "MOLTEN CORE" },
+                { img: earringsImg, code: "OBJ-05", name: "SYMBIOTE CUFF" },
+                { img: airpodImg, code: "OBJ-03", name: "EXO-POD" },
+                { img: airpodMaxImg, code: "OBJ-06", name: "VALKYRIE CANS" },
+              ].map((item, i) => (
+                <div key={i}>
+                  <div
+                    style={{
+                      aspectRatio: "4/5",
+                      overflow: "hidden",
+                      marginBottom: 8,
+                    }}
+                  >
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Helvetica Neue', sans-serif",
+                        fontSize: 10,
+                        letterSpacing: "0.1em",
+                        color: "#666",
+                      }}
+                    >
+                      {item.code}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Beautique Display', sans-serif",
+                        fontSize: 12,
+                        letterSpacing: "0.06em",
+                        color: "#000",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "#0a0a0a",
+              color: "#ffffff",
+              padding: "48px 24px 32px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'Helvetica Neue', sans-serif",
+                fontSize: 11,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#E63027",
+                marginBottom: 16,
+              }}
+            >
+              NEWSLETTER — N° 01
+            </p>
+            <h2
+              style={{
+                fontFamily: "'Beautique Display', serif",
+                fontSize: "clamp(32px, 8vw, 56px)",
+                fontWeight: 400,
+                textTransform: "uppercase",
+                color: "#ffffff",
+                lineHeight: 1.05,
+                marginBottom: 32,
+              }}
+            >
+              BECOME PART
+              <br />
+              OF THE{" "}
+              <em style={{ color: "#E63027", fontStyle: "italic" }}>archive</em>.
+            </h2>
+            <div
+              style={{
+                display: "flex",
+                borderBottom: "1px solid rgba(255,255,255,0.4)",
+                marginBottom: 48,
+              }}
+            >
+              <input
+                type="email"
+                placeholder="ENTER YOUR EMAIL"
+                style={{
+                  flex: 1,
+                  background: "transparent",
+                  border: "none",
+                  color: "#ffffff",
+                  fontFamily: "'Helvetica Neue', sans-serif",
+                  fontSize: 12,
+                  letterSpacing: "0.16em",
+                  padding: "12px 0",
+                  outline: "none",
+                }}
+              />
+              <button
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "#ffffff",
+                  fontSize: 14,
+                  cursor: "pointer",
+                  padding: "12px 0 12px 12px",
+                }}
+              >
+                →
+              </button>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "32px 16px",
+                marginBottom: 48,
+              }}
+            >
+              {(
+                [
+                  ["+ SHOP", ["New Arrivals", "Objects", "Editions", "Archive Sale"]],
+                  ["+ UNIVERSE", ["Manifesto", "Studio", "Process", "Editorial"]],
+                  ["+ SUPPORT", ["Contact", "Shipping", "Returns", "FAQ"]],
+                  ["+ CONNECT", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
+                ] as Array<[string, string[]]>
+              ).map(([title, items]) => (
+                <div key={title}>
+                  <h3
+                    style={{
+                      fontFamily: "'Helvetica Neue', sans-serif",
+                      fontSize: 11,
+                      fontWeight: 500,
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: "#E63027",
+                      marginBottom: 12,
+                    }}
+                  >
+                    {title}
+                  </h3>
+                  {items.map((item) => (
+                    <a
+                      key={item}
+                      href="#"
+                      style={{
+                        display: "block",
+                        fontFamily: "'Helvetica Neue', sans-serif",
+                        fontSize: 13,
+                        fontWeight: 300,
+                        color: "rgba(255,255,255,0.7)",
+                        textDecoration: "none",
+                        marginBottom: 8,
+                        letterSpacing: "0.04em",
+                      }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div
+              style={{
+                fontFamily: "'Beautique Display', sans-serif",
+                fontSize: "clamp(48px, 15vw, 100px)",
+                fontWeight: 400,
+                textAlign: "center",
+                color: "transparent",
+                WebkitTextStroke: "1px rgba(255,255,255,0.15)",
+                letterSpacing: "-0.02em",
+                lineHeight: 0.85,
+                padding: "32px 0",
+                userSelect: "none",
+              }}
+            >
+              MORPH
+            </div>
+            <div
+              style={{
+                paddingTop: 24,
+                borderTop: "1px solid rgba(255,255,255,0.12)",
+                fontFamily: "'Helvetica Neue', sans-serif",
+                fontSize: 10,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.4)",
+              }}
+            >
+              © 2026 MORPH STUDIO — ALL RIGHTS RESERVED
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function LookGallery() {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 768,
+  );
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   const galleryRef = useRef<HTMLDivElement>(null);
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
