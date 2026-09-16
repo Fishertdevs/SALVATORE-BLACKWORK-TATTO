@@ -12,11 +12,7 @@ import glasses2Img from "@assets/Glasses_2_1777634693808.png";
 import nailImg from "@assets/Nail_1777634693809.png";
 import glasses1Img from "@assets/Glasses_1_1777634693810.png";
 import mainImg from "@assets/hero_new_image_1777693117619.png";
-import eps26Img from "@assets/EPS_26_1777694909337.png";
-import lookIntoImg from "@assets/LOOK_INTO_1777694909336.png";
-import theFutureImg from "@assets/THE_FUTURE_1777694909337.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
-import featuredLabelImg from "@assets/Featured_1777721133168.png";
 
 const productVideoMp4 = `${import.meta.env.BASE_URL}product-video.mp4`;
 const productVideoWebm = `${import.meta.env.BASE_URL}product-video.webm`;
@@ -122,7 +118,7 @@ function MobileLookGallery() {
         <span style={{
           fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
           fontSize: 18, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
-        }}>MORPH</span>
+        }}>SALVATORE BLACKWORK TATTO</span>
         <button onClick={() => setMenuOpen(true)} style={{
           background: "none", border: "none", cursor: "pointer",
           display: "flex", flexDirection: "column", gap: 5,
@@ -147,8 +143,8 @@ function MobileLookGallery() {
             fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 10, letterSpacing: "0.18em",
             textTransform: "uppercase", color: "#999",
-          }}>GMT +9, CANADA</span>
-          {[["+ COLLECTION", "#"], ["+ UNIVERSE", "#"], ["+ MANIFESTO", "#"]].map(([label, href]) => (
+          }}>BY APPOINTMENT</span>
+          {[["+ PORTFOLIO", "#"], ["+ STUDIO", "#"], ["+ BOOKING", "#"]].map(([label, href]) => (
             <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
               fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
               fontSize: 32, fontWeight: 400, color: "#1a1a1a",
@@ -161,7 +157,7 @@ function MobileLookGallery() {
 
       {/* HERO */}
       <div style={{ width: "100%", height: "100vh", position: "relative" }}>
-        <img src={mainImg} alt="MORPH" style={{
+        <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" style={{
           width: "100%", height: "100%", objectFit: "cover", display: "block"
         }} />
         <div style={{ position: "absolute", bottom: "15vh", left: 24, right: 24 }}>
@@ -169,13 +165,13 @@ function MobileLookGallery() {
             fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 11, letterSpacing: "0.2em",
             textTransform: "uppercase", color: "#E63027", margin: "0 0 8px",
-          }}>EPS — 26</p>
+          }}>SALVATORE — BLACKWORK</p>
           <p style={{
             fontFamily: "'Beautique Display', serif",
             fontSize: "clamp(40px, 10vw, 72px)",
             fontWeight: 400, color: "#E63027",
             lineHeight: 1, margin: 0, textTransform: "uppercase",
-          }}>LOOK INTO<br />THE FUTURE</p>
+          }}>BLACKWORK<br />TATTO</p>
         </div>
       </div>
 
@@ -185,16 +181,15 @@ function MobileLookGallery() {
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
         }}>
-          MORPH operates at the intersection of fashion, sculpture, and material research.
-          Each object is conceived as a wearable artifact — shaped by algorithmic precision
-          and finished by hand.
+          SALVATORE BLACKWORK TATTO works where ink, shadow, and skin meet.
+          Every tattoo is drawn with intention, built from bold contrast and finished
+          with a precise, personal hand.
         </p>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: 0,
         }}>
-          Founded with a singular obsession: to dissolve the boundary between the body
-          and the object it carries.
+          Custom blackwork for people who want their story to stay permanently visible.
         </p>
       </div>
 
@@ -214,7 +209,7 @@ function MobileLookGallery() {
           fontWeight: 400, color: "#000000",
           lineHeight: 1.1, textTransform: "uppercase",
           margin: "24px 0 0",
-        }}>MORPH OBJECT 01 —<br />WHERE JEWELRY BECOMES ARCHITECTURE</h3>
+        }}>BLACKWORK PIECE 01 —<br />WHERE INK BECOMES ARCHITECTURE</h3>
       </div>
 
       {/* ARCHIVE — vertical single column */}
@@ -224,15 +219,15 @@ function MobileLookGallery() {
           fontSize: 11, letterSpacing: "0.15em",
           textTransform: "uppercase", color: "#1a1a1a",
           borderTop: "1px solid #e0e0e0", paddingTop: 24, marginBottom: 32,
-        }}>MORPH — NEW COLLECTION 2026' — 66 PRODUCTS</p>
+        }}>SALVATORE BLACKWORK TATTO — SELECTED WORKS — 2026</p>
 
         {[
-          { img: tableImg, code: "OBJ-01", name: "FLUX BENCH" },
-          { img: shoesImg, code: "OBJ-04", name: "SCYTHE STILETTOS" },
-          { img: candleImg, code: "OBJ-02", name: "MOLTEN CORE" },
-          { img: earringsImg, code: "OBJ-05", name: "SYMBIOTE CUFF" },
-          { img: airpodImg, code: "OBJ-03", name: "EXO-POD" },
-          { img: airpodMaxImg, code: "OBJ-06", name: "VALKYRIE CANS" },
+          { img: tableImg, code: "BW-01", name: "BLACK FLAME" },
+          { img: shoesImg, code: "BW-04", name: "NOCTURNAL FORM" },
+          { img: candleImg, code: "BW-02", name: "THORN STUDY" },
+          { img: earringsImg, code: "BW-05", name: "RITUAL MARK" },
+          { img: airpodImg, code: "BW-03", name: "VOID SCRIPT" },
+          { img: airpodMaxImg, code: "BW-06", name: "IRON VEIL" },
         ].map((item, i) => (
           <div key={i} style={{ marginBottom: 40 }}>
             <div style={{ width: "100%", aspectRatio: "4/5", overflow: "hidden", marginBottom: 12 }}>
@@ -263,13 +258,13 @@ function MobileLookGallery() {
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 11, letterSpacing: "0.18em",
           textTransform: "uppercase", color: "#E63027", margin: "0 0 12px",
-        }}>NEWSLETTER — N° 01</p>
+        }}>BLACKWORK JOURNAL — N° 01</p>
         <h2 style={{
           fontFamily: "'Beautique Display', serif",
           fontSize: "clamp(28px, 8vw, 48px)",
           fontWeight: 400, textTransform: "uppercase",
           color: "#ffffff", lineHeight: 1.05, margin: "0 0 32px",
-        }}>BECOME PART<br />OF THE <em style={{ color: "#E63027", fontStyle: "italic" }}>archive</em>.</h2>
+        }}>MAKE YOUR MARK<br />IN THE <em style={{ color: "#E63027", fontStyle: "italic" }}>archive</em>.</h2>
 
         <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.4)", marginBottom: 48 }}>
           <input type="email" placeholder="ENTER YOUR EMAIL" style={{
@@ -285,9 +280,9 @@ function MobileLookGallery() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 16px", marginBottom: 48 }}>
           {([
-            ["+ SHOP", ["New Arrivals", "Objects", "Editions", "Archive Sale"]],
-            ["+ UNIVERSE", ["Manifesto", "Studio", "Process", "Editorial"]],
-            ["+ SUPPORT", ["Contact", "Shipping", "Returns", "FAQ"]],
+            ["+ STUDIO", ["About Salvatore", "Blackwork", "Process", "Aftercare"]],
+            ["+ BOOKING", ["Consultation", "Availability", "Preparation", "FAQ"]],
+            ["+ SUPPORT", ["Contact", "Care guide", "Policies", "FAQ"]],
             ["+ CONNECT", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
           ] as [string, string[]][]).map(([title, items]) => (
             <div key={title}>
@@ -315,14 +310,14 @@ function MobileLookGallery() {
           WebkitTextStroke: "1px rgba(255,255,255,0.12)",
           letterSpacing: "-0.02em", lineHeight: 0.85,
           padding: "32px 0", userSelect: "none",
-        }}>MORPH</div>
+        }}>SALVATORE BLACKWORK TATTO</div>
 
         <div style={{
           paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.12)",
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 10, letterSpacing: "0.15em",
           textTransform: "uppercase", color: "rgba(255,255,255,0.4)",
-        }}>© 2026 MORPH STUDIO — ALL RIGHTS RESERVED</div>
+        }}>© 2026 SALVATORE BLACKWORK TATTO — ALL RIGHTS RESERVED</div>
       </div>
 
     </div>
@@ -348,9 +343,9 @@ export default function LookGallery() {
   const featuredCardRef = useRef<HTMLDivElement | null>(null);
   const expandedRef = useRef(false);
   const activeTimelineRef = useRef<gsap.core.Timeline | null>(null);
-  const heroEpsRef = useRef<HTMLImageElement>(null);
-  const heroLookRef = useRef<HTMLImageElement>(null);
-  const heroFutureRef = useRef<HTMLImageElement>(null);
+  const heroEpsRef = useRef<HTMLDivElement>(null);
+  const heroLookRef = useRef<HTMLDivElement>(null);
+  const heroFutureRef = useRef<HTMLDivElement>(null);
   const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -858,22 +853,22 @@ export default function LookGallery() {
         <img id="fullscreen-img" src={mainImg} alt="" />
         <nav id="hero-navbar" ref={navbarRef}>
           <div className="nav-left">
-            <span className="nav-logo">MORPH</span>
-            <span>GMT +9, CANADA</span>
+            <span className="nav-logo">SALVATORE BLACKWORK TATTO</span>
+            <span>BY APPOINTMENT</span>
           </div>
           <div className="nav-right">
             <ul className="nav-links">
               <li>
                 <span className="nav-plus">+</span>
-                <span>COLLECTION</span>
+                <span>PORTFOLIO</span>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <span>UNIVERSE</span>
+                <span>STUDIO</span>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <span>MANIFESTO</span>
+                <span>BOOKING</span>
               </li>
             </ul>
             <span className="nav-menu">MENU</span>
@@ -885,34 +880,40 @@ export default function LookGallery() {
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-left">
-            <img className="hero-eps" ref={heroEpsRef} src={eps26Img} alt="EPS - 26" />
-            <img className="hero-look" ref={heroLookRef} src={lookIntoImg} alt="LOOK INTO" />
+            <div className="hero-eps" ref={heroEpsRef} aria-label="Salvatore Blackwork">
+              SALVATORE — BLACKWORK
+            </div>
+            <div className="hero-look" ref={heroLookRef} aria-label="Blackwork Tatto">
+              BLACKWORK<br />TATTO
+            </div>
           </div>
           <div className="hero-future-wrap">
-            <img className="hero-future" ref={heroFutureRef} src={theFutureImg} alt="THE FUTURE" />
+            <div className="hero-future" ref={heroFutureRef} aria-label="Ink is architecture">
+              INK IS<br />ARCHITECTURE
+            </div>
             <p className="hero-future-desc" ref={heroFutureDescRef}>
-              The flawless fusion of ultra-light Liquid Titanium alloy and multi-layered Holographic
-              lenses creates a design architecture that shatters all norms. Engineered with
-              sophisticated precision
+              Blackwork tattoos built from deep contrast, deliberate linework,
+              and a point of view that belongs only to you.
             </p>
           </div>
         </div>
 
-        <section className="product-video-section" aria-label="MORPH featured object">
-          <img className="featured-label" src={featuredLabelImg} alt="Featured" data-delay="0s" />
+        <section className="product-video-section" aria-label="Salvatore Blackwork featured tattoo">
+          <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
+            SALVATORE BLACKWORK TATTO / FEATURED WORK
+          </div>
           <div className="featured-grid">
             <div className="featured-col-left" aria-hidden="true" />
             <div className="featured-about-text">
               <p data-delay="0.2s">
-                MORPH operates at the intersection of fashion, sculpture, and material research.
-                Each object is conceived as a wearable artifact — shaped by algorithmic precision
-                and finished by hand. The collection draws from industrial processes, biological
-                structures, and the aesthetics of liquid metal in motion.
+                SALVATORE BLACKWORK TATTO operates at the intersection of ink,
+                anatomy, and visual language. Each piece is composed to move with
+                the body and hold its meaning for a lifetime.
               </p>
               <p data-delay="0.35s">
-                Founded with a singular obsession: to dissolve the boundary between the body and
-                the object it carries. MORPH does not follow seasonal cycles. Each piece exists as
-                a numbered edition, documented and archived as part of an ongoing material study.
+                The studio is driven by one idea: a tattoo should feel inevitable on
+                the skin. From first sketch to final needle pass, every line serves
+                the person wearing it.
               </p>
             </div>
           </div>
@@ -929,20 +930,20 @@ export default function LookGallery() {
               <source src={productVideoMp4} type="video/mp4" />
             </video>
           </div>
-          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">MORPH OBJECT 01 — WHERE JEWELRY BECOMES ARCHITECTURE</h3>
+          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">BLACKWORK PIECE 01 — WHERE INK BECOMES ARCHITECTURE</h3>
         </section>
         <section className="archive-section">
-          <header className="archive-header" aria-label="MORPH — NEW COLLECTION 2026' — 66 PRODUCTS">
+          <header className="archive-header" aria-label="Salvatore Blackwork Tatto — selected works — 2026">
             <div className="archive-marquee-track">
               {[
-                "MORPH",
-                "NEW COLLECTION 2026'",
-                "66 PRODUCTS",
-                "MORPH",
-                "MORPH",
-                "NEW COLLECTION 2026'",
-                "66 PRODUCTS",
-                "MORPH",
+                "SALVATORE BLACKWORK TATTO",
+                "SELECTED WORKS 2026",
+                "BY APPOINTMENT",
+                "SALVATORE BLACKWORK TATTO",
+                "SALVATORE BLACKWORK TATTO",
+                "SELECTED WORKS 2026",
+                "BY APPOINTMENT",
+                "SALVATORE BLACKWORK TATTO",
               ].map((label, i) => (
                 <span
                   key={i}
@@ -967,8 +968,8 @@ export default function LookGallery() {
                   <img src={tableImg} alt="Chrome table" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-01</span>
-                  <span className="archive-caption-name">FLUX BENCH</span>
+                  <span className="archive-caption-code">BW-01</span>
+                  <span className="archive-caption-name">BLACK FLAME</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
@@ -976,8 +977,8 @@ export default function LookGallery() {
                   <img src={shoesImg} alt="Chrome heels" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-04</span>
-                  <span className="archive-caption-name">SCYTHE STILETTOS</span>
+                  <span className="archive-caption-code">BW-04</span>
+                  <span className="archive-caption-name">NOCTURNAL FORM</span>
                 </figcaption>
               </figure>
             </div>
@@ -987,8 +988,8 @@ export default function LookGallery() {
                   <img src={candleImg} alt="Chrome candle holder" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-02</span>
-                  <span className="archive-caption-name">MOLTEN CORE</span>
+                  <span className="archive-caption-code">BW-02</span>
+                  <span className="archive-caption-name">THORN STUDY</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
@@ -996,8 +997,8 @@ export default function LookGallery() {
                   <img src={earringsImg} alt="Sculptural ear cuff" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-05</span>
-                  <span className="archive-caption-name">SYMBIOTE CUFF</span>
+                  <span className="archive-caption-code">BW-05</span>
+                  <span className="archive-caption-name">RITUAL MARK</span>
                 </figcaption>
               </figure>
             </div>
@@ -1007,8 +1008,8 @@ export default function LookGallery() {
                   <img src={airpodImg} alt="Translucent case" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-03</span>
-                  <span className="archive-caption-name">EXO-POD</span>
+                  <span className="archive-caption-code">BW-03</span>
+                  <span className="archive-caption-name">VOID SCRIPT</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
@@ -1016,8 +1017,8 @@ export default function LookGallery() {
                   <img src={airpodMaxImg} alt="Sculptural headphones" />
                 </div>
                 <figcaption className="archive-caption">
-                  <span className="archive-caption-code">OBJ-06</span>
-                  <span className="archive-caption-name">VALKYRIE CANS</span>
+                  <span className="archive-caption-code">BW-06</span>
+                  <span className="archive-caption-name">IRON VEIL</span>
                 </figcaption>
               </figure>
             </div>
@@ -1050,29 +1051,29 @@ export default function LookGallery() {
 
             <nav className="footer-nav" aria-label="Footer navigation">
               <div className="footer-col">
-                <h3 className="footer-col-title">+ SHOP</h3>
+                <h3 className="footer-col-title">+ STUDIO</h3>
                 <ul>
-                  <li><a href="#">New Arrivals</a></li>
-                  <li><a href="#">Objects</a></li>
-                  <li><a href="#">Editions</a></li>
-                  <li><a href="#">Archive Sale</a></li>
+                  <li><a href="#">About Salvatore</a></li>
+                  <li><a href="#">Blackwork</a></li>
+                  <li><a href="#">Process</a></li>
+                  <li><a href="#">Aftercare</a></li>
                 </ul>
               </div>
               <div className="footer-col">
-                <h3 className="footer-col-title">+ UNIVERSE</h3>
+                <h3 className="footer-col-title">+ BOOKING</h3>
                 <ul>
-                  <li><a href="#">Manifesto</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Process</a></li>
-                  <li><a href="#">Editorial</a></li>
+                  <li><a href="#">Consultation</a></li>
+                  <li><a href="#">Availability</a></li>
+                  <li><a href="#">Preparation</a></li>
+                  <li><a href="#">FAQ</a></li>
                 </ul>
               </div>
               <div className="footer-col">
                 <h3 className="footer-col-title">+ SUPPORT</h3>
                 <ul>
                   <li><a href="#">Contact</a></li>
-                  <li><a href="#">Shipping</a></li>
-                  <li><a href="#">Returns</a></li>
+                  <li><a href="#">Care guide</a></li>
+                  <li><a href="#">Policies</a></li>
                   <li><a href="#">FAQ</a></li>
                 </ul>
               </div>
@@ -1096,13 +1097,13 @@ export default function LookGallery() {
             data-reveal-property="background-position"
             data-reveal-to="0% 0%"
           >
-            MORPH
+            SALVATORE BLACKWORK TATTO
           </div>
 
           <div className="footer-bottom">
-            <span>© 2026 MORPH STUDIO — ALL RIGHTS RESERVED</span>
-            <span>EPS — 26 / LOOK INTO THE FUTURE</span>
-            <span>GMT +9 CANADA</span>
+            <span>© 2026 SALVATORE BLACKWORK TATTO — ALL RIGHTS RESERVED</span>
+            <span>BLACKWORK TATTO / INK IS ARCHITECTURE</span>
+            <span>BY APPOINTMENT</span>
           </div>
         </footer>
       </div>
