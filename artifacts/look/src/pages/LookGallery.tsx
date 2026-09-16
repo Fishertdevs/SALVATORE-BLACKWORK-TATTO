@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "wouter";
 import { gsap } from "gsap";
 import phoneImg from "@assets/Phone_1777633894261.png";
 import shoesImg from "@assets/Shoes_1777633894262.png";
@@ -105,14 +106,14 @@ function imageToAsciiGrid(
 function MobileLookGallery() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div style={{ width: "100%", backgroundColor: "#0a0a0a", color: "#ffffff", overflowX: "hidden" }}>
+    <div style={{ width: "100%", backgroundColor: "#FFF8C9", color: "#1a1a1a", overflowX: "hidden" }}>
 
       {/* NAVBAR */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "16px 24px",
-        background: "rgba(245,245,245,0.95)",
+           background: "rgba(255,248,201,0.95)",
         backdropFilter: "blur(4px)",
       }}>
         <span style={{
@@ -130,7 +131,7 @@ function MobileLookGallery() {
       </nav>
       {menuOpen && (
         <div style={{
-          position: "fixed", inset: 0, backgroundColor: "#ffffff",
+           position: "fixed", inset: 0, backgroundColor: "#FFF8C9",
           zIndex: 100, display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center", gap: 40,
         }}>
@@ -144,13 +145,20 @@ function MobileLookGallery() {
             fontSize: 10, letterSpacing: "0.18em",
             textTransform: "uppercase", color: "#999",
           }}>BY APPOINTMENT</span>
-          {[["+ PORTFOLIO", "#"], ["+ STUDIO", "#"], ["+ BOOKING", "#"]].map(([label, href]) => (
-            <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
+          {[
+            ["/inicio", "+ INICIO"],
+            ["/acerca-de", "+ ACERCA DE"],
+            ["/portfolio", "+ PORTFOLIO"],
+            ["/servicios", "+ SERVICIOS"],
+            ["/reservas", "+ RESERVAS"],
+            ["/contacto", "+ CONTACTO"],
+          ].map(([href, label]) => (
+            <Link key={label} href={href} onClick={() => setMenuOpen(false)} style={{
               fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
               fontSize: 32, fontWeight: 400, color: "#1a1a1a",
               textDecoration: "none", letterSpacing: "0.02em",
               textTransform: "uppercase",
-            }}>{label}</a>
+            }}>{label}</Link>
           ))}
         </div>
       )}
@@ -176,7 +184,7 @@ function MobileLookGallery() {
       </div>
 
       {/* FEATURED TEXT */}
-      <div style={{ backgroundColor: "#ffffff", color: "#1a1a1a", padding: "48px 24px" }}>
+      <div style={{ backgroundColor: "#FFF8C9", color: "#1a1a1a", padding: "48px 24px" }}>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
@@ -194,7 +202,7 @@ function MobileLookGallery() {
       </div>
 
       {/* PRODUCT VIDEO */}
-      <div style={{ backgroundColor: "#ffffff", padding: "0 24px 48px" }}>
+      <div style={{ backgroundColor: "#FFF8C9", padding: "0 24px 48px" }}>
         <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden" }}>
           <video autoPlay loop muted playsInline style={{
             width: "100%", height: "100%", objectFit: "cover", display: "block"
@@ -213,7 +221,7 @@ function MobileLookGallery() {
       </div>
 
       {/* ARCHIVE — vertical single column */}
-      <div style={{ backgroundColor: "#ffffff", padding: "0 24px 64px" }}>
+      <div style={{ backgroundColor: "#FFF8C9", padding: "0 24px 64px" }}>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 11, letterSpacing: "0.15em",
@@ -860,15 +868,27 @@ export default function LookGallery() {
             <ul className="nav-links">
               <li>
                 <span className="nav-plus">+</span>
-                <span>PORTFOLIO</span>
+                <Link href="/inicio">INICIO</Link>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <span>STUDIO</span>
+                <Link href="/acerca-de">ACERCA DE</Link>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <span>BOOKING</span>
+                <Link href="/portfolio">PORTFOLIO</Link>
+              </li>
+              <li>
+                <span className="nav-plus">+</span>
+                <Link href="/servicios">SERVICIOS</Link>
+              </li>
+              <li>
+                <span className="nav-plus">+</span>
+                <Link href="/reservas">RESERVAS</Link>
+              </li>
+              <li>
+                <span className="nav-plus">+</span>
+                <Link href="/contacto">CONTACTO</Link>
               </li>
             </ul>
             <span className="nav-menu">MENU</span>
