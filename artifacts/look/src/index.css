@@ -1910,3 +1910,954 @@ body,
     gap: 12px;
   }
 }
+
+/* ============ INDEPENDENT BLACKWORK PAGE COMPOSITIONS ============ */
+.page-home main,
+.page-about main,
+.page-portfolio main,
+.page-services main,
+.page-booking main,
+.page-contact main {
+  overflow: hidden;
+}
+
+.page-home-hero {
+  min-height: calc(100vh - 80px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(360px, 1.18fr);
+  gap: 7vw;
+  align-items: center;
+  padding: 7vw;
+}
+
+.page-home-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.page-home-hero-copy h1,
+.page-about-title h1,
+.page-portfolio-hero h1,
+.page-services-hero-copy h1,
+.page-booking-heading h1,
+.page-contact-title h1 {
+  margin: 34px 0 38px;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(4.8rem, 9vw, 10.5rem);
+  font-weight: 400;
+  line-height: 0.76;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.page-home-hero-copy h1 em,
+.page-about-title h1 em,
+.page-portfolio-hero h1 em,
+.page-services-hero-copy h1 em,
+.page-booking-heading h1 em,
+.page-contact-title h1 em {
+  color: #E63027;
+  font-family: 'Playfair Display', 'Beautique Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-home-hero-copy > p,
+.page-about-title > p,
+.page-services-hero-copy > p,
+.page-booking-heading > p,
+.page-contact-title > p {
+  max-width: 330px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-home-hero-image {
+  position: relative;
+  height: min(78vh, 820px);
+  margin: 0;
+  overflow: hidden;
+  background: #e7dfaa;
+}
+
+.page-home-hero-image img,
+.page-about-portrait img,
+.page-services-image img,
+.page-booking-image img,
+.page-contact-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.page-home-hero-image img {
+  object-position: center center;
+}
+
+.page-home-hero-image figcaption,
+.page-about-portrait figcaption,
+.page-services-image figcaption,
+.page-booking-image figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  color: #E63027;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page-home-manifesto {
+  display: grid;
+  grid-template-columns: 0.55fr 1.1fr 0.75fr;
+  gap: 4vw;
+  align-items: end;
+  padding: 10vw 7vw 11vw;
+  color: #FFF8C9;
+  background: #0B0A0A;
+}
+
+.page-home-manifesto h2 {
+  margin: 0;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(4rem, 9vw, 10rem);
+  font-weight: 400;
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.page-home-manifesto h2 em {
+  color: #E63027;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-home-manifesto > div {
+  padding-bottom: 10px;
+}
+
+.page-home-manifesto > div p {
+  max-width: 290px;
+  margin: 0;
+  color: rgba(255, 248, 201, 0.8);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.page-home-index {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 7vw;
+  border-left: 1px solid rgba(23, 21, 21, 0.2);
+}
+
+.page-home-index div {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-right: 1px solid rgba(23, 21, 21, 0.2);
+  border-bottom: 1px solid rgba(23, 21, 21, 0.2);
+}
+
+.page-home-index strong {
+  color: #E63027;
+  font-family: 'Beautique Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.page-home-index span {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.page-about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  gap: 9vw;
+  min-height: 89vh;
+  align-items: end;
+  padding: 8vw 7vw 10vw;
+}
+
+.page-about-title {
+  padding-bottom: 5vw;
+}
+
+.page-about-title h1 {
+  margin-bottom: 50px;
+}
+
+.page-about-portrait {
+  position: relative;
+  height: min(70vh, 700px);
+  margin: 0;
+  background: #e7dfaa;
+}
+
+.page-about-portrait img {
+  object-position: center top;
+}
+
+.page-about-story {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 9vw;
+  padding: 9vw 7vw 11vw;
+  color: #FFF8C9;
+  background: #0B0A0A;
+}
+
+.page-about-story-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.page-about-story-label span {
+  color: #E63027;
+  font-size: 20px;
+}
+
+.page-about-story-copy h2 {
+  margin: 0 0 55px;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(3.6rem, 7vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.page-about-story-copy h2 em {
+  color: #E63027;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-about-story-copy p {
+  max-width: 530px;
+  margin: 0;
+  color: rgba(255, 248, 201, 0.78);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.page-about-story-copy p + p {
+  margin-top: 28px;
+}
+
+.page-about-process {
+  padding: 9vw 7vw 12vw;
+}
+
+.page-about-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 50px;
+  border-top: 1px solid rgba(23, 21, 21, 0.22);
+  border-bottom: 1px solid rgba(23, 21, 21, 0.22);
+}
+
+.page-about-process-grid article {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-right: 1px solid rgba(23, 21, 21, 0.22);
+}
+
+.page-about-process-grid article:last-child {
+  border-right: 0;
+}
+
+.page-about-process-grid strong {
+  color: #E63027;
+  font-family: 'Beautique Display', serif;
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.page-about-process-grid h3 {
+  margin: 30px 0 0;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.page-about-process-grid p {
+  max-width: 220px;
+  margin: 18px 0 0;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.page-portfolio-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 6vw;
+  align-items: end;
+  padding: 9vw 7vw 8vw;
+}
+
+.page-portfolio-hero h1 {
+  margin-bottom: 0;
+}
+
+.page-portfolio-hero > p {
+  max-width: 300px;
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-portfolio-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2.5vw;
+  align-items: start;
+  padding: 0 7vw 10vw;
+}
+
+.page-portfolio-gallery article {
+  grid-column: span 4;
+}
+
+.page-portfolio-gallery .page-portfolio-card-large {
+  grid-column: span 6;
+}
+
+.page-portfolio-gallery .page-portfolio-card-small:nth-child(2) {
+  margin-top: 13vw;
+}
+
+.page-portfolio-gallery .page-portfolio-card-small:nth-child(3) {
+  margin-top: 4vw;
+}
+
+.page-portfolio-gallery figure {
+  height: 43vw;
+  max-height: 680px;
+  margin: 0;
+  overflow: hidden;
+  background: #e7dfaa;
+}
+
+.page-portfolio-gallery .page-portfolio-card-small figure {
+  height: 30vw;
+  max-height: 460px;
+}
+
+.page-portfolio-gallery img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.page-portfolio-gallery article:hover img {
+  transform: scale(1.04);
+}
+
+.page-portfolio-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 15px;
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.page-portfolio-meta span {
+  color: #E63027;
+}
+
+.page-portfolio-meta strong {
+  font-weight: 500;
+  text-align: right;
+}
+
+.page-portfolio-note {
+  padding: 7vw 7vw 12vw;
+  text-align: center;
+}
+
+.page-portfolio-note h2 {
+  margin: 35px 0 42px;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 400;
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.page-portfolio-note h2 em {
+  color: #E63027;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-portfolio-note .tattoo-red-link {
+  justify-content: center;
+}
+
+.page-services-hero {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 7vw;
+  align-items: center;
+  min-height: 88vh;
+  padding: 8vw 7vw;
+  color: #FFF8C9;
+  background: #0B0A0A;
+}
+
+.page-services-hero-copy h1 {
+  color: #FFF8C9;
+}
+
+.page-services-hero-copy > p {
+  color: rgba(255, 248, 201, 0.76);
+}
+
+.page-services-image {
+  position: relative;
+  height: min(70vh, 720px);
+  margin: 0;
+  overflow: hidden;
+  background: #d8c984;
+}
+
+.page-services-image img {
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  object-position: center center;
+  filter: grayscale(0.1) contrast(1.06);
+}
+
+.page-services-hero .tattoo-eyebrow,
+.page-services-callout .tattoo-eyebrow {
+  color: #E63027;
+}
+
+.page-services-list {
+  padding: 0 7vw 10vw;
+}
+
+.page-services-list article {
+  display: grid;
+  grid-template-columns: 75px 1.15fr 1fr 28px;
+  gap: 30px;
+  align-items: center;
+  padding: 25px 0;
+  border-top: 1px solid rgba(23, 21, 21, 0.25);
+}
+
+.page-services-list article:last-child {
+  border-bottom: 1px solid rgba(23, 21, 21, 0.25);
+}
+
+.page-services-list article > span:first-child {
+  color: #E63027;
+  font-family: 'Beautique Display', serif;
+  font-size: 28px;
+}
+
+.page-services-list h2 {
+  margin: 0;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(1.7rem, 3.4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.page-services-list p {
+  max-width: 320px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.page-services-arrow {
+  color: #E63027;
+  font-size: 24px;
+}
+
+.page-services-callout {
+  margin: 0 7vw 10vw;
+  padding: 8vw 7vw 9vw;
+  color: #FFF8C9;
+  background: #E63027;
+}
+
+.page-services-callout h2 {
+  margin: 42px 0 52px;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 400;
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.page-services-callout h2 em {
+  color: #0B0A0A;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-services-callout .tattoo-light-link {
+  color: #0B0A0A;
+}
+
+.page-booking-heading {
+  padding: 9vw 7vw 7vw;
+}
+
+.page-booking-heading h1 {
+  margin-bottom: 30px;
+}
+
+.page-booking-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+  gap: 9vw;
+  padding: 0 7vw 13vw;
+  align-items: start;
+}
+
+.page-booking-image {
+  position: relative;
+  height: min(70vh, 700px);
+  margin: 0;
+  overflow: hidden;
+  background: #e7dfaa;
+}
+
+.page-booking-image img {
+  object-position: center center;
+}
+
+.page-booking-form-wrap {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 5vw;
+  padding-top: 10px;
+}
+
+.page-booking-aside p {
+  max-width: 220px;
+  margin: 35px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-booking-aside p + p {
+  margin-top: 20px;
+}
+
+.page-booking .tattoo-form {
+  gap: 32px;
+}
+
+.page-contact-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 8vw;
+  min-height: 86vh;
+  align-items: center;
+  padding: 8vw 7vw 10vw;
+}
+
+.page-contact-title h1 {
+  margin-bottom: 42px;
+}
+
+.page-contact-image {
+  height: min(68vh, 720px);
+  margin: 0;
+  overflow: hidden;
+  background: #e7dfaa;
+}
+
+.page-contact-image img {
+  object-position: center top;
+}
+
+.page-contact-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0 7vw 11vw;
+  border-top: 1px solid rgba(23, 21, 21, 0.24);
+}
+
+.page-contact-details > div {
+  min-height: 190px;
+  padding: 24px 28px 28px 0;
+  border-bottom: 1px solid rgba(23, 21, 21, 0.24);
+}
+
+.page-contact-details > div:nth-child(even) {
+  padding-left: 28px;
+  border-left: 1px solid rgba(23, 21, 21, 0.24);
+}
+
+.page-contact-details a {
+  display: inline-block;
+  margin-top: 34px;
+  color: #171515;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(1.4rem, 2.6vw, 2.7rem);
+  line-height: 0.9;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.page-contact-details p {
+  margin: 34px 0 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.page-contact-details .tattoo-red-link {
+  margin-top: 34px;
+}
+
+.page-contact-statement {
+  position: relative;
+  min-height: 48vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin: 0 7vw 11vw;
+  padding: 5vw;
+  color: #FFF8C9;
+  background: #0B0A0A;
+  overflow: hidden;
+}
+
+.page-contact-statement::after {
+  content: "SALVATORE";
+  position: absolute;
+  right: -2vw;
+  top: 5vw;
+  color: rgba(255, 248, 201, 0.06);
+  font-family: 'Beautique Display', serif;
+  font-size: 24vw;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.page-contact-statement h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: 'Beautique Display', serif;
+  font-size: clamp(4.5rem, 10vw, 11rem);
+  font-weight: 400;
+  line-height: 0.76;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.page-contact-statement h2 em {
+  color: #E63027;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-contact-statement span {
+  position: relative;
+  z-index: 1;
+  color: #E63027;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 900px) {
+  .page-home-hero,
+  .page-about-hero,
+  .page-services-hero,
+  .page-booking-layout,
+  .page-contact-hero {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .page-home-hero {
+    min-height: auto;
+    padding-top: 13vw;
+  }
+
+  .page-home-hero-image,
+  .page-about-portrait,
+  .page-services-image,
+  .page-booking-image,
+  .page-contact-image {
+    height: 78vw;
+    max-height: 700px;
+  }
+
+  .page-home-manifesto {
+    grid-template-columns: 1fr 1.6fr;
+  }
+
+  .page-home-manifesto > .tattoo-eyebrow {
+    grid-column: 1 / -1;
+  }
+
+  .page-portfolio-hero {
+    display: block;
+  }
+
+  .page-portfolio-hero > p {
+    margin-top: 40px;
+  }
+
+  .page-booking-heading {
+    padding-top: 13vw;
+  }
+
+  .page-booking-form-wrap {
+    grid-template-columns: 0.7fr 1.3fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-home-hero,
+  .page-about-hero,
+  .page-services-hero,
+  .page-booking-heading,
+  .page-contact-hero {
+    padding: 18vw 20px 20vw;
+  }
+
+  .page-home-hero-copy h1,
+  .page-about-title h1,
+  .page-portfolio-hero h1,
+  .page-services-hero-copy h1,
+  .page-booking-heading h1,
+  .page-contact-title h1 {
+    margin: 28px 0 34px;
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .page-home-hero-image,
+  .page-about-portrait,
+  .page-services-image,
+  .page-booking-image,
+  .page-contact-image {
+    height: 125vw;
+  }
+
+  .page-home-manifesto {
+    display: block;
+    padding: 22vw 20px 25vw;
+  }
+
+  .page-home-manifesto h2 {
+    margin: 45px 0;
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .page-home-manifesto > div p {
+    max-width: 320px;
+  }
+
+  .page-home-index {
+    display: block;
+    margin: 0 20px;
+  }
+
+  .page-home-index div {
+    min-height: 135px;
+    border-right: 0;
+  }
+
+  .page-about-story {
+    display: block;
+    padding: 22vw 20px 25vw;
+  }
+
+  .page-about-story-label {
+    margin-bottom: 70px;
+  }
+
+  .page-about-story-copy h2 {
+    margin-bottom: 42px;
+    font-size: clamp(3.7rem, 17vw, 6rem);
+  }
+
+  .page-about-process {
+    padding: 22vw 20px 25vw;
+  }
+
+  .page-about-process-grid {
+    display: block;
+    margin-top: 40px;
+  }
+
+  .page-about-process-grid article {
+    min-height: 170px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(23, 21, 21, 0.22);
+  }
+
+  .page-about-process-grid article:last-child {
+    border-bottom: 0;
+  }
+
+  .page-portfolio-hero {
+    padding: 18vw 20px 16vw;
+  }
+
+  .page-portfolio-gallery {
+    display: block;
+    padding: 0 20px 22vw;
+  }
+
+  .page-portfolio-gallery article,
+  .page-portfolio-gallery .page-portfolio-card-large,
+  .page-portfolio-gallery .page-portfolio-card-small {
+    width: 84%;
+    margin: 0 0 62px;
+  }
+
+  .page-portfolio-gallery article:nth-child(even) {
+    margin-left: auto;
+  }
+
+  .page-portfolio-gallery figure,
+  .page-portfolio-gallery .page-portfolio-card-small figure {
+    height: 116vw;
+    max-height: none;
+  }
+
+  .page-portfolio-note {
+    padding: 8vw 20px 24vw;
+  }
+
+  .page-portfolio-note h2 {
+    margin: 35px 0 42px;
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .page-services-hero {
+    padding-bottom: 22vw;
+  }
+
+  .page-services-list {
+    padding: 0 20px 22vw;
+  }
+
+  .page-services-list article {
+    grid-template-columns: 38px 1fr 24px;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .page-services-list article p {
+    grid-column: 2 / -1;
+    margin-top: 8px;
+  }
+
+  .page-services-list h2 {
+    font-size: 2rem;
+  }
+
+  .page-services-callout {
+    margin: 0 20px 22vw;
+    padding: 20vw;
+  }
+
+  .page-services-callout h2 {
+    margin: 42px 0 50px;
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .page-booking-layout {
+    padding: 0 20px 24vw;
+  }
+
+  .page-booking-form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+  }
+
+  .page-booking-aside p {
+    max-width: 300px;
+  }
+
+  .page-contact-details {
+    display: block;
+    margin: 0 20px 24vw;
+  }
+
+  .page-contact-details > div,
+  .page-contact-details > div:nth-child(even) {
+    min-height: 150px;
+    padding: 24px 0;
+    border-left: 0;
+  }
+
+  .page-contact-details a {
+    margin-top: 25px;
+    font-size: 2rem;
+  }
+
+  .page-contact-details .tattoo-red-link {
+    margin-top: 25px;
+  }
+
+  .page-contact-statement {
+    min-height: 110vw;
+    display: block;
+    margin: 0 20px 24vw;
+    padding: 12vw 20px;
+  }
+
+  .page-contact-statement h2 {
+    font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .page-contact-statement span {
+    display: block;
+    margin-top: 45vw;
+  }
+}
