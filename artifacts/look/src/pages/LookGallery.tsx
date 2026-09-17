@@ -188,13 +188,13 @@ function MobileLookGallery({
             fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 11, letterSpacing: "0.2em",
             textTransform: "uppercase", color: "#E63027", margin: "0 0 8px",
-          }}>SALVATORE — BLACKWORK</p>
+          }}>{copy.heroEyebrow}</p>
           <p style={{
             fontFamily: "'Beautique Display', serif",
             fontSize: "clamp(40px, 10vw, 72px)",
             fontWeight: 400, color: "#E63027",
             lineHeight: 1, margin: 0, textTransform: "uppercase",
-          }}>BLACKWORK<br />TATTO</p>
+          }}>{copy.heroTitle[0]}<br />{copy.heroTitle[1]}</p>
         </div>
       </div>
 
@@ -204,15 +204,13 @@ function MobileLookGallery({
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
         }}>
-          SALVATORE BLACKWORK TATTO works where ink, shadow, and skin meet.
-          Every tattoo is drawn with intention, built from bold contrast and finished
-          with a precise, personal hand.
+          {copy.featuredParagraphs[0]}
         </p>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: 0,
         }}>
-          Custom blackwork for people who want their story to stay permanently visible.
+          {copy.featuredParagraphs[1]}
         </p>
       </div>
 
@@ -232,7 +230,7 @@ function MobileLookGallery({
           fontWeight: 400, color: "#000000",
           lineHeight: 1.1, textTransform: "uppercase",
           margin: "24px 0 0",
-        }}>BLACKWORK PIECE 01 —<br />WHERE INK BECOMES ARCHITECTURE</h3>
+        }}>{copy.featuredHeadline}</h3>
       </div>
 
       {/* ARCHIVE — vertical single column */}
@@ -242,19 +240,19 @@ function MobileLookGallery({
           fontSize: 11, letterSpacing: "0.15em",
           textTransform: "uppercase", color: "#1a1a1a",
           borderTop: "1px solid #e0e0e0", paddingTop: 24, marginBottom: 32,
-        }}>SALVATORE BLACKWORK TATTO — SELECTED WORKS — 2026</p>
+        }}>{`SALVATORE BLACKWORK TATTO — ${copy.selectedWorks} — ${language === "es" ? "CON CITA PREVIA" : "BY APPOINTMENT"}`}</p>
 
         {[
-          { img: tableImg, code: "BW-01", name: "BLACK FLAME" },
-          { img: shoesImg, code: "BW-04", name: "NOCTURNAL FORM" },
-          { img: candleImg, code: "BW-02", name: "THORN STUDY" },
-          { img: earringsImg, code: "BW-05", name: "RITUAL MARK" },
-          { img: airpodImg, code: "BW-03", name: "VOID SCRIPT" },
-          { img: airpodMaxImg, code: "BW-06", name: "IRON VEIL" },
+          { img: tableImg, code: "BW-01" },
+          { img: shoesImg, code: "BW-04" },
+          { img: candleImg, code: "BW-02" },
+          { img: earringsImg, code: "BW-05" },
+          { img: airpodImg, code: "BW-03" },
+          { img: airpodMaxImg, code: "BW-06" },
         ].map((item, i) => (
           <div key={i} style={{ marginBottom: 40 }}>
             <div style={{ width: "100%", aspectRatio: "4/5", overflow: "hidden", marginBottom: 12 }}>
-              <img src={item.img} alt={item.name} style={{
+              <img src={item.img} alt={copy.archiveWorks[i][1]} style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block"
               }} />
             </div>
@@ -269,13 +267,13 @@ function MobileLookGallery({
                 fontFamily: "'Beautique Display', sans-serif",
                 fontSize: 16, letterSpacing: "0.06em", color: "#000",
                 textTransform: "uppercase",
-              }}>{item.name}</span>
+              }}>{copy.archiveWorks[i][0]}</span>
             </div>
           </div>
         ))}
       </div>
 
-      <StudioHomeSections />
+      <StudioHomeSections language={language} />
 
       {/* FOOTER */}
       <div style={{ backgroundColor: "#0a0a0a", color: "#ffffff", padding: "48px 24px 32px" }}>
@@ -283,16 +281,16 @@ function MobileLookGallery({
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 11, letterSpacing: "0.18em",
           textTransform: "uppercase", color: "#E63027", margin: "0 0 12px",
-        }}>BLACKWORK JOURNAL — N° 01</p>
+        }}>{copy.footerJournal}</p>
         <h2 style={{
           fontFamily: "'Beautique Display', serif",
           fontSize: "clamp(28px, 8vw, 48px)",
           fontWeight: 400, textTransform: "uppercase",
           color: "#ffffff", lineHeight: 1.05, margin: "0 0 32px",
-        }}>MAKE YOUR MARK<br />IN THE <em style={{ color: "#E63027", fontStyle: "italic" }}>archive</em>.</h2>
+        }}>{copy.footerMark[0]}<br />{copy.footerMark[1]} <em style={{ color: "#E63027", fontStyle: "italic" }}>{copy.footerMark[2]}</em>.</h2>
 
         <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.4)", marginBottom: 48 }}>
-          <input type="email" placeholder="ENTER YOUR EMAIL" style={{
+          <input type="email" placeholder={copy.emailPlaceholder} style={{
             flex: 1, background: "transparent", border: "none",
             color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 12, letterSpacing: "0.16em", padding: "12px 0", outline: "none",
@@ -300,16 +298,11 @@ function MobileLookGallery({
           <button style={{
             background: "transparent", border: "none", color: "#ffffff",
             fontSize: 14, cursor: "pointer", padding: "12px 0 12px 12px",
-          }}>→</button>
+          }}>{copy.subscribe}</button>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 16px", marginBottom: 48 }}>
-          {([
-            ["+ STUDIO", ["About Salvatore", "Blackwork", "Process", "Aftercare"]],
-            ["+ BOOKING", ["Consultation", "Availability", "Preparation", "FAQ"]],
-            ["+ SUPPORT", ["Contact", "Care guide", "Policies", "FAQ"]],
-            ["+ CONNECT", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
-          ] as [string, string[]][]).map(([title, items]) => (
+          {copy.footerColumns.map(([title, items]) => (
             <div key={title}>
               <h3 style={{
                 fontFamily: "'Helvetica Neue', sans-serif",
