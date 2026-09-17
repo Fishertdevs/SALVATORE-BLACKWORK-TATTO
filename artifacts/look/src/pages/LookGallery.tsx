@@ -3,17 +3,12 @@ import { gsap } from "gsap";
 import { StudioHomeSections } from "@/pages/TattooPages";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
-import phoneImg from "@assets/Phone_1777633894261.png";
 import shoesImg from "@assets/Shoes_1777633894262.png";
 import tableImg from "@assets/Table_1777633894262.png";
 import airpodMaxImg from "@assets/Airpod_max_1777633894262.png";
 import airpodImg from "@assets/Airpod_1777633894263.png";
 import candleImg from "@assets/candle_1777633894263.png";
-import chairImg from "@assets/Chair_1777633894263.png";
 import earringsImg from "@assets/Earrings_1777633894263.png";
-import glasses2Img from "@assets/Glasses_2_1777634693808.png";
-import nailImg from "@assets/Nail_1777634693809.png";
-import glasses1Img from "@assets/Glasses_1_1777634693810.png";
 import mainImg from "@assets/hero_new_image_1777693117619.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
@@ -25,26 +20,9 @@ const FONT_SIZE = 14;
 const ASPECT_W = 4;
 const ASPECT_H = 5;
 const ASCII_COLS = 25;
-const IMAGE_STAGGER_MS = 140;
 const CELL_APPEAR_MS = 7;
 const SCRAMBLE_COUNT = 10;
 const SCRAMBLE_SPEED_MS = 120;
-
-const TOTAL_CARDS = 12;
-const FEATURED_INDEX = 4;
-const portraitImages = [
-  phoneImg,
-  shoesImg,
-  tableImg,
-  airpodMaxImg,
-  airpodImg,
-  candleImg,
-  chairImg,
-  earringsImg,
-  glasses2Img,
-  nailImg,
-  glasses1Img,
-];
 
 const denseCharIndex = ASCII_CHARS.lastIndexOf(".");
 const denseChars = ASCII_CHARS.slice(denseCharIndex + 1).split("");
@@ -594,41 +572,17 @@ export default function LookGallery() {
       animateCells(canvas, asciiGrid, brightnessGrid, delay, ASCII_COLS, ASCII_ROWS, onDone);
     };
 
-    // Build cards
-    for (let i = 0; i < TOTAL_CARDS; i++) {
-      const div = document.createElement("div");
-      if (i === FEATURED_INDEX) {
-        div.className = "img featured";
-        const img = document.createElement("img");
-        img.id = "featured-img-el";
-        img.src = mainImg;
-        div.appendChild(img);
-        featuredCard = div;
-      } else {
-        const seedIdx = i < FEATURED_INDEX ? i : i - 1;
-        div.className = "img";
-        const img = document.createElement("img");
-        img.className = "ascii-reveal";
-        img.src = portraitImages[seedIdx]!;
-        div.appendChild(img);
-      }
-      gallery.appendChild(div);
-    }
+    // The welcome screen intentionally contains only the hero's ASCII card.
+    const div = document.createElement("div");
+    div.className = "img featured";
+    const img = document.createElement("img");
+    img.id = "featured-img-el";
+    img.src = mainImg;
+    div.appendChild(img);
+    gallery.appendChild(div);
+    featuredCard = div;
 
     featuredCardRef.current = featuredCard;
-
-    // Run ASCII effect for portraits
-    gallery.querySelectorAll<HTMLImageElement>("img.ascii-reveal").forEach((img, i) => {
-      const canvas = document.createElement("canvas");
-      img.closest(".img")!.appendChild(canvas);
-      const delay = i * IMAGE_STAGGER_MS;
-      const run = () => runEffect(img, canvas, delay);
-      if (img.complete && img.naturalWidth) {
-        run();
-      } else {
-        img.addEventListener("load", run);
-      }
-    });
 
     // Featured card ASCII effect — 16:9 grid, source covered (cropped) to fit
     const runEffectLeftCrop = (
@@ -800,9 +754,9 @@ export default function LookGallery() {
         tl.fromTo(heroActions, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 3.3);
       }
       tl.eventCallback("onComplete", () => {
-        gallery.style.opacity = "0";
-        gallery.style.pointerEvents = "none";
-        gallery.style.zIndex = "110";
+        gallery?.style.setProperty("opacity", "0");
+        gallery?.style.setProperty("pointer-events", "none");
+        gallery?.style.setProperty("z-index", "110");
         fullSection.style.overflowY = "auto";
       });
     }
@@ -845,9 +799,9 @@ export default function LookGallery() {
               borderRadius: "0px",
             });
             gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
-            gallery.style.pointerEvents = "auto";
-            gallery.style.opacity = "1";
-            gallery.style.zIndex = "110";
+            gallery?.style.setProperty("pointer-events", "auto");
+            gallery?.style.setProperty("opacity", "1");
+            gallery?.style.setProperty("z-index", "110");
           },
         })
         .to(heroOverlays, {
