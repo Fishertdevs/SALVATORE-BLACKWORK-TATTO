@@ -535,8 +535,8 @@ body,
   height: 100%;
   z-index: 100;
   background: #FFFFFF;
-  pointer-events: auto;
-  opacity: 1;
+  pointer-events: none;
+  opacity: 0;
   overflow: hidden;
   overscroll-behavior: contain;
   scroll-behavior: smooth;

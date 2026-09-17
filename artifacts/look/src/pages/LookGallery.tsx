@@ -714,6 +714,9 @@ export default function LookGallery() {
 
       const rect = featured.getBoundingClientRect();
 
+      // The welcome mosaic must sit behind the expanding hero. Leaving it
+      // above the hero makes its images remain visible as a ghost overlay.
+      gsap.set(gallery, { zIndex: 90 });
       gsap.set(fullSection, {
         opacity: 1,
         pointerEvents: "all",
@@ -753,7 +756,12 @@ export default function LookGallery() {
             duration: ZOOM_DURATION,
           },
           0,
-        );
+        )
+        .to(gallery, {
+          opacity: 0,
+          duration: 0.35,
+          ease: "power2.inOut",
+        }, ZOOM_DURATION - 0.15);
       activeTimelineRef.current = tl;
       if (navbar) {
         tl.to(
@@ -782,6 +790,12 @@ export default function LookGallery() {
       if (heroFutureDescRef.current) {
         tl.fromTo(heroFutureDescRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 1.1);
       }
+      tl.eventCallback("onComplete", () => {
+        gallery.style.opacity = "0";
+        gallery.style.pointerEvents = "none";
+        gallery.style.zIndex = "110";
+        fullSection.style.overflowY = "auto";
+      });
     }
 
     function collapseSection() {
@@ -822,6 +836,9 @@ export default function LookGallery() {
               borderRadius: "0px",
             });
             gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
+            gallery.style.pointerEvents = "auto";
+            gallery.style.opacity = "1";
+            gallery.style.zIndex = "110";
           },
         })
         .to(heroOverlays, {
