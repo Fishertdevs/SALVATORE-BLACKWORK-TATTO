@@ -25,10 +25,10 @@ const FONT_SIZE = 14;
 const ASPECT_W = 4;
 const ASPECT_H = 5;
 const ASCII_COLS = 25;
-const IMAGE_STAGGER_MS = 70;
-const CELL_APPEAR_MS = 2;
+const IMAGE_STAGGER_MS = 140;
+const CELL_APPEAR_MS = 7;
 const SCRAMBLE_COUNT = 10;
-const SCRAMBLE_SPEED_MS = 100;
+const SCRAMBLE_SPEED_MS = 120;
 
 const TOTAL_CARDS = 12;
 const FEATURED_INDEX = 4;
@@ -688,7 +688,7 @@ export default function LookGallery() {
       const canvas = document.createElement("canvas");
       featuredCard.appendChild(canvas);
       const run = () =>
-        runEffectLeftCrop(featuredImgEl, canvas, 500, () => {
+        runEffectLeftCrop(featuredImgEl, canvas, 800, () => {
           featuredCard!.classList.add("revealed");
           const revealTimer = window.setTimeout(() => {
             expandSection();
@@ -733,18 +733,20 @@ export default function LookGallery() {
       gsap.set(fullContent, { opacity: 1, y: 0 });
       if (navbar) gsap.set(navbar, { y: "-100%", autoAlpha: 0 });
       const heroOverlays = [
+        heroTopTitleRef.current,
         heroEpsRef.current,
         heroLookRef.current,
         heroFutureRef.current,
         heroFutureDescRef.current,
-      ].filter((el): el is HTMLImageElement | HTMLParagraphElement => el !== null);
+        ...Array.from(fullContent.querySelectorAll<HTMLElement>(".hero-side-action")),
+      ].filter((el): el is HTMLElement => el !== null);
       gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
 
-      const ZOOM_DURATION = 0.8;
+      const ZOOM_DURATION = 2.4;
       const tl = gsap
         .timeline({ defaults: { ease: "expo.inOut" } })
-        .to(gallery, { opacity: 0.12, duration: 0.5 }, 0)
-        .to(featured, { opacity: 0, duration: 0.2 }, 0)
+        .to(gallery, { opacity: 0.12, duration: 1.1 }, 0)
+        .to(featured, { opacity: 0, duration: 0.8 }, 0)
         .to(
           fullSection,
           {
@@ -759,18 +761,18 @@ export default function LookGallery() {
         )
         .to(gallery, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.8,
           ease: "power2.inOut",
-        }, ZOOM_DURATION - 0.15);
+        }, ZOOM_DURATION - 0.35);
       activeTimelineRef.current = tl;
       if (navbar) {
         tl.to(
           navbar,
-          { y: "0%", autoAlpha: 1, duration: 0.55, ease: "expo.out" },
-          ZOOM_DURATION - 0.3,
+          { y: "0%", autoAlpha: 1, duration: 1.1, ease: "expo.out" },
+          ZOOM_DURATION - 0.5,
         );
       }
-      const REVEAL_DURATION = 0.85;
+      const REVEAL_DURATION = 1.2;
       const REVEAL_EASE = "power3.out";
       const REVEAL_FROM = { clipPath: "inset(0px 100% 0px 0px)" };
       const REVEAL_TO = {
@@ -778,17 +780,24 @@ export default function LookGallery() {
         duration: REVEAL_DURATION,
         ease: REVEAL_EASE,
       };
+      if (heroTopTitleRef.current) {
+        tl.fromTo(heroTopTitleRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.8);
+      }
       if (heroEpsRef.current) {
-        tl.fromTo(heroEpsRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.5);
+        tl.fromTo(heroEpsRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 1.3);
       }
       if (heroLookRef.current) {
-        tl.fromTo(heroLookRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.7);
+        tl.fromTo(heroLookRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 1.8);
       }
       if (heroFutureRef.current) {
-        tl.fromTo(heroFutureRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 0.9);
+        tl.fromTo(heroFutureRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 2.3);
       }
       if (heroFutureDescRef.current) {
-        tl.fromTo(heroFutureDescRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 1.1);
+        tl.fromTo(heroFutureDescRef.current, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 2.8);
+      }
+      const heroActions = fullContent.querySelectorAll<HTMLElement>(".hero-side-action");
+      if (heroActions.length) {
+        tl.fromTo(heroActions, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 3.3);
       }
       tl.eventCallback("onComplete", () => {
         gallery.style.opacity = "0";
