@@ -494,29 +494,29 @@ export default function LookGallery() {
       timeline
         .to(heroTopTitleRef.current, {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.9,
-        }, 0.15)
+          duration: 0.85,
+        }, 1.3)
         .to(heroEpsRef.current, {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.8,
-        }, 0.35)
+          duration: 0.85,
+        }, 1.5)
         .to(heroLookRef.current, {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.8,
-        }, 0.52)
+          duration: 0.85,
+        }, 1.9)
         .to(heroFutureRef.current, {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.8,
-        }, 0.68)
+          duration: 0.85,
+        }, 1.7)
         .to(heroFutureDescRef.current, {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.75,
-        }, 0.84)
+          duration: 0.85,
+        }, 2.1)
         .to(content.querySelectorAll<HTMLElement>(".hero-side-action"), {
           clipPath: "inset(0 0% 0 0)",
-          duration: 0.7,
-          stagger: 0.12,
-        }, 1);
+          duration: 0.85,
+          stagger: 0.2,
+        }, 2.4);
     };
     revealHeroRef.current = revealHero;
 
