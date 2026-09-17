@@ -634,6 +634,20 @@ export default function LookGallery() {
         bg.push(br);
       }
       prepareCanvas(canvas, cols, rows);
+      const card = featuredCard;
+      if (card) {
+        const renderDuration =
+          (delay + cols * rows * CELL_APPEAR_MS + SCRAMBLE_COUNT * SCRAMBLE_SPEED_MS) / 1000;
+        gsap.set(card, {
+          scale: 0.28,
+          transformOrigin: "50% 50%",
+        });
+        gsap.to(card, {
+          scale: 1,
+          duration: Math.max(1, renderDuration),
+          ease: "none",
+        });
+      }
       animateCells(canvas, ag, bg, delay, cols, rows, onDone);
     };
 
