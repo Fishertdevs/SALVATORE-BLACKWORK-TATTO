@@ -884,64 +884,43 @@ export default function LookGallery() {
           </div>
           <div className="nav-right">
             <ul className="nav-links">
-              <li>
-                <a href="#home-hero">INICIO</a>
-              </li>
-              <li>
-                <a href="#studio-about">ACERCA DE</a>
-              </li>
-              <li>
-                <a href="#studio-portfolio">PORTFOLIO</a>
-              </li>
-              <li>
-                <a href="#studio-services">SERVICIOS</a>
-              </li>
-              <li>
-                <a href="#studio-booking">RESERVAS</a>
-              </li>
-              <li>
-                <a href="#studio-contact">CONTACTO</a>
-              </li>
+              {copy.nav.map((label, index) => (
+                <li key={label}>
+                  <a href={navHrefs[index]}>{label}</a>
+                </li>
+              ))}
             </ul>
+            <LanguageSwitcher language={language} onChange={handleLanguageChange} />
           </div>
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-left">
-            <div className="hero-eps" ref={heroEpsRef} aria-label="Salvatore Blackwork">
-              SALVATORE — BLACKWORK
+            <div className="hero-eps" ref={heroEpsRef} aria-label={copy.heroEyebrow}>
+              {copy.heroEyebrow}
             </div>
-            <div className="hero-look" ref={heroLookRef} aria-label="Blackwork Tatto">
-              BLACKWORK<br />TATTO
+            <div className="hero-look" ref={heroLookRef} aria-label={`${copy.heroTitle[0]} ${copy.heroTitle[1]}`}>
+              {copy.heroTitle[0]}<br />{copy.heroTitle[1]}
             </div>
           </div>
           <div className="hero-future-wrap">
-            <div className="hero-future" ref={heroFutureRef} aria-label="Ink is architecture">
-              INK IS<br />ARCHITECTURE
+            <div className="hero-future" ref={heroFutureRef} aria-label={`${copy.heroFuture[0]} ${copy.heroFuture[1]}`}>
+              {copy.heroFuture[0]}<br />{copy.heroFuture[1]}
             </div>
             <p className="hero-future-desc" ref={heroFutureDescRef}>
-              Blackwork tattoos built from deep contrast, deliberate linework,
-              and a point of view that belongs only to you.
+              {copy.heroDescription}
             </p>
           </div>
         </div>
 
         <section className="product-video-section" aria-label="Salvatore Blackwork featured tattoo">
           <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
-            SALVATORE BLACKWORK TATTO / FEATURED WORK
+            {copy.featuredLabel}
           </div>
           <div className="featured-grid">
             <div className="featured-col-left" aria-hidden="true" />
             <div className="featured-about-text">
-              <p data-delay="0.2s">
-                SALVATORE BLACKWORK TATTO operates at the intersection of ink,
-                anatomy, and visual language. Each piece is composed to move with
-                the body and hold its meaning for a lifetime.
-              </p>
-              <p data-delay="0.35s">
-                The studio is driven by one idea: a tattoo should feel inevitable on
-                the skin. From first sketch to final needle pass, every line serves
-                the person wearing it.
-              </p>
+              <p data-delay="0.2s">{copy.featuredParagraphs[0]}</p>
+              <p data-delay="0.35s">{copy.featuredParagraphs[1]}</p>
             </div>
           </div>
           <div className="product-video-wrap">
@@ -957,19 +936,19 @@ export default function LookGallery() {
               <source src={productVideoMp4} type="video/mp4" />
             </video>
           </div>
-          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">BLACKWORK PIECE 01 — WHERE INK BECOMES ARCHITECTURE</h3>
+          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">{copy.featuredHeadline}</h3>
         </section>
         <section className="archive-section">
-          <header className="archive-header" aria-label="Salvatore Blackwork Tatto — selected works — 2026">
+          <header className="archive-header" aria-label={`${copy.selectedWorks} — 2026`}>
             <div className="archive-marquee-track">
               {[
                 "SALVATORE BLACKWORK TATTO",
-                "SELECTED WORKS 2026",
-                "BY APPOINTMENT",
+                `${copy.selectedWorks} 2026`,
+                copy.appointment,
                 "SALVATORE BLACKWORK TATTO",
                 "SALVATORE BLACKWORK TATTO",
-                "SELECTED WORKS 2026",
-                "BY APPOINTMENT",
+                `${copy.selectedWorks} 2026`,
+                copy.appointment,
                 "SALVATORE BLACKWORK TATTO",
               ].map((label, i) => (
                 <span
@@ -992,74 +971,74 @@ export default function LookGallery() {
             <div className="archive-col archive-col-1">
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.5s">
-                  <img src={tableImg} alt="Chrome table" />
+                  <img src={tableImg} alt={copy.archiveWorks[0][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-01</span>
-                  <span className="archive-caption-name">BLACK FLAME</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[0][0]}</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.5s">
-                  <img src={shoesImg} alt="Chrome heels" />
+                  <img src={shoesImg} alt={copy.archiveWorks[1][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-04</span>
-                  <span className="archive-caption-name">NOCTURNAL FORM</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[1][0]}</span>
                 </figcaption>
               </figure>
             </div>
             <div className="archive-col archive-col-2">
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.7s">
-                  <img src={candleImg} alt="Chrome candle holder" />
+                  <img src={candleImg} alt={copy.archiveWorks[2][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-02</span>
-                  <span className="archive-caption-name">THORN STUDY</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[2][0]}</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.7s">
-                  <img src={earringsImg} alt="Sculptural ear cuff" />
+                  <img src={earringsImg} alt={copy.archiveWorks[3][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-05</span>
-                  <span className="archive-caption-name">RITUAL MARK</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[3][0]}</span>
                 </figcaption>
               </figure>
             </div>
             <div className="archive-col archive-col-3">
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.9s">
-                  <img src={airpodImg} alt="Translucent case" />
+                  <img src={airpodImg} alt={copy.archiveWorks[4][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-03</span>
-                  <span className="archive-caption-name">VOID SCRIPT</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[4][0]}</span>
                 </figcaption>
               </figure>
               <figure className="archive-item">
                 <div className="archive-img" data-delay="0.9s">
-                  <img src={airpodMaxImg} alt="Sculptural headphones" />
+                  <img src={airpodMaxImg} alt={copy.archiveWorks[5][1]} />
                 </div>
                 <figcaption className="archive-caption">
                   <span className="archive-caption-code">BW-06</span>
-                  <span className="archive-caption-name">IRON VEIL</span>
+                  <span className="archive-caption-name">{copy.archiveWorks[5][0]}</span>
                 </figcaption>
               </figure>
             </div>
           </div>
         </section>
 
-        <StudioHomeSections />
+        <StudioHomeSections language={language} />
 
         <footer className="site-footer" aria-label="Site footer">
           <div className="footer-top">
             <div className="footer-cta">
-              <p className="footer-eyebrow">NEWSLETTER — N° 01</p>
+              <p className="footer-eyebrow">{copy.footerEyebrow}</p>
               <h2 className="footer-headline">
-                BECOME PART<br />OF THE <em>archive</em>.
+                {copy.footerHeadline[0]}<br />{copy.footerHeadline[1]} <em>{copy.footerHeadline[2]}</em>.
               </h2>
               <form
                 className="footer-form"
@@ -1069,52 +1048,24 @@ export default function LookGallery() {
                 <input
                   type="email"
                   className="footer-input"
-                  placeholder="ENTER YOUR EMAIL"
-                  aria-label="Email address"
+                  placeholder={copy.emailPlaceholder}
+                  aria-label={language === "es" ? "Dirección de email" : "Email address"}
                 />
-                <button type="submit" className="footer-submit" aria-label="Subscribe">
-                  SUBSCRIBE →
+                <button type="submit" className="footer-submit" aria-label={language === "es" ? "Suscribirse" : "Subscribe"}>
+                  {copy.subscribe}
                 </button>
               </form>
             </div>
 
             <nav className="footer-nav" aria-label="Footer navigation">
-              <div className="footer-col">
-                <h3 className="footer-col-title">+ STUDIO</h3>
-                <ul>
-                  <li><a href="#">About Salvatore</a></li>
-                  <li><a href="#">Blackwork</a></li>
-                  <li><a href="#">Process</a></li>
-                  <li><a href="#">Aftercare</a></li>
-                </ul>
-              </div>
-              <div className="footer-col">
-                <h3 className="footer-col-title">+ BOOKING</h3>
-                <ul>
-                  <li><a href="#">Consultation</a></li>
-                  <li><a href="#">Availability</a></li>
-                  <li><a href="#">Preparation</a></li>
-                  <li><a href="#">FAQ</a></li>
-                </ul>
-              </div>
-              <div className="footer-col">
-                <h3 className="footer-col-title">+ SUPPORT</h3>
-                <ul>
-                  <li><a href="#">Contact</a></li>
-                  <li><a href="#">Care guide</a></li>
-                  <li><a href="#">Policies</a></li>
-                  <li><a href="#">FAQ</a></li>
-                </ul>
-              </div>
-              <div className="footer-col">
-                <h3 className="footer-col-title">+ CONNECT</h3>
-                <ul>
-                  <li><a href="#">Instagram</a></li>
-                  <li><a href="#">Are.na</a></li>
-                  <li><a href="#">Tumblr</a></li>
-                  <li><a href="#">Spotify</a></li>
-                </ul>
-              </div>
+              {copy.footerColumns.map(([title, items]) => (
+                <div className="footer-col" key={title}>
+                  <h3 className="footer-col-title">{title}</h3>
+                  <ul>
+                    {items.map((item) => <li key={item}><a href="#">{item}</a></li>)}
+                  </ul>
+                </div>
+              ))}
             </nav>
           </div>
 
@@ -1130,9 +1081,9 @@ export default function LookGallery() {
           </div>
 
           <div className="footer-bottom">
-            <span>© 2026 SALVATORE BLACKWORK TATTO — ALL RIGHTS RESERVED</span>
-            <span>BLACKWORK TATTO / INK IS ARCHITECTURE</span>
-            <span>BY APPOINTMENT</span>
+            <span>© 2026 SALVATORE BLACKWORK TATTO — {language === "es" ? "TODOS LOS DERECHOS RESERVADOS" : "ALL RIGHTS RESERVED"}</span>
+            <span>{copy.footerTagline}</span>
+            <span>{copy.footerAppointment}</span>
           </div>
         </footer>
       </div>
