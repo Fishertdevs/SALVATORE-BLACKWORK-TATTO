@@ -1,0 +1,1 @@
+- [Package firewall recovery](package-firewall-recovery.md) — if a workspace install is blocked on a direct package tarball, update that dependency before retrying the frozen install.
