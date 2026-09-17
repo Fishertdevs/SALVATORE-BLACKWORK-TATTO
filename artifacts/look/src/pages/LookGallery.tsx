@@ -357,10 +357,6 @@ export default function LookGallery() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  if (isMobile) {
-    return <MobileLookGallery language={language} onLanguageChange={handleLanguageChange} />;
-  }
-
   const copy = galleryCopy[language];
   const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -866,6 +862,10 @@ export default function LookGallery() {
       cleanups.forEach((fn) => fn());
     };
   }, []);
+
+  if (isMobile) {
+    return <MobileLookGallery language={language} onLanguageChange={handleLanguageChange} />;
+  }
 
   return (
     <div className="look-root">
