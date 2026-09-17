@@ -1,69 +1,24 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
-import { Link } from "wouter";
-import mainImg from "@assets/hero_new_image_1777693117619.png";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
 import servicesImg from "@assets/generated_images/services-blackwork-detail.png";
 import bookingImg from "@assets/generated_images/booking-blackwork-study.png";
 import contactImg from "@assets/generated_images/contact-blackwork-portrait.png";
 
-const navItems = [
-  ["/inicio", "INICIO"],
-  ["/acerca-de", "ACERCA DE"],
-  ["/portfolio", "PORTFOLIO"],
-  ["/servicios", "SERVICIOS"],
-  ["/reservas", "RESERVAS"],
-  ["/contacto", "CONTACTO"],
-] as const;
-
-function TattooHeader() {
+function StudioFrame({
+  id,
+  children,
+  className = "",
+}: {
+  id: string;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <header className="tattoo-header">
-      <Link href="/inicio" className="tattoo-brand">
-        SALVATORE BLACKWORK TATTO
-      </Link>
-      <span className="tattoo-header-note">ESTUDIO PRIVADO / BY APPOINTMENT</span>
-      <nav className="tattoo-nav" aria-label="Navegación principal">
-        {navItems.map(([href, label]) => (
-          <Link key={href} href={href} className="tattoo-nav-link">
-            <span>+</span>
-            {label}
-          </Link>
-        ))}
-      </nav>
-    </header>
-  );
-}
-
-function TattooFooter() {
-  return (
-    <footer className="tattoo-page-footer">
-      <div>
-        <p className="tattoo-eyebrow">SALVATORE BLACKWORK TATTO</p>
-        <h2>INK WITH<br /><em>intention</em>.</h2>
-      </div>
-      <div className="tattoo-footer-links">
-        {navItems.slice(0, 4).map(([href, label]) => (
-          <Link key={href} href={href}>{label}</Link>
-        ))}
-      </div>
-      <div className="tattoo-footer-bottom">
-        <span>© 2026 SALVATORE BLACKWORK TATTO</span>
-        <span>ALL WORK BY APPOINTMENT</span>
-        <Link href="/contacto">CONTACTAR EL ESTUDIO →</Link>
-      </div>
-    </footer>
-  );
-}
-
-function StudioFrame({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return (
-    <div className={`tattoo-page ${className}`}>
-      <TattooHeader />
-      <main>{children}</main>
-      <TattooFooter />
-    </div>
+    <section id={id} className={`tattoo-page ${className}`}>
+      {children}
+    </section>
   );
 }
 
@@ -71,41 +26,9 @@ function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="tattoo-eyebrow">{children}</p>;
 }
 
-export function HomePage() {
-  return (
-    <StudioFrame className="page-home">
-      <section className="page-home-hero">
-        <div className="page-home-hero-copy">
-          <Eyebrow>SALVATORE BLACKWORK TATTO / 001</Eyebrow>
-          <h1>BLACKWORK<br /><em>tatto</em> STUDIO</h1>
-          <p>Un estudio privado para piezas deliberadas, contraste profundo y lenguaje visual permanente.</p>
-          <Link className="tattoo-red-link" href="/reservas">INICIAR UNA CONSULTA →</Link>
-        </div>
-        <figure className="page-home-hero-image">
-          <img src={mainImg} alt="Retrato editorial del estudio Salvatore Blackwork" />
-          <figcaption>01 / THE FACE OF THE STUDIO</figcaption>
-        </figure>
-      </section>
-      <section className="page-home-manifesto">
-        <Eyebrow>MANIFIESTO / 01</Eyebrow>
-        <h2>THE BODY IS<br /><em>the canvas.</em></h2>
-        <div>
-          <p>Diseñamos tatuajes blackwork a partir de la persona, no de una plantilla. Cada línea tiene un motivo; cada sombra, un peso.</p>
-          <Link className="tattoo-light-link" href="/portfolio">VER EL PORTFOLIO →</Link>
-        </div>
-      </section>
-      <section className="page-home-index">
-        <div><strong>01</strong><span>BLACKWORK<br />WITH INTENTION</span></div>
-        <div><strong>02</strong><span>ONE-TO-ONE<br />CONSULTATION</span></div>
-        <div><strong>03</strong><span>BUILT FOR<br />THE BODY</span></div>
-      </section>
-    </StudioFrame>
-  );
-}
-
 export function AboutPage() {
   return (
-    <StudioFrame className="page-about">
+    <StudioFrame id="studio-about" className="page-about">
       <section className="page-about-hero">
         <div className="page-about-title">
           <Eyebrow>ACERCA DE / 002</Eyebrow>
@@ -145,7 +68,7 @@ export function PortfolioPage() {
   ] as const;
 
   return (
-    <StudioFrame className="page-portfolio">
+    <StudioFrame id="studio-portfolio" className="page-portfolio">
       <section className="page-portfolio-hero">
         <div>
           <Eyebrow>PORTFOLIO / 003</Eyebrow>
@@ -166,7 +89,7 @@ export function PortfolioPage() {
       <section className="page-portfolio-note">
         <Eyebrow>NO HAY DOS IGUALES</Eyebrow>
         <h2>Your mark,<br /><em>your language.</em></h2>
-        <Link className="tattoo-red-link" href="/reservas">CUÉNTANOS TU IDEA →</Link>
+        <a className="tattoo-red-link" href="#studio-booking">CUÉNTANOS TU IDEA →</a>
       </section>
     </StudioFrame>
   );
@@ -181,7 +104,7 @@ export function ServicesPage() {
   ];
 
   return (
-    <StudioFrame className="page-services">
+    <StudioFrame id="studio-services" className="page-services">
       <section className="page-services-hero">
         <div className="page-services-hero-copy">
           <Eyebrow>SERVICIOS / 004</Eyebrow>
@@ -206,7 +129,7 @@ export function ServicesPage() {
       <section className="page-services-callout">
         <Eyebrow>THE SALVATORE METHOD</Eyebrow>
         <h2>PRECISION<br /><em>over noise.</em></h2>
-        <Link className="tattoo-light-link" href="/acerca-de">CONOCER EL ESTUDIO →</Link>
+        <a className="tattoo-light-link" href="#studio-about">CONOCER EL ESTUDIO →</a>
       </section>
     </StudioFrame>
   );
@@ -221,7 +144,7 @@ export function BookingPage() {
   }
 
   return (
-    <StudioFrame className="page-booking">
+    <StudioFrame id="studio-booking" className="page-booking">
       <section className="page-booking-heading">
         <Eyebrow>RESERVAS / 005</Eyebrow>
         <h1>START WITH<br /><em>an idea.</em></h1>
@@ -261,7 +184,7 @@ export function BookingPage() {
 
 export function ContactPage() {
   return (
-    <StudioFrame className="page-contact">
+    <StudioFrame id="studio-contact" className="page-contact">
       <section className="page-contact-hero">
         <div className="page-contact-title">
           <Eyebrow>CONTACTO / 006</Eyebrow>
@@ -276,12 +199,24 @@ export function ContactPage() {
         <div><Eyebrow>EMAIL</Eyebrow><a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a></div>
         <div><Eyebrow>SOCIAL</Eyebrow><a href="#">@SALVATOREBLACKWORK</a></div>
         <div><Eyebrow>HORARIO</Eyebrow><p>LUN — VIE<br />BY APPOINTMENT</p></div>
-        <div><Eyebrow>RESERVAS</Eyebrow><Link className="tattoo-red-link" href="/reservas">INICIAR CONSULTA →</Link></div>
+        <div><Eyebrow>RESERVAS</Eyebrow><a className="tattoo-red-link" href="#studio-booking">INICIAR CONSULTA →</a></div>
       </section>
       <section className="page-contact-statement">
         <h2>MAKE IT<br /><em>permanent.</em></h2>
         <span>STUDIO NOTES / 2026</span>
       </section>
     </StudioFrame>
+  );
+}
+
+export function StudioHomeSections() {
+  return (
+    <div className="studio-home-sections" aria-label="Información del estudio">
+      <AboutPage />
+      <PortfolioPage />
+      <ServicesPage />
+      <BookingPage />
+      <ContactPage />
+    </div>
   );
 }
