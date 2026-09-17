@@ -551,6 +551,12 @@ body,
 .look-root #fullscreen-content {
   position: absolute;
   inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.82fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2.5rem);
+  padding: clamp(5.5rem, 9vw, 9rem) clamp(2rem, 4vw, 5rem) clamp(2rem, 5vw, 5rem);
+  box-sizing: border-box;
   pointer-events: none;
   opacity: 1;
   overflow: hidden;
@@ -567,71 +573,85 @@ body,
   pointer-events: auto;
 }
 .look-root .hero-left {
-  position: absolute;
-  top: clamp(180px, 9.375vw, 240px);
-  left: clamp(60px, 3.125vw, 80px);
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: 2;
+  align-self: center;
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(84px, 4.375vw, 112px);
+  gap: clamp(3rem, 6vw, 7rem);
 }
 .look-root .hero-eps {
   display: block;
-  max-width: min(760px, calc(100vw - 120px));
+  max-width: 100%;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(3.5rem, 6.4vw, 6.25rem);
+  font-size: clamp(1.7rem, 3.5vw, 4.5rem);
   font-weight: 400;
   line-height: 0.86;
   letter-spacing: -0.03em;
   color: #E63027;
-  white-space: nowrap;
-  width: auto;
+  white-space: normal;
+  overflow-wrap: break-word;
+  width: 100%;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }
 .look-root .hero-look {
   display: block;
-  width: max-content;
+  width: 100%;
+  max-width: 100%;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(5.5rem, 10vw, 10rem);
+  font-size: clamp(3.2rem, 5.4vw, 7rem);
   font-weight: 400;
   line-height: 0.78;
   letter-spacing: -0.04em;
   color: #E63027;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }
 .look-root .hero-future-wrap {
-  position: absolute;
-  bottom: clamp(80px, 8vh, 200px);
-  right: clamp(60px, 3.125vw, 80px);
-  width: clamp(380px, 23.958vw, 613.33px);
-  max-width: calc(100vw - clamp(120px, 6.25vw, 160px));
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: 2;
+  align-self: end;
+  justify-self: end;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
 .look-root .hero-future {
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(3rem, 5.2vw, 5.5rem);
+  font-size: clamp(2.2rem, 4.2vw, 5.5rem);
   font-weight: 400;
   line-height: 0.84;
   letter-spacing: -0.03em;
   color: #E63027;
   text-align: right;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
   width: 100%;
   display: block;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }
 .look-root .hero-future-desc {
-  margin: clamp(24px, 1.667vw, 36px) 0 0 0;
+  width: min(100%, 19rem);
+  margin: clamp(1.5rem, 2.2vw, 2.25rem) 0 0 auto;
   font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: clamp(0.75rem, 1.1vw, 1.1rem);
   line-height: 1.4;
   color: #E63027;
   text-align: right;
+  overflow-wrap: break-word;
   clip-path: inset(0 100% 0 0);
   will-change: clip-path;
 }

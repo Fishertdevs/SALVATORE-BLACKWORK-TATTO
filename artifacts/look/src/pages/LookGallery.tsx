@@ -179,11 +179,13 @@ function MobileLookGallery({
       </nav>
 
       {/* HERO */}
-      <div style={{ width: "100%", height: "100vh", position: "relative" }}>
-        <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" style={{
-          width: "100%", height: "100%", objectFit: "cover", display: "block"
-        }} />
-        <div style={{ position: "absolute", bottom: "15vh", left: 24, right: 24 }}>
+      <div className="mobile-hero">
+        <div className="mobile-hero-image">
+          <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" style={{
+            width: "100%", height: "100%", objectFit: "cover", display: "block"
+          }} />
+        </div>
+        <div className="mobile-hero-copy">
           <p style={{
             fontFamily: "'Helvetica Neue', sans-serif",
             fontSize: 11, letterSpacing: "0.2em",
