@@ -622,16 +622,33 @@ export default function LookGallery() {
       const fullContent = fullContentRef.current;
       const navbar = navbarRef.current;
       const featured = featuredCardRef.current;
+      const heroImage = fullSection?.querySelector<HTMLImageElement>("#home-hero");
       if (!fullSection || !fullContent || !featured) return;
       if (expandedRef.current) return;
       expandedRef.current = true;
       activeTimelineRef.current?.kill();
 
       const rect = featured.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const finalHeroWidth = Math.min(viewportWidth * 0.55, 820);
 
       // The welcome mosaic must sit behind the expanding hero. Leaving it
       // above the hero makes its images remain visible as a ghost overlay.
       gsap.set(gallery, { zIndex: 90 });
+      if (heroImage) {
+        // Start the real hero image with the exact same frame as the intro
+        // card, then animate its crop and position instead of swapping frames.
+        gsap.set(heroImage, {
+          width: rect.width,
+          height: rect.height,
+          top: 0,
+          left: 0,
+          margin: 0,
+          transform: "none",
+          objectPosition: "center center",
+        });
+      }
       gsap.set(fullSection, {
         opacity: 1,
         pointerEvents: "all",
@@ -670,6 +687,19 @@ export default function LookGallery() {
             left: 0,
             top: 0,
             borderRadius: "0px",
+            duration: ZOOM_DURATION,
+          },
+          0,
+        )
+        .to(
+          heroImage,
+          {
+            width: finalHeroWidth,
+            height: viewportHeight,
+            top: "50%",
+            left: 0,
+            margin: "0 auto",
+            transform: "translateY(-50%)",
             duration: ZOOM_DURATION,
           },
           0,
@@ -719,6 +749,9 @@ export default function LookGallery() {
         gallery?.style.setProperty("pointer-events", "none");
         gallery?.style.setProperty("z-index", "110");
         fullSection.style.overflowY = "auto";
+        if (heroImage) {
+          gsap.set(heroImage, { clearProps: "width,height,top,left,margin,transform" });
+        }
       });
     }
 
