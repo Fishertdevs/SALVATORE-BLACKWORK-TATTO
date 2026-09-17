@@ -346,14 +346,23 @@ export default function LookGallery() {
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" && window.innerWidth < 768,
   );
+  const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
+  const handleLanguageChange = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    persistLanguage(nextLanguage);
+  };
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  if (isMobile) return <MobileLookGallery />;
+  if (isMobile) {
+    return <MobileLookGallery language={language} onLanguageChange={handleLanguageChange} />;
+  }
 
+  const copy = galleryCopy[language];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
   const galleryRef = useRef<HTMLDivElement>(null);
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
