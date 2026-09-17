@@ -371,7 +371,6 @@ export default function LookGallery() {
   const heroFutureRef = useRef<HTMLDivElement>(null);
   const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
   const heroTopTitleRef = useRef<HTMLDivElement>(null);
-  const revealHeroRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const root = fullSectionRef.current;
@@ -454,75 +453,6 @@ export default function LookGallery() {
       cancelAnimationFrame(rafId);
       root?.removeEventListener("scroll", checkAll);
       observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const content = fullContentRef.current;
-    if (!content) return;
-
-    const overlays = [
-      heroTopTitleRef.current,
-      heroEpsRef.current,
-      heroLookRef.current,
-      heroFutureRef.current,
-      heroFutureDescRef.current,
-      ...Array.from(content.querySelectorAll<HTMLElement>(".hero-side-action")),
-    ].filter((element): element is HTMLElement => element !== null);
-
-    if (!overlays.length) return;
-
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    let timeline: gsap.core.Timeline | null = null;
-    const revealHero = () => {
-      if (timeline) return;
-
-      if (reduceMotion) {
-        gsap.set(overlays, { clipPath: "inset(0 0% 0 0)", opacity: 1 });
-        return;
-      }
-
-      timeline = gsap.timeline({
-        defaults: { ease: "power3.out" },
-      });
-      gsap.set(overlays, { clipPath: "inset(0 100% 0 0)", opacity: 1 });
-
-      timeline
-        .to(heroTopTitleRef.current, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-        }, 1.3)
-        .to(heroEpsRef.current, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-        }, 1.5)
-        .to(heroLookRef.current, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-        }, 1.9)
-        .to(heroFutureRef.current, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-        }, 1.7)
-        .to(heroFutureDescRef.current, {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-        }, 2.1)
-        .to(content.querySelectorAll<HTMLElement>(".hero-side-action"), {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 0.85,
-          stagger: 0.2,
-        }, 2.4);
-    };
-    revealHeroRef.current = revealHero;
-
-    return () => {
-      timeline?.kill();
-      revealHeroRef.current = null;
     };
   }, []);
 
