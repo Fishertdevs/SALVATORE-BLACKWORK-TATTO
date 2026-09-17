@@ -889,6 +889,7 @@ export default function LookGallery() {
           </div>
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
+          <div className="hero-top-title">SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">
             <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
               {copy.heroLeftTitle[0]}<br />{copy.heroLeftTitle[1]}
