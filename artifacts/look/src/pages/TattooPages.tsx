@@ -266,29 +266,23 @@ export function PortfolioPage({ language }: StudioProps) {
   );
 }
 
-export function ServicesPage() {
-  const services = [
-    ["01", "CUSTOM BLACKWORK", "Diseños construidos desde cero alrededor de tu idea, tu anatomía y tu ritmo."],
-    ["02", "SMALL STUDIES", "Piezas pequeñas para comenzar una colección de tinta con intención."],
-    ["03", "LARGE COMPOSITIONS", "Proyectos de mayor escala pensados para moverse con el cuerpo y el tiempo."],
-    ["04", "CONSULTATION", "Una conversación clara para definir concepto, ubicación, tamaño y proceso."],
-  ];
-
+export function ServicesPage({ language }: StudioProps) {
+  const copy = studioCopy[language].services;
   return (
     <StudioFrame id="studio-services" className="page-services">
       <section className="page-services-hero">
         <div className="page-services-hero-copy">
-          <Eyebrow>SERVICIOS / 004</Eyebrow>
-          <h1>THE WORK<br /><em>in detail.</em></h1>
-          <p>No hay una fórmula única. Cada proyecto recibe el nivel de detalle y tiempo que necesita.</p>
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
+          <p>{copy.intro}</p>
         </div>
         <figure className="page-services-image">
-          <img src={servicesImg} alt="Detalle de tatuaje blackwork en una composición editorial" />
-          <figcaption>THE BODY / THE LINE / THE WEIGHT</figcaption>
+          <img src={servicesImg} alt={language === "es" ? "Detalle de tatuaje blackwork en una composición editorial" : "Blackwork tattoo detail in an editorial composition"} />
+          <figcaption>{copy.imageCaption}</figcaption>
         </figure>
       </section>
       <section className="page-services-list">
-        {services.map(([number, name, description]) => (
+        {copy.items.map(([number, name, description]) => (
           <article key={number}>
             <span>{number}</span>
             <h2>{name}</h2>
@@ -298,16 +292,17 @@ export function ServicesPage() {
         ))}
       </section>
       <section className="page-services-callout">
-        <Eyebrow>THE SALVATORE METHOD</Eyebrow>
-        <h2>PRECISION<br /><em>over noise.</em></h2>
-        <a className="tattoo-light-link" href="#studio-about">CONOCER EL ESTUDIO →</a>
+        <Eyebrow>{copy.method}</Eyebrow>
+        <h2>{copy.callout[0]}<br /><em>{copy.callout[1]}.</em></h2>
+        <a className="tattoo-light-link" href="#studio-about">{copy.cta}</a>
       </section>
     </StudioFrame>
   );
 }
 
-export function BookingPage() {
+export function BookingPage({ language }: StudioProps) {
   const [sent, setSent] = useState(false);
+  const copy = studioCopy[language].booking;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -317,34 +312,34 @@ export function BookingPage() {
   return (
     <StudioFrame id="studio-booking" className="page-booking">
       <section className="page-booking-heading">
-        <Eyebrow>RESERVAS / 005</Eyebrow>
-        <h1>START WITH<br /><em>an idea.</em></h1>
-        <p>Cuéntanos qué quieres llevar en la piel. Revisamos cada propuesta personalmente.</p>
+        <Eyebrow>{copy.eyebrow}</Eyebrow>
+        <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
+        <p>{copy.intro}</p>
       </section>
       <section className="page-booking-layout">
         <figure className="page-booking-image">
-          <img src={bookingImg} alt="Estudio de dibujo y preparación para una sesión de tatuaje" />
-          <figcaption>PREPARE THE IDEA / THEN THE SKIN</figcaption>
+          <img src={bookingImg} alt={language === "es" ? "Estudio de dibujo y preparación para una sesión de tatuaje" : "Drawing studio prepared for a tattoo session"} />
+          <figcaption>{copy.imageCaption}</figcaption>
         </figure>
         <div className="page-booking-form-wrap">
           <div className="page-booking-aside">
-            <Eyebrow>ANTES DE ESCRIBIR</Eyebrow>
-            <p>Incluye referencias visuales, tamaño aproximado, ubicación y cualquier detalle que sientas importante.</p>
-            <p>Respondemos las solicitudes de lunes a viernes.</p>
+            <Eyebrow>{copy.asideEyebrow}</Eyebrow>
+            <p>{copy.aside[0]}</p>
+            <p>{copy.aside[1]}</p>
           </div>
           {sent ? (
             <div className="tattoo-form-success">
-              <Eyebrow>RECIBIDO / 005</Eyebrow>
-              <h2>Tu idea ya está<br /><em>en el estudio.</em></h2>
-              <p>Gracias por escribir. Te contactaremos para continuar la conversación.</p>
-              <button type="button" onClick={() => setSent(false)}>ENVIAR OTRA CONSULTA →</button>
+              <Eyebrow>{copy.received}</Eyebrow>
+              <h2>{copy.successTitle[0]}<br /><em>{copy.successTitle[1]}</em></h2>
+              <p>{copy.successText}</p>
+              <button type="button" onClick={() => setSent(false)}>{copy.another}</button>
             </div>
           ) : (
             <form className="tattoo-form" onSubmit={handleSubmit}>
-              <label>Tu nombre<input required name="name" placeholder="NOMBRE COMPLETO" /></label>
-              <label>Tu email<input required type="email" name="email" placeholder="EMAIL" /></label>
-              <label>Cuéntanos tu idea<textarea required name="idea" rows={5} placeholder="IDEA, UBICACIÓN, TAMAÑO..." /></label>
-              <button type="submit">ENVIAR CONSULTA <span>↗</span></button>
+              <label>{copy.name}<input required name="name" placeholder={copy.namePlaceholder} /></label>
+              <label>{copy.email}<input required type="email" name="email" placeholder="EMAIL" /></label>
+              <label>{copy.idea}<textarea required name="idea" rows={5} placeholder={copy.ideaPlaceholder} /></label>
+              <button type="submit">{copy.submit} <span>↗</span></button>
             </form>
           )}
         </div>
@@ -353,41 +348,42 @@ export function BookingPage() {
   );
 }
 
-export function ContactPage() {
+export function ContactPage({ language }: StudioProps) {
+  const copy = studioCopy[language].contact;
   return (
     <StudioFrame id="studio-contact" className="page-contact">
       <section className="page-contact-hero">
         <div className="page-contact-title">
-          <Eyebrow>CONTACTO / 006</Eyebrow>
-          <h1>COME<br /><em>say hello.</em></h1>
-          <p>Para consultas, colaboraciones y preguntas sobre el estudio, escríbenos.</p>
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
+          <p>{copy.intro}</p>
         </div>
         <figure className="page-contact-image">
-          <img src={contactImg} alt="Retrato editorial con tatuajes blackwork" />
+          <img src={contactImg} alt={language === "es" ? "Retrato editorial con tatuajes blackwork" : "Editorial portrait with blackwork tattoos"} />
         </figure>
       </section>
       <section className="page-contact-details">
-        <div><Eyebrow>EMAIL</Eyebrow><a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a></div>
-        <div><Eyebrow>SOCIAL</Eyebrow><a href="#">@SALVATOREBLACKWORK</a></div>
-        <div><Eyebrow>HORARIO</Eyebrow><p>LUN — VIE<br />BY APPOINTMENT</p></div>
-        <div><Eyebrow>RESERVAS</Eyebrow><a className="tattoo-red-link" href="#studio-booking">INICIAR CONSULTA →</a></div>
+        <div><Eyebrow>{copy.email}</Eyebrow><a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a></div>
+        <div><Eyebrow>{copy.social}</Eyebrow><a href="#">@SALVATOREBLACKWORK</a></div>
+        <div><Eyebrow>{copy.hours}</Eyebrow><p>{copy.days}<br />{copy.appointment}</p></div>
+        <div><Eyebrow>{copy.booking}</Eyebrow><a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a></div>
       </section>
       <section className="page-contact-statement">
-        <h2>MAKE IT<br /><em>permanent.</em></h2>
-        <span>STUDIO NOTES / 2026</span>
+        <h2>{copy.statement[0]}<br /><em>{copy.statement[1]}.</em></h2>
+        <span>{copy.notes}</span>
       </section>
     </StudioFrame>
   );
 }
 
-export function StudioHomeSections() {
+export function StudioHomeSections({ language }: StudioProps) {
   return (
     <div className="studio-home-sections" aria-label="Información del estudio">
-      <AboutPage />
-      <PortfolioPage />
-      <ServicesPage />
-      <BookingPage />
-      <ContactPage />
+      <AboutPage language={language} />
+      <PortfolioPage language={language} />
+      <ServicesPage language={language} />
+      <BookingPage language={language} />
+      <ContactPage language={language} />
     </div>
   );
 }
