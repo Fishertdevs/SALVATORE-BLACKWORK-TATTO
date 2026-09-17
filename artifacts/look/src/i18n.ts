@@ -19,6 +19,14 @@ export const galleryCopy = {
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
     heroDescription:
       "Tatuajes blackwork construidos desde el contraste, la línea precisa y una mirada que solo te pertenece a ti.",
+    heroLeftTitle: ["TU IDEA", "EN LA PIEL"],
+    heroLeftDescription:
+      "Hablemos de una pieza pensada para tu cuerpo, tu historia y la forma en que quieres llevarla.",
+    heroLeftAction: "COTIZAR PROYECTO",
+    heroRightTitle: ["BLACKWORK", "CON INTENCIÓN"],
+    heroRightDescription:
+      "Diseños construidos con precisión, contraste y una mirada propia para acompañarte durante toda la vida.",
+    heroRightAction: "VER PORTAFOLIO",
     featuredLabel: "SALVATORE BLACKWORK TATTO / OBRA DESTACADA",
     featuredParagraphs: [
       "SALVATORE BLACKWORK TATTO trabaja en el punto donde se encuentran la tinta, la anatomía y el lenguaje visual. Cada pieza se compone para moverse con el cuerpo y conservar su significado durante toda la vida.",
@@ -57,6 +65,14 @@ export const galleryCopy = {
     heroFuture: ["INK IS", "ARCHITECTURE"],
     heroDescription:
       "Blackwork tattoos built from deep contrast, deliberate linework, and a point of view that belongs only to you.",
+    heroLeftTitle: ["YOUR IDEA", "ON SKIN"],
+    heroLeftDescription:
+      "Let's talk about a piece shaped around your body, your story, and the way you want to carry it.",
+    heroLeftAction: "PRICE YOUR PROJECT",
+    heroRightTitle: ["BLACKWORK", "WITH INTENT"],
+    heroRightDescription:
+      "Designs built with precision, contrast, and a point of view made to stay with you for a lifetime.",
+    heroRightAction: "VIEW PORTFOLIO",
     featuredLabel: "SALVATORE BLACKWORK TATTO / FEATURED WORK",
     featuredParagraphs: [
       "SALVATORE BLACKWORK TATTO operates at the intersection of ink, anatomy, and visual language. Each piece is composed to move with the body and hold its meaning for a lifetime.",

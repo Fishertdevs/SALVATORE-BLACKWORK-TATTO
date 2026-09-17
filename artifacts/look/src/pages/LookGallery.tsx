@@ -889,21 +889,19 @@ export default function LookGallery() {
           </div>
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
-          <div className="hero-left">
-            <div className="hero-eps" ref={heroEpsRef} aria-label={copy.heroEyebrow}>
-              {copy.heroEyebrow}
+          <div className="hero-side hero-side-left">
+            <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
+              {copy.heroLeftTitle[0]}<br />{copy.heroLeftTitle[1]}
             </div>
-            <div className="hero-look" ref={heroLookRef} aria-label={`${copy.heroTitle[0]} ${copy.heroTitle[1]}`}>
-              {copy.heroTitle[0]}<br />{copy.heroTitle[1]}
-            </div>
+            <p className="hero-side-desc" ref={heroLookRef}>{copy.heroLeftDescription}</p>
+            <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}<span>↗</span></a>
           </div>
-          <div className="hero-future-wrap">
-            <div className="hero-future" ref={heroFutureRef} aria-label={`${copy.heroFuture[0]} ${copy.heroFuture[1]}`}>
-              {copy.heroFuture[0]}<br />{copy.heroFuture[1]}
+          <div className="hero-side hero-side-right">
+            <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>
+              {copy.heroRightTitle[0]}<br />{copy.heroRightTitle[1]}
             </div>
-            <p className="hero-future-desc" ref={heroFutureDescRef}>
-              {copy.heroDescription}
-            </p>
+            <p className="hero-side-desc" ref={heroFutureDescRef}>{copy.heroRightDescription}</p>
+            <a className="hero-side-action" href="#studio-portfolio">{copy.heroRightAction}<span>↗</span></a>
           </div>
         </div>
 

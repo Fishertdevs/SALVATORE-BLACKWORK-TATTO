@@ -544,9 +544,9 @@ body,
   position: relative;
   top: 0;
   right: 0;
-  width: 55%;
+  width: min(55vw, 820px);
   height: 100vh;
-  margin-left: auto;
+  margin: 0 auto;
   object-fit: cover;
   object-position: center center;
   display: block;
@@ -558,14 +558,10 @@ body,
   bottom: 0;
   left: 0;
   z-index: 1;
-  width: 50%;
+  width: 100%;
   min-height: 100%;
   padding: clamp(7rem, 11vw, 10rem) clamp(2rem, 5vw, 6rem) clamp(3rem, 7vw, 6rem);
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(3.5rem, 7vw, 7rem);
   pointer-events: none;
   opacity: 1;
   overflow: visible;
@@ -581,75 +577,75 @@ body,
 .look-root .site-footer input {
   pointer-events: auto;
 }
-.look-root .hero-left {
-  position: relative;
-  top: auto;
-  left: auto;
-  width: 100%;
+.look-root .hero-side {
+  position: absolute;
+  top: 50%;
+  width: clamp(12rem, 20vw, 20rem);
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 5vw, 5rem);
+  gap: clamp(1.2rem, 2vw, 2rem);
+  transform: translateY(-50%);
 }
-.look-root .hero-eps {
+.look-root .hero-side-left {
+  left: clamp(2rem, 5vw, 6rem);
+  align-items: flex-start;
+  text-align: left;
+}
+.look-root .hero-side-right {
+  right: clamp(2rem, 5vw, 6rem);
+  align-items: flex-end;
+  text-align: right;
+}
+.look-root .hero-side-title {
   display: block;
   max-width: 100%;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.8rem, 3.4vw, 4rem);
+  font-size: clamp(2rem, 3.2vw, 4rem);
   font-weight: 400;
   line-height: 0.86;
   letter-spacing: -0.03em;
   color: #E63027;
-  white-space: nowrap;
-  width: auto;
+  white-space: normal;
+  width: 100%;
   clip-path: inset(0 0 0 0);
 }
-.look-root .hero-look {
-  display: block;
+.look-root .hero-side-desc {
   width: 100%;
-  max-width: 100%;
-  font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(3.5rem, 6.6vw, 7.5rem);
-  font-weight: 400;
-  line-height: 0.78;
-  letter-spacing: -0.04em;
-  color: #E63027;
-  white-space: nowrap;
-  clip-path: inset(0 0 0 0);
-}
-.look-root .hero-future-wrap {
-  position: relative;
-  right: auto;
-  bottom: auto;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-.look-root .hero-future {
-  font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(2.4rem, 4.2vw, 5rem);
-  font-weight: 400;
-  line-height: 0.84;
-  letter-spacing: -0.03em;
-  color: #E63027;
-  text-align: left;
-  white-space: nowrap;
-  width: 100%;
-  display: block;
-  clip-path: inset(0 0 0 0);
-}
-.look-root .hero-future-desc {
-  width: min(100%, 31rem);
-  margin: clamp(1.5rem, 2vw, 2rem) 0 0;
+  max-width: 20rem;
   font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(0.75rem, 0.95vw, 1rem);
   font-weight: 400;
-  font-size: clamp(0.8rem, 1.15vw, 1.15rem);
-  line-height: 1.4;
+  line-height: 1.45;
   color: #E63027;
-  text-align: left;
+  overflow-wrap: break-word;
   clip-path: inset(0 0 0 0);
+}
+.look-root .hero-side-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(230, 48, 39, 0.72);
+  color: #E63027;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(0.62rem, 0.7vw, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  pointer-events: auto;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+.look-root .hero-side-action:hover,
+.look-root .hero-side-action:focus-visible {
+  border-color: #E63027;
+  color: #FFFFFF;
+  background: #E63027;
+}
+.look-root .hero-side-action span {
+  font-size: 0.9rem;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;
