@@ -722,7 +722,68 @@ body,
 .look-root #hero-navbar .nav-right {
   display: flex;
   align-items: center;
+  gap: clamp(1.25rem, 1.5vw, 2rem);
   font-weight: 500;
+}
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.language-option {
+  position: relative;
+  border: 0;
+  padding: 0.35rem 0.1rem;
+  color: #1a1a1a;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.language-option::after {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 0;
+  left: 0.1rem;
+  height: 1px;
+  background: #d71920;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+.language-option:hover,
+.language-option:focus-visible,
+.language-option.is-active {
+  color: #d71920;
+}
+.language-option:hover::after,
+.language-option:focus-visible::after,
+.language-option.is-active::after {
+  transform: scaleX(1);
+}
+.language-option:focus-visible {
+  outline: 1px solid rgba(215, 25, 32, 0.5);
+  outline-offset: 0.3rem;
+}
+.language-divider {
+  color: rgba(26, 26, 26, 0.35);
+}
+.mobile-nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.mobile-nav-top .language-switch {
+  font-size: 0.62rem;
 }
 .mobile-nav-link:hover,
 .mobile-nav-link:focus-visible {
