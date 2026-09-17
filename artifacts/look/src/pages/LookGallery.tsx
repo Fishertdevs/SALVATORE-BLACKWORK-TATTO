@@ -869,14 +869,14 @@ export default function LookGallery() {
           <div className="hero-top-title" ref={heroTopTitleRef}>SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">
             <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
-              {copy.heroLeftTitle[0]}<br />{copy.heroLeftTitle[1]}
+              {copy.heroLeftTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroLookRef}>{copy.heroLeftDescription}</p>
             <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}<span>↗</span></a>
           </div>
           <div className="hero-side hero-side-right">
             <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>
-              {copy.heroRightTitle[0]}<br />{copy.heroRightTitle[1]}
+              {copy.heroRightTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroFutureDescRef}>{copy.heroRightDescription}</p>
             <a className="hero-side-action" href="#studio-portfolio">{copy.heroRightAction}<span>↗</span></a>
