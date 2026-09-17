@@ -449,7 +449,7 @@ html,
 body,
 #root {
   min-height: 100%;
-  background: #FFF8C9;
+  background: #FFFFFF;
 }
 
 .look-root,
@@ -462,7 +462,7 @@ body,
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #FFF8C9;
+  background: #FFFFFF;
 }
 
 .look-root #gallery-layer {
@@ -532,7 +532,7 @@ body,
   width: 100%;
   height: 100%;
   z-index: 100;
-  background: #FFF8C9;
+  background: #FFFFFF;
   pointer-events: none;
   opacity: 0;
   overflow-x: hidden;
@@ -540,7 +540,7 @@ body,
   overscroll-behavior: contain;
   scroll-behavior: smooth;
 }
-.look-root #fullscreen-img {
+.look-root #home-hero {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -555,7 +555,7 @@ body,
   opacity: 1;
   overflow: hidden;
 }
-.look-root #fullscreen-img {
+.look-root #home-hero {
   pointer-events: none;
 }
 .look-root .site-footer {
@@ -672,7 +672,7 @@ body,
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #1a1a1a;
-  background: linear-gradient(to bottom, rgba(255,248,201,0.92) 0%, rgba(255,248,201,0.0) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.0) 100%);
   backdrop-filter: blur(2px);
   pointer-events: auto;
   will-change: transform, opacity;
@@ -732,7 +732,7 @@ body,
   font-weight: 500;
 }
 .look-root #hero-navbar .nav-burger {
-  display: inline-flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -758,7 +758,7 @@ body,
   position: relative;
   z-index: 2;
   width: 100%;
-  background: #FFF8C9;
+  background: #FFFFFF;
   color: #1a1a1a;
   padding: 80px 60px 0;
   box-sizing: border-box;
@@ -832,7 +832,7 @@ body,
 .look-root .archive-section {
   position: relative;
   z-index: 2;
-  background: #FFF8C9;
+  background: #FFFFFF;
   padding: 0 0 100px;
   color: #1a1a1a;
 }

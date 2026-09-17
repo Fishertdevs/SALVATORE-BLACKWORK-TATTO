@@ -158,7 +158,7 @@ function MobileLookGallery() {
               fontSize: 32, fontWeight: 400, color: "#1a1a1a",
               textDecoration: "none", letterSpacing: "0.02em",
               textTransform: "uppercase",
-            }}>{label}</Link>
+            }}>{label}</a>
           ))}
         </div>
       )}
