@@ -370,6 +370,7 @@ export default function LookGallery() {
   const heroLookRef = useRef<HTMLDivElement>(null);
   const heroFutureRef = useRef<HTMLDivElement>(null);
   const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
+  const heroTopTitleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = fullSectionRef.current;
@@ -452,6 +453,68 @@ export default function LookGallery() {
       cancelAnimationFrame(rafId);
       root?.removeEventListener("scroll", checkAll);
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const content = fullContentRef.current;
+    if (!content) return;
+
+    const overlays = [
+      heroTopTitleRef.current,
+      heroEpsRef.current,
+      heroLookRef.current,
+      heroFutureRef.current,
+      heroFutureDescRef.current,
+      ...Array.from(content.querySelectorAll<HTMLElement>(".hero-side-action")),
+    ].filter((element): element is HTMLElement => element !== null);
+
+    if (!overlays.length) return;
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) {
+      gsap.set(overlays, { clipPath: "inset(0 0% 0 0)", opacity: 1 });
+      return;
+    }
+
+    const timeline = gsap.timeline({
+      defaults: { ease: "power3.out" },
+    });
+    gsap.set(overlays, { clipPath: "inset(0 100% 0 0)", opacity: 1 });
+
+    timeline
+      .to(heroTopTitleRef.current, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.9,
+      }, 0.15)
+      .to(heroEpsRef.current, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.8,
+      }, 0.35)
+      .to(heroLookRef.current, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.8,
+      }, 0.52)
+      .to(heroFutureRef.current, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.8,
+      }, 0.68)
+      .to(heroFutureDescRef.current, {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.75,
+      }, 0.84)
+      .to(content.querySelectorAll<HTMLElement>(".hero-side-action"), {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.7,
+        stagger: 0.12,
+      }, 1);
+
+    return () => {
+      timeline.kill();
     };
   }, []);
 
@@ -889,7 +952,7 @@ export default function LookGallery() {
           </div>
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
-          <div className="hero-top-title">SALVATORE BLACKWORK TATTO</div>
+          <div className="hero-top-title" ref={heroTopTitleRef}>SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">
             <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
               {copy.heroLeftTitle[0]}<br />{copy.heroLeftTitle[1]}
