@@ -534,11 +534,12 @@ body,
 .look-root #home-hero {
   position: relative;
   top: 50%;
-  right: 0;
+  left: 50%;
+  right: auto;
   width: min(55vw, 820px);
   height: 100vh;
-  margin: 0 auto;
-  transform: translateY(-50%);
+  margin: 0;
+  transform: translate(-50%, -50%);
   object-fit: cover;
   object-position: center center;
   display: block;

@@ -642,10 +642,10 @@ export default function LookGallery() {
         gsap.set(heroImage, {
           width: rect.width,
           height: rect.height,
-          top: 0,
-          left: 0,
+          top: "50%",
+          left: "50%",
           margin: 0,
-          transform: "none",
+          transform: "translate(-50%, -50%)",
           objectPosition: "center center",
         });
       }
@@ -691,24 +691,22 @@ export default function LookGallery() {
           },
           0,
         )
-        .to(
-          heroImage,
-          {
-            width: finalHeroWidth,
-            height: viewportHeight,
-            top: "50%",
-            left: 0,
-            margin: "0 auto",
-            transform: "translateY(-50%)",
-            duration: ZOOM_DURATION,
-          },
-          0,
-        )
         .to(gallery, {
           opacity: 0,
           duration: 0.8,
           ease: "power2.inOut",
         }, ZOOM_DURATION - 0.35);
+      if (heroImage) {
+        tl.to(
+          heroImage,
+          {
+            width: finalHeroWidth,
+            height: viewportHeight,
+            duration: ZOOM_DURATION,
+          },
+          0,
+        );
+      }
       activeTimelineRef.current = tl;
       if (navbar) {
         tl.to(
