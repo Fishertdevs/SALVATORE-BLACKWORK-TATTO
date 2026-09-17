@@ -104,64 +104,43 @@ function imageToAsciiGrid(
 }
 
 function MobileLookGallery() {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div style={{ width: "100%", backgroundColor: "#FFFFFF", color: "#1a1a1a", overflowX: "hidden" }}>
 
       {/* NAVBAR */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 50,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: "16px 24px",
-           background: "rgba(255,255,255,0.95)",
+        display: "flex", flexDirection: "column", alignItems: "stretch", gap: 14,
+        padding: "15px 24px 13px",
+        background: "rgba(255,255,255,0.95)",
         backdropFilter: "blur(4px)",
       }}>
         <span style={{
           fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
-          fontSize: 18, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
+          fontSize: 17, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
         }}>SALVATORE BLACKWORK TATTO</span>
-        <button onClick={() => setMenuOpen(true)} style={{
-          background: "none", border: "none", cursor: "pointer",
-          display: "flex", flexDirection: "column", gap: 5,
-          padding: 8,
-        }}>
-          <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
-          <span style={{ display: "block", width: 22, height: 1.5, backgroundColor: "#1a1a1a" }} />
-        </button>
-      </nav>
-      {menuOpen && (
         <div style={{
-           position: "fixed", inset: 0, backgroundColor: "#FFFFFF",
-          zIndex: 100, display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center", gap: 40,
+          display: "flex", gap: 18, overflowX: "auto", width: "100%",
+          scrollbarWidth: "none",
         }}>
-          <button onClick={() => setMenuOpen(false)} style={{
-            position: "absolute", top: 20, right: 24,
-            background: "none", border: "none",
-            fontSize: 32, color: "#1a1a1a", cursor: "pointer", lineHeight: 1,
-          }}>×</button>
-          <span style={{
-            fontFamily: "'Helvetica Neue', sans-serif",
-            fontSize: 10, letterSpacing: "0.18em",
-            textTransform: "uppercase", color: "#999",
-          }}>BY APPOINTMENT</span>
           {[
-            ["#home-hero", "+ INICIO"],
-            ["#studio-about", "+ ACERCA DE"],
-            ["#studio-portfolio", "+ PORTFOLIO"],
-            ["#studio-services", "+ SERVICIOS"],
-            ["#studio-booking", "+ RESERVAS"],
-            ["#studio-contact", "+ CONTACTO"],
+            ["#home-hero", "INICIO"],
+            ["#studio-about", "ACERCA DE"],
+            ["#studio-portfolio", "PORTFOLIO"],
+            ["#studio-services", "SERVICIOS"],
+            ["#studio-booking", "RESERVAS"],
+            ["#studio-contact", "CONTACTO"],
           ].map(([href, label]) => (
-            <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
-              fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
-              fontSize: 32, fontWeight: 400, color: "#1a1a1a",
-              textDecoration: "none", letterSpacing: "0.02em",
-              textTransform: "uppercase",
+            <a key={label} className="mobile-nav-link" href={href} style={{
+              flex: "0 0 auto",
+              fontFamily: "'Helvetica Neue', Arial, sans-serif",
+              fontSize: 9, fontWeight: 500, color: "#1a1a1a",
+              textDecoration: "none", letterSpacing: "0.16em",
+              textTransform: "uppercase", transition: "color 180ms ease",
             }}>{label}</a>
           ))}
         </div>
-      )}
+      </nav>
 
       {/* HERO */}
       <div style={{ width: "100%", height: "100vh", position: "relative" }}>
@@ -864,40 +843,28 @@ export default function LookGallery() {
         <nav id="hero-navbar" ref={navbarRef}>
           <div className="nav-left">
             <span className="nav-logo">SALVATORE BLACKWORK TATTO</span>
-            <span>BY APPOINTMENT</span>
           </div>
           <div className="nav-right">
             <ul className="nav-links">
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#home-hero">INICIO</a>
               </li>
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#studio-about">ACERCA DE</a>
               </li>
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#studio-portfolio">PORTFOLIO</a>
               </li>
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#studio-services">SERVICIOS</a>
               </li>
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#studio-booking">RESERVAS</a>
               </li>
               <li>
-                <span className="nav-plus">+</span>
                 <a href="#studio-contact">CONTACTO</a>
               </li>
             </ul>
-            <span className="nav-menu">MENU</span>
-            <button className="nav-burger" aria-label="Open menu">
-              <span />
-              <span />
-            </button>
           </div>
         </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
