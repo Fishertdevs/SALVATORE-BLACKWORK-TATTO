@@ -693,11 +693,6 @@ export default function LookGallery() {
       const run = () =>
         runEffectLeftCrop(featuredImgEl, canvas, 500, () => {
           featuredCard!.classList.add("revealed");
-          // Tự động expand sau 0.4s
-          const t = window.setTimeout(() => {
-            expandSection();
-          }, 400);
-          timeouts.push(t);
         });
       if (featuredImgEl.complete && featuredImgEl.naturalWidth) {
         run();

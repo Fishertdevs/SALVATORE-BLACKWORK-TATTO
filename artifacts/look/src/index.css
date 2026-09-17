@@ -533,7 +533,7 @@ body,
   height: 100%;
   z-index: 100;
   background: #FFFFFF;
-  pointer-events: none;
+  pointer-events: auto;
   opacity: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -541,11 +541,12 @@ body,
   scroll-behavior: smooth;
 }
 .look-root #home-hero {
-  position: absolute;
+  position: relative;
   top: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+  width: 55%;
+  height: 100vh;
+  margin-left: auto;
   object-fit: cover;
   object-position: center center;
   display: block;
@@ -568,9 +569,6 @@ body,
   pointer-events: none;
   opacity: 1;
   overflow: visible;
-}
-.look-root #home-hero {
-  width: 55%;
 }
 .look-root #home-hero {
   pointer-events: none;
@@ -604,8 +602,7 @@ body,
   color: #E63027;
   white-space: nowrap;
   width: auto;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
+  clip-path: inset(0 0 0 0);
 }
 .look-root .hero-look {
   display: block;
@@ -618,8 +615,7 @@ body,
   letter-spacing: -0.04em;
   color: #E63027;
   white-space: nowrap;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
+  clip-path: inset(0 0 0 0);
 }
 .look-root .hero-future-wrap {
   position: relative;
@@ -642,8 +638,7 @@ body,
   white-space: nowrap;
   width: 100%;
   display: block;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
+  clip-path: inset(0 0 0 0);
 }
 .look-root .hero-future-desc {
   width: min(100%, 31rem);
@@ -654,8 +649,7 @@ body,
   line-height: 1.4;
   color: #E63027;
   text-align: left;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
+  clip-path: inset(0 0 0 0);
 }
 .look-root #fullscreen-cta {
   display: inline-flex;
@@ -698,9 +692,9 @@ body,
   backdrop-filter: blur(2px);
   pointer-events: auto;
   will-change: transform, opacity;
-  transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 .look-root #hero-navbar .nav-left {
   display: flex;
