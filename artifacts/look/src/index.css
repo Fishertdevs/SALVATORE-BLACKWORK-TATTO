@@ -490,6 +490,10 @@ body,
   width: min(64vw, 760px);
   aspect-ratio: 16 / 9;
 }
+.look-root .img.intro-featured img {
+  display: block;
+  filter: grayscale(1);
+}
 .look-root #featured-img-el {
   object-fit: cover !important;
   object-position: center center !important;

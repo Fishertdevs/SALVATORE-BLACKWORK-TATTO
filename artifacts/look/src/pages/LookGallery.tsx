@@ -574,7 +574,7 @@ export default function LookGallery() {
 
     // The welcome screen intentionally contains only the hero's ASCII card.
     const div = document.createElement("div");
-    div.className = "img featured";
+    div.className = "img featured intro-featured";
     const img = document.createElement("img");
     img.id = "featured-img-el";
     img.src = mainImg;
@@ -584,85 +584,32 @@ export default function LookGallery() {
 
     featuredCardRef.current = featuredCard;
 
-    // Featured card ASCII effect — 16:9 grid, source covered (cropped) to fit
-    const runEffectLeftCrop = (
-      img: HTMLImageElement,
-      canvas: HTMLCanvasElement,
-      delay: number,
-      onDone?: () => void,
-    ) => {
-      const cols = FEATURED_ASCII_COLS;
-      const rows = FEATURED_ASCII_ROWS;
-      const targetAspect = 16 / 9;
-      const srcAspect = img.naturalWidth / img.naturalHeight;
-      let cropW = img.naturalWidth;
-      let cropH = img.naturalHeight;
-      let cropX = 0;
-      let cropY = 0;
-      if (srcAspect > targetAspect) {
-        cropW = img.naturalHeight * targetAspect;
-        cropX = (img.naturalWidth - cropW) / 2;
-      } else {
-        cropH = img.naturalWidth / targetAspect;
-        cropY = (img.naturalHeight - cropH) / 2;
-      }
-
-      const sc = document.createElement("canvas");
-      sc.width = cols;
-      sc.height = rows;
-      const sctx = sc.getContext("2d")!;
-      sctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, cols, rows);
-      const { data } = sctx.getImageData(0, 0, cols, rows);
-
-      const ag: string[][] = [];
-      const bg: number[][] = [];
-      for (let r = 0; r < rows; r++) {
-        const ar: string[] = [];
-        const br: number[] = [];
-        for (let c = 0; c < cols; c++) {
-          const pi = (r * cols + c) * 4;
-          const lum =
-            (data[pi]! * 0.299 + data[pi + 1]! * 0.587 + data[pi + 2]! * 0.114) / 255;
-          const ci = Math.min(
-            ASCII_CHARS.length - 1,
-            Math.floor((1 - lum) * ASCII_CHARS.length),
-          );
-          ar.push(ASCII_CHARS[ci]!);
-          br.push(ci);
-        }
-        ag.push(ar);
-        bg.push(br);
-      }
-      prepareCanvas(canvas, cols, rows);
-      const card = featuredCard;
-      if (card) {
-        const renderDuration =
-          (delay + cols * rows * CELL_APPEAR_MS + SCRAMBLE_COUNT * SCRAMBLE_SPEED_MS) / 1000;
-        gsap.set(card, {
-          scale: 0.28,
-          transformOrigin: "50% 50%",
-        });
-        gsap.to(card, {
-          scale: 1,
-          duration: Math.max(1, renderDuration),
-          ease: "none",
-        });
-      }
-      animateCells(canvas, ag, bg, delay, cols, rows, onDone);
-    };
-
     if (featuredCard) {
       const featuredImgEl = featuredCard.querySelector("img")!;
-      const canvas = document.createElement("canvas");
-      featuredCard.appendChild(canvas);
-      const run = () =>
-        runEffectLeftCrop(featuredImgEl, canvas, 800, () => {
-          featuredCard!.classList.add("revealed");
-          const revealTimer = window.setTimeout(() => {
-            expandSection();
-          }, 400);
-          timeouts.push(revealTimer);
+      const run = () => {
+        gsap.set(featuredCard, {
+          opacity: 0,
+          scale: 0.28,
+          filter: "blur(18px) grayscale(1)",
+          clipPath: "inset(12% 12% 12% 12%)",
+          transformOrigin: "50% 50%",
         });
+        gsap.to(featuredCard, {
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px) grayscale(0)",
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 6.5,
+          ease: "power2.out",
+          onComplete: () => {
+          featuredCard!.classList.add("revealed");
+            const revealTimer = window.setTimeout(() => {
+              expandSection();
+            }, 600);
+            timeouts.push(revealTimer);
+          },
+        });
+      };
       if (featuredImgEl.complete && featuredImgEl.naturalWidth) {
         run();
       } else {
