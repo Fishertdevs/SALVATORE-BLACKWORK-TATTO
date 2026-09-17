@@ -568,16 +568,15 @@ body,
 }
 .look-root .hero-top-title {
   position: absolute;
-  top: clamp(1.25rem, 2vw, 2rem);
+  top: clamp(5rem, 8vw, 8rem);
   left: 50%;
   z-index: 3;
   width: max-content;
-  max-width: calc(100% - 2rem);
-  color: #1a1a1a;
+  color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(0.95rem, 1.2vw, 1.35rem);
+  font-size: clamp(2rem, 5vw, 5.5rem);
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.04em;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
