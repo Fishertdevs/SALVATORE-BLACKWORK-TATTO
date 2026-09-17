@@ -596,18 +596,16 @@ body,
   min-width: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: clamp(1.2rem, 2vw, 2rem);
   transform: translateY(-50%);
+  text-align: center;
 }
 .look-root .hero-side-left {
   left: clamp(2rem, 5vw, 6rem);
-  align-items: flex-start;
-  text-align: left;
 }
 .look-root .hero-side-right {
   right: clamp(2rem, 5vw, 6rem);
-  align-items: flex-end;
-  text-align: right;
 }
 .look-root .hero-side-title {
   display: block;
@@ -617,11 +615,13 @@ body,
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(1.5rem, 2.1vw, 2.8rem);
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.15;
   letter-spacing: -0.04em;
   color: #E63027;
   text-align: center;
   white-space: nowrap;
+  overflow: visible;
+  padding: 0.08em 0 0.04em;
   clip-path: inset(0 0 0 0);
 }
 .look-root .hero-side-desc {
@@ -631,7 +631,8 @@ body,
   font-size: clamp(0.75rem, 0.95vw, 1rem);
   font-weight: 400;
   line-height: 1.45;
-  color: #E63027;
+  color: #1a1a1a;
+  text-align: center;
   overflow-wrap: break-word;
   clip-path: inset(0 0 0 0);
 }
@@ -649,6 +650,7 @@ body,
   line-height: 1;
   text-decoration: none;
   text-transform: uppercase;
+  align-self: center;
   pointer-events: auto;
   transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
