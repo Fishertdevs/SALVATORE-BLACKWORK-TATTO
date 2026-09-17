@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { StudioHomeSections } from "@/pages/TattooPages";
+import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
+import type { Language } from "@/i18n";
 import phoneImg from "@assets/Phone_1777633894261.png";
 import shoesImg from "@assets/Shoes_1777633894262.png";
 import tableImg from "@assets/Table_1777633894262.png";
@@ -103,7 +105,45 @@ function imageToAsciiGrid(
   return { asciiGrid: ag, brightnessGrid: bg };
 }
 
-function MobileLookGallery() {
+function LanguageSwitcher({
+  language,
+  onChange,
+}: {
+  language: Language;
+  onChange: (language: Language) => void;
+}) {
+  return (
+    <div className="language-switch" aria-label="Language selector">
+      <button
+        type="button"
+        className={`language-option ${language === "es" ? "is-active" : ""}`}
+        aria-pressed={language === "es"}
+        onClick={() => onChange("es")}
+      >
+        ES
+      </button>
+      <span className="language-divider" aria-hidden="true">/</span>
+      <button
+        type="button"
+        className={`language-option ${language === "en" ? "is-active" : ""}`}
+        aria-pressed={language === "en"}
+        onClick={() => onChange("en")}
+      >
+        EN
+      </button>
+    </div>
+  );
+}
+
+function MobileLookGallery({
+  language,
+  onLanguageChange,
+}: {
+  language: Language;
+  onLanguageChange: (language: Language) => void;
+}) {
+  const copy = galleryCopy[language];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
   return (
     <div style={{ width: "100%", backgroundColor: "#FFFFFF", color: "#1a1a1a", overflowX: "hidden" }}>
 
@@ -115,23 +155,19 @@ function MobileLookGallery() {
         background: "rgba(255,255,255,0.95)",
         backdropFilter: "blur(4px)",
       }}>
-        <span style={{
-          fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
-          fontSize: 17, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
-        }}>SALVATORE BLACKWORK TATTO</span>
+        <div className="mobile-nav-top">
+          <span style={{
+            fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
+            fontSize: 17, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
+          }}>SALVATORE BLACKWORK TATTO</span>
+          <LanguageSwitcher language={language} onChange={onLanguageChange} />
+        </div>
         <div style={{
           display: "flex", gap: 18, overflowX: "auto", width: "100%",
           scrollbarWidth: "none",
         }}>
-          {[
-            ["#home-hero", "INICIO"],
-            ["#studio-about", "ACERCA DE"],
-            ["#studio-portfolio", "PORTFOLIO"],
-            ["#studio-services", "SERVICIOS"],
-            ["#studio-booking", "RESERVAS"],
-            ["#studio-contact", "CONTACTO"],
-          ].map(([href, label]) => (
-            <a key={label} className="mobile-nav-link" href={href} style={{
+          {copy.nav.map((label, index) => (
+            <a key={label} className="mobile-nav-link" href={navHrefs[index]} style={{
               flex: "0 0 auto",
               fontFamily: "'Helvetica Neue', Arial, sans-serif",
               fontSize: 9, fontWeight: 500, color: "#1a1a1a",
