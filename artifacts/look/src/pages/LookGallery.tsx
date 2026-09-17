@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "wouter";
 import { gsap } from "gsap";
+import { StudioHomeSections } from "@/pages/TattooPages";
 import phoneImg from "@assets/Phone_1777633894261.png";
 import shoesImg from "@assets/Shoes_1777633894262.png";
 import tableImg from "@assets/Table_1777633894262.png";
@@ -106,14 +106,14 @@ function imageToAsciiGrid(
 function MobileLookGallery() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div style={{ width: "100%", backgroundColor: "#FFF8C9", color: "#1a1a1a", overflowX: "hidden" }}>
+    <div style={{ width: "100%", backgroundColor: "#FFFFFF", color: "#1a1a1a", overflowX: "hidden" }}>
 
       {/* NAVBAR */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "16px 24px",
-           background: "rgba(255,248,201,0.95)",
+           background: "rgba(255,255,255,0.95)",
         backdropFilter: "blur(4px)",
       }}>
         <span style={{
@@ -131,7 +131,7 @@ function MobileLookGallery() {
       </nav>
       {menuOpen && (
         <div style={{
-           position: "fixed", inset: 0, backgroundColor: "#FFF8C9",
+           position: "fixed", inset: 0, backgroundColor: "#FFFFFF",
           zIndex: 100, display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center", gap: 40,
         }}>
@@ -146,14 +146,14 @@ function MobileLookGallery() {
             textTransform: "uppercase", color: "#999",
           }}>BY APPOINTMENT</span>
           {[
-            ["/inicio", "+ INICIO"],
-            ["/acerca-de", "+ ACERCA DE"],
-            ["/portfolio", "+ PORTFOLIO"],
-            ["/servicios", "+ SERVICIOS"],
-            ["/reservas", "+ RESERVAS"],
-            ["/contacto", "+ CONTACTO"],
+            ["#home-hero", "+ INICIO"],
+            ["#studio-about", "+ ACERCA DE"],
+            ["#studio-portfolio", "+ PORTFOLIO"],
+            ["#studio-services", "+ SERVICIOS"],
+            ["#studio-booking", "+ RESERVAS"],
+            ["#studio-contact", "+ CONTACTO"],
           ].map(([href, label]) => (
-            <Link key={label} href={href} onClick={() => setMenuOpen(false)} style={{
+            <a key={label} href={href} onClick={() => setMenuOpen(false)} style={{
               fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
               fontSize: 32, fontWeight: 400, color: "#1a1a1a",
               textDecoration: "none", letterSpacing: "0.02em",
@@ -184,7 +184,7 @@ function MobileLookGallery() {
       </div>
 
       {/* FEATURED TEXT */}
-      <div style={{ backgroundColor: "#FFF8C9", color: "#1a1a1a", padding: "48px 24px" }}>
+      <div style={{ backgroundColor: "#FFFFFF", color: "#1a1a1a", padding: "48px 24px" }}>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
@@ -202,7 +202,7 @@ function MobileLookGallery() {
       </div>
 
       {/* PRODUCT VIDEO */}
-      <div style={{ backgroundColor: "#FFF8C9", padding: "0 24px 48px" }}>
+      <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 48px" }}>
         <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden" }}>
           <video autoPlay loop muted playsInline style={{
             width: "100%", height: "100%", objectFit: "cover", display: "block"
@@ -221,7 +221,7 @@ function MobileLookGallery() {
       </div>
 
       {/* ARCHIVE — vertical single column */}
-      <div style={{ backgroundColor: "#FFF8C9", padding: "0 24px 64px" }}>
+      <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 64px" }}>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 11, letterSpacing: "0.15em",
@@ -259,6 +259,8 @@ function MobileLookGallery() {
           </div>
         ))}
       </div>
+
+      <StudioHomeSections />
 
       {/* FOOTER */}
       <div style={{ backgroundColor: "#0a0a0a", color: "#ffffff", padding: "48px 24px 32px" }}>
@@ -858,7 +860,7 @@ export default function LookGallery() {
       <div id="gallery-layer" ref={galleryRef} />
 
       <div id="fullscreen-section" ref={fullSectionRef}>
-        <img id="fullscreen-img" src={mainImg} alt="" />
+        <img id="home-hero" src={mainImg} alt="" />
         <nav id="hero-navbar" ref={navbarRef}>
           <div className="nav-left">
             <span className="nav-logo">SALVATORE BLACKWORK TATTO</span>
@@ -868,27 +870,27 @@ export default function LookGallery() {
             <ul className="nav-links">
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/inicio">INICIO</Link>
+                <a href="#home-hero">INICIO</a>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/acerca-de">ACERCA DE</Link>
+                <a href="#studio-about">ACERCA DE</a>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/portfolio">PORTFOLIO</Link>
+                <a href="#studio-portfolio">PORTFOLIO</a>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/servicios">SERVICIOS</Link>
+                <a href="#studio-services">SERVICIOS</a>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/reservas">RESERVAS</Link>
+                <a href="#studio-booking">RESERVAS</a>
               </li>
               <li>
                 <span className="nav-plus">+</span>
-                <Link href="/contacto">CONTACTO</Link>
+                <a href="#studio-contact">CONTACTO</a>
               </li>
             </ul>
             <span className="nav-menu">MENU</span>
@@ -1044,6 +1046,8 @@ export default function LookGallery() {
             </div>
           </div>
         </section>
+
+        <StudioHomeSections />
 
         <footer className="site-footer" aria-label="Site footer">
           <div className="footer-top">
