@@ -534,7 +534,7 @@ body,
   z-index: 100;
   background: #FFFFFF;
   pointer-events: auto;
-  opacity: 0;
+  opacity: 1;
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
