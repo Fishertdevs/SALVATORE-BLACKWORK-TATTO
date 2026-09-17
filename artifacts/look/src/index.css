@@ -473,7 +473,9 @@ body,
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 1rem;
-  z-index: 1;
+  z-index: 110;
+  background: #FFFFFF;
+  pointer-events: auto;
 }
 
 .look-root .img {
@@ -574,7 +576,7 @@ body,
   width: max-content;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(2rem, 5vw, 5.5rem);
+  font-size: clamp(2.4rem, 5.8vw, 6.5rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
