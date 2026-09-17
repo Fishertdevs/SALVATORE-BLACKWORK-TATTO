@@ -691,15 +691,7 @@ export default function LookGallery() {
         runEffectLeftCrop(featuredImgEl, canvas, 500, () => {
           featuredCard!.classList.add("revealed");
           const revealTimer = window.setTimeout(() => {
-            gsap.to(gallery, {
-              opacity: 0,
-              duration: 0.55,
-              ease: "power2.inOut",
-              onComplete: () => {
-                gallery.style.pointerEvents = "none";
-                revealHeroRef.current?.();
-              },
-            });
+            expandSection();
           }, 400);
           timeouts.push(revealTimer);
         });
