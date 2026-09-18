@@ -591,8 +591,8 @@ body,
 }
 .look-root .hero-side {
   position: absolute;
-  top: 57%;
-  width: clamp(12rem, 20vw, 20rem);
+  top: 62%;
+  width: clamp(16rem, 24vw, 24rem);
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -602,10 +602,10 @@ body,
   text-align: center;
 }
 .look-root .hero-side-left {
-  left: clamp(2rem, 5vw, 6rem);
+  left: clamp(1.5rem, 4vw, 5rem);
 }
 .look-root .hero-side-right {
-  right: clamp(2rem, 5vw, 6rem);
+  right: clamp(1.5rem, 4vw, 5rem);
 }
 .look-root .hero-side-title {
   display: block;
@@ -628,7 +628,7 @@ body,
 }
 .look-root .hero-side-desc {
   width: 100%;
-  max-width: 20rem;
+  max-width: 24rem;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(1.1rem, 1.35vw, 1.4rem);
   font-weight: 400;
