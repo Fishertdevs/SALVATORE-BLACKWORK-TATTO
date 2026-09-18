@@ -262,10 +262,6 @@ function MobileLookGallery({
             </a>
           ))}
         </nav>
-        <div className="mobile-menu-footer">
-          <div className="mobile-menu-info">SALVATORE BLACKWORK TATTO</div>
-          <div className="mobile-menu-info">© 2026 SALVATORE BLACKWORK TATTO</div>
-        </div>
       </div>
 
       {/* HERO */}
