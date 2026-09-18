@@ -568,7 +568,7 @@ body,
   width: max-content;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(2.4rem, 5.8vw, 6.5rem);
+  font-size: clamp(2.7rem, 6.4vw, 7.2rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -628,7 +628,7 @@ body,
   width: 100%;
   max-width: 20rem;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(0.75rem, 0.95vw, 1rem);
+  font-size: clamp(0.95rem, 1.15vw, 1.2rem);
   font-weight: 400;
   line-height: 1.45;
   color: #1a1a1a;
@@ -639,9 +639,9 @@ body,
 .look-root .hero-side-action {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid rgba(230, 48, 39, 0.72);
+  padding: 0 0 0.35rem;
+  border: 0;
+  border-bottom: 1px solid #E63027;
   color: #E63027;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: clamp(0.62rem, 0.7vw, 0.75rem);
@@ -652,16 +652,14 @@ body,
   text-transform: uppercase;
   align-self: center;
   pointer-events: auto;
-  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease, border-color 180ms ease;
 }
 .look-root .hero-side-action:hover,
 .look-root .hero-side-action:focus-visible {
-  border-color: #E63027;
-  color: #FFFFFF;
-  background: #E63027;
-}
-.look-root .hero-side-action span {
-  font-size: 0.9rem;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+  background: transparent;
+  outline: none;
 }
 .look-root #fullscreen-cta {
   display: inline-flex;

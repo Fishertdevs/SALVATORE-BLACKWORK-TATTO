@@ -872,14 +872,14 @@ export default function LookGallery() {
               {copy.heroLeftTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroLookRef}>{copy.heroLeftDescription}</p>
-            <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}<span>↗</span></a>
+            <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}</a>
           </div>
           <div className="hero-side hero-side-right">
             <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>
               {copy.heroRightTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroFutureDescRef}>{copy.heroRightDescription}</p>
-            <a className="hero-side-action" href="#studio-portfolio">{copy.heroRightAction}<span>↗</span></a>
+            <a className="hero-side-action" href="#studio-portfolio">{copy.heroRightAction}</a>
           </div>
         </div>
 
