@@ -613,7 +613,7 @@ body,
   max-width: none;
   align-self: center;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.5rem, 2.1vw, 2.8rem);
+  font-size: clamp(1.9rem, 2.6vw, 3.3rem);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: -0.04em;
@@ -628,7 +628,7 @@ body,
   width: 100%;
   max-width: 20rem;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(0.95rem, 1.15vw, 1.2rem);
+  font-size: clamp(1.1rem, 1.35vw, 1.4rem);
   font-weight: 400;
   line-height: 1.45;
   color: #1a1a1a;
@@ -644,7 +644,7 @@ body,
   border-bottom: 1px solid #E63027;
   color: #E63027;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(0.62rem, 0.7vw, 0.75rem);
+  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1;
