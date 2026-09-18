@@ -3080,13 +3080,13 @@ body,
 .mobile-menu-links {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 18px;
   margin-top: 40px;
 }
 
 .mobile-menu-link {
   font-family: 'Beautique Display', serif;
-  font-size: 36px;
+  font-size: clamp(24px, 7vw, 30px);
   text-transform: uppercase;
   color: #1a1a1a;
   text-decoration: none;
