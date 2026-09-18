@@ -19,11 +19,11 @@ export const galleryCopy = {
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
     heroDescription:
       "Tatuajes blackwork construidos desde el contraste, la línea precisa y una mirada que solo te pertenece a ti.",
-    heroLeftTitle: ["DISEÑO BLACKWORK", "A MEDIDA"],
+    heroLeftTitle: ["PIEZAS", "ÚNICAS"],
     heroLeftDescription:
       "Hablemos de una pieza pensada para tu cuerpo, tu historia y la forma en que quieres llevarla.",
     heroLeftAction: "COTIZAR PROYECTO",
-    heroRightTitle: ["PORTAFOLIO", "SALVATORE"],
+    heroRightTitle: ["CATÁLOGO", "DE OBRAS"],
     heroRightDescription:
       "Diseños construidos con precisión, contraste y una mirada propia para acompañarte durante toda la vida.",
     heroRightAction: "VER PORTAFOLIO",
@@ -65,11 +65,11 @@ export const galleryCopy = {
     heroFuture: ["INK IS", "ARCHITECTURE"],
     heroDescription:
       "Blackwork tattoos built from deep contrast, deliberate linework, and a point of view that belongs only to you.",
-    heroLeftTitle: ["BESPOKE BLACKWORK", "DESIGN"],
+    heroLeftTitle: ["UNIQUE", "PIECES"],
     heroLeftDescription:
       "Let's talk about a piece shaped around your body, your story, and the way you want to carry it.",
     heroLeftAction: "PRICE YOUR PROJECT",
-    heroRightTitle: ["SALVATORE", "PORTFOLIO"],
+    heroRightTitle: ["WORKS", "CATALOGUE"],
     heroRightDescription:
       "Designs built with precision, contrast, and a point of view made to stay with you for a lifetime.",
     heroRightAction: "VIEW PORTFOLIO",
