@@ -322,7 +322,11 @@ function MobileLookGallery({
         </div>
 
         <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>
-          <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" className="mobile-hero-image" />
+          <img
+            src={mainImg}
+            alt="SALVATORE BLACKWORK TATTO"
+            className={`mobile-hero-image ${showWelcome ? "is-welcome-active" : ""}`}
+          />
         </div>
       </section>
 

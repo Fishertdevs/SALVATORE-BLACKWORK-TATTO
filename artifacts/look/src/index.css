@@ -3014,6 +3014,10 @@ body,
   object-position: center 24%;
 }
 
+.mobile-look-root .mobile-hero-image.is-welcome-active {
+  visibility: hidden;
+}
+
 .mobile-look-root .mobile-hero-copy-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
