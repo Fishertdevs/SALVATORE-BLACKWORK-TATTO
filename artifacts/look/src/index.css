@@ -2975,7 +2975,6 @@ body,
 /* Mobile Hero */
 .mobile-look-root .mobile-home-hero {
   box-sizing: border-box;
-  min-height: 100dvh;
   padding-top: 68px;
   background: #FFFFFF;
   display: flex;
@@ -2990,18 +2989,19 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', serif;
-  font-size: clamp(20px, 6.4vw, 27px);
+  font-size: clamp(18px, 5.8vw, 24px);
   font-weight: 400;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .mobile-look-root .mobile-hero-image-frame {
   width: 100%;
   margin: 4px 0 0;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #FFFFFF;
 }
@@ -3011,7 +3011,7 @@ body,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 24%;
 }
 
 .mobile-look-root .mobile-hero-copy-grid {

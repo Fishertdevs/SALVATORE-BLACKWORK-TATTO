@@ -188,6 +188,11 @@ function MobileLookGallery({
         duration: 5.3,
         ease: "power2.out",
       })
+      .to(welcomeImage, {
+        filter: "blur(0px) grayscale(0)",
+        duration: 0.9,
+        ease: "power2.inOut",
+      })
       .to({}, { duration: 0.6 })
       .add(() => {
         const start = welcomeImage.getBoundingClientRect();
