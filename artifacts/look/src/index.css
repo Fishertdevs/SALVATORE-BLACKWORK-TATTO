@@ -3086,7 +3086,8 @@ body,
 
 .mobile-menu-link {
   font-family: 'Beautique Display', serif;
-  font-size: clamp(24px, 7vw, 30px);
+  font-size: clamp(12px, 3.6vw, 15px);
+  font-weight: 500;
   text-transform: uppercase;
   color: #1a1a1a;
   text-decoration: none;
