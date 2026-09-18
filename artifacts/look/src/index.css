@@ -2992,12 +2992,15 @@ body,
 
 .mobile-logo-text {
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
-  max-width: 10.5rem;
-  font-size: 15px;
-  line-height: 1.02;
+  max-width: none;
+  min-width: 0;
+  font-size: clamp(10px, 3vw, 13px);
+  line-height: 1;
   color: #1a1a1a;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 1;
   z-index: 101;
   transition: color 0.4s ease;
 }
@@ -3009,7 +3012,8 @@ body,
 .mobile-header-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
+  flex-shrink: 0;
   z-index: 101;
 }
 
