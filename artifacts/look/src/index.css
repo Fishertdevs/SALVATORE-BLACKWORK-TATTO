@@ -812,7 +812,8 @@ body,
   gap: 1rem;
 }
 .mobile-look-root .mobile-header-actions .language-switch {
-  font-size: 0.62rem;
+  gap: 0.3rem;
+  font-size: 0.55rem;
 }
 .mobile-nav-link:hover,
 .mobile-nav-link:focus-visible {
@@ -856,7 +857,7 @@ body,
 .look-root .featured-about-text {
   max-width: 420px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   line-height: 1.5;
   color: #1a1a1a;
@@ -2976,7 +2977,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 16px;
+  padding: 18px 10px;
   background: #FFFFFF;
   backdrop-filter: none;
   transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
@@ -2993,10 +2994,10 @@ body,
 }
 
 .mobile-logo-text {
-  font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
+  font-family: 'Beautique Display', serif;
   max-width: none;
   min-width: 0;
-  font-size: clamp(13px, 3.8vw, 15px);
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   color: #000000;
@@ -3005,9 +3006,11 @@ body,
   white-space: nowrap;
   flex-shrink: 1;
   font-synthesis: none;
-  text-rendering: geometricPrecision;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  -webkit-text-stroke: 0.15px currentColor;
   z-index: 101;
   transition: color 0.4s ease;
 }
@@ -3033,7 +3036,7 @@ body,
 .mobile-header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   flex-shrink: 0;
   z-index: 101;
 }
@@ -3041,14 +3044,14 @@ body,
 .mobile-hamburger {
   background: none;
   border: none;
-  padding: 8px;
+  padding: 5px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 6px;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
 }
 
 .mobile-hamburger-line {
