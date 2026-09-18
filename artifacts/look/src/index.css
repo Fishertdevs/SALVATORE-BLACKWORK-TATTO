@@ -609,9 +609,10 @@ body,
 }
 .look-root .hero-side-title {
   display: block;
-  width: max-content;
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
   align-self: center;
+  box-sizing: border-box;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(1.9rem, 2.6vw, 3.3rem);
   font-weight: 400;
