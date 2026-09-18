@@ -130,6 +130,7 @@ function MobileLookGallery({
 
   const welcomeRef = useRef<HTMLDivElement>(null);
   const welcomeImgRef = useRef<HTMLImageElement>(null);
+  const mobileHeroImageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Handle body scroll locking
@@ -155,7 +156,8 @@ function MobileLookGallery({
   useEffect(() => {
     const welcomeElement = welcomeRef.current;
     const welcomeImage = welcomeImgRef.current;
-    if (!isWelcomeReady || !showWelcome || !welcomeElement || !welcomeImage) return;
+    const heroImageFrame = mobileHeroImageRef.current;
+    if (!isWelcomeReady || !showWelcome || !welcomeElement || !welcomeImage || !heroImageFrame) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
@@ -164,26 +166,48 @@ function MobileLookGallery({
     }
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        onComplete: () => setShowWelcome(false),
-      });
+      const tl = gsap.timeline();
 
       tl.fromTo(welcomeImage, {
         opacity: 0,
-        scale: 0.92,
-        filter: "blur(16px) grayscale(1)",
+        scale: 0.28,
+        filter: "blur(18px) grayscale(1)",
+        clipPath: "inset(12%)"
       }, {
         opacity: 1,
         scale: 1,
         filter: "blur(0px) grayscale(0)",
-        duration: 3.8,
+        clipPath: "inset(0%)",
+        duration: 6.5,
         ease: "power2.out",
       })
-      .to({}, { duration: 0.45 })
-      .to(welcomeElement, {
-        opacity: 0,
-        duration: 1.1,
-        ease: "power2.inOut"
+      .to({}, { duration: 0.6 })
+      .add(() => {
+        const start = welcomeImage.getBoundingClientRect();
+        const destination = heroImageFrame.getBoundingClientRect();
+        gsap.set(welcomeImage, {
+          position: "fixed",
+          top: start.top,
+          left: start.left,
+          width: start.width,
+          height: start.height,
+          maxWidth: "none",
+          margin: 0,
+        });
+        gsap.to(welcomeElement, {
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          duration: 2.4,
+          ease: "expo.inOut",
+        });
+        gsap.to(welcomeImage, {
+          top: destination.top,
+          left: destination.left,
+          width: destination.width,
+          height: destination.height,
+          duration: 2.4,
+          ease: "expo.inOut",
+          onComplete: () => setShowWelcome(false),
+        });
       });
     });
 
@@ -265,24 +289,33 @@ function MobileLookGallery({
       </div>
 
       {/* HERO */}
-      <div style={{ width: "100%", height: "100dvh", position: "relative" }} id="home-hero">
-        <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" style={{
-          width: "100%", height: "100%", objectFit: "cover", display: "block"
-        }} />
-        <div style={{ position: "absolute", bottom: "15vh", left: 24, right: 24 }}>
-          <p style={{
-            fontFamily: "'Helvetica Neue', sans-serif",
-            fontSize: 11, letterSpacing: "0.2em",
-            textTransform: "uppercase", color: "#E63027", margin: "0 0 8px",
-          }}>{copy.heroEyebrow}</p>
-          <p style={{
-            fontFamily: "'Beautique Display', serif",
-            fontSize: "clamp(40px, 10vw, 72px)",
-            fontWeight: 400, color: "#E63027",
-            lineHeight: 1, margin: 0, textTransform: "uppercase",
-          }}>{copy.heroTitle[0]}<br />{copy.heroTitle[1]}</p>
+      <section className="mobile-home-hero" id="home-hero">
+        <div className="mobile-hero-title-wrap">
+          <h1 className="mobile-hero-title">
+            <span>SALVATORE</span>
+            <span>BLACKWORK</span>
+            <span>TATTO</span>
+          </h1>
         </div>
-      </div>
+
+        <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>
+          <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" className="mobile-hero-image" />
+        </div>
+
+        <div className="mobile-hero-copy-grid">
+          <div className="mobile-hero-copy-block">
+            <h2 className="mobile-hero-side-title">{copy.heroLeftTitle.join(" ")}</h2>
+            <p className="mobile-hero-side-description">{copy.heroLeftDescription}</p>
+            <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
+          </div>
+
+          <div className="mobile-hero-copy-block">
+            <h2 className="mobile-hero-side-title">{copy.heroRightTitle.join(" ")}</h2>
+            <p className="mobile-hero-side-description">{copy.heroRightDescription}</p>
+            <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
+          </div>
+        </div>
+      </section>
 
       {/* FEATURED TEXT */}
       <div style={{ backgroundColor: "#FFFFFF", color: "#1a1a1a", padding: "48px 24px" }}>
