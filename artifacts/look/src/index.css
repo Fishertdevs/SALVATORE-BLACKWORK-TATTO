@@ -1570,7 +1570,7 @@ body,
 .tattoo-service-row p {
   max-width: 330px;
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.45;
 }
@@ -3001,18 +3001,17 @@ body,
   font-weight: 400;
   line-height: 1;
   color: #000000;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 1;
   font-synthesis: none;
   font-kerning: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: auto;
-  -webkit-text-stroke: 0.15px currentColor;
   z-index: 101;
-  transition: color 0.4s ease;
+  transition: none;
 }
 
 .mobile-header.is-menu-open .mobile-logo-text {
