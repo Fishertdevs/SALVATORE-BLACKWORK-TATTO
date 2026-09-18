@@ -9,7 +9,7 @@ import airpodMaxImg from "@assets/Airpod_max_1777633894262.png";
 import airpodImg from "@assets/Airpod_1777633894263.png";
 import candleImg from "@assets/candle_1777633894263.png";
 import earringsImg from "@assets/Earrings_1777633894263.png";
-import mainImg from "@assets/hero_new_image_1777693117619.png";
+import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
 const productVideoMp4 = `${import.meta.env.BASE_URL}product-video.mp4`;
