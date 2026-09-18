@@ -122,42 +122,154 @@ function MobileLookGallery({
 }) {
   const copy = galleryCopy[language];
   const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
-  return (
-    <div style={{ width: "100%", backgroundColor: "#FFFFFF", color: "#1a1a1a", overflowX: "hidden" }}>
 
-      {/* NAVBAR */}
-      <nav style={{
-        position: "sticky", top: 0, zIndex: 50,
-        display: "flex", flexDirection: "column", alignItems: "stretch", gap: 14,
-        padding: "15px 24px 13px",
-        background: "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(4px)",
-      }}>
-        <div className="mobile-nav-top">
-          <span style={{
-            fontFamily: "'Beautique Display', 'Helvetica Neue', sans-serif",
-            fontSize: 17, color: "#1a1a1a", letterSpacing: "0.04em", textTransform: "uppercase",
-          }}>SALVATORE BLACKWORK TATTO</span>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [isWelcomeReady, setIsWelcomeReady] = useState(false);
+
+  const welcomeRef = useRef<HTMLDivElement>(null);
+  const welcomeImgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // Handle body scroll locking
+    if (isMenuOpen || showWelcome) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen, showWelcome]);
+
+  useEffect(() => {
+    // Handle header scroll style
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const welcomeElement = welcomeRef.current;
+    const welcomeImage = welcomeImgRef.current;
+    if (!isWelcomeReady || !showWelcome || !welcomeElement || !welcomeImage) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setShowWelcome(false);
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        onComplete: () => setShowWelcome(false),
+      });
+
+      tl.fromTo(welcomeImage, {
+        opacity: 0,
+        scale: 0.92,
+        filter: "blur(16px) grayscale(1)",
+      }, {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px) grayscale(0)",
+        duration: 3.8,
+        ease: "power2.out",
+      })
+      .to({}, { duration: 0.45 })
+      .to(welcomeElement, {
+        opacity: 0,
+        duration: 1.1,
+        ease: "power2.inOut"
+      });
+    });
+
+    return () => ctx.revert();
+  }, [isWelcomeReady, showWelcome]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
+
+  return (
+    <div className="mobile-look-root">
+      {/* WELCOME REVEAL */}
+      {showWelcome && (
+        <div className="mobile-welcome-overlay" ref={welcomeRef} data-testid="mobile-welcome-overlay">
+          <img
+            src={mainImg}
+            alt="SALVATORE BLACKWORK TATTO"
+            className="mobile-welcome-img"
+            ref={welcomeImgRef}
+            onLoad={() => setIsWelcomeReady(true)}
+            onError={() => setShowWelcome(false)}
+          />
+        </div>
+      )}
+
+      {/* HEADER WITH HAMBURGER */}
+      <header className={`mobile-header ${isScrolled ? 'is-scrolled' : ''} ${isMenuOpen ? 'is-menu-open' : ''}`} data-testid="mobile-header">
+        <div className="mobile-logo-text">SALVATORE BLACKWORK TATTO</div>
+        <div className="mobile-header-actions">
           <LanguageSwitcher language={language} onChange={onLanguageChange} />
+          <button
+            type="button"
+            className="mobile-hamburger"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen
+              ? (language === "es" ? "Cerrar menú" : "Close menu")
+              : (language === "es" ? "Abrir menú" : "Open menu")}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            data-testid="button-menu-toggle"
+          >
+            <span className="mobile-hamburger-line" />
+            <span className="mobile-hamburger-line" />
+            <span className="mobile-hamburger-line" />
+          </button>
         </div>
-        <div style={{
-          display: "flex", gap: 18, overflowX: "auto", width: "100%",
-          scrollbarWidth: "none",
-        }}>
+      </header>
+
+      {/* MENU OVERLAY */}
+      <div
+        id="mobile-navigation"
+        className={`mobile-menu-overlay ${isMenuOpen ? 'is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={language === "es" ? "Navegación principal" : "Main navigation"}
+        aria-hidden={!isMenuOpen}
+        data-testid="mobile-menu-overlay"
+      >
+        <nav className="mobile-menu-links">
           {copy.nav.map((label, index) => (
-            <a key={label} className="mobile-nav-link" href={navHrefs[index]} style={{
-              flex: "0 0 auto",
-              fontFamily: "'Helvetica Neue', Arial, sans-serif",
-              fontSize: 9, fontWeight: 500, color: "#1a1a1a",
-              textDecoration: "none", letterSpacing: "0.16em",
-              textTransform: "uppercase", transition: "color 180ms ease",
-            }}>{label}</a>
+            <a
+              key={label}
+              href={navHrefs[index]}
+              className="mobile-menu-link"
+              onClick={() => setIsMenuOpen(false)}
+              tabIndex={isMenuOpen ? 0 : -1}
+              data-testid={`link-mobile-nav-${index}`}
+            >
+              {label}
+            </a>
           ))}
+        </nav>
+        <div className="mobile-menu-footer">
+          <div className="mobile-menu-info">SALVATORE BLACKWORK TATTO</div>
+          <div className="mobile-menu-info">© 2026 {language === "es" ? "TODOS LOS DERECHOS RESERVADOS" : "ALL RIGHTS RESERVED"}</div>
         </div>
-      </nav>
+      </div>
 
       {/* HERO */}
-      <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+      <div style={{ width: "100%", height: "100dvh", position: "relative" }} id="home-hero">
         <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" style={{
           width: "100%", height: "100%", objectFit: "cover", display: "block"
         }} />
