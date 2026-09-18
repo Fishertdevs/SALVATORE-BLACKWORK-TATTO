@@ -183,7 +183,7 @@ function MobileLookGallery({
       })
       .to(welcomeImage, {
         scale: 1,
-        filter: "blur(0px) grayscale(0)",
+        filter: "blur(0px) grayscale(1)",
         clipPath: "inset(0%)",
         duration: 5.3,
         ease: "power2.out",
@@ -211,6 +211,7 @@ function MobileLookGallery({
           left: destination.left,
           width: destination.width,
           height: destination.height,
+          filter: "blur(0px) grayscale(0)",
           duration: 2.4,
           ease: "expo.inOut",
           onComplete: () => setShowWelcome(false),
