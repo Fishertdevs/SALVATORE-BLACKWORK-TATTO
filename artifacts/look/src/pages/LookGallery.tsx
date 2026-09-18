@@ -175,10 +175,17 @@ function MobileLookGallery({
         clipPath: "inset(12%)"
       }, {
         opacity: 1,
+        scale: 0.42,
+        filter: "blur(10px) grayscale(1)",
+        clipPath: "inset(8%)",
+        duration: 1.2,
+        ease: "power2.out",
+      })
+      .to(welcomeImage, {
         scale: 1,
         filter: "blur(0px) grayscale(0)",
         clipPath: "inset(0%)",
-        duration: 6.5,
+        duration: 5.3,
         ease: "power2.out",
       })
       .to({}, { duration: 0.6 })
@@ -291,15 +298,7 @@ function MobileLookGallery({
       {/* HERO */}
       <section className="mobile-home-hero" id="home-hero">
         <div className="mobile-hero-title-wrap">
-          <h1 className="mobile-hero-title">
-            <span>SALVATORE</span>
-            <span>BLACKWORK</span>
-            <span>TATTO</span>
-          </h1>
-        </div>
-
-        <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>
-          <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" className="mobile-hero-image" />
+          <h1 className="mobile-hero-title">SALVATORE BLACKWORK TATTO</h1>
         </div>
 
         <div className="mobile-hero-copy-grid">
@@ -314,6 +313,10 @@ function MobileLookGallery({
             <p className="mobile-hero-side-description">{copy.heroRightDescription}</p>
             <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
           </div>
+        </div>
+
+        <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>
+          <img src={mainImg} alt="SALVATORE BLACKWORK TATTO" className="mobile-hero-image" />
         </div>
       </section>
 

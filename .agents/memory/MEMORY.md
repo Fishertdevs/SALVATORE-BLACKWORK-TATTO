@@ -1,2 +1,3 @@
 - [Package firewall recovery](package-firewall-recovery.md) — if a workspace install is blocked on a direct package tarball, update that dependency before retrying the frozen install.
 - [Approved desktop hero](approved-desktop-hero.md) — preserve the approved desktop hero unchanged when improving mobile behavior or layout.
+- [Mobile welcome verification](mobile-welcome-verification.md) — verify the long mobile intro with separate immediate and delayed captures so neither animation state is missed.
