@@ -19,13 +19,13 @@ export const galleryCopy = {
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
     heroDescription:
       "Tatuajes blackwork construidos desde el contraste, la línea precisa y una mirada que solo te pertenece a ti.",
-    heroLeftTitle: ["PIEZAS", "ÚNICAS"],
+    heroLeftTitle: ["PIEZAS ÚNICAS"],
     heroLeftDescription:
       "Hablemos de una pieza pensada para tu cuerpo, tu historia y la forma en que quieres llevarla.",
     heroLeftAction: "COTIZAR PROYECTO",
     heroRightTitle: ["CATÁLOGO", "DE OBRAS"],
     heroRightDescription:
-      "Diseños construidos con precisión, contraste y una mirada propia para acompañarte durante toda la vida.",
+      "Diseños blackwork precisos, creados para tu cuerpo y pensados para acompañarte toda la vida.",
     heroRightAction: "VER PORTAFOLIO",
     featuredLabel: "SALVATORE BLACKWORK TATTO / OBRA DESTACADA",
     featuredParagraphs: [
@@ -65,13 +65,13 @@ export const galleryCopy = {
     heroFuture: ["INK IS", "ARCHITECTURE"],
     heroDescription:
       "Blackwork tattoos built from deep contrast, deliberate linework, and a point of view that belongs only to you.",
-    heroLeftTitle: ["UNIQUE", "PIECES"],
+    heroLeftTitle: ["UNIQUE PIECES"],
     heroLeftDescription:
       "Let's talk about a piece shaped around your body, your story, and the way you want to carry it.",
     heroLeftAction: "PRICE YOUR PROJECT",
     heroRightTitle: ["WORKS", "CATALOGUE"],
     heroRightDescription:
-      "Designs built with precision, contrast, and a point of view made to stay with you for a lifetime.",
+      "Precise blackwork designs, created for your body and made to stay with you for a lifetime.",
     heroRightAction: "VIEW PORTFOLIO",
     featuredLabel: "SALVATORE BLACKWORK TATTO / FEATURED WORK",
     featuredParagraphs: [
