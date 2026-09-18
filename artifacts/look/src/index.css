@@ -3020,9 +3020,9 @@ body,
 
 .mobile-look-root .mobile-hero-copy-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 14px;
-  padding: 8px 12px 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  padding: 10px 20px 22px;
 }
 
 .mobile-look-root .mobile-hero-copy-block {
@@ -3031,7 +3031,7 @@ body,
 }
 
 .mobile-look-root .mobile-hero-side-title {
-  margin: 0 0 8px;
+  margin: 0 0 7px;
   color: #E63027;
   font-family: 'Beautique Display', serif;
   font-size: clamp(15px, 4.2vw, 18px);
@@ -3042,12 +3042,13 @@ body,
 }
 
 .mobile-look-root .mobile-hero-side-description {
-  margin: 0 0 12px;
+  max-width: 320px;
+  margin: 0 auto 12px;
   color: #1a1a1a;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 300;
-  line-height: 1.42;
+  line-height: 1.5;
 }
 
 .mobile-look-root .mobile-hero-side-action {
