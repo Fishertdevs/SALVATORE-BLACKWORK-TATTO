@@ -368,23 +368,23 @@ function MobileLookGallery({
           id="mobile-welcome-title"
           className="mobile-welcome-title welcome-reveal-target"
           data-delay="0s"
-          data-duration="2.2s"
+          data-duration="1.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.welcomeTitle}
         </h2>
         <div
           className="mobile-welcome-label welcome-reveal-target"
-          data-delay="0.45s"
-          data-duration="2.2s"
+          data-delay="0.5s"
+          data-duration="1.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.featuredLabel}
         </div>
         <p
           className="mobile-welcome-copy welcome-reveal-target"
-          data-delay="0.9s"
-          data-duration="2.2s"
+          data-delay="1s"
+          data-duration="1.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.featuredParagraphs.join(" ")}
@@ -567,8 +567,7 @@ export default function LookGallery() {
         const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
         el.style.transition = "none";
           if (el.classList.contains("welcome-reveal-target")) {
-            el.style.opacity = "1";
-            el.style.transform = "translateX(0)";
+            el.style.clipPath = to;
           } else {
             el.style.clipPath = to;
           }
@@ -584,9 +583,16 @@ export default function LookGallery() {
       const prop = el.dataset.revealProperty ?? "clip-path";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
       if (el.classList.contains("welcome-reveal-target")) {
-        el.style.transition = `opacity ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}, transform ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
-        el.style.opacity = "1";
-        el.style.transform = "translateX(0)";
+        gsap.fromTo(
+          el,
+          { clipPath: "inset(0px 100% 0px 0px)" },
+          {
+            clipPath: to,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: Number.parseFloat(delay) || 0,
+          },
+        );
         return;
       }
       el.style.transition = `${prop} ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
@@ -1092,15 +1098,15 @@ export default function LookGallery() {
           <h2
             className="featured-welcome-title welcome-reveal-target"
             data-delay="0s"
-            data-duration="2.2s"
+            data-duration="1.2s"
             data-reveal-to="inset(0 0% 0 0)"
           >
             {copy.welcomeTitle}
           </h2>
           <div
             className="featured-label welcome-reveal-target"
-            data-delay="0.45s"
-            data-duration="2.2s"
+            data-delay="0.5s"
+            data-duration="1.2s"
             data-reveal-to="inset(0 0% 0% 0)"
           >
             {copy.featuredLabel}
@@ -1109,8 +1115,8 @@ export default function LookGallery() {
             <div className="featured-about-text">
               <p
                 className="welcome-reveal-target"
-                data-delay="0.9s"
-                data-duration="2.2s"
+                data-delay="1s"
+                data-duration="1.2s"
               >
                 {copy.featuredParagraphs.join(" ")}
               </p>
