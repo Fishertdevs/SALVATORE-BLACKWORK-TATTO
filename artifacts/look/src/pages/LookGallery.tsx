@@ -366,22 +366,25 @@ function MobileLookGallery({
       <section className="mobile-welcome-section" aria-labelledby="mobile-welcome-title">
         <h2
           id="mobile-welcome-title"
-          className="mobile-welcome-title"
+          className="mobile-welcome-title welcome-reveal-target"
           data-delay="0s"
+          data-duration="2.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.welcomeTitle}
         </h2>
         <div
-          className="mobile-welcome-label"
-          data-delay="0.25s"
+          className="mobile-welcome-label welcome-reveal-target"
+          data-delay="0.45s"
+          data-duration="2.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.featuredLabel}
         </div>
         <p
-          className="mobile-welcome-copy"
-          data-delay="0.5s"
+          className="mobile-welcome-copy welcome-reveal-target"
+          data-delay="0.9s"
+          data-duration="2.2s"
           data-reveal-to="inset(0 0% 0 0)"
         >
           {copy.featuredParagraphs.join(" ")}
@@ -563,7 +566,12 @@ export default function LookGallery() {
       for (const { el } of targets) {
         const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
         el.style.transition = "none";
-        el.style.clipPath = to;
+          if (el.classList.contains("welcome-reveal-target")) {
+            el.style.opacity = "1";
+            el.style.transform = "translateX(0)";
+          } else {
+            el.style.clipPath = to;
+          }
       }
       return;
     }
@@ -575,6 +583,12 @@ export default function LookGallery() {
       const duration = el.dataset.duration ?? "1s";
       const prop = el.dataset.revealProperty ?? "clip-path";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
+      if (el.classList.contains("welcome-reveal-target")) {
+        el.style.transition = `opacity ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}, transform ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
+        el.style.opacity = "1";
+        el.style.transform = "translateX(0)";
+        return;
+      }
       el.style.transition = `${prop} ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
       if (prop === "background-position") {
         el.style.backgroundPosition = to;
@@ -1078,16 +1092,28 @@ export default function LookGallery() {
           <h2
             className="featured-welcome-title"
             data-delay="0s"
+            data-duration="2.2s"
             data-reveal-to="inset(0 0% 0 0)"
           >
             {copy.welcomeTitle}
           </h2>
-          <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
+          <div
+            className="featured-label welcome-reveal-target"
+            data-delay="0.45s"
+            data-duration="2.2s"
+            data-reveal-to="inset(0 0% 0% 0)"
+          >
             {copy.featuredLabel}
           </div>
           <div className="featured-grid">
             <div className="featured-about-text">
-              <p data-delay="0.2s">{copy.featuredParagraphs.join(" ")}</p>
+              <p
+                className="welcome-reveal-target"
+                data-delay="0.9s"
+                data-duration="2.2s"
+              >
+                {copy.featuredParagraphs.join(" ")}
+              </p>
             </div>
           </div>
         </section>
