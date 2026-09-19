@@ -2,3 +2,4 @@
 - [Approved desktop hero](approved-desktop-hero.md) — preserve the approved desktop hero unchanged when improving mobile behavior or layout.
 - [Mobile welcome verification](mobile-welcome-verification.md) — verify the long mobile intro with separate immediate and delayed captures so neither animation state is missed.
 - [Approved mobile hero heading](approved-mobile-hero-heading.md) — preserve the approved centered title and prominent style keywords during later mobile refinements.
+- [Welcome text animation](welcome-text-animation.md) — replay welcome text on viewport re-entry without clipping glyphs.

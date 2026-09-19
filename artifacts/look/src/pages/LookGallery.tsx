@@ -557,6 +557,7 @@ export default function LookGallery() {
       ...featuredTargets.map((el) => ({ el, threshold: 0.15 })),
       ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
     ];
+    const replayTargets = new Set(featuredTargets);
     if (!targets.length) return;
     const reduceMotion =
       typeof window !== "undefined" &&
@@ -576,7 +577,31 @@ export default function LookGallery() {
       return;
     }
     const revealed = new WeakSet<HTMLElement>();
+    const replayActive = new WeakSet<HTMLElement>();
+    const replayInitial = { opacity: 0, y: 14 };
+    const replayFinal = { opacity: 1, y: 0 };
+    const resetReplayTarget = (el: HTMLElement) => {
+      if (!replayTargets.has(el)) return;
+      gsap.killTweensOf(el);
+      replayActive.delete(el);
+      gsap.set(el, replayInitial);
+    };
+    const replayReveal = (el: HTMLElement) => {
+      if (!replayTargets.has(el) || replayActive.has(el)) return;
+      replayActive.add(el);
+      gsap.killTweensOf(el);
+      gsap.fromTo(el, replayInitial, {
+        ...replayFinal,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
+      });
+    };
     const reveal = (el: HTMLElement) => {
+      if (replayTargets.has(el)) {
+        replayReveal(el);
+        return;
+      }
       if (revealed.has(el)) return;
       revealed.add(el);
       const delay = el.dataset.delay ?? "0s";
@@ -611,6 +636,14 @@ export default function LookGallery() {
         for (const entry of entries) {
           const el = entry.target as HTMLElement;
           const minRatio = thresholdFor.get(el) ?? 0.1;
+          if (replayTargets.has(el)) {
+            if (entry.isIntersecting && entry.intersectionRatio >= minRatio) {
+              replayReveal(el);
+            } else if (!entry.isIntersecting) {
+              resetReplayTarget(el);
+            }
+            continue;
+          }
           if (!entry.isIntersecting || entry.intersectionRatio < minRatio) continue;
           reveal(el);
           observer.unobserve(el);
@@ -622,11 +655,19 @@ export default function LookGallery() {
     const checkAll = () => {
       const vh = window.innerHeight;
       for (const { el, threshold } of targets) {
-        if (revealed.has(el)) continue;
         const rect = el.getBoundingClientRect();
         const visible =
           Math.max(0, Math.min(vh, rect.bottom) - Math.max(0, rect.top));
         const ratio = rect.height ? visible / rect.height : 0;
+        if (replayTargets.has(el)) {
+          if (ratio >= threshold) {
+            replayReveal(el);
+          } else if (rect.bottom < 0 || rect.top > vh) {
+            resetReplayTarget(el);
+          }
+          continue;
+        }
+        if (revealed.has(el)) continue;
         if (ratio >= threshold) {
           reveal(el);
           observer.unobserve(el);
@@ -639,6 +680,9 @@ export default function LookGallery() {
       cancelAnimationFrame(rafId);
       root?.removeEventListener("scroll", checkAll);
       observer.disconnect();
+      for (const el of replayTargets) {
+        gsap.killTweensOf(el);
+      }
     };
   }, []);
 
