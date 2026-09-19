@@ -619,9 +619,16 @@ export default function LookGallery() {
     }
     const revealed = new WeakSet<HTMLElement>();
     const replayActive = new WeakSet<HTMLElement>();
-    const replayInitial = { clipPath: "inset(0px 100% 0px 0px)" };
-    const replayFinal = {
+    const heroReplayInitial = { clipPath: "inset(0px 100% 0px 0px)" };
+    const heroReplayFinal = {
       clipPath: "inset(0px 0% 0px 0px)",
+      duration: 1.2,
+      ease: "power3.out",
+    };
+    const welcomeReplayInitial = { opacity: 0, y: 14 };
+    const welcomeReplayFinal = {
+      opacity: 1,
+      y: 0,
       duration: 1.2,
       ease: "power3.out",
     };
@@ -630,17 +637,26 @@ export default function LookGallery() {
       if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       gsap.killTweensOf(el);
       replayActive.delete(el);
-      gsap.set(el, replayInitial);
+      if (heroReplayTargets.has(el)) {
+        gsap.set(el, heroReplayInitial);
+      } else {
+        gsap.set(el, { clearProps: "clipPath", ...welcomeReplayInitial });
+      }
     };
     const replayReveal = (el: HTMLElement) => {
       if (!replayTargets.has(el) || replayActive.has(el)) return;
       if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       replayActive.add(el);
       gsap.killTweensOf(el);
-      gsap.fromTo(el, replayInitial, {
-        ...replayFinal,
-        delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
-      });
+      const isHeroTarget = heroReplayTargets.has(el);
+      gsap.fromTo(
+        el,
+        isHeroTarget ? heroReplayInitial : welcomeReplayInitial,
+        {
+          ...(isHeroTarget ? heroReplayFinal : welcomeReplayFinal),
+          delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
+        },
+      );
     };
     const reveal = (el: HTMLElement) => {
       if (replayTargets.has(el)) {
@@ -654,8 +670,8 @@ export default function LookGallery() {
       const prop = el.dataset.revealProperty ?? "clip-path";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
       if (el.classList.contains("welcome-reveal-target")) {
-        gsap.fromTo(el, replayInitial, {
-          ...replayFinal,
+        gsap.fromTo(el, welcomeReplayInitial, {
+          ...welcomeReplayFinal,
           delay: Number.parseFloat(delay) || 0,
         });
         return;
