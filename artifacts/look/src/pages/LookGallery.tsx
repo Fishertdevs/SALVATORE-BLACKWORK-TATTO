@@ -567,7 +567,8 @@ export default function LookGallery() {
         const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
         el.style.transition = "none";
           if (el.classList.contains("welcome-reveal-target")) {
-            el.style.clipPath = to;
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
           } else {
             el.style.clipPath = to;
           }
@@ -585,9 +586,10 @@ export default function LookGallery() {
       if (el.classList.contains("welcome-reveal-target")) {
         gsap.fromTo(
           el,
-          { clipPath: "inset(0px 100% 0px 0px)" },
+          { opacity: 0, y: 14 },
           {
-            clipPath: to,
+            opacity: 1,
+            y: 0,
             duration: 1.2,
             ease: "power3.out",
             delay: Number.parseFloat(delay) || 0,
