@@ -3174,6 +3174,26 @@ body,
 }
 
 /* Menu Overlay */
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  padding: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.46);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+
+.mobile-menu-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
 .mobile-menu-overlay {
   position: fixed;
   top: 0;
@@ -3204,13 +3224,13 @@ body,
 .mobile-menu-links {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   margin-top: 8px;
 }
 
 .mobile-menu-link {
   font-family: 'Beautique Display', serif;
-  font-size: clamp(16px, 5vw, 20px);
+  font-size: clamp(14px, 4.2vw, 17px);
   font-weight: 400;
   text-transform: uppercase;
   color: #1a1a1a;

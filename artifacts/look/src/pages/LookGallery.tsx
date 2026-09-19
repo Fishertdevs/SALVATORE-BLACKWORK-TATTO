@@ -275,6 +275,14 @@ function MobileLookGallery({
         </div>
       </header>
 
+      <button
+        type="button"
+        className={`mobile-menu-backdrop ${isMenuOpen ? "is-visible" : ""}`}
+        onClick={() => setIsMenuOpen(false)}
+        aria-label={language === "es" ? "Cerrar menú" : "Close menu"}
+        tabIndex={isMenuOpen ? 0 : -1}
+      />
+
       {/* MENU OVERLAY */}
       <div
         id="mobile-navigation"
