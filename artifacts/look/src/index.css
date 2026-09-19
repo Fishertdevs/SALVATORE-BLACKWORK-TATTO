@@ -3059,7 +3059,7 @@ body,
 .mobile-look-root .mobile-hero-actions {
   position: absolute;
   right: 14px;
-  bottom: 44px;
+  bottom: 76px;
   left: 14px;
   z-index: 2;
   display: grid;
@@ -3089,7 +3089,7 @@ body,
   color: #E63027;
   background: transparent;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.2;
