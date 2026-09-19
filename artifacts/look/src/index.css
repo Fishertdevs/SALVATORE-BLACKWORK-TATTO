@@ -3050,6 +3050,8 @@ body,
   height: 100%;
   object-fit: cover;
   object-position: center 24%;
+  transform: scale(1.28);
+  transform-origin: center center;
 }
 
 .mobile-look-root .mobile-hero-image.is-welcome-active {
@@ -3089,7 +3091,7 @@ body,
   color: #E63027;
   background: transparent;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.03em;
   line-height: 1.2;
