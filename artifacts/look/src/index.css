@@ -3017,15 +3017,20 @@ body,
 }
 
 .mobile-look-root .mobile-hero-kicker {
-  margin: 12px 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 13px 0 0;
+  padding: 0 6px;
   color: #161616;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.14em;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.06em;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .mobile-look-root .mobile-hero-image-frame {
