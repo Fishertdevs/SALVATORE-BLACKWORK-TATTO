@@ -923,19 +923,22 @@ body,
 .look-root .archive-marquee-track,
 .mobile-look-root .archive-marquee-track {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 200px;
   width: max-content;
   height: 100%;
+  white-space: nowrap;
   animation: archive-marquee-scroll 40s linear infinite;
   will-change: transform;
 }
 .look-root .archive-marquee-item,
 .mobile-look-root .archive-marquee-item {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 200px;
-  white-space: nowrap;
+  white-space: nowrap !important;
   font-weight: 300;
   letter-spacing: 0.05em;
 }
@@ -955,6 +958,7 @@ body,
 .mobile-look-root .archive-header {
   width: calc(100% + 48px);
   margin: 0 -24px 32px;
+  overflow: hidden;
 }
 
 .look-root .archive-marquee-item {
