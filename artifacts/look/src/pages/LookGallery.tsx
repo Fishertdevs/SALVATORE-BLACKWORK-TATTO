@@ -370,16 +370,10 @@ function MobileLookGallery({
         <h2 id="mobile-welcome-title" className="mobile-welcome-title">
           {copy.welcomeTitle}
         </h2>
-        <p style={{
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
-        }}>
+        <p className="mobile-welcome-copy">
           {copy.featuredParagraphs[0]}
         </p>
-        <p style={{
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: 0,
-        }}>
+        <p className="mobile-welcome-copy mobile-welcome-copy-last">
           {copy.featuredParagraphs[1]}
         </p>
       </section>

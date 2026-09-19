@@ -850,15 +850,17 @@ body,
   box-sizing: border-box;
 }
 .look-root .featured-welcome-title {
-  max-width: 760px;
-  margin: 0 0 28px;
+  width: 100%;
+  margin: 0 auto 28px;
   color: #171515;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(42px, 6vw, 88px);
+  font-size: clamp(34px, 5vw, 72px);
   font-weight: 400;
   line-height: 0.88;
   letter-spacing: -0.045em;
+  text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 .look-root .featured-label {
   display: block;
@@ -884,11 +886,13 @@ body,
 }
 .look-root .featured-about-text {
   max-width: 420px;
+  margin: 0 auto;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 300;
   line-height: 1.5;
   color: #1a1a1a;
+  text-align: center;
 }
 .look-root .featured-about-text p {
   margin: 0 0 1.25em 0;
@@ -3028,11 +3032,28 @@ body,
   margin: 0 0 28px;
   color: #171515;
   font-family: 'Beautique Display', serif;
-  font-size: clamp(42px, 14vw, 72px);
+  font-size: clamp(29px, 8vw, 52px);
   font-weight: 400;
   line-height: 0.88;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.06em;
+  text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mobile-look-root .mobile-welcome-copy {
+  max-width: 330px;
+  margin: 0 auto 16px;
+  color: #1a1a1a;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.mobile-look-root .mobile-welcome-copy-last {
+  margin-bottom: 0;
 }
 
 .mobile-look-root .mobile-hero-title-wrap {
