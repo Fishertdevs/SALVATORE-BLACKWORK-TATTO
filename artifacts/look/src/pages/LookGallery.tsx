@@ -317,7 +317,8 @@ function MobileLookGallery({
               <span>SALVATORE</span>
               <span>BLACKWORK TATTO</span>
             </h1>
-            <p className="mobile-hero-kicker">BLACKOUT · TRIBAL · ONE-OFFS</p>
+            <p className="mobile-hero-intro">{copy.mobileHeroIntro}</p>
+            <p className="mobile-hero-kicker">{copy.mobileHeroStyles}</p>
           </div>
         </div>
 
