@@ -12,9 +12,6 @@ import earringsImg from "@assets/Earrings_1777633894263.png";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
-const productVideoMp4 = `${import.meta.env.BASE_URL}product-video.mp4`;
-const productVideoWebm = `${import.meta.env.BASE_URL}product-video.webm`;
-
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
 const ASPECT_W = 4;
@@ -375,25 +372,6 @@ function MobileLookGallery({
         </p>
       </section>
 
-      {/* PRODUCT VIDEO */}
-      <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 48px" }}>
-        <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden" }}>
-          <video autoPlay loop muted playsInline style={{
-            width: "100%", height: "100%", objectFit: "cover", display: "block"
-          }}>
-            <source src={productVideoWebm} type="video/webm" />
-            <source src={productVideoMp4} type="video/mp4" />
-          </video>
-        </div>
-        <h3 style={{
-          fontFamily: "'Beautique Display', serif",
-          fontSize: "clamp(24px, 6vw, 40px)",
-          fontWeight: 400, color: "#000000",
-          lineHeight: 1.1, textTransform: "uppercase",
-          margin: "24px 0 0",
-        }}>{copy.featuredHeadline}</h3>
-      </div>
-
       {/* ARCHIVE — vertical single column */}
       <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 64px" }}>
         <p style={{
@@ -540,7 +518,7 @@ export default function LookGallery() {
     );
     const featuredTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".product-video-section .featured-label, .product-video-section .featured-about-text p, .product-video-section .featured-headline",
+        ".product-video-section .featured-label, .product-video-section .featured-about-text p",
       ),
     );
     const footerTargets = Array.from(
@@ -1071,31 +1049,16 @@ export default function LookGallery() {
           <div className="hero-image-keywords">{copy.mobileHeroStyles}</div>
         </div>
 
-        <section className="product-video-section" aria-label="Salvatore Blackwork featured tattoo">
+        <section className="product-video-section" aria-label="Salvatore Blackwork studio welcome">
           <h2 className="featured-welcome-title">{copy.welcomeTitle}</h2>
           <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
             {copy.featuredLabel}
           </div>
           <div className="featured-grid">
-            <div className="featured-col-left" aria-hidden="true" />
             <div className="featured-about-text">
               <p data-delay="0.2s">{copy.featuredParagraphs.join(" ")}</p>
             </div>
           </div>
-          <div className="product-video-wrap">
-            <video
-              className="product-video"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-            >
-              <source src={productVideoWebm} type="video/webm" />
-              <source src={productVideoMp4} type="video/mp4" />
-            </video>
-          </div>
-          <h3 className="featured-headline" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">{copy.featuredHeadline}</h3>
         </section>
         <section className="archive-section">
           <header className="archive-header" aria-label={`${copy.selectedWorks} — 2026`}>
