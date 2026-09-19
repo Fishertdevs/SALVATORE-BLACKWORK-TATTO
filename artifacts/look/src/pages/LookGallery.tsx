@@ -567,19 +567,18 @@ export default function LookGallery() {
       for (const { el } of targets) {
         const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
         el.style.transition = "none";
-          if (el.classList.contains("welcome-reveal-target")) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-          } else {
-            el.style.clipPath = to;
-          }
+        el.style.clipPath = to;
       }
       return;
     }
     const revealed = new WeakSet<HTMLElement>();
     const replayActive = new WeakSet<HTMLElement>();
-    const replayInitial = { opacity: 0, y: 14 };
-    const replayFinal = { opacity: 1, y: 0 };
+    const replayInitial = { clipPath: "inset(0px 100% 0px 0px)" };
+    const replayFinal = {
+      clipPath: "inset(0px 0% 0px 0px)",
+      duration: 1.2,
+      ease: "power3.out",
+    };
     const resetReplayTarget = (el: HTMLElement) => {
       if (!replayTargets.has(el)) return;
       gsap.killTweensOf(el);
@@ -592,8 +591,6 @@ export default function LookGallery() {
       gsap.killTweensOf(el);
       gsap.fromTo(el, replayInitial, {
         ...replayFinal,
-        duration: 1.2,
-        ease: "power3.out",
         delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
       });
     };
@@ -609,17 +606,10 @@ export default function LookGallery() {
       const prop = el.dataset.revealProperty ?? "clip-path";
       const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
       if (el.classList.contains("welcome-reveal-target")) {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 14 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            delay: Number.parseFloat(delay) || 0,
-          },
-        );
+        gsap.fromTo(el, replayInitial, {
+          ...replayFinal,
+          delay: Number.parseFloat(delay) || 0,
+        });
         return;
       }
       el.style.transition = `${prop} ${duration} cubic-bezier(0.76, 0, 0.24, 1) ${delay}`;
@@ -649,7 +639,7 @@ export default function LookGallery() {
           observer.unobserve(el);
         }
       },
-      { threshold: [0.1, 0.15, 0.2] },
+      { root: root ?? null, threshold: [0.1, 0.15, 0.2] },
     );
     targets.forEach(({ el }) => observer.observe(el));
     const checkAll = () => {

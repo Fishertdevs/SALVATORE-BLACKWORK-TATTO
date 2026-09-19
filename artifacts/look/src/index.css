@@ -864,7 +864,7 @@ body,
   overflow: visible;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 .look-root .featured-label {
   display: block;
@@ -880,7 +880,7 @@ body,
   white-space: nowrap;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 .look-root .featured-grid {
   display: block;
@@ -901,7 +901,7 @@ body,
   font-weight: 300;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 .look-root .featured-about-text p:last-child {
   margin-bottom: 0;
@@ -3032,7 +3032,7 @@ body,
   overflow: visible;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-welcome-label {
@@ -3047,7 +3047,7 @@ body,
   white-space: nowrap;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-welcome-copy {
@@ -3061,7 +3061,7 @@ body,
   text-align: center;
   opacity: 1;
   transform: none;
-  will-change: opacity, transform;
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-hero-title-wrap {
