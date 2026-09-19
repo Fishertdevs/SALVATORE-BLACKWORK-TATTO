@@ -626,6 +626,19 @@ body,
   padding: 0.08em 0 0.04em;
   clip-path: inset(0 0 0 0);
 }
+.look-root .hero-side-keyword {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  left: 0;
+  width: 100%;
+  color: #1a1a1a;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
 .look-root .hero-side-desc {
   width: 100%;
   max-width: 24rem;

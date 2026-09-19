@@ -1027,6 +1027,7 @@ export default function LookGallery() {
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-top-title" ref={heroTopTitleRef}>SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">
+            <span className="hero-side-keyword">TRIBAL</span>
             <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
               {copy.heroLeftTitle.join(" ")}
             </div>
@@ -1034,6 +1035,7 @@ export default function LookGallery() {
             <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}</a>
           </div>
           <div className="hero-side hero-side-right">
+            <span className="hero-side-keyword">ORNAMENTAL</span>
             <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>
               {copy.heroRightTitle.join(" ")}
             </div>
