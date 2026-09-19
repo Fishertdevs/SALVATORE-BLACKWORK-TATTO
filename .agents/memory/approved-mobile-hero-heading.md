@@ -8,3 +8,9 @@ Preserve the approved mobile hero heading: the centered red two-line title follo
 **Why:** The user explicitly confirmed this title and keyword treatment was correct before requesting only tighter image spacing and moving the buttons over the image.
 
 **How to apply:** Future mobile layout adjustments may change surrounding spacing or image controls, but should not reduce, replace, or restyle the approved title and keyword line unless explicitly requested.
+
+Keep the mobile hero filling the first viewport when adjusting the portrait zoom.
+
+**Why:** The user approved the full-screen hero with no following-section gap and then requested only a smaller portrait.
+
+**How to apply:** Adjust the image crop independently of the hero height; do not shorten the hero to reduce the portrait.
