@@ -546,7 +546,7 @@ export default function LookGallery() {
     );
     const featuredTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".product-video-section .featured-welcome-title, .product-video-section .featured-label, .product-video-section .featured-about-text p, .mobile-welcome-section .mobile-welcome-title, .mobile-welcome-section .mobile-welcome-label, .mobile-welcome-section .mobile-welcome-copy",
+        ".product-video-section .featured-welcome-title, .product-video-section .featured-label, .mobile-welcome-section .mobile-welcome-title, .mobile-welcome-section .mobile-welcome-label",
       ),
     );
     const footerTargets = Array.from(
