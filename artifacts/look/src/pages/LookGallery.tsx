@@ -374,12 +374,19 @@ function MobileLookGallery({
 
       {/* ARCHIVE — vertical single column */}
       <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 64px" }}>
-        <p style={{
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 11, letterSpacing: "0.15em",
-          textTransform: "uppercase", color: "#1a1a1a",
-          borderTop: "1px solid #e0e0e0", paddingTop: 24, marginBottom: 32,
-        }}>{`SALVATORE BLACKWORK TATTO — ${copy.selectedWorks} — ${language === "es" ? "CON CITA PREVIA" : "BY APPOINTMENT"}`}</p>
+        <div
+          className="mobile-culture-marquee"
+          aria-label={copy.cultureMarquee.join(" · ")}
+        >
+          <div className="mobile-culture-marquee-track">
+            {[...copy.cultureMarquee, ...copy.cultureMarquee].map((label, i) => (
+              <span className="mobile-culture-marquee-item" key={`${label}-${i}`}>
+                {label}
+                <span className="mobile-culture-marquee-separator" aria-hidden="true">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
 
         {[
           { img: tableImg, code: "BW-01" },
@@ -1061,18 +1068,9 @@ export default function LookGallery() {
           </div>
         </section>
         <section className="archive-section">
-          <header className="archive-header" aria-label={`${copy.selectedWorks} — 2026`}>
+          <header className="archive-header" aria-label={copy.cultureMarquee.join(" · ")}>
             <div className="archive-marquee-track">
-              {[
-                "SALVATORE BLACKWORK TATTO",
-                `${copy.selectedWorks} 2026`,
-                copy.appointment,
-                "SALVATORE BLACKWORK TATTO",
-                "SALVATORE BLACKWORK TATTO",
-                `${copy.selectedWorks} 2026`,
-                copy.appointment,
-                "SALVATORE BLACKWORK TATTO",
-              ].map((label, i) => (
+              {[...copy.cultureMarquee, ...copy.cultureMarquee].map((label, i) => (
                 <span
                   key={i}
                   className="archive-marquee-item"
