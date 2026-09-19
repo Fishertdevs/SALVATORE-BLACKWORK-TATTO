@@ -304,21 +304,10 @@ function MobileLookGallery({
       {/* HERO */}
       <section className="mobile-home-hero" id="home-hero">
         <div className="mobile-hero-title-wrap">
-          <h1 className="mobile-hero-title">SALVATORE BLACKWORK TATTO</h1>
-        </div>
-
-        <div className="mobile-hero-copy-grid">
-          <div className="mobile-hero-copy-block">
-            <h2 className="mobile-hero-side-title">{copy.heroLeftTitle.join(" ")}</h2>
-            <p className="mobile-hero-side-description">{copy.heroLeftDescription}</p>
-            <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
-          </div>
-
-          <div className="mobile-hero-copy-block">
-            <h2 className="mobile-hero-side-title">{copy.heroRightTitle.join(" ")}</h2>
-            <p className="mobile-hero-side-description">{copy.heroRightDescription}</p>
-            <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
-          </div>
+          <h1 className="mobile-hero-title">
+            <span>SALVATORE</span>
+            <span>BLACKWORK TATTO</span>
+          </h1>
         </div>
 
         <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>
@@ -327,6 +316,11 @@ function MobileLookGallery({
             alt="SALVATORE BLACKWORK TATTO"
             className={`mobile-hero-image ${showWelcome ? "is-welcome-active" : ""}`}
           />
+        </div>
+
+        <div className="mobile-hero-actions">
+          <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
+          <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
         </div>
       </section>
 

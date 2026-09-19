@@ -2989,13 +2989,18 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', serif;
-  font-size: clamp(18px, 5.8vw, 24px);
+  font-size: clamp(30px, 9.5vw, 42px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 0.9;
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: -0.015em;
+  -webkit-text-stroke: 0.2px currentColor;
+}
+
+.mobile-look-root .mobile-hero-title span {
+  display: block;
   white-space: nowrap;
-  letter-spacing: -0.01em;
 }
 
 .mobile-look-root .mobile-hero-image-frame {
@@ -3018,37 +3023,13 @@ body,
   visibility: hidden;
 }
 
-.mobile-look-root .mobile-hero-copy-grid {
+.mobile-look-root .mobile-hero-actions {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 20px;
-  padding: 10px 20px 22px;
-}
-
-.mobile-look-root .mobile-hero-copy-block {
-  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 18px 16px 24px;
   text-align: center;
-}
-
-.mobile-look-root .mobile-hero-side-title {
-  margin: 0 0 7px;
-  color: #E63027;
-  font-family: 'Beautique Display', serif;
-  font-size: clamp(15px, 4.2vw, 18px);
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.mobile-look-root .mobile-hero-side-description {
-  max-width: 320px;
-  margin: 0 auto 12px;
-  color: #1a1a1a;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.5;
 }
 
 .mobile-look-root .mobile-hero-side-action {
