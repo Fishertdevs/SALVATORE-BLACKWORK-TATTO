@@ -829,7 +829,7 @@ export default function LookGallery() {
         heroLookRef.current,
         heroFutureRef.current,
         heroFutureDescRef.current,
-        ...Array.from(fullContent.querySelectorAll<HTMLElement>(".hero-side-action")),
+        ...Array.from(fullContent.querySelectorAll<HTMLElement>(".hero-side-action, .hero-image-keywords")),
       ].filter((el): el is HTMLElement => el !== null);
       gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
 
@@ -900,6 +900,10 @@ export default function LookGallery() {
       const heroActions = fullContent.querySelectorAll<HTMLElement>(".hero-side-action");
       if (heroActions.length) {
         tl.fromTo(heroActions, REVEAL_FROM, REVEAL_TO, ZOOM_DURATION + 3.3);
+      }
+      const heroKeywords = fullContent.querySelector<HTMLElement>(".hero-image-keywords");
+      if (heroKeywords) {
+        tl.fromTo(heroKeywords, REVEAL_FROM, REVEAL_TO);
       }
       tl.eventCallback("onComplete", () => {
         gallery?.style.setProperty("opacity", "0");
