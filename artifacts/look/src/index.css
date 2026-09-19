@@ -3059,7 +3059,7 @@ body,
 .mobile-look-root .mobile-hero-actions {
   position: absolute;
   right: 14px;
-  bottom: 76px;
+  bottom: 112px;
   left: 14px;
   z-index: 2;
   display: grid;
@@ -3081,7 +3081,7 @@ body,
 .mobile-look-root .mobile-hero-side-action {
   display: flex;
   min-height: 42px;
-  padding: 8px 10px;
+  padding: 8px 4px;
   border: 0;
   border-radius: 0;
   align-items: center;
@@ -3089,9 +3089,9 @@ body,
   color: #E63027;
   background: transparent;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   line-height: 1.2;
   text-decoration: none;
   text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95);
