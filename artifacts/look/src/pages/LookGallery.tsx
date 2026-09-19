@@ -312,10 +312,13 @@ function MobileLookGallery({
       {/* HERO */}
       <section className="mobile-home-hero" id="home-hero">
         <div className="mobile-hero-title-wrap">
-          <h1 className="mobile-hero-title">
-            <span>SALVATORE</span>
-            <span>BLACKWORK TATTO</span>
-          </h1>
+          <div className="mobile-hero-heading">
+            <h1 className="mobile-hero-title">
+              <span>SALVATORE</span>
+              <span>BLACKWORK TATTO</span>
+            </h1>
+            <p className="mobile-hero-kicker">BLACKOUT · TRIBAL · ONE-OFFS</p>
+          </div>
         </div>
 
         <div className="mobile-hero-image-frame" ref={mobileHeroImageRef}>

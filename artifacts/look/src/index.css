@@ -2989,6 +2989,13 @@ body,
   justify-content: center;
 }
 
+.mobile-look-root .mobile-hero-heading {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
 .mobile-look-root .mobile-hero-title {
   margin: 0;
   color: #E63027;
@@ -3007,6 +3014,18 @@ body,
 .mobile-look-root .mobile-hero-title span {
   display: block;
   white-space: nowrap;
+}
+
+.mobile-look-root .mobile-hero-kicker {
+  margin: 11px 0 0;
+  color: #161616;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .mobile-look-root .mobile-hero-image-frame {
