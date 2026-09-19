@@ -2990,6 +2990,8 @@ body,
 }
 
 .mobile-look-root .mobile-hero-heading {
+  position: relative;
+  z-index: 3;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -3057,7 +3059,7 @@ body,
 .mobile-look-root .mobile-hero-actions {
   position: absolute;
   right: 14px;
-  bottom: 16px;
+  bottom: 44px;
   left: 14px;
   z-index: 2;
   display: grid;
