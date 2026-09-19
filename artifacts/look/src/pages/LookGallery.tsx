@@ -1027,7 +1027,6 @@ export default function LookGallery() {
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-top-title" ref={heroTopTitleRef}>SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">
-            <span className="hero-side-keyword">TRIBAL</span>
             <div className="hero-side-title" ref={heroEpsRef} aria-label={copy.heroLeftTitle.join(" ")}>
               {copy.heroLeftTitle.join(" ")}
             </div>
@@ -1035,13 +1034,13 @@ export default function LookGallery() {
             <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}</a>
           </div>
           <div className="hero-side hero-side-right">
-            <span className="hero-side-keyword">ORNAMENTAL</span>
             <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>
               {copy.heroRightTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroFutureDescRef}>{copy.heroRightDescription}</p>
             <a className="hero-side-action" href="#studio-portfolio">{copy.heroRightAction}</a>
           </div>
+          <div className="hero-image-keywords">{copy.mobileHeroStyles}</div>
         </div>
 
         <section className="product-video-section" aria-label="Salvatore Blackwork featured tattoo">

@@ -19,7 +19,7 @@ export const galleryCopy = {
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
     heroDescription:
       "Tatuajes blackwork construidos desde el contraste, la línea precisa y una mirada que solo te pertenece a ti.",
-    mobileHeroStyles: "DOTWORK · TRIBAL · ORNAMENTAL",
+    mobileHeroStyles: "ORNAMENTAL · TRIBAL · BLACKWORK",
     heroLeftTitle: ["PROYECTOS ÚNICOS"],
     heroLeftDescription:
       "Hablemos de una pieza pensada para tu cuerpo, tu historia y la forma en que quieres llevarla.",
@@ -66,7 +66,7 @@ export const galleryCopy = {
     heroFuture: ["INK IS", "ARCHITECTURE"],
     heroDescription:
       "Blackwork tattoos built from deep contrast, deliberate linework, and a point of view that belongs only to you.",
-    mobileHeroStyles: "DOTWORK · TRIBAL · ORNAMENTAL",
+    mobileHeroStyles: "ORNAMENTAL · TRIBAL · BLACKWORK",
     heroLeftTitle: ["UNIQUE PROJECTS"],
     heroLeftDescription:
       "Let's talk about a piece shaped around your body, your story, and the way you want to carry it.",

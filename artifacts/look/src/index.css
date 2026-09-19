@@ -626,18 +626,21 @@ body,
   padding: 0.08em 0 0.04em;
   clip-path: inset(0 0 0 0);
 }
-.look-root .hero-side-keyword {
+.look-root .hero-image-keywords {
   position: absolute;
-  bottom: calc(100% + 18px);
-  left: 0;
-  width: 100%;
-  color: #1a1a1a;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(12px, 1vw, 16px);
-  font-weight: 700;
+  bottom: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 48%;
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(18px, 2vw, 32px);
+  font-weight: 400;
   line-height: 1.2;
-  letter-spacing: 0.12em;
+  letter-spacing: -0.04em;
   text-align: center;
+  white-space: nowrap;
 }
 .look-root .hero-side-desc {
   width: 100%;

@@ -3,7 +3,7 @@ name: Approved mobile hero heading
 description: Approved visual treatment for the mobile hero title and tattoo-style keywords.
 ---
 
-Preserve the approved mobile hero heading treatment: the centered red two-line title followed by a single prominent line of tattoo-style keywords. The user subsequently requested replacing BLACKWORK in that line to avoid repeating the title.
+Preserve the approved mobile hero heading treatment: the centered red two-line title followed by a single prominent line of tattoo-style keywords. The keyword wording and order can change when explicitly requested.
 
 **Why:** The user explicitly confirmed this title and keyword treatment was correct before requesting only tighter image spacing and moving the buttons over the image.
 
