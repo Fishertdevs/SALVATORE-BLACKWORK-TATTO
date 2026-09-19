@@ -910,7 +910,8 @@ body,
 /* Infinite-scroll marquee: track holds two identical copies of the
    sequence, animated from translateX(0) to translateX(-50%) so the
    second copy lands exactly where the first started — seamless loop. */
-.look-root .archive-header {
+.look-root .archive-header,
+.mobile-look-root .archive-header {
   height: 60px;
   margin-bottom: 4rem;
   overflow: hidden;
@@ -919,7 +920,8 @@ body,
   text-transform: uppercase;
   color: #1a1a1a;
 }
-.look-root .archive-marquee-track {
+.look-root .archive-marquee-track,
+.mobile-look-root .archive-marquee-track {
   display: flex;
   align-items: center;
   gap: 200px;
@@ -928,7 +930,8 @@ body,
   animation: archive-marquee-scroll 40s linear infinite;
   will-change: transform;
 }
-.look-root .archive-marquee-item {
+.look-root .archive-marquee-item,
+.mobile-look-root .archive-marquee-item {
   display: inline-flex;
   align-items: center;
   gap: 200px;
@@ -936,7 +939,8 @@ body,
   font-weight: 300;
   letter-spacing: 0.05em;
 }
-.look-root .archive-marquee-sep {
+.look-root .archive-marquee-sep,
+.mobile-look-root .archive-marquee-sep {
   width: 14px;
   height: 14px;
   display: inline-block;
@@ -948,43 +952,9 @@ body,
   to { transform: translateX(-50%); }
 }
 
-.mobile-look-root .mobile-culture-marquee {
+.mobile-look-root .archive-header {
   width: calc(100% + 48px);
   margin: 0 -24px 32px;
-  overflow: hidden;
-  border-top: 1px solid rgba(26, 26, 26, 0.18);
-  border-bottom: 1px solid rgba(26, 26, 26, 0.18);
-  color: #1a1a1a;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.mobile-look-root .mobile-culture-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: mobile-culture-marquee-scroll 28s linear infinite;
-  will-change: transform;
-}
-
-.mobile-look-root .mobile-culture-marquee-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 24px;
-  padding: 16px 0 15px 24px;
-}
-
-.mobile-look-root .mobile-culture-marquee-separator {
-  color: #E63027;
-  font-size: 13px;
-}
-
-@keyframes mobile-culture-marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 .look-root .archive-marquee-item {
@@ -993,7 +963,7 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .look-root .archive-marquee-track,
-  .mobile-look-root .mobile-culture-marquee-track {
+  .mobile-look-root .archive-marquee-track {
     animation: none;
   }
 }
@@ -3049,6 +3019,17 @@ body,
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.mobile-look-root .mobile-welcome-label {
+  margin: 0 0 28px;
+  color: #E63027;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .mobile-look-root .mobile-welcome-copy {

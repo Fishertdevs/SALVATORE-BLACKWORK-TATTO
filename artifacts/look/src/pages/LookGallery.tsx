@@ -367,6 +367,7 @@ function MobileLookGallery({
         <h2 id="mobile-welcome-title" className="mobile-welcome-title">
           {copy.welcomeTitle}
         </h2>
+        <div className="mobile-welcome-label">{copy.featuredLabel}</div>
         <p className="mobile-welcome-copy">
           {copy.featuredParagraphs.join(" ")}
         </p>
@@ -374,19 +375,21 @@ function MobileLookGallery({
 
       {/* ARCHIVE — vertical single column */}
       <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 64px" }}>
-        <div
-          className="mobile-culture-marquee"
-          aria-label={copy.cultureMarquee.join(" · ")}
-        >
-          <div className="mobile-culture-marquee-track">
+        <header className="archive-header" aria-label={copy.cultureMarquee.join(" · ")}>
+          <div className="archive-marquee-track">
             {[...copy.cultureMarquee, ...copy.cultureMarquee].map((label, i) => (
-              <span className="mobile-culture-marquee-item" key={`${label}-${i}`}>
+              <span className="archive-marquee-item" key={`${label}-${i}`}>
                 {label}
-                <span className="mobile-culture-marquee-separator" aria-hidden="true">✦</span>
+                <img
+                  src={marqueeStarImg}
+                  alt=""
+                  aria-hidden="true"
+                  className="archive-marquee-sep"
+                />
               </span>
             ))}
           </div>
-        </div>
+        </header>
 
         {[
           { img: tableImg, code: "BW-01" },
