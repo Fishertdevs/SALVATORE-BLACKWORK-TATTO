@@ -2975,14 +2975,18 @@ body,
 /* Mobile Hero */
 .mobile-look-root .mobile-home-hero {
   box-sizing: border-box;
-  padding-top: 68px;
+  padding-top: 82px;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
 }
 
 .mobile-look-root .mobile-hero-title-wrap {
-  padding: 10px 10px 12px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 16px 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .mobile-look-root .mobile-hero-title {
@@ -2996,6 +3000,8 @@ body,
   text-transform: uppercase;
   letter-spacing: -0.015em;
   -webkit-text-stroke: 0.2px currentColor;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .mobile-look-root .mobile-hero-title span {
@@ -3027,24 +3033,35 @@ body,
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  gap: 16px;
-  padding: 18px 16px 24px;
+  gap: 12px;
+  padding: 18px 16px 26px;
   text-align: center;
 }
 
 .mobile-look-root .mobile-hero-side-action {
-  display: inline;
-  padding: 0 0 2px;
-  border: 0;
-  border-bottom: 1px solid #E63027;
+  display: flex;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #E63027;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
   color: #E63027;
+  background: transparent;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   line-height: 1.2;
   text-decoration: none;
   text-transform: uppercase;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.mobile-look-root .mobile-hero-side-action:hover,
+.mobile-look-root .mobile-hero-side-action:focus-visible {
+  color: #FFFFFF;
+  background: #E63027;
 }
 
 /* Mobile Nav / Header */
@@ -3193,8 +3210,8 @@ body,
 
 .mobile-menu-link {
   font-family: 'Beautique Display', serif;
-  font-size: clamp(12px, 3.6vw, 15px);
-  font-weight: 500;
+  font-size: clamp(16px, 5vw, 20px);
+  font-weight: 400;
   text-transform: uppercase;
   color: #1a1a1a;
   text-decoration: none;
