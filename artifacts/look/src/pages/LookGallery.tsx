@@ -649,6 +649,9 @@ export default function LookGallery() {
       replayActive.add(el);
       gsap.killTweensOf(el);
       const isHeroTarget = heroReplayTargets.has(el);
+      if (!isHeroTarget) {
+        gsap.set(el, { clearProps: "clipPath" });
+      }
       gsap.fromTo(
         el,
         isHeroTarget ? heroReplayInitial : welcomeReplayInitial,
