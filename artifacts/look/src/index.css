@@ -861,6 +861,7 @@ body,
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  overflow: visible;
   opacity: 0;
   transform: translateX(-20px);
   will-change: opacity, transform;
@@ -3030,6 +3031,7 @@ body,
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  overflow: visible;
   opacity: 0;
   transform: translateX(-20px);
   will-change: opacity, transform;

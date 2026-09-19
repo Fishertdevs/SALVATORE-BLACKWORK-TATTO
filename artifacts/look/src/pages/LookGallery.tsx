@@ -1090,7 +1090,7 @@ export default function LookGallery() {
 
         <section className="product-video-section" aria-label="Salvatore Blackwork studio welcome">
           <h2
-            className="featured-welcome-title"
+            className="featured-welcome-title welcome-reveal-target"
             data-delay="0s"
             data-duration="2.2s"
             data-reveal-to="inset(0 0% 0 0)"
