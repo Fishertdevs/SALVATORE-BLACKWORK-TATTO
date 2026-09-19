@@ -328,7 +328,7 @@ function MobileLookGallery({
             className={`mobile-hero-image ${showWelcome ? "is-welcome-active" : ""}`}
           />
 
-          <div className="mobile-hero-actions">
+          <div className={`mobile-hero-actions ${showWelcome ? "is-welcome-active" : ""}`}>
             <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
             <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
           </div>
