@@ -861,6 +861,8 @@ body,
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 .look-root .featured-label {
   display: block;
@@ -3023,17 +3025,22 @@ body,
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-welcome-label {
   margin: 0 0 28px;
   color: #E63027;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: 11px;
+  font-size: clamp(8px, 2.4vw, 10px);
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-welcome-copy {
@@ -3045,6 +3052,8 @@ body,
   font-weight: 300;
   line-height: 1.6;
   text-align: center;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
 }
 
 .mobile-look-root .mobile-hero-title-wrap {

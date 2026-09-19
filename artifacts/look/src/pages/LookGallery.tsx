@@ -364,11 +364,26 @@ function MobileLookGallery({
 
       {/* WELCOME TEXT */}
       <section className="mobile-welcome-section" aria-labelledby="mobile-welcome-title">
-        <h2 id="mobile-welcome-title" className="mobile-welcome-title">
+        <h2
+          id="mobile-welcome-title"
+          className="mobile-welcome-title"
+          data-delay="0s"
+          data-reveal-to="inset(0 0% 0 0)"
+        >
           {copy.welcomeTitle}
         </h2>
-        <div className="mobile-welcome-label">{copy.featuredLabel}</div>
-        <p className="mobile-welcome-copy">
+        <div
+          className="mobile-welcome-label"
+          data-delay="0.25s"
+          data-reveal-to="inset(0 0% 0 0)"
+        >
+          {copy.featuredLabel}
+        </div>
+        <p
+          className="mobile-welcome-copy"
+          data-delay="0.5s"
+          data-reveal-to="inset(0 0% 0 0)"
+        >
           {copy.featuredParagraphs.join(" ")}
         </p>
       </section>
@@ -528,7 +543,7 @@ export default function LookGallery() {
     );
     const featuredTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".product-video-section .featured-label, .product-video-section .featured-about-text p",
+        ".product-video-section .featured-welcome-title, .product-video-section .featured-label, .product-video-section .featured-about-text p, .mobile-welcome-section .mobile-welcome-title, .mobile-welcome-section .mobile-welcome-label, .mobile-welcome-section .mobile-welcome-copy",
       ),
     );
     const footerTargets = Array.from(
@@ -1060,7 +1075,13 @@ export default function LookGallery() {
         </div>
 
         <section className="product-video-section" aria-label="Salvatore Blackwork studio welcome">
-          <h2 className="featured-welcome-title">{copy.welcomeTitle}</h2>
+          <h2
+            className="featured-welcome-title"
+            data-delay="0s"
+            data-reveal-to="inset(0 0% 0 0)"
+          >
+            {copy.welcomeTitle}
+          </h2>
           <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
             {copy.featuredLabel}
           </div>
