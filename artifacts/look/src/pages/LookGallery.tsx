@@ -131,6 +131,7 @@ function MobileLookGallery({
   const welcomeRef = useRef<HTMLDivElement>(null);
   const welcomeImgRef = useRef<HTMLImageElement>(null);
   const mobileHeroImageRef = useRef<HTMLDivElement>(null);
+  const mobileHeroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Handle body scroll locking
@@ -228,6 +229,35 @@ function MobileLookGallery({
   }, [isWelcomeReady, showWelcome]);
 
   useEffect(() => {
+    const hero = mobileHeroRef.current;
+    if (showWelcome || !hero) return;
+
+    const ctx = gsap.context(() => {
+      const title = hero.querySelector(".mobile-hero-title");
+      const keywords = hero.querySelector(".mobile-hero-kicker");
+      const actions = hero.querySelectorAll(".mobile-hero-side-action");
+      const elements = [title, keywords, ...Array.from(actions)].filter(Boolean);
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        gsap.set(elements, { clipPath: "inset(0px 0% 0px 0px)" });
+        return;
+      }
+
+      const reveal = {
+        clipPath: "inset(0px 0% 0px 0px)",
+        duration: 1.2,
+        ease: "power3.out",
+      };
+      const tl = gsap.timeline();
+      if (title) tl.to(title, reveal, 0.8);
+      if (keywords) tl.to(keywords, reveal, 1.3);
+      tl.to(actions, reveal, 1.8);
+    }, hero);
+
+    return () => ctx.revert();
+  }, [showWelcome]);
+
+  useEffect(() => {
     if (!isMenuOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsMenuOpen(false);
@@ -310,7 +340,7 @@ function MobileLookGallery({
       </div>
 
       {/* HERO */}
-      <section className="mobile-home-hero" id="home-hero">
+      <section className="mobile-home-hero" id="home-hero" ref={mobileHeroRef}>
         <div className="mobile-hero-title-wrap">
           <div className="mobile-hero-heading">
             <h1 className="mobile-hero-title">

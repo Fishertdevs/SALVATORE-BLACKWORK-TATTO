@@ -2990,6 +2990,12 @@ body,
 }
 
 /* Mobile Hero */
+.mobile-look-root .mobile-hero-title,
+.mobile-look-root .mobile-hero-kicker,
+.mobile-look-root .mobile-hero-side-action {
+  clip-path: inset(0px 100% 0px 0px);
+}
+
 .mobile-look-root .mobile-home-hero {
   box-sizing: border-box;
   height: 100svh;
