@@ -229,6 +229,8 @@ function MobileLookGallery({
     const hero = mobileHeroRef.current;
     if (showWelcome || !hero) return;
 
+    let initialRevealComplete = false;
+    let heroObserver: IntersectionObserver | null = null;
     const ctx = gsap.context(() => {
       const title = hero.querySelector(".mobile-hero-title");
       const keywords = hero.querySelector(".mobile-hero-kicker");
@@ -248,10 +250,46 @@ function MobileLookGallery({
       const tl = gsap.timeline();
       if (title) tl.to(title, reveal, 0.8);
       if (keywords) tl.to(keywords, reveal, 1.3);
-      tl.to(actions, reveal, 1.8);
+      tl.to(actions, {
+        ...reveal,
+        onComplete: () => {
+          initialRevealComplete = true;
+        },
+      }, 1.8);
+
+      const replayHero = () => {
+        if (!initialRevealComplete) return;
+        const replay = gsap.timeline();
+        if (title) replay.fromTo(title, {
+          clipPath: "inset(0px 100% 0px 0px)",
+        }, reveal, 0);
+        if (keywords) replay.fromTo(keywords, {
+          clipPath: "inset(0px 100% 0px 0px)",
+        }, reveal, 0.5);
+        replay.fromTo(actions, {
+          clipPath: "inset(0px 100% 0px 0px)",
+        }, reveal, 1);
+      };
+
+      heroObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!initialRevealComplete) return;
+          if (entry?.isIntersecting && entry.intersectionRatio >= 0.15) {
+            replayHero();
+          } else if (entry && !entry.isIntersecting) {
+            gsap.killTweensOf(elements);
+            gsap.set(elements, { clipPath: "inset(0px 100% 0px 0px)" });
+          }
+        },
+        { threshold: [0, 0.15] },
+      );
+      heroObserver.observe(hero);
     }, hero);
 
-    return () => ctx.revert();
+    return () => {
+      heroObserver?.disconnect();
+      ctx.revert();
+    };
   }, [showWelcome]);
 
   useEffect(() => {
@@ -538,6 +576,7 @@ export default function LookGallery() {
   const heroFutureRef = useRef<HTMLDivElement>(null);
   const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
   const heroTopTitleRef = useRef<HTMLDivElement>(null);
+  const heroReplayReadyRef = useRef(false);
 
   useEffect(() => {
     const root = fullSectionRef.current;
@@ -549,15 +588,22 @@ export default function LookGallery() {
         ".product-video-section .featured-welcome-title, .product-video-section .featured-label, .mobile-welcome-section .mobile-welcome-title, .mobile-welcome-section .mobile-welcome-label",
       ),
     );
+    const heroTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        ".hero-top-title, .hero-side-title, .hero-side-desc, .hero-side-action, .hero-image-keywords",
+      ),
+    );
     const footerTargets = Array.from(
       document.querySelectorAll<HTMLElement>(".site-footer .footer-wordmark"),
     );
     const targets: { el: HTMLElement; threshold: number }[] = [
       ...archiveImages.map((el) => ({ el, threshold: 0.1 })),
       ...featuredTargets.map((el) => ({ el, threshold: 0.15 })),
+      ...heroTargets.map((el) => ({ el, threshold: 0.15 })),
       ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
     ];
-    const replayTargets = new Set(featuredTargets);
+    const replayTargets = new Set([...featuredTargets, ...heroTargets]);
+    const heroReplayTargets = new Set(heroTargets);
     if (!targets.length) return;
     const reduceMotion =
       typeof window !== "undefined" &&
@@ -581,12 +627,14 @@ export default function LookGallery() {
     };
     const resetReplayTarget = (el: HTMLElement) => {
       if (!replayTargets.has(el)) return;
+      if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       gsap.killTweensOf(el);
       replayActive.delete(el);
       gsap.set(el, replayInitial);
     };
     const replayReveal = (el: HTMLElement) => {
       if (!replayTargets.has(el) || replayActive.has(el)) return;
+      if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       replayActive.add(el);
       gsap.killTweensOf(el);
       gsap.fromTo(el, replayInitial, {
@@ -989,6 +1037,7 @@ export default function LookGallery() {
         tl.fromTo(heroKeywords, REVEAL_FROM, REVEAL_TO);
       }
       tl.eventCallback("onComplete", () => {
+        heroReplayReadyRef.current = true;
         gallery?.style.setProperty("opacity", "0");
         gallery?.style.setProperty("pointer-events", "none");
         gallery?.style.setProperty("z-index", "110");
