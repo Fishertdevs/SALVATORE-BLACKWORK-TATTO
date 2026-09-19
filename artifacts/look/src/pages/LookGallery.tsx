@@ -365,8 +365,11 @@ function MobileLookGallery({
         </div>
       </section>
 
-      {/* FEATURED TEXT */}
-      <div style={{ backgroundColor: "#FFFFFF", color: "#1a1a1a", padding: "48px 24px" }}>
+      {/* WELCOME TEXT */}
+      <section className="mobile-welcome-section" aria-labelledby="mobile-welcome-title">
+        <h2 id="mobile-welcome-title" className="mobile-welcome-title">
+          {copy.welcomeTitle}
+        </h2>
         <p style={{
           fontFamily: "'Helvetica Neue', sans-serif",
           fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#1a1a1a", margin: "0 0 16px",
@@ -379,7 +382,7 @@ function MobileLookGallery({
         }}>
           {copy.featuredParagraphs[1]}
         </p>
-      </div>
+      </section>
 
       {/* PRODUCT VIDEO */}
       <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 48px" }}>
@@ -1078,6 +1081,7 @@ export default function LookGallery() {
         </div>
 
         <section className="product-video-section" aria-label="Salvatore Blackwork featured tattoo">
+          <h2 className="featured-welcome-title">{copy.welcomeTitle}</h2>
           <div className="featured-label" data-delay="0s" data-reveal-to="inset(0 0% 0% 0)">
             {copy.featuredLabel}
           </div>
