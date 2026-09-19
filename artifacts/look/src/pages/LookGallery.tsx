@@ -371,10 +371,7 @@ function MobileLookGallery({
           {copy.welcomeTitle}
         </h2>
         <p className="mobile-welcome-copy">
-          {copy.featuredParagraphs[0]}
-        </p>
-        <p className="mobile-welcome-copy mobile-welcome-copy-last">
-          {copy.featuredParagraphs[1]}
+          {copy.featuredParagraphs.join(" ")}
         </p>
       </section>
 
@@ -1082,8 +1079,7 @@ export default function LookGallery() {
           <div className="featured-grid">
             <div className="featured-col-left" aria-hidden="true" />
             <div className="featured-about-text">
-              <p data-delay="0.2s">{copy.featuredParagraphs[0]}</p>
-              <p data-delay="0.35s">{copy.featuredParagraphs[1]}</p>
+              <p data-delay="0.2s">{copy.featuredParagraphs.join(" ")}</p>
             </div>
           </div>
           <div className="product-video-wrap">

@@ -3032,10 +3032,10 @@ body,
   margin: 0 0 28px;
   color: #171515;
   font-family: 'Beautique Display', serif;
-  font-size: clamp(29px, 8vw, 52px);
+  font-size: clamp(19px, 7.4vw, 44px);
   font-weight: 400;
   line-height: 0.88;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.075em;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
@@ -3050,10 +3050,6 @@ body,
   font-weight: 300;
   line-height: 1.6;
   text-align: center;
-}
-
-.mobile-look-root .mobile-welcome-copy-last {
-  margin-bottom: 0;
 }
 
 .mobile-look-root .mobile-hero-title-wrap {
