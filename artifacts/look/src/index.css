@@ -3070,10 +3070,10 @@ body,
   bottom: 112px;
   left: 14px;
   z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: clamp(12px, 4vw, 20px);
   padding: 0;
   text-align: center;
   opacity: 1;
