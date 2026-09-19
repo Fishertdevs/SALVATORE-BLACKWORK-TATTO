@@ -1,0 +1,10 @@
+---
+name: Approved mobile hero heading
+description: Approved visual treatment for the mobile hero title and tattoo-style keywords.
+---
+
+Preserve the approved mobile hero heading: the centered red two-line title followed by a single prominent line of BLACKWORK · TRIBAL · ORNAMENTAL.
+
+**Why:** The user explicitly confirmed this title and keyword treatment was correct before requesting only tighter image spacing and moving the buttons over the image.
+
+**How to apply:** Future mobile layout adjustments may change surrounding spacing or image controls, but should not reduce, replace, or restyle the approved title and keyword line unless explicitly requested.

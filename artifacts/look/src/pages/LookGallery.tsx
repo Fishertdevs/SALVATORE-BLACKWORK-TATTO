@@ -327,11 +327,11 @@ function MobileLookGallery({
             alt="SALVATORE BLACKWORK TATTO"
             className={`mobile-hero-image ${showWelcome ? "is-welcome-active" : ""}`}
           />
-        </div>
 
-        <div className="mobile-hero-actions">
-          <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
-          <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
+          <div className="mobile-hero-actions">
+            <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
+            <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
+          </div>
         </div>
       </section>
 
