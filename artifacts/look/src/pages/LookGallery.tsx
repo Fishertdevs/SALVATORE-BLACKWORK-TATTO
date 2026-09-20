@@ -583,6 +583,11 @@ export default function LookGallery() {
   const skipWelcome = shouldSkipWelcome();
 
   useEffect(() => {
+    if (!skipWelcome) return;
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.hash}`);
+  }, [skipWelcome]);
+
+  useEffect(() => {
     const root = fullSectionRef.current;
     const archiveImages = Array.from(
       document.querySelectorAll<HTMLElement>(".archive-section .archive-img"),

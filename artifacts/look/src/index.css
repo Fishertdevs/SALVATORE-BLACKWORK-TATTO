@@ -1548,23 +1548,26 @@ body,
 /* ============ COOKIE CONSENT ============ */
 .cookie-banner {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 1000;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: 22px 28px;
-  width: min(780px, calc(100vw - 40px));
+  width: 100%;
   max-height: min(70vh, 440px);
   overflow: auto;
-  padding: 24px 26px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 27px 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   background: #111;
-  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.2);
   color: #fff;
 }
 
 .cookie-banner-copy {
+  flex: 1 1 100%;
   min-width: 0;
 }
 
@@ -1605,7 +1608,7 @@ body,
   align-items: end;
   justify-content: end;
   gap: 8px;
-  grid-column: 1 / -1;
+  width: 100%;
 }
 
 .cookie-button {
@@ -1637,7 +1640,7 @@ body,
 }
 
 .cookie-settings {
-  grid-column: 1 / -1;
+  width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
@@ -1792,6 +1795,7 @@ body,
   }
 
   .cookie-banner {
+    left: 8px;
     right: 8px;
     bottom: 8px;
     grid-template-columns: 1fr;
