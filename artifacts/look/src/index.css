@@ -771,6 +771,25 @@ body,
   gap: clamp(1.25rem, 1.5vw, 2rem);
   font-weight: 500;
 }
+
+@media (min-width: 768px) {
+  .look-root #hero-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .look-root #hero-navbar .nav-links {
+    position: absolute;
+    left: 50%;
+    width: max-content;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+}
+
 .language-switch {
   display: inline-flex;
   align-items: center;
