@@ -13,6 +13,10 @@ import earringsImg from "@assets/Earrings_1777633894263.png";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
 import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
+const appBasePath = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
 const ASPECT_W = 4;
