@@ -590,15 +590,6 @@ export default function LookGallery() {
   useEffect(() => {
     const root = fullSectionRef.current;
     const heroNavbar = navbarRef.current;
-    const syncHeroScrollbarCompensation = () => {
-      const section = fullSectionRef.current;
-      if (!section) return;
-      const scrollbarWidth = Math.max(0, section.offsetWidth - section.clientWidth);
-      document.documentElement.style.setProperty(
-        "--hero-scrollbar-width",
-        `${scrollbarWidth}px`,
-      );
-    };
     if (heroNavbar && !skipWelcome) {
       gsap.set(heroNavbar, { autoAlpha: 0, y: "-100%" });
     }
@@ -806,6 +797,16 @@ export default function LookGallery() {
     const gallery = galleryRef.current;
     if (!gallery) return;
     gallery.innerHTML = "";
+
+    const syncHeroScrollbarCompensation = () => {
+      const section = fullSectionRef.current;
+      if (!section) return;
+      const scrollbarWidth = Math.max(0, section.offsetWidth - section.clientWidth);
+      document.documentElement.style.setProperty(
+        "--hero-scrollbar-width",
+        `${scrollbarWidth}px`,
+      );
+    };
 
     const cleanups: Array<() => void> = [];
     const intervals: number[] = [];
