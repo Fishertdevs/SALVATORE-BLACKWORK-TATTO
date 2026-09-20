@@ -59,9 +59,8 @@ export const galleryCopy = {
       ["+ CONECTA", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
     ],
     footerTagline: "BLACKWORK / LA TINTA ES ARQUITECTURA",
-    footerAppointment: "CON CITA PREVIA",
     footerStudioDescriptor: "ESTUDIO DE TATUAJE BLACKWORK",
-    footerLegalLinks: ["TÉRMINOS Y CONDICIONES", "POLÍTICA DE PRIVACIDAD", "CONTACTO"],
+    footerLegalLinks: ["TÉRMINOS Y CONDICIONES", "POLÍTICA DE PRIVACIDAD"],
   },
   en: {
     nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "BOOKING", "CONTACT"],
@@ -110,8 +109,7 @@ export const galleryCopy = {
       ["+ CONNECT", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
     ],
     footerTagline: "BLACKWORK / INK IS ARCHITECTURE",
-    footerAppointment: "BY APPOINTMENT",
     footerStudioDescriptor: "BLACKWORK TATTOO STUDIO",
-    footerLegalLinks: ["TERMS AND CONDITIONS", "PRIVACY POLICY", "CONTACT"],
+    footerLegalLinks: ["TERMS AND CONDITIONS", "PRIVACY POLICY"],
   },
 } as const;

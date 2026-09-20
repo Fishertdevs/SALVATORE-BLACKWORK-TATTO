@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Instagram, Mail, MessageCircle } from "lucide-react";
+import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { StudioHomeSections } from "@/pages/TattooPages";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
@@ -133,13 +133,13 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
 
         <div className="footer-socials" aria-label={language === "es" ? "Redes y contacto" : "Social and contact links"}>
           <a className="footer-social" href="#studio-contact" aria-label="Instagram">
-            <Instagram size={17} strokeWidth={1.5} aria-hidden="true" />
+            <SiInstagram size={16} aria-hidden="true" />
           </a>
           <a className="footer-social" href="#studio-contact" aria-label="WhatsApp">
-            <MessageCircle size={17} strokeWidth={1.5} aria-hidden="true" />
+            <SiWhatsapp size={16} aria-hidden="true" />
           </a>
-          <a className="footer-social" href="#studio-contact" aria-label={language === "es" ? "Email" : "Email"}>
-            <Mail size={17} strokeWidth={1.5} aria-hidden="true" />
+          <a className="footer-social" href="#studio-contact" aria-label="TikTok">
+            <SiTiktok size={16} aria-hidden="true" />
           </a>
         </div>
 
@@ -153,12 +153,10 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
           ))}
         </nav>
 
-        <p className="footer-appointment">{copy.footerAppointment}</p>
       </div>
 
       <div className="footer-bottom">
         <span>© 2026 SALVATORE BLACKWORK TATTO</span>
-        <span>{language === "es" ? "TODOS LOS DERECHOS RESERVADOS" : "ALL RIGHTS RESERVED"}</span>
       </div>
     </footer>
   );
