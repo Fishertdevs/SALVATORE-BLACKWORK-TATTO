@@ -814,9 +814,9 @@ body,
   .look-root #hero-navbar {
     position: fixed;
     top: 0;
-    right: 0;
+    right: var(--hero-scrollbar-width, 0px);
     left: 0;
-    width: 100%;
+    width: auto;
     z-index: 120;
     border: 0 !important;
     border-bottom: 0 !important;

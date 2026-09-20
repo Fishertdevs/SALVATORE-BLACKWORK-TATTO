@@ -590,6 +590,15 @@ export default function LookGallery() {
   useEffect(() => {
     const root = fullSectionRef.current;
     const heroNavbar = navbarRef.current;
+    const syncHeroScrollbarCompensation = () => {
+      const section = fullSectionRef.current;
+      if (!section) return;
+      const scrollbarWidth = Math.max(0, section.offsetWidth - section.clientWidth);
+      document.documentElement.style.setProperty(
+        "--hero-scrollbar-width",
+        `${scrollbarWidth}px`,
+      );
+    };
     if (heroNavbar && !skipWelcome) {
       gsap.set(heroNavbar, { autoAlpha: 0, y: "-100%" });
     }
@@ -1047,6 +1056,7 @@ export default function LookGallery() {
         }
         gsap.set(heroOverlays, { clipPath: "inset(0 0% 0 0)" });
         fullSection.style.overflowY = "auto";
+        syncHeroScrollbarCompensation();
         if (heroImage) {
           gsap.set(heroImage, { clearProps: "width,height,top,left,margin,transform" });
         }
@@ -1148,6 +1158,7 @@ export default function LookGallery() {
         gallery?.style.setProperty("pointer-events", "none");
         gallery?.style.setProperty("z-index", "110");
         fullSection.style.overflowY = "auto";
+        syncHeroScrollbarCompensation();
         if (heroImage) {
           gsap.set(heroImage, { clearProps: "width,height,top,left,margin,transform" });
         }
@@ -1242,6 +1253,7 @@ export default function LookGallery() {
     return () => {
       intervals.forEach((id) => clearInterval(id));
       timeouts.forEach((id) => clearTimeout(id));
+      document.documentElement.style.removeProperty("--hero-scrollbar-width");
       cleanups.forEach((fn) => fn());
     };
   }, []);
