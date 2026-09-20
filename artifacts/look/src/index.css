@@ -1274,6 +1274,23 @@ body,
   padding: clamp(66px, 9vw, 124px) 0 112px;
 }
 
+.legal-inline-back {
+  display: inline-block;
+  margin: 0 0 34px;
+  color: #e63027;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.legal-inline-back:hover {
+  color: #111;
+}
+
 .legal-eyebrow {
   margin: 0 0 18px;
   color: #e63027;
@@ -1418,7 +1435,7 @@ body,
     #111 100%
   );
   background-size: 200% 100%;
-  background-position: 0% 0%;
+  background-position: 100% 0%;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1696,6 +1713,11 @@ body,
   .legal-container {
     width: min(100% - 40px, 900px);
     padding: 124px 0 76px;
+  }
+
+  .legal-inline-back {
+    margin-bottom: 28px;
+    font-size: 9px;
   }
 
   .legal-container h1 {

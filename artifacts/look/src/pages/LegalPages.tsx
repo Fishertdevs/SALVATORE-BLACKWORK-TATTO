@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { getInitialLanguage, persistLanguage } from "@/i18n";
@@ -114,6 +114,8 @@ function LegalLayout({
   updated: string;
   children: ReactNode;
 }) {
+  const footerRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     document.title = `${title} — SALVATORE BLACKWORK TATTO`;
     window.scrollTo(0, 0);
@@ -121,6 +123,44 @@ function LegalLayout({
       document.title = "SALVATORE BLACKWORK TATTO";
     };
   }, [title]);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    const wordmark = footer?.querySelector<HTMLElement>(".footer-wordmark");
+    if (!footer || !wordmark) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      wordmark.style.backgroundPosition = "0% 0%";
+      return;
+    }
+
+    const showWordmark = () => {
+      gsap.killTweensOf(wordmark);
+      gsap.fromTo(
+        wordmark,
+        { backgroundPosition: "100% 0%" },
+        { backgroundPosition: "0% 0%", duration: 1.6, ease: "power3.out" },
+      );
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          showWordmark();
+        } else {
+          gsap.killTweensOf(wordmark);
+          wordmark.style.backgroundPosition = "100% 0%";
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(footer);
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(wordmark);
+    };
+  }, []);
 
   return (
     <main className="legal-page">
@@ -142,7 +182,7 @@ function LegalLayout({
         <p className="legal-updated">Última actualización: {updated}</p>
         <article className="legal-content">{children}</article>
       </div>
-      <footer className="site-footer legal-site-footer">
+      <footer ref={footerRef} className="site-footer legal-site-footer">
         <div className="footer-wordmark" aria-hidden="true">SALVATORE BLACKWORK TATTO</div>
         <div className="footer-center">
           <p className="footer-design-label">ALTERNATIVE DESIGN</p>
