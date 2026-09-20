@@ -1751,7 +1751,7 @@ body,
 
   .legal-container {
     width: min(100% - 40px, 900px);
-    padding: 124px 0 76px;
+    padding: 96px 0 76px;
   }
 
   .legal-inline-back {
@@ -1789,8 +1789,8 @@ body,
 
   .legal-content p,
   .legal-content li {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 13px;
+    line-height: 1.55;
   }
 
   .legal-table-row {
