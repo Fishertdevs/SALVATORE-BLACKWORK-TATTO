@@ -117,6 +117,12 @@ function LegalLayout({
   children: ReactNode;
 }) {
   const footerRef = useRef<HTMLElement>(null);
+  const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
+
+  const changeLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    persistLanguage(nextLanguage);
+  };
 
   useEffect(() => {
     document.title = `${title} — SALVATORE BLACKWORK TATTO`;
@@ -230,6 +236,27 @@ function LegalLayout({
           <a href={`${appBasePath}?skipWelcome=1#studio-booking`}>RESERVAS</a>
           <a href={`${appBasePath}?skipWelcome=1#studio-contact`}>CONTACTO</a>
         </nav>
+        <div className="legal-header-language">
+          <div className="language-switch" aria-label="Language selector">
+            <button
+              type="button"
+              className={`language-option ${language === "es" ? "is-active" : ""}`}
+              aria-pressed={language === "es"}
+              onClick={() => changeLanguage("es")}
+            >
+              ES
+            </button>
+            <span className="language-divider" aria-hidden="true">/</span>
+            <button
+              type="button"
+              className={`language-option ${language === "en" ? "is-active" : ""}`}
+              aria-pressed={language === "en"}
+              onClick={() => changeLanguage("en")}
+            >
+              EN
+            </button>
+          </div>
+        </div>
       </header>
       <LegalMobileHeader />
       <div className="legal-container">

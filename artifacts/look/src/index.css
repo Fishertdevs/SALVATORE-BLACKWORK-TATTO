@@ -1679,7 +1679,12 @@ body,
 }
 
 .legal-mobile-header {
-  display: none;
+  display: none !important;
+}
+
+.legal-header-language {
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 760px) {
@@ -1687,8 +1692,8 @@ body,
     display: none;
   }
 
-  .legal-mobile-header {
-    display: flex;
+  .legal-page .legal-mobile-header {
+    display: flex !important;
   }
 
   .legal-header {
