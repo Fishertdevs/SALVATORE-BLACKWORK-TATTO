@@ -1039,7 +1039,11 @@ export default function LookGallery() {
           scaleY: 1,
         });
         gsap.set(fullContent, { opacity: 1, y: 0 });
-        if (navbar) gsap.set(navbar, { y: "0%", autoAlpha: 1 });
+        if (navbar) {
+          gsap.set(navbar, { y: "0%", autoAlpha: 1 });
+          navbar.style.transform = "none";
+          navbar.style.willChange = "auto";
+        }
         gsap.set(heroOverlays, { clipPath: "inset(0 0% 0 0)" });
         fullSection.style.overflowY = "auto";
         if (heroImage) {
@@ -1122,6 +1126,10 @@ export default function LookGallery() {
       }
       tl.eventCallback("onComplete", () => {
         heroReplayReadyRef.current = true;
+        if (navbar) {
+          navbar.style.transform = "none";
+          navbar.style.willChange = "auto";
+        }
         gallery?.style.setProperty("opacity", "0");
         gallery?.style.setProperty("pointer-events", "none");
         gallery?.style.setProperty("z-index", "110");
