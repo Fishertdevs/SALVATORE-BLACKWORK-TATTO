@@ -450,6 +450,9 @@ body,
 #root {
   min-height: 100%;
   background: #FFFFFF;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
 .look-root,
@@ -474,6 +477,9 @@ body,
   justify-content: center;
   z-index: 110;
   background: #FFFFFF;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   pointer-events: auto;
 }
 
