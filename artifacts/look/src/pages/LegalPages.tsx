@@ -162,6 +162,60 @@ function LegalLayout({
     };
   }, []);
 
+  useEffect(() => {
+    const content = document.querySelector<HTMLElement>(".legal-content");
+    if (!content) return;
+
+    const targets = Array.from(content.querySelectorAll<HTMLElement>("h2, p, li"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      gsap.set(targets, { clearProps: "opacity,transform" });
+      return;
+    }
+
+    const showText = (element: HTMLElement) => {
+      gsap.killTweensOf(element);
+      gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: "power2.out",
+      });
+    };
+
+    const hideText = (element: HTMLElement) => {
+      gsap.killTweensOf(element);
+      gsap.to(element, {
+        opacity: 0,
+        y: 14,
+        duration: 0.35,
+        ease: "power2.in",
+      });
+    };
+
+    gsap.set(targets, { opacity: 0, y: 14 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            showText(element);
+          } else {
+            hideText(element);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(targets);
+    };
+  }, []);
+
   return (
     <main className="legal-page">
       <header className="legal-header">
