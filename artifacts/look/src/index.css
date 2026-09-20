@@ -1710,7 +1710,11 @@ body,
   }
 
   .legal-content > p:first-child {
-    font-size: 18px;
+    color: rgba(17, 17, 17, 0.76);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.68;
+    text-align: center;
   }
 
   .legal-content p,
