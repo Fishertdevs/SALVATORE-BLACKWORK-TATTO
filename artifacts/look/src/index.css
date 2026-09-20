@@ -1057,7 +1057,7 @@ body,
 .mobile-look-root .footer-wordmark {
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(28px, 3.4vw, 52px);
+  font-size: clamp(26px, 2.8vw, 42px);
   line-height: 0.88;
   letter-spacing: -0.02em;
   text-align: center;
@@ -1159,7 +1159,7 @@ body,
 }
 .look-root .footer-legal-nav a:hover,
 .mobile-look-root .footer-legal-nav a:hover {
-  color: #ffffff;
+  color: #E63027;
 }
 .look-root .footer-appointment,
 .mobile-look-root .footer-appointment {
@@ -1187,7 +1187,7 @@ body,
   }
   .look-root .footer-wordmark,
   .mobile-look-root .footer-wordmark {
-    font-size: clamp(28px, 7vw, 42px);
+    font-size: clamp(24px, 6vw, 34px);
     padding: 28px 0 24px;
   }
   .look-root .footer-bottom,

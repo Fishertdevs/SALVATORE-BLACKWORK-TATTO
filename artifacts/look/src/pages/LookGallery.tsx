@@ -594,8 +594,9 @@ export default function LookGallery() {
       ...heroTargets.map((el) => ({ el, threshold: 0.15 })),
       ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
     ];
-    const replayTargets = new Set([...featuredTargets, ...heroTargets]);
+    const replayTargets = new Set([...featuredTargets, ...heroTargets, ...footerTargets]);
     const heroReplayTargets = new Set(heroTargets);
+    const footerReplayTargets = new Set(footerTargets);
     if (!targets.length) return;
     const reduceMotion =
       typeof window !== "undefined" &&
@@ -604,8 +605,13 @@ export default function LookGallery() {
     if (reduceMotion) {
       for (const { el } of targets) {
         const to = el.dataset.revealTo ?? "inset(0 0% 0 0)";
+        const prop = el.dataset.revealProperty ?? "clip-path";
         el.style.transition = "none";
-        el.style.clipPath = to;
+        if (prop === "background-position") {
+          el.style.backgroundPosition = to;
+        } else {
+          el.style.clipPath = to;
+        }
       }
       return;
     }
@@ -624,6 +630,12 @@ export default function LookGallery() {
       duration: 1.2,
       ease: "power3.out",
     };
+    const footerReplayInitial = { backgroundPosition: "100% 0%" };
+    const footerReplayFinal = {
+      backgroundPosition: "0% 0%",
+      duration: 1.6,
+      ease: "power3.out",
+    };
     const resetReplayTarget = (el: HTMLElement) => {
       if (!replayTargets.has(el)) return;
       if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
@@ -631,6 +643,8 @@ export default function LookGallery() {
       replayActive.delete(el);
       if (heroReplayTargets.has(el)) {
         gsap.set(el, heroReplayInitial);
+      } else if (footerReplayTargets.has(el)) {
+        gsap.set(el, footerReplayInitial);
       } else {
         gsap.set(el, { clearProps: "clipPath", ...welcomeReplayInitial });
       }
@@ -641,14 +655,20 @@ export default function LookGallery() {
       replayActive.add(el);
       gsap.killTweensOf(el);
       const isHeroTarget = heroReplayTargets.has(el);
+      const isFooterTarget = footerReplayTargets.has(el);
       if (!isHeroTarget) {
         gsap.set(el, { clearProps: "clipPath" });
       }
+      const replayFinal = isHeroTarget
+        ? heroReplayFinal
+        : isFooterTarget
+          ? footerReplayFinal
+          : welcomeReplayFinal;
       gsap.fromTo(
         el,
         isHeroTarget ? heroReplayInitial : welcomeReplayInitial,
         {
-          ...(isHeroTarget ? heroReplayFinal : welcomeReplayFinal),
+          ...replayFinal,
           delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
         },
       );
