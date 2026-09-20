@@ -1095,6 +1095,9 @@ export default function LookGallery() {
             autoAlpha: 1,
             duration: 1.1,
             ease: "expo.out",
+            onStart: () => {
+              navbar.classList.add("is-hero-visible");
+            },
             onComplete: () => {
               navbar.classList.add("is-hero-visible");
               navbar.style.transform = "none";
