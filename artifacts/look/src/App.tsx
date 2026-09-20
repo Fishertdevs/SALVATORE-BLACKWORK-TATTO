@@ -4,6 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import LookGallery from "@/pages/LookGallery";
+import CookieBanner from "@/components/CookieBanner";
+import { CookiePolicyPage, PrivacyPolicyPage, TermsPage } from "@/pages/LegalPages";
 
 const queryClient = new QueryClient();
 
@@ -11,6 +13,9 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={LookGallery} />
+      <Route path="/politica-de-cookies" component={CookiePolicyPage} />
+      <Route path="/politica-de-privacidad" component={PrivacyPolicyPage} />
+      <Route path="/terminos-y-condiciones" component={TermsPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -22,6 +27,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
+          <CookieBanner />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>
