@@ -1391,7 +1391,7 @@ body,
 
 @media (min-width: 761px) {
   .legal-container h1 {
-    transform: translateY(-24px);
+    transform: translateY(-52px);
   }
 }
 
@@ -1784,8 +1784,8 @@ body,
 
   .legal-content p,
   .legal-content li {
-    font-size: 15px;
-    line-height: 1.68;
+    font-size: 17px;
+    line-height: 1.7;
   }
 
   .legal-table-row {
