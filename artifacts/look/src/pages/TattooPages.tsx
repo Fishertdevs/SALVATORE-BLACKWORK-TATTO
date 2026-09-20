@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
+import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
@@ -78,17 +79,20 @@ const studioCopy = {
     },
     contact: {
       eyebrow: "CONTACTO / 006",
-      title: ["VEN", "a saludar"],
-      intro: "Para consultas, colaboraciones y preguntas sobre el estudio, escríbenos.",
+      title: ["¿TIENES UN PROYECTO", "EN MENTE?"],
+      intro: "Cuéntanos tu idea y construimos juntos la solución.",
+      contactLabel: "CONTÁCTANOS",
+      bookingLabel: "AGENDAR CITA",
+      location: "BOGOTÁ / CO",
+      locationNote: "REMOTO GLOBAL",
       email: "EMAIL",
       social: "REDES",
       hours: "HORARIO",
       days: "LUN — VIE",
       appointment: "CON CITA PREVIA",
-      booking: "RESERVAS",
-      bookingCta: "INICIAR CONSULTA →",
-      statement: ["HAZLO", "permanente"],
-      notes: "NOTAS DEL ESTUDIO / 2026",
+      phone: "WHATSAPP",
+      phoneValue: "+57 311 251 2939",
+      mapLabel: "ABRIR EN MAPS ↗",
     },
   },
   en: {
@@ -161,17 +165,20 @@ const studioCopy = {
     },
     contact: {
       eyebrow: "CONTACT / 006",
-      title: ["COME", "say hello"],
-      intro: "For consultations, collaborations, and studio questions, write to us.",
+      title: ["DO YOU HAVE A PROJECT", "IN MIND?"],
+      intro: "Tell us your idea and we will build the solution together.",
+      contactLabel: "CONTACT US",
+      bookingLabel: "BOOK AN APPOINTMENT",
+      location: "BOGOTÁ / CO",
+      locationNote: "REMOTE WORLDWIDE",
       email: "EMAIL",
       social: "SOCIAL",
       hours: "HOURS",
       days: "MON — FRI",
       appointment: "BY APPOINTMENT",
-      booking: "BOOKING",
-      bookingCta: "START A CONSULTATION →",
-      statement: ["MAKE IT", "permanent"],
-      notes: "STUDIO NOTES / 2026",
+      phone: "WHATSAPP",
+      phoneValue: "+57 311 251 2939",
+      mapLabel: "OPEN IN MAPS ↗",
     },
   },
 } as const;
@@ -352,47 +359,64 @@ export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
   return (
     <StudioFrame id="studio-contact" className="page-contact">
-      <section className="page-contact-hero">
-        <div className="page-contact-title">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
-          <p>{copy.intro}</p>
-          <div className="page-contact-location" aria-label={language === "es" ? "Ubicación del estudio" : "Studio location"}>
-            <span className="page-contact-location-mark" aria-hidden="true" />
-            <span>{language === "es" ? "BOGOTÁ / CO" : "BOGOTÁ / CO"}</span>
-            <span>{copy.appointment}</span>
-          </div>
+      <section className="page-contact-reference">
+        <header className="page-contact-heading">
+          <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em></h1>
+          <span>{copy.eyebrow}</span>
+        </header>
+
+        <div className="page-contact-board">
+          <article className="page-contact-card">
+            <div className="page-contact-card-tabs">
+              <span className="is-active">{copy.contactLabel}</span>
+              <a href="#studio-booking">{copy.bookingLabel}</a>
+            </div>
+            <p className="page-contact-card-intro">{copy.intro}</p>
+            <dl className="page-contact-card-list">
+              <div>
+                <dt>{copy.hours}</dt>
+                <dd>{copy.days}<br />{copy.appointment}</dd>
+              </div>
+              <div>
+                <dt>{copy.location}</dt>
+                <dd>{copy.locationNote}</dd>
+              </div>
+              <div>
+                <dt>{copy.email}</dt>
+                <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
+              </div>
+              <div>
+                <dt>{copy.phone}</dt>
+                <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
+              </div>
+            </dl>
+            <div className="page-contact-card-socials" aria-label={copy.social}>
+              <a href="https://instagram.com/salvatoreblackwork" target="_blank" rel="noreferrer" aria-label="Instagram"><SiInstagram size={15} /></a>
+              <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer" aria-label="WhatsApp"><SiWhatsapp size={15} /></a>
+              <a href="https://tiktok.com/@salvatoreblackwork" target="_blank" rel="noreferrer" aria-label="TikTok"><SiTiktok size={15} /></a>
+            </div>
+          </article>
+
+          <a
+            className="page-contact-map"
+            href="https://www.openstreetmap.org/?mlat=4.668&mlon=-74.056#map=14/4.668/-74.056"
+            target="_blank"
+            rel="noreferrer"
+            aria-label={copy.mapLabel}
+          >
+            <iframe
+              title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-74.12%2C4.62%2C-74.02%2C4.71&layer=mapnik&marker=4.668%2C-74.056"
+              loading="lazy"
+            />
+            <span>{copy.mapLabel}</span>
+          </a>
+
+          <figure className="page-contact-portrait">
+            <img src={contactImg} alt={language === "es" ? "Retrato editorial con tatuajes blackwork" : "Editorial portrait with blackwork tattoos"} />
+            <figcaption>{copy.location}</figcaption>
+          </figure>
         </div>
-        <figure className="page-contact-image">
-          <img src={contactImg} alt={language === "es" ? "Retrato editorial con tatuajes blackwork" : "Editorial portrait with blackwork tattoos"} />
-          <figcaption><span>PLACA 06</span><span>BLACKWORK / BOGOTÁ</span></figcaption>
-        </figure>
-      </section>
-      <section className="page-contact-details">
-        <div className="page-contact-detail">
-          <Eyebrow>{copy.email}</Eyebrow>
-          <a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a>
-          <span className="page-contact-detail-index">01</span>
-        </div>
-        <div className="page-contact-detail">
-          <Eyebrow>{copy.social}</Eyebrow>
-          <a href="#">@SALVATOREBLACKWORK</a>
-          <span className="page-contact-detail-index">02</span>
-        </div>
-        <div className="page-contact-detail">
-          <Eyebrow>{copy.hours}</Eyebrow>
-          <p>{copy.days}<br />{copy.appointment}</p>
-          <span className="page-contact-detail-index">03</span>
-        </div>
-        <div className="page-contact-detail page-contact-detail-booking">
-          <Eyebrow>{copy.booking}</Eyebrow>
-          <a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a>
-          <span className="page-contact-detail-index">04</span>
-        </div>
-      </section>
-      <section className="page-contact-statement">
-        <h2>{copy.statement[0]}<br /><em>{copy.statement[1]}.</em></h2>
-        <span>{copy.notes}</span>
       </section>
     </StudioFrame>
   );
