@@ -59,7 +59,8 @@ export const galleryCopy = {
       ["+ CONECTA", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
     ],
     footerTagline: "BLACKWORK / LA TINTA ES ARQUITECTURA",
-    footerStudioDescriptor: "ESTUDIO DE TATUAJE BLACKWORK",
+    footerDesignLabel: "ALTERNATIVE DESIGN",
+    footerStyleLine: "ORNAMENTAL . TRIBAL . BLACKWORK",
     footerLegalLinks: ["TÉRMINOS Y CONDICIONES", "POLÍTICA DE PRIVACIDAD"],
   },
   en: {
@@ -109,7 +110,8 @@ export const galleryCopy = {
       ["+ CONNECT", ["Instagram", "Are.na", "Tumblr", "Spotify"]],
     ],
     footerTagline: "BLACKWORK / INK IS ARCHITECTURE",
-    footerStudioDescriptor: "BLACKWORK TATTOO STUDIO",
+    footerDesignLabel: "ALTERNATIVE DESIGN",
+    footerStyleLine: "ORNAMENTAL . TRIBAL . BLACKWORK",
     footerLegalLinks: ["TERMS AND CONDITIONS", "PRIVACY POLICY"],
   },
 } as const;

@@ -128,8 +128,8 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
       </div>
 
       <div className="footer-center">
-        <p className="footer-brand-name">SALVATORE BLACKWORK TATTO</p>
-        <p className="footer-description">{copy.footerStudioDescriptor}</p>
+        <p className="footer-design-label">{copy.footerDesignLabel}</p>
+        <p className="footer-style-line">{copy.footerStyleLine}</p>
 
         <div className="footer-socials" aria-label={language === "es" ? "Redes y contacto" : "Social and contact links"}>
           <a className="footer-social" href="#studio-contact" aria-label="Instagram">

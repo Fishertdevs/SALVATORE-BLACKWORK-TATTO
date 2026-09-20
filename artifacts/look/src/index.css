@@ -1057,7 +1057,7 @@ body,
 .mobile-look-root .footer-wordmark {
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(40px, 6vw, 88px);
+  font-size: clamp(36px, 5vw, 74px);
   line-height: 0.88;
   letter-spacing: -0.02em;
   text-align: center;
@@ -1086,20 +1086,20 @@ body,
   margin: 0 auto;
   text-align: center;
 }
-.look-root .footer-brand-name,
-.mobile-look-root .footer-brand-name {
+.look-root .footer-design-label,
+.mobile-look-root .footer-design-label {
   margin: 0 0 8px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.look-root .footer-description,
-.mobile-look-root .footer-description {
+.look-root .footer-style-line,
+.mobile-look-root .footer-style-line {
   margin: 0;
   color: rgba(255, 255, 255, 0.58);
   font-size: 10px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .look-root .footer-socials,
@@ -1162,12 +1162,12 @@ body,
 .look-root .footer-bottom,
 .mobile-look-root .footer-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 12px 24px;
   margin-top: 26px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 0;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1181,7 +1181,7 @@ body,
   }
   .look-root .footer-wordmark,
   .mobile-look-root .footer-wordmark {
-    font-size: clamp(34px, 9vw, 54px);
+    font-size: clamp(32px, 8vw, 50px);
     padding: 28px 0 24px;
   }
   .look-root .footer-bottom,
