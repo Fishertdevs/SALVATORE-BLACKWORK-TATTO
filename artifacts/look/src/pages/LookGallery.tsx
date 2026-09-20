@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
 import { StudioHomeSections } from "@/pages/TattooPages";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
@@ -107,6 +108,59 @@ function LanguageSwitcher({
         EN
       </button>
     </div>
+  );
+}
+
+type GalleryCopy = (typeof galleryCopy)[Language];
+
+function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language }) {
+  return (
+    <footer className="site-footer" aria-label={language === "es" ? "Pie de página" : "Site footer"}>
+      <div
+        className="footer-wordmark"
+        aria-hidden="true"
+        data-delay="0.1s"
+        data-duration="1.6s"
+        data-reveal-property="background-position"
+        data-reveal-to="0% 0%"
+      >
+        SALVATORE BLACKWORK TATTO
+      </div>
+
+      <div className="footer-center">
+        <p className="footer-brand-name">SALVATORE BLACKWORK TATTO</p>
+        <p className="footer-description">{copy.footerStudioDescriptor}</p>
+
+        <div className="footer-socials" aria-label={language === "es" ? "Redes y contacto" : "Social and contact links"}>
+          <a className="footer-social" href="#studio-contact" aria-label="Instagram">
+            <Instagram size={17} strokeWidth={1.5} aria-hidden="true" />
+          </a>
+          <a className="footer-social" href="#studio-contact" aria-label="WhatsApp">
+            <MessageCircle size={17} strokeWidth={1.5} aria-hidden="true" />
+          </a>
+          <a className="footer-social" href="#studio-contact" aria-label={language === "es" ? "Email" : "Email"}>
+            <Mail size={17} strokeWidth={1.5} aria-hidden="true" />
+          </a>
+        </div>
+
+        <div className="footer-rule" aria-hidden="true" />
+
+        <nav className="footer-legal-nav" aria-label={language === "es" ? "Enlaces legales" : "Legal links"}>
+          {copy.footerLegalLinks.map((label, index) => (
+            <a key={label} href={index === copy.footerLegalLinks.length - 1 ? "#studio-contact" : "#"}>
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        <p className="footer-appointment">{copy.footerAppointment}</p>
+      </div>
+
+      <div className="footer-bottom">
+        <span>© 2026 SALVATORE BLACKWORK TATTO</span>
+        <span>{language === "es" ? "TODOS LOS DERECHOS RESERVADOS" : "ALL RIGHTS RESERVED"}</span>
+      </div>
+    </footer>
   );
 }
 
@@ -480,68 +534,7 @@ function MobileLookGallery({
 
       <StudioHomeSections language={language} />
 
-      {/* FOOTER */}
-      <div style={{ backgroundColor: "#0a0a0a", color: "#ffffff", padding: "48px 24px 32px" }}>
-        <p style={{
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 11, letterSpacing: "0.18em",
-          textTransform: "uppercase", color: "#E63027", margin: "0 0 12px",
-        }}>{copy.footerJournal}</p>
-        <h2 style={{
-          fontFamily: "'Beautique Display', serif",
-          fontSize: "clamp(28px, 8vw, 48px)",
-          fontWeight: 400, textTransform: "uppercase",
-          color: "#ffffff", lineHeight: 1.05, margin: "0 0 32px",
-        }}>{copy.footerMark[0]}<br />{copy.footerMark[1]} <em style={{ color: "#E63027", fontStyle: "italic" }}>{copy.footerMark[2]}</em>.</h2>
-
-        <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.4)", marginBottom: 48 }}>
-          <input type="email" placeholder={copy.emailPlaceholder} style={{
-            flex: 1, background: "transparent", border: "none",
-            color: "#ffffff", fontFamily: "'Helvetica Neue', sans-serif",
-            fontSize: 12, letterSpacing: "0.16em", padding: "12px 0", outline: "none",
-          }} />
-          <button style={{
-            background: "transparent", border: "none", color: "#ffffff",
-            fontSize: 14, cursor: "pointer", padding: "12px 0 12px 12px",
-          }}>{copy.subscribe}</button>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 16px", marginBottom: 48 }}>
-          {copy.footerColumns.map(([title, items]) => (
-            <div key={title}>
-              <h3 style={{
-                fontFamily: "'Helvetica Neue', sans-serif",
-                fontSize: 11, fontWeight: 500, letterSpacing: "0.2em",
-                textTransform: "uppercase", color: "#E63027", marginBottom: 12,
-              }}>{title}</h3>
-              {items.map(item => (
-                <a key={item} href="#" style={{
-                  display: "block", fontFamily: "'Helvetica Neue', sans-serif",
-                  fontSize: 13, fontWeight: 300,
-                  color: "rgba(255,255,255,0.7)", textDecoration: "none", marginBottom: 8,
-                }}>{item}</a>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <div style={{
-          fontFamily: "'Beautique Display', sans-serif",
-          fontSize: "clamp(48px, 15vw, 80px)",
-          fontWeight: 400, textAlign: "center",
-          color: "transparent",
-          WebkitTextStroke: "1px rgba(255,255,255,0.12)",
-          letterSpacing: "-0.02em", lineHeight: 0.85,
-          padding: "32px 0", userSelect: "none",
-        }}>SALVATORE BLACKWORK TATTO</div>
-
-        <div style={{
-          paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.12)",
-          fontFamily: "'Helvetica Neue', sans-serif",
-          fontSize: 10, letterSpacing: "0.15em",
-          textTransform: "uppercase", color: "rgba(255,255,255,0.4)",
-        }}>© 2026 SALVATORE BLACKWORK TATTO — ALL RIGHTS RESERVED</div>
-      </div>
+      <SiteFooter copy={copy} language={language} />
 
     </div>
   );
@@ -1313,59 +1306,7 @@ export default function LookGallery() {
 
         <StudioHomeSections language={language} />
 
-        <footer className="site-footer" aria-label="Site footer">
-          <div className="footer-top">
-            <div className="footer-cta">
-              <p className="footer-eyebrow">{copy.footerEyebrow}</p>
-              <h2 className="footer-headline">
-                {copy.footerHeadline[0]}<br />{copy.footerHeadline[1]} <em>{copy.footerHeadline[2]}</em>.
-              </h2>
-              <form
-                className="footer-form"
-                onSubmit={(e) => e.preventDefault()}
-                aria-label="Newsletter signup"
-              >
-                <input
-                  type="email"
-                  className="footer-input"
-                  placeholder={copy.emailPlaceholder}
-                  aria-label={language === "es" ? "Dirección de email" : "Email address"}
-                />
-                <button type="submit" className="footer-submit" aria-label={language === "es" ? "Suscribirse" : "Subscribe"}>
-                  {copy.subscribe}
-                </button>
-              </form>
-            </div>
-
-            <nav className="footer-nav" aria-label="Footer navigation">
-              {copy.footerColumns.map(([title, items]) => (
-                <div className="footer-col" key={title}>
-                  <h3 className="footer-col-title">{title}</h3>
-                  <ul>
-                    {items.map((item) => <li key={item}><a href="#">{item}</a></li>)}
-                  </ul>
-                </div>
-              ))}
-            </nav>
-          </div>
-
-          <div
-            className="footer-wordmark"
-            aria-hidden="true"
-            data-delay="0.1s"
-            data-duration="1.6s"
-            data-reveal-property="background-position"
-            data-reveal-to="0% 0%"
-          >
-            SALVATORE BLACKWORK TATTO
-          </div>
-
-          <div className="footer-bottom">
-            <span>© 2026 SALVATORE BLACKWORK TATTO — {language === "es" ? "TODOS LOS DERECHOS RESERVADOS" : "ALL RIGHTS RESERVED"}</span>
-            <span>{copy.footerTagline}</span>
-            <span>{copy.footerAppointment}</span>
-          </div>
-        </footer>
+        <SiteFooter copy={copy} language={language} />
       </div>
 
     </div>
