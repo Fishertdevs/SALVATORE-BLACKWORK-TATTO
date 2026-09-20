@@ -1350,9 +1350,18 @@ body,
 }
 
 .legal-content > p:first-child {
+  width: 100%;
+  max-width: 560px;
+  min-height: 130px;
+  margin: 0 auto 18px;
   color: #111;
   font-size: 21px;
   line-height: 1.55;
+  text-align: center;
+}
+
+.legal-container h1.legal-title-terms {
+  font-size: clamp(30px, 4.8vw, 64px);
 }
 
 .legal-content h2 {
@@ -1732,11 +1741,19 @@ body,
   }
 
   .legal-content > p:first-child {
+    width: 100%;
+    max-width: 560px;
+    min-height: 126px;
+    margin: 0 auto 18px;
     color: rgba(17, 17, 17, 0.76);
     font-size: 15px;
     font-weight: 400;
     line-height: 1.68;
     text-align: center;
+  }
+
+  .legal-container h1.legal-title-terms {
+    font-size: clamp(24px, 7.8vw, 48px);
   }
 
   .legal-content p,

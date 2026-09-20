@@ -17,6 +17,13 @@ const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
+function shouldSkipWelcome() {
+  return (
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("skipWelcome") === "1"
+  );
+}
+
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
 const ASPECT_W = 4;
@@ -179,7 +186,7 @@ function MobileLookGallery({
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(() => !shouldSkipWelcome());
   const [isWelcomeReady, setIsWelcomeReady] = useState(false);
 
   const welcomeRef = useRef<HTMLDivElement>(null);
@@ -573,6 +580,7 @@ export default function LookGallery() {
   const heroFutureDescRef = useRef<HTMLParagraphElement>(null);
   const heroTopTitleRef = useRef<HTMLDivElement>(null);
   const heroReplayReadyRef = useRef(false);
+  const skipWelcome = shouldSkipWelcome();
 
   useEffect(() => {
     const root = fullSectionRef.current;
@@ -947,7 +955,7 @@ export default function LookGallery() {
       }
     }
 
-    function expandSection() {
+    function expandSection(immediate = false) {
       const fullSection = fullSectionRef.current;
       const fullContent = fullContentRef.current;
       const navbar = navbarRef.current;
@@ -1003,6 +1011,33 @@ export default function LookGallery() {
         ...Array.from(fullContent.querySelectorAll<HTMLElement>(".hero-side-action, .hero-image-keywords")),
       ].filter((el): el is HTMLElement => el !== null);
       gsap.set(heroOverlays, { clipPath: "inset(0 100% 0 0)" });
+
+      if (immediate) {
+        expandedRef.current = true;
+        heroReplayReadyRef.current = true;
+        gsap.set(gallery, { opacity: 0, pointerEvents: "none", zIndex: 110 });
+        gsap.set(fullSection, {
+          opacity: 1,
+          pointerEvents: "all",
+          width: "100vw",
+          height: "100vh",
+          left: 0,
+          top: 0,
+          borderRadius: "0px",
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+        });
+        gsap.set(fullContent, { opacity: 1, y: 0 });
+        if (navbar) gsap.set(navbar, { y: "0%", autoAlpha: 1 });
+        gsap.set(heroOverlays, { clipPath: "inset(0 0% 0 0)" });
+        fullSection.style.overflowY = "auto";
+        if (heroImage) {
+          gsap.set(heroImage, { clearProps: "width,height,top,left,margin,transform" });
+        }
+        return;
+      }
 
       const ZOOM_DURATION = 2.4;
       const tl = gsap
@@ -1086,6 +1121,10 @@ export default function LookGallery() {
           gsap.set(heroImage, { clearProps: "width,height,top,left,margin,transform" });
         }
       });
+    }
+
+    if (skipWelcome) {
+      expandSection(true);
     }
 
     function collapseSection() {

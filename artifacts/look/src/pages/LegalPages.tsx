@@ -18,6 +18,8 @@ const legalNav = [
   ["CONTACTO", "#studio-contact"],
 ] as const;
 
+const directHomeHref = `${appBasePath}?skipWelcome=1#home-hero`;
+
 function LegalMobileHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
@@ -91,7 +93,7 @@ function LegalMobileHeader() {
           {legalNav.map(([label, hash]) => (
             <a
               key={label}
-              href={`${appBasePath}${hash}`}
+              href={`${appBasePath}?skipWelcome=1${hash}`}
               className="mobile-menu-link"
               onClick={() => setIsMenuOpen(false)}
               tabIndex={isMenuOpen ? 0 : -1}
@@ -219,20 +221,20 @@ function LegalLayout({
   return (
     <main className="legal-page">
       <header className="legal-header">
-        <a className="legal-logo" href={appBasePath}>SALVATORE BLACKWORK TATTO</a>
+        <a className="legal-logo" href={directHomeHref}>SALVATORE BLACKWORK TATTO</a>
         <nav className="legal-main-nav" aria-label="Navegación principal">
-          <a href={`${appBasePath}#home-hero`}>INICIO</a>
-          <a href={`${appBasePath}#studio-about`}>ACERCA DE</a>
-          <a href={`${appBasePath}#studio-portfolio`}>PORTFOLIO</a>
-          <a href={`${appBasePath}#studio-services`}>SERVICIOS</a>
-          <a href={`${appBasePath}#studio-booking`}>RESERVAS</a>
-          <a href={`${appBasePath}#studio-contact`}>CONTACTO</a>
+          <a href={`${appBasePath}?skipWelcome=1#home-hero`}>INICIO</a>
+          <a href={`${appBasePath}?skipWelcome=1#studio-about`}>ACERCA DE</a>
+          <a href={`${appBasePath}?skipWelcome=1#studio-portfolio`}>PORTFOLIO</a>
+          <a href={`${appBasePath}?skipWelcome=1#studio-services`}>SERVICIOS</a>
+          <a href={`${appBasePath}?skipWelcome=1#studio-booking`}>RESERVAS</a>
+          <a href={`${appBasePath}?skipWelcome=1#studio-contact`}>CONTACTO</a>
         </nav>
       </header>
       <LegalMobileHeader />
       <div className="legal-container">
-        <a className="legal-inline-back" href={appBasePath}>← VOLVER AL INICIO</a>
-        <h1>{title}</h1>
+        <a className="legal-inline-back" href={directHomeHref}>← VOLVER AL INICIO</a>
+        <h1 className={title === "Términos y Condiciones" ? "legal-title-terms" : undefined}>{title}</h1>
         <p className="legal-updated">Última actualización: {updated}</p>
         <article className="legal-content">{children}</article>
       </div>
