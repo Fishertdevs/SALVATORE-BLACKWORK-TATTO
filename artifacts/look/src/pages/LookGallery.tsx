@@ -1225,25 +1225,25 @@ export default function LookGallery() {
 
   return (
     <div className="look-root">
+      <nav id="hero-navbar" ref={navbarRef}>
+        <div className="nav-left">
+          <div className="nav-logo">SALVATORE BLACKWORK TATTO</div>
+        </div>
+        <div className="nav-right">
+          <ul className="nav-links">
+            {copy.nav.map((label, index) => (
+              <li key={label}>
+                <a href={navHrefs[index]}>{label}</a>
+              </li>
+            ))}
+          </ul>
+          <LanguageSwitcher language={language} onChange={handleLanguageChange} />
+        </div>
+      </nav>
       <div id="gallery-layer" ref={galleryRef} />
 
       <div id="fullscreen-section" ref={fullSectionRef}>
         <img id="home-hero" src={mainImg} alt="" />
-        <nav id="hero-navbar" ref={navbarRef}>
-          <div className="nav-left">
-            <span className="nav-logo">SALVATORE BLACKWORK TATTO</span>
-          </div>
-          <div className="nav-right">
-            <ul className="nav-links">
-              {copy.nav.map((label, index) => (
-                <li key={label}>
-                  <a href={navHrefs[index]}>{label}</a>
-                </li>
-              ))}
-            </ul>
-            <LanguageSwitcher language={language} onChange={handleLanguageChange} />
-          </div>
-        </nav>
         <div id="fullscreen-content" ref={fullContentRef}>
           <div className="hero-top-title" ref={heroTopTitleRef}>SALVATORE BLACKWORK TATTO</div>
           <div className="hero-side hero-side-left">

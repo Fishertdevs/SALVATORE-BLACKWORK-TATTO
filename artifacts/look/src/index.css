@@ -779,6 +779,7 @@ body,
     right: 0;
     left: 0;
     width: 100%;
+    z-index: 120;
   }
 
   .look-root #hero-navbar .nav-links {
