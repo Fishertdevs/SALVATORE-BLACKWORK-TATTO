@@ -227,16 +227,18 @@ function LegalLayout({
   return (
     <main className="legal-page">
       <header className="legal-header">
-        <a className="legal-logo" href={directHomeHref}>SALVATORE BLACKWORK TATTO</a>
-        <nav className="legal-main-nav" aria-label="Navegación principal">
-          <a href={`${appBasePath}?skipWelcome=1#home-hero`}>INICIO</a>
-          <a href={`${appBasePath}?skipWelcome=1#studio-about`}>ACERCA DE</a>
-          <a href={`${appBasePath}?skipWelcome=1#studio-portfolio`}>PORTFOLIO</a>
-          <a href={`${appBasePath}?skipWelcome=1#studio-services`}>SERVICIOS</a>
-          <a href={`${appBasePath}?skipWelcome=1#studio-booking`}>RESERVAS</a>
-          <a href={`${appBasePath}?skipWelcome=1#studio-contact`}>CONTACTO</a>
-        </nav>
-        <div className="legal-header-language">
+        <div className="nav-left">
+          <a className="nav-logo" href={directHomeHref}>SALVATORE BLACKWORK TATTO</a>
+        </div>
+        <nav className="nav-right" aria-label="Navegación principal">
+          <ul className="nav-links">
+            <li><a href={`${appBasePath}?skipWelcome=1#home-hero`}>INICIO</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-about`}>ACERCA DE</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-portfolio`}>PORTFOLIO</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-services`}>SERVICIOS</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-booking`}>RESERVAS</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-contact`}>CONTACTO</a></li>
+          </ul>
           <div className="language-switch" aria-label="Language selector">
             <button
               type="button"
@@ -256,7 +258,7 @@ function LegalLayout({
               EN
             </button>
           </div>
-        </div>
+        </nav>
       </header>
       <LegalMobileHeader />
       <div className="legal-container">
