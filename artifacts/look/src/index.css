@@ -1041,8 +1041,8 @@ body,
 /* ============ FOOTER ============ */
 .look-root .site-footer,
 .mobile-look-root .site-footer {
-  background: #0a0a0a;
-  color: #f5f5f5;
+  background: #ffffff;
+  color: #111111;
   padding: 0 60px 30px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: relative;
@@ -1057,7 +1057,7 @@ body,
 .mobile-look-root .footer-wordmark {
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(32px, 4.2vw, 64px);
+  font-size: clamp(28px, 3.4vw, 52px);
   line-height: 0.88;
   letter-spacing: -0.02em;
   text-align: center;
@@ -1068,8 +1068,8 @@ body,
     to right,
     #E63027 0%,
     #E63027 50%,
-    #ffffff 50%,
-    #ffffff 100%
+    #111111 50%,
+    #111111 100%
   );
   background-size: 200% 100%;
   background-position: 100% 0%;
@@ -1097,7 +1097,7 @@ body,
 .look-root .footer-style-line,
 .mobile-look-root .footer-style-line {
   margin: 0;
-  color: rgba(255, 255, 255, 0.58);
+  color: rgba(17, 17, 17, 0.58);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1116,9 +1116,9 @@ body,
   justify-content: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(17, 17, 17, 0.35);
   border-radius: 50%;
-  color: #ffffff;
+  color: #111111;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 .look-root .footer-social:hover,
@@ -1132,7 +1132,7 @@ body,
   width: 100%;
   height: 1px;
   margin: 24px auto 16px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(17, 17, 17, 0.18);
 }
 .look-root .footer-legal-nav,
 .mobile-look-root .footer-legal-nav {
@@ -1151,7 +1151,7 @@ body,
 }
 .look-root .footer-legal-nav a,
 .mobile-look-root .footer-legal-nav a {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(17, 17, 17, 0.72);
   font-size: 10px;
   letter-spacing: 0.06em;
   text-decoration: none;
@@ -1171,13 +1171,13 @@ body,
   justify-content: center;
   align-items: center;
   gap: 12px 24px;
-  margin-top: 26px;
-  padding-top: 18px;
+  margin-top: 12px;
+  padding-top: 0;
   border-top: 0;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(17, 17, 17, 0.55);
   font-weight: 400;
 }
 @media (max-width: 900px) {
@@ -1187,7 +1187,7 @@ body,
   }
   .look-root .footer-wordmark,
   .mobile-look-root .footer-wordmark {
-    font-size: clamp(32px, 8vw, 50px);
+    font-size: clamp(28px, 7vw, 42px);
     padding: 28px 0 24px;
   }
   .look-root .footer-bottom,
