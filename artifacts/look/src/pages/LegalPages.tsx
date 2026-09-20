@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
@@ -19,6 +19,14 @@ const legalNav = [
 ] as const;
 
 const directHomeHref = `${appBasePath}?skipWelcome=1#home-hero`;
+
+function returnToHome(event: MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  const homeUrl = new URL(appBasePath, window.location.href);
+  homeUrl.search = "?skipWelcome=1";
+  homeUrl.hash = "home-hero";
+  window.location.assign(homeUrl.toString());
+}
 
 function LegalMobileHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -262,7 +270,9 @@ function LegalLayout({
       </header>
       <LegalMobileHeader />
       <div className="legal-container">
-        <a className="legal-inline-back" href={directHomeHref}>← VOLVER AL INICIO</a>
+        <a className="legal-inline-back" href={directHomeHref} onClick={returnToHome}>
+          ← VOLVER AL INICIO
+        </a>
         <h1 className={title === "Términos y Condiciones" ? "legal-title-terms" : undefined}>{title}</h1>
         <p className="legal-updated">Última actualización: {updated}</p>
         <article className="legal-content">{children}</article>
