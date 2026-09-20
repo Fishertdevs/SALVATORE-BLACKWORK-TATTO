@@ -525,6 +525,9 @@ body,
   height: 100%;
   z-index: 100;
   background: #FFFFFF;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   pointer-events: none;
   opacity: 0;
   overflow: hidden;
@@ -556,6 +559,9 @@ body,
   min-height: 100%;
   padding: clamp(7rem, 11vw, 10rem) clamp(2rem, 5vw, 6rem) clamp(3rem, 7vw, 6rem);
   box-sizing: border-box;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   pointer-events: none;
   opacity: 1;
   overflow: visible;
@@ -609,6 +615,9 @@ body,
 }
 .look-root .hero-side-title {
   display: block;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   width: max-content;
   max-width: none;
   align-self: center;
