@@ -1057,7 +1057,7 @@ body,
 .mobile-look-root .footer-wordmark {
   font-family: 'Beautique Display', 'Helvetica Neue', sans-serif;
   font-weight: 400;
-  font-size: clamp(36px, 5vw, 74px);
+  font-size: clamp(32px, 4.2vw, 64px);
   line-height: 0.88;
   letter-spacing: -0.02em;
   text-align: center;
@@ -1138,10 +1138,16 @@ body,
 .mobile-look-root .footer-legal-nav {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 8px;
+}
+.look-root .footer-policy-row,
+.mobile-look-root .footer-policy-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .look-root .footer-legal-nav a,
 .mobile-look-root .footer-legal-nav a {

@@ -61,7 +61,9 @@ export const galleryCopy = {
     footerTagline: "BLACKWORK / LA TINTA ES ARQUITECTURA",
     footerDesignLabel: "ALTERNATIVE DESIGN",
     footerStyleLine: "ORNAMENTAL . TRIBAL . BLACKWORK",
-    footerLegalLinks: ["TÉRMINOS Y CONDICIONES", "POLÍTICA DE PRIVACIDAD"],
+    footerLegalTerms: "TÉRMINOS Y CONDICIONES",
+    footerLegalCookies: "POLÍTICA DE COOKIES",
+    footerLegalPrivacy: "POLÍTICA DE PRIVACIDAD",
   },
   en: {
     nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "BOOKING", "CONTACT"],
@@ -112,6 +114,8 @@ export const galleryCopy = {
     footerTagline: "BLACKWORK / INK IS ARCHITECTURE",
     footerDesignLabel: "ALTERNATIVE DESIGN",
     footerStyleLine: "ORNAMENTAL . TRIBAL . BLACKWORK",
-    footerLegalLinks: ["TERMS AND CONDITIONS", "PRIVACY POLICY"],
+    footerLegalTerms: "TERMS AND CONDITIONS",
+    footerLegalCookies: "COOKIE POLICY",
+    footerLegalPrivacy: "PRIVACY POLICY",
   },
 } as const;

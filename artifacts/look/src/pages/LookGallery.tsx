@@ -146,11 +146,12 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
         <div className="footer-rule" aria-hidden="true" />
 
         <nav className="footer-legal-nav" aria-label={language === "es" ? "Enlaces legales" : "Legal links"}>
-          {copy.footerLegalLinks.map((label, index) => (
-            <a key={label} href={index === copy.footerLegalLinks.length - 1 ? "#studio-contact" : "#"}>
-              {label}
-            </a>
-          ))}
+          <a href="#">{copy.footerLegalTerms}</a>
+          <div className="footer-policy-row">
+            <a href="#">{copy.footerLegalCookies}</a>
+            <span aria-hidden="true">·</span>
+            <a href="#">{copy.footerLegalPrivacy}</a>
+          </div>
         </nav>
 
       </div>
