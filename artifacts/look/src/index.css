@@ -780,6 +780,11 @@ body,
     left: 0;
     width: 100%;
     z-index: 120;
+    border-bottom: 0;
+    box-shadow: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
   }
 
   .look-root #hero-navbar .nav-links {
@@ -1251,7 +1256,7 @@ body,
   text-transform: uppercase;
   color: #1a1a1a;
   background: #fff;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  border-bottom: 0;
   backdrop-filter: none;
 }
 
