@@ -589,6 +589,10 @@ export default function LookGallery() {
 
   useEffect(() => {
     const root = fullSectionRef.current;
+    const heroNavbar = navbarRef.current;
+    if (heroNavbar && !skipWelcome) {
+      gsap.set(heroNavbar, { autoAlpha: 0, y: "-100%" });
+    }
     const archiveImages = Array.from(
       document.querySelectorAll<HTMLElement>(".archive-section .archive-img"),
     );
