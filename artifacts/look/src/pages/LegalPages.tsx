@@ -307,12 +307,6 @@ export function PrivacyPolicyPage() {
       title="Política de Privacidad"
       updated="enero 2026"
     >
-      <p>
-        Esta política informa cómo SALVATORE BLACKWORK TATTO, como marca del estudio de tatuaje,
-        trata los datos personales de las personas que visitan este sitio, solicitan información o
-        se ponen en contacto con el estudio.
-      </p>
-
       <h2>1. Responsable del tratamiento</h2>
       <p>
         El responsable legal, razón social, NIT, domicilio y correo de atención de derechos deben
@@ -395,12 +389,6 @@ export function CookiePolicyPage() {
       title="Política de Cookies"
       updated="enero 2026"
     >
-      <p>
-        Las cookies son pequeños archivos de texto que los sitios web almacenan en su dispositivo
-        cuando los visita. Permiten que el sitio recuerde sus preferencias y mejoran su experiencia
-        de navegación.
-      </p>
-
       <h2>¿Qué son las cookies?</h2>
       <p>
         Las cookies son pequeños archivos de texto que los sitios web almacenan en su dispositivo
@@ -441,11 +429,6 @@ export function TermsPage() {
       title="Términos y Condiciones"
       updated="enero 2026"
     >
-      <p>
-        Estos términos establecen las reglas generales de uso del sitio de SALVATORE BLACKWORK
-        TATTO y de las solicitudes de información o cita realizadas a través de sus canales.
-      </p>
-
       <h2>1. Aceptación</h2>
       <p>
         La navegación y el uso del sitio implican la lectura y aceptación de estos términos. Si no
