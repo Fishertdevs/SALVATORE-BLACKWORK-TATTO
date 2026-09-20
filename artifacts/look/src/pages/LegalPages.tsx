@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useEffect } from "react";
+import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 
 const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -28,6 +29,14 @@ function LegalLayout({
     <main className="legal-page">
       <header className="legal-header">
         <a className="legal-logo" href={appBasePath}>SALVATORE BLACKWORK TATTO</a>
+        <nav className="legal-main-nav" aria-label="Navegación principal">
+          <a href={`${appBasePath}#home-hero`}>INICIO</a>
+          <a href={`${appBasePath}#studio-about`}>ACERCA DE</a>
+          <a href={`${appBasePath}#studio-portfolio`}>PORTFOLIO</a>
+          <a href={`${appBasePath}#studio-services`}>SERVICIOS</a>
+          <a href={`${appBasePath}#studio-booking`}>RESERVAS</a>
+          <a href={`${appBasePath}#studio-contact`}>CONTACTO</a>
+        </nav>
         <a className="legal-back-link" href={appBasePath}>Volver al estudio</a>
       </header>
       <div className="legal-container">
@@ -41,10 +50,35 @@ function LegalLayout({
         </div>
         <article className="legal-content">{children}</article>
       </div>
-      <footer className="legal-footer">
-        <a href={`${appBasePath}politica-de-cookies`}>Política de Cookies</a>
-        <a href={`${appBasePath}politica-de-privacidad`}>Política de Privacidad</a>
-        <a href={`${appBasePath}terminos-y-condiciones`}>Términos y Condiciones</a>
+      <footer className="site-footer legal-site-footer">
+        <div className="footer-wordmark" aria-hidden="true">SALVATORE BLACKWORK TATTO</div>
+        <div className="footer-center">
+          <p className="footer-design-label">ALTERNATIVE DESIGN</p>
+          <p className="footer-style-line">ORNAMENTAL . TRIBAL . BLACKWORK</p>
+          <div className="footer-socials" aria-label="Redes y contacto">
+            <a className="footer-social" href={`${appBasePath}#studio-contact`} aria-label="Instagram">
+              <SiInstagram size={16} aria-hidden="true" />
+            </a>
+            <a className="footer-social" href={`${appBasePath}#studio-contact`} aria-label="WhatsApp">
+              <SiWhatsapp size={16} aria-hidden="true" />
+            </a>
+            <a className="footer-social" href={`${appBasePath}#studio-contact`} aria-label="TikTok">
+              <SiTiktok size={16} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="footer-rule" aria-hidden="true" />
+          <nav className="footer-legal-nav" aria-label="Enlaces legales">
+            <a href={`${appBasePath}terminos-y-condiciones`}>TÉRMINOS Y CONDICIONES</a>
+            <div className="footer-policy-row">
+              <a href={`${appBasePath}politica-de-cookies`}>POLÍTICA DE COOKIES</a>
+              <span aria-hidden="true">·</span>
+              <a href={`${appBasePath}politica-de-privacidad`}>POLÍTICA DE PRIVACIDAD</a>
+            </div>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2026 SALVATORE BLACKWORK TATTO</span>
+        </div>
       </footer>
     </main>
   );
