@@ -1256,6 +1256,7 @@ body,
 .legal-header .nav-right {
   display: flex;
   align-items: center;
+  margin-left: auto;
   gap: clamp(1.25rem, 1.5vw, 2rem);
   font-weight: 500;
 }
@@ -1264,9 +1265,11 @@ body,
   display: flex;
   align-items: center;
   gap: clamp(2rem, 1.667vw, 2.667rem);
+  width: max-content;
   list-style: none;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
 }
 
 .legal-header .nav-links li {
@@ -1395,6 +1398,12 @@ body,
     top: 0;
     right: 0;
     left: 0;
+  }
+
+  .legal-header .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .legal-container {
