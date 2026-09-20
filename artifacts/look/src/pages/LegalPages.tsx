@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+import { gsap } from "gsap";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
@@ -133,10 +134,10 @@ function LegalLayout({
           <a href={`${appBasePath}#studio-booking`}>RESERVAS</a>
           <a href={`${appBasePath}#studio-contact`}>CONTACTO</a>
         </nav>
-        <a className="legal-back-link" href={appBasePath}>Volver al estudio</a>
       </header>
       <LegalMobileHeader />
       <div className="legal-container">
+        <a className="legal-inline-back" href={appBasePath}>← VOLVER AL INICIO</a>
         <h1>{title}</h1>
         <p className="legal-updated">Última actualización: {updated}</p>
         <article className="legal-content">{children}</article>
