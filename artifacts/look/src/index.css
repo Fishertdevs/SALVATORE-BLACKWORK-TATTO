@@ -131,71 +131,44 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: red; /*replace with H S L */
+  --background: 45 24% 96%;
+  --foreground: 0 0% 11%;
+  --border: 0 0% 76%;
+  --card: 45 24% 96%;
+  --card-foreground: 0 0% 11%;
+  --card-border: 0 0% 76%;
+  --sidebar: 45 24% 96%;
+  --sidebar-foreground: 0 0% 11%;
+  --sidebar-border: 0 0% 76%;
+  --sidebar-primary: 3 77% 52%;
+  --sidebar-primary-foreground: 45 24% 96%;
+  --sidebar-accent: 45 20% 90%;
+  --sidebar-accent-foreground: 0 0% 11%;
+  --sidebar-ring: 3 77% 52%;
+  --popover: 45 24% 96%;
+  --popover-foreground: 0 0% 11%;
+  --popover-border: 0 0% 76%;
+  --primary: 3 77% 52%;
+  --primary-foreground: 45 24% 96%;
+  --secondary: 0 0% 11%;
+  --secondary-foreground: 45 24% 96%;
+  --muted: 45 16% 90%;
+  --muted-foreground: 0 0% 38%;
+  --accent: 3 77% 52%;
+  --accent-foreground: 45 24% 96%;
+  --destructive: 3 77% 52%;
+  --destructive-foreground: 45 24% 96%;
+  --input: 0 0% 76%;
+  --ring: 3 77% 52%;
+  --chart-1: 3 77% 52%;
+  --chart-2: 0 0% 11%;
+  --chart-3: 45 20% 70%;
+  --chart-4: 45 30% 55%;
+  --chart-5: 0 0% 38%;
 
-  --foreground: red; /*replace with H S L */
-
-  --border: red; /*replace with H S L */
-
-  --card: red; /*replace with H S L */
-
-  --card-foreground: red; /*replace with H S L */
-
-  --card-border: red; /*replace with H S L */
-
-  --sidebar: red; /*replace with H S L */
-
-  --sidebar-foreground: red; /*replace with H S L */
-
-  --sidebar-border: red; /*replace with H S L */
-
-  --sidebar-primary: red; /*replace with H S L */
-
-  --sidebar-primary-foreground: red; /*replace with H S L */
-
-  --sidebar-accent: red; /*replace with H S L */
-
-  --sidebar-accent-foreground: red; /*replace with H S L */
-
-  --sidebar-ring: red; /*replace with H S L */
-
-  --popover: red; /*replace with H S L */
-
-  --popover-foreground: red; /*replace with H S L */
-
-  --popover-border: red; /*replace with H S L */
-
-  --primary: red; /*replace with H S L */
-
-  --primary-foreground: red; /*replace with H S L */
-
-  --secondary: red; /*replace with H S L */
-
-  --secondary-foreground: red; /*replace with H S L */
-
-  --muted: red; /*replace with H S L */
-
-  --muted-foreground: red; /*replace with H S L */
-
-  --accent: red; /*replace with H S L */
-
-  --accent-foreground: red; /*replace with H S L */
-
-  --destructive: red; /*replace with H S L */
-
-  --destructive-foreground: red; /*replace with H S L */
-
-  --input: red; /*replace with H S L */
-  --ring: red; /*replace with H S L */
-  --chart-1: red; /*replace with H S L */
-  --chart-2: red; /*replace with H S L */
-  --chart-3: red; /*replace with H S L */
-  --chart-4: red; /*replace with H S L */
-  --chart-5: red; /*replace with H S L */
-
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: Georgia, serif;
-  --app-font-mono: Menlo, monospace;
+  --app-font-sans: 'Helvetica Neue', sans-serif;
+  --app-font-serif: 'Beautique Display', serif;
+  --app-font-mono: 'Helvetica Neue', monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00); /*replace with H S L */
   --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00); /*replace with H S L */
@@ -249,68 +222,40 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: red; /*replace with H S L */
-
-  --foreground: red; /*replace with H S L */
-
-  --border: red; /*replace with H S L */
-
-  --card: red; /*replace with H S L */
-
-  --card-foreground: red; /*replace with H S L */
-
-  --card-border: red; /*replace with H S L */
-
-  --sidebar: red; /*replace with H S L */
-
-  --sidebar-foreground: red; /*replace with H S L */
-
-  --sidebar-border: red; /*replace with H S L */
-
-  --sidebar-primary: red; /*replace with H S L */
-
-  --sidebar-primary-foreground: red; /*replace with H S L */
-
-  --sidebar-accent: red; /*replace with H S L */
-
-  --sidebar-accent-foreground: red; /*replace with H S L */
-
-  --sidebar-ring: red; /*replace with H S L */
-
-  --popover: red; /*replace with H S L */
-
-  --popover-foreground: red; /*replace with H S L */
-
-  --popover-border: red; /*replace with H S L */
-
-  --primary: red; /*replace with H S L */
-
-  --primary-foreground: red; /*replace with H S L */
-
-  --secondary: red; /*replace with H S L */
-
-  --secondary-foreground: red; /*replace with H S L */
-
-  --muted: red; /*replace with H S L */
-
-  --muted-foreground: red; /*replace with H S L */
-
-  --accent: red; /*replace with H S L */
-
-  --accent-foreground: red; /*replace with H S L */
-
-  --destructive: red; /*replace with H S L */
-
-  --destructive-foreground: red; /*replace with H S L */
-
-  /* Used as the border around inputs. Dark mode: Should be a border that is light enough to have high contrast when rendered on a --card background. More contrast than standard --border */
-  --input: red; /*replace with H S L */
-  --ring: red; /*replace with H S L */
-  --chart-1: red; /*replace with H S L */
-  --chart-2: red; /*replace with H S L */
-  --chart-3: red; /*replace with H S L */
-  --chart-4: red; /*replace with H S L */
-  --chart-5: red; /*replace with H S L */
+  --background: 0 0% 8%;
+  --foreground: 45 24% 96%;
+  --border: 0 0% 28%;
+  --card: 0 0% 11%;
+  --card-foreground: 45 24% 96%;
+  --card-border: 0 0% 28%;
+  --sidebar: 0 0% 8%;
+  --sidebar-foreground: 45 24% 96%;
+  --sidebar-border: 0 0% 28%;
+  --sidebar-primary: 3 77% 52%;
+  --sidebar-primary-foreground: 45 24% 96%;
+  --sidebar-accent: 0 0% 16%;
+  --sidebar-accent-foreground: 45 24% 96%;
+  --sidebar-ring: 3 77% 52%;
+  --popover: 0 0% 11%;
+  --popover-foreground: 45 24% 96%;
+  --popover-border: 0 0% 28%;
+  --primary: 3 77% 52%;
+  --primary-foreground: 45 24% 96%;
+  --secondary: 45 24% 96%;
+  --secondary-foreground: 0 0% 11%;
+  --muted: 0 0% 16%;
+  --muted-foreground: 45 12% 72%;
+  --accent: 3 77% 52%;
+  --accent-foreground: 45 24% 96%;
+  --destructive: 3 77% 52%;
+  --destructive-foreground: 45 24% 96%;
+  --input: 0 0% 28%;
+  --ring: 3 77% 52%;
+  --chart-1: 3 77% 52%;
+  --chart-2: 45 24% 96%;
+  --chart-3: 0 0% 38%;
+  --chart-4: 45 20% 70%;
+  --chart-5: 45 12% 72%;
 
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
@@ -3324,43 +3269,120 @@ body,
 }
 
 .page-contact-hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
   gap: 8vw;
-  min-height: 86vh;
+  min-height: 84vh;
   align-items: center;
   padding: 8vw 7vw 10vw;
+  color: #FFF8C9;
+  background: #0B0A0A;
+  overflow: hidden;
+}
+
+.page-contact-hero::before {
+  position: absolute;
+  top: 0;
+  right: 7vw;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 248, 201, 0.14);
+  content: "";
+}
+
+.page-contact-title {
+  position: relative;
+  z-index: 1;
+  padding: 3vw 0 2vw;
 }
 
 .page-contact-title h1 {
-  margin-bottom: 42px;
+  color: #FFF8C9;
+}
+
+.page-contact-title > p {
+  color: rgba(255, 248, 201, 0.76);
+}
+
+.page-contact-location {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(42px, 7vw, 86px);
+  color: rgba(255, 248, 201, 0.72);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.page-contact-location span:last-child {
+  padding-left: 14px;
+  border-left: 1px solid rgba(255, 248, 201, 0.28);
+  color: #E63027;
+}
+
+.page-contact-location-mark {
+  width: 7px;
+  height: 7px;
+  background: #E63027;
+  transform: rotate(45deg);
 }
 
 .page-contact-image {
+  position: relative;
+  z-index: 1;
   height: min(68vh, 720px);
   margin: 0;
   overflow: hidden;
-  background: #e7dfaa;
+  background: #E63027;
+  border: 1px solid rgba(255, 248, 201, 0.18);
 }
 
 .page-contact-image img {
   object-position: center top;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.12);
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.page-contact-image:hover img {
+  transform: scale(1.035);
+}
+
+.page-contact-image figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #FFF8C9;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .page-contact-details {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1.35fr 1fr 0.8fr 1.35fr;
   margin: 0 7vw 11vw;
   border-top: 1px solid rgba(23, 21, 21, 0.24);
 }
 
 .page-contact-details > div {
+  position: relative;
   min-height: 190px;
   padding: 24px 28px 28px 0;
   border-bottom: 1px solid rgba(23, 21, 21, 0.24);
 }
 
-.page-contact-details > div:nth-child(even) {
+.page-contact-details > div + div {
   padding-left: 28px;
   border-left: 1px solid rgba(23, 21, 21, 0.24);
 }
@@ -3374,6 +3396,12 @@ body,
   line-height: 0.9;
   text-decoration: none;
   overflow-wrap: anywhere;
+  transition: color 180ms ease;
+}
+
+.page-contact-details a:hover,
+.page-contact-details a:focus-visible {
+  color: #E63027;
 }
 
 .page-contact-details p {
@@ -3385,6 +3413,33 @@ body,
 
 .page-contact-details .tattoo-red-link {
   margin-top: 34px;
+}
+
+.page-contact-detail-index {
+  position: absolute;
+  right: 0;
+  bottom: 26px;
+  color: #E63027;
+  font-family: 'Beautique Display', serif;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.page-contact-detail-booking {
+  padding-right: 22px !important;
+  background: #E63027;
+  border-color: #E63027 !important;
+  color: #FFF8C9;
+}
+
+.page-contact-detail-booking .tattoo-eyebrow,
+.page-contact-detail-booking .tattoo-red-link,
+.page-contact-detail-booking .page-contact-detail-index {
+  color: #FFF8C9;
+}
+
+.page-contact-detail-booking .tattoo-red-link {
+  border-bottom-color: #FFF8C9;
 }
 
 .page-contact-statement {
@@ -3661,10 +3716,31 @@ body,
   }
 
   .page-contact-details > div,
-  .page-contact-details > div:nth-child(even) {
+  .page-contact-details > div + div {
     min-height: 150px;
     padding: 24px 0;
     border-left: 0;
+  }
+
+  .page-contact-hero::before {
+    right: 20px;
+  }
+
+  .page-contact-title {
+    padding: 0;
+  }
+
+  .page-contact-location {
+    flex-wrap: wrap;
+    row-gap: 14px;
+    margin-top: 48px;
+  }
+
+  .page-contact-image figcaption {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    font-size: 8px;
   }
 
   .page-contact-details a {
@@ -3674,6 +3750,15 @@ body,
 
   .page-contact-details .tattoo-red-link {
     margin-top: 25px;
+  }
+
+  .page-contact-detail-index {
+    right: 0;
+    bottom: 22px;
+  }
+
+  .page-contact-detail-booking {
+    padding-right: 18px !important;
   }
 
   .page-contact-statement {

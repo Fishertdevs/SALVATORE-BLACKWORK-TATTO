@@ -357,16 +357,38 @@ export function ContactPage({ language }: StudioProps) {
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
           <p>{copy.intro}</p>
+          <div className="page-contact-location" aria-label={language === "es" ? "Ubicación del estudio" : "Studio location"}>
+            <span className="page-contact-location-mark" aria-hidden="true" />
+            <span>{language === "es" ? "BOGOTÁ / CO" : "BOGOTÁ / CO"}</span>
+            <span>{copy.appointment}</span>
+          </div>
         </div>
         <figure className="page-contact-image">
           <img src={contactImg} alt={language === "es" ? "Retrato editorial con tatuajes blackwork" : "Editorial portrait with blackwork tattoos"} />
+          <figcaption><span>PLACA 06</span><span>BLACKWORK / BOGOTÁ</span></figcaption>
         </figure>
       </section>
       <section className="page-contact-details">
-        <div><Eyebrow>{copy.email}</Eyebrow><a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a></div>
-        <div><Eyebrow>{copy.social}</Eyebrow><a href="#">@SALVATOREBLACKWORK</a></div>
-        <div><Eyebrow>{copy.hours}</Eyebrow><p>{copy.days}<br />{copy.appointment}</p></div>
-        <div><Eyebrow>{copy.booking}</Eyebrow><a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a></div>
+        <div className="page-contact-detail">
+          <Eyebrow>{copy.email}</Eyebrow>
+          <a href="mailto:hello@salvatoreblackwork.tattoo">HELLO@SALVATOREBLACKWORK.TATTOO</a>
+          <span className="page-contact-detail-index">01</span>
+        </div>
+        <div className="page-contact-detail">
+          <Eyebrow>{copy.social}</Eyebrow>
+          <a href="#">@SALVATOREBLACKWORK</a>
+          <span className="page-contact-detail-index">02</span>
+        </div>
+        <div className="page-contact-detail">
+          <Eyebrow>{copy.hours}</Eyebrow>
+          <p>{copy.days}<br />{copy.appointment}</p>
+          <span className="page-contact-detail-index">03</span>
+        </div>
+        <div className="page-contact-detail page-contact-detail-booking">
+          <Eyebrow>{copy.booking}</Eyebrow>
+          <a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a>
+          <span className="page-contact-detail-index">04</span>
+        </div>
       </section>
       <section className="page-contact-statement">
         <h2>{copy.statement[0]}<br /><em>{copy.statement[1]}.</em></h2>
