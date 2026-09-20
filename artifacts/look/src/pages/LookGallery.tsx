@@ -664,9 +664,14 @@ export default function LookGallery() {
         : isFooterTarget
           ? footerReplayFinal
           : welcomeReplayFinal;
+      const replayInitial = isHeroTarget
+        ? heroReplayInitial
+        : isFooterTarget
+          ? footerReplayInitial
+          : welcomeReplayInitial;
       gsap.fromTo(
         el,
-        isHeroTarget ? heroReplayInitial : welcomeReplayInitial,
+        replayInitial,
         {
           ...replayFinal,
           delay: Number.parseFloat(el.dataset.delay ?? "0s") || 0,
