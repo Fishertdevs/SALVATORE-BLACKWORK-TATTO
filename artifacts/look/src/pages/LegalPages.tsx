@@ -1,18 +1,114 @@
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
+import { getInitialLanguage, persistLanguage } from "@/i18n";
+import type { Language } from "@/i18n";
 
 const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
+const legalNav = [
+  ["INICIO", "#home-hero"],
+  ["ACERCA DE", "#studio-about"],
+  ["PORTFOLIO", "#studio-portfolio"],
+  ["SERVICIOS", "#studio-services"],
+  ["RESERVAS", "#studio-booking"],
+  ["CONTACTO", "#studio-contact"],
+] as const;
+
+function LegalMobileHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  const changeLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    persistLanguage(nextLanguage);
+  };
+
+  return (
+    <>
+      <header className={`mobile-header legal-mobile-header ${isMenuOpen ? "is-menu-open" : ""}`}>
+        <div className="mobile-logo-text">SALVATORE BLACKWORK TATTO</div>
+        <div className="mobile-header-actions">
+          <div className="language-switch" aria-label="Language selector">
+            <button
+              type="button"
+              className={`language-option ${language === "es" ? "is-active" : ""}`}
+              aria-pressed={language === "es"}
+              onClick={() => changeLanguage("es")}
+            >
+              ES
+            </button>
+            <span className="language-divider" aria-hidden="true">/</span>
+            <button
+              type="button"
+              className={`language-option ${language === "en" ? "is-active" : ""}`}
+              aria-pressed={language === "en"}
+              onClick={() => changeLanguage("en")}
+            >
+              EN
+            </button>
+          </div>
+          <button
+            type="button"
+            className="mobile-hamburger"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMenuOpen}
+            aria-controls="legal-mobile-navigation"
+          >
+            <span className="mobile-hamburger-line" />
+            <span className="mobile-hamburger-line" />
+            <span className="mobile-hamburger-line" />
+          </button>
+        </div>
+      </header>
+      <button
+        type="button"
+        className={`mobile-menu-backdrop ${isMenuOpen ? "is-visible" : ""}`}
+        onClick={() => setIsMenuOpen(false)}
+        aria-label="Cerrar menú"
+        tabIndex={isMenuOpen ? 0 : -1}
+      />
+      <div
+        id="legal-mobile-navigation"
+        className={`mobile-menu-overlay ${isMenuOpen ? "is-open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navegación principal"
+        aria-hidden={!isMenuOpen}
+      >
+        <nav className="mobile-menu-links">
+          {legalNav.map(([label, hash]) => (
+            <a
+              key={label}
+              href={`${appBasePath}${hash}`}
+              className="mobile-menu-link"
+              onClick={() => setIsMenuOpen(false)}
+              tabIndex={isMenuOpen ? 0 : -1}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </>
+  );
+}
+
 function LegalLayout({
-  eyebrow,
   title,
   updated,
   children,
 }: {
-  eyebrow: string;
   title: string;
   updated: string;
   children: ReactNode;
@@ -39,15 +135,10 @@ function LegalLayout({
         </nav>
         <a className="legal-back-link" href={appBasePath}>Volver al estudio</a>
       </header>
+      <LegalMobileHeader />
       <div className="legal-container">
-        <p className="legal-eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         <p className="legal-updated">Última actualización: {updated}</p>
-        <div className="legal-disclaimer" role="note">
-          <strong>Información general:</strong> este documento es una plantilla informativa y no
-          constituye asesoramiento legal. El titular debe revisar y completar sus datos antes de
-          publicarlo de forma definitiva.
-        </div>
         <article className="legal-content">{children}</article>
       </div>
       <footer className="site-footer legal-site-footer">
@@ -87,9 +178,8 @@ function LegalLayout({
 export function PrivacyPolicyPage() {
   return (
     <LegalLayout
-      eyebrow="SALVATORE BLACKWORK TATTO / PRIVACIDAD"
-      title="Política de Privacidad y Tratamiento de Datos"
-      updated="20 de septiembre de 2026"
+      title="Política de Privacidad"
+      updated="enero 2026"
     >
       <p>
         Esta política informa cómo SALVATORE BLACKWORK TATTO, como marca del estudio de tatuaje,
@@ -176,73 +266,44 @@ export function PrivacyPolicyPage() {
 export function CookiePolicyPage() {
   return (
     <LegalLayout
-      eyebrow="SALVATORE BLACKWORK TATTO / COOKIES"
       title="Política de Cookies"
-      updated="20 de septiembre de 2026"
+      updated="enero 2026"
     >
       <p>
-        Esta política explica cómo este sitio utiliza cookies y tecnologías similares, incluido el
-        almacenamiento local del navegador, para funcionar y recordar las preferencias de quienes
-        lo visitan.
+        Las cookies son pequeños archivos de texto que los sitios web almacenan en su dispositivo
+        cuando los visita. Permiten que el sitio recuerde sus preferencias y mejoran su experiencia
+        de navegación.
       </p>
 
-      <h2>1. ¿Qué son las cookies?</h2>
+      <h2>¿Qué son las cookies?</h2>
       <p>
-        Son pequeños archivos o identificadores que un sitio guarda en el navegador para recordar
-        una sesión, una preferencia o información técnica. El almacenamiento local cumple una
-        función similar, aunque técnicamente no es una cookie.
+        Las cookies son pequeños archivos de texto que los sitios web almacenan en su dispositivo
+        cuando los visita. Permiten que el sitio recuerde sus preferencias y mejoran su experiencia
+        de navegación.
       </p>
 
-      <h2>2. Tecnologías utilizadas actualmente</h2>
-      <div className="legal-table" role="table" aria-label="Tecnologías utilizadas">
-        <div className="legal-table-row legal-table-head" role="row">
-          <span role="columnheader">Tecnología</span>
-          <span role="columnheader">Finalidad</span>
-          <span role="columnheader">Duración</span>
-        </div>
-        <div className="legal-table-row" role="row">
-          <span>Preferencia de idioma</span>
-          <span>Recordar si prefieres español o inglés.</span>
-          <span>Persistente hasta borrado</span>
-        </div>
-        <div className="legal-table-row" role="row">
-          <span>Consentimiento de cookies</span>
-          <span>Recordar tu decisión sobre cookies no esenciales.</span>
-          <span>Persistente hasta borrado</span>
-        </div>
-      </div>
+      <h2>Cookies que utilizamos</h2>
       <p>
-        Actualmente el sitio no activa cookies de publicidad, perfiles de navegación ni analítica
-        de terceros sin una acción afirmativa del visitante. Si se agregan nuevas herramientas,
-        esta tabla deberá actualizarse antes de activarlas.
+        Este sitio web utiliza únicamente cookies esenciales para su funcionamiento correcto. No
+        utilizamos cookies de seguimiento o publicidad de terceros.
       </p>
 
-      <h2>3. Gestión del consentimiento</h2>
+      <h2>Cookies esenciales</h2>
       <p>
-        Al entrar por primera vez verás un banner que permite aceptar todas las categorías,
-        rechazar las no esenciales o configurar tu elección. Puedes borrar los datos del sitio
-        desde la configuración del navegador para volver a ver el banner.
+        Estas cookies son necesarias para que el sitio web funcione correctamente e incluyen
+        preferencias de idioma y consentimiento de cookies. No pueden ser desactivadas.
       </p>
 
-      <h2>4. Cookies de terceros</h2>
+      <h2>Control de cookies</h2>
       <p>
-        No se deben incorporar píxeles publicitarios, herramientas de analítica, mapas, videos
-        incrustados u otros servicios que instalen cookies sin identificarlos en esta política y
-        obtener el consentimiento que corresponda.
+        Puede gestionar las cookies a través de la configuración de su navegador. Tenga en cuenta
+        que deshabilitar las cookies esenciales puede afectar el funcionamiento del sitio web.
       </p>
 
-      <h2>5. Marco colombiano</h2>
+      <h2>Más información</h2>
       <p>
-        Cuando las cookies o tecnologías similares se relacionen con datos personales, su uso se
-        administrará conforme a la Ley 1581 de 2012, el Decreto 1074 de 2015 y las instrucciones
-        de la SIC, respetando información previa, finalidad, seguridad y derechos del titular.
-      </p>
-
-      <h2>6. Contacto y cambios</h2>
-      <p>
-        Si tienes preguntas sobre esta política o deseas ejercer tus derechos, utiliza los canales
-        de contacto publicados por el estudio. La política puede cambiar cuando se incorporen
-        nuevas tecnologías o cambie la normativa aplicable.
+        Para obtener más información sobre cómo utilizamos las cookies, no dude en contactarnos a
+        través de los canales disponibles en nuestro sitio.
       </p>
     </LegalLayout>
   );
@@ -251,9 +312,8 @@ export function CookiePolicyPage() {
 export function TermsPage() {
   return (
     <LegalLayout
-      eyebrow="SALVATORE BLACKWORK TATTO / TÉRMINOS"
       title="Términos y Condiciones"
-      updated="20 de septiembre de 2026"
+      updated="enero 2026"
     >
       <p>
         Estos términos establecen las reglas generales de uso del sitio de SALVATORE BLACKWORK
