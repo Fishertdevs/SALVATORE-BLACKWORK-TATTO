@@ -1393,6 +1393,10 @@ body,
   .legal-container h1 {
     transform: translateY(-52px);
   }
+
+  .legal-updated {
+    transform: translateY(-28px);
+  }
 }
 
 .legal-content h2 {
@@ -1760,6 +1764,7 @@ body,
     font-size: clamp(27px, 9vw, 56px);
     letter-spacing: -0.065em;
     white-space: nowrap;
+    transform: translateY(-24px);
   }
 
   .legal-disclaimer {
@@ -1784,8 +1789,8 @@ body,
 
   .legal-content p,
   .legal-content li {
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   .legal-table-row {
