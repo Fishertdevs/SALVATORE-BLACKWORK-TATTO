@@ -1793,6 +1793,10 @@ body,
     line-height: 1.55;
   }
 
+  .legal-content h2:first-of-type {
+    margin-top: 20px;
+  }
+
   .legal-table-row {
     grid-template-columns: 1fr;
     gap: 5px;
