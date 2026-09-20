@@ -1764,7 +1764,7 @@ body,
     font-size: clamp(27px, 9vw, 56px);
     letter-spacing: -0.065em;
     white-space: nowrap;
-    transform: translateY(-24px);
+    transform: none;
   }
 
   .legal-disclaimer {
