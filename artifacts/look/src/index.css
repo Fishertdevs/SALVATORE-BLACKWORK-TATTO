@@ -1389,6 +1389,12 @@ body,
   font-size: clamp(28px, 3.1vw, 40px);
 }
 
+@media (min-width: 761px) {
+  .legal-container h1 {
+    transform: translateY(-24px);
+  }
+}
+
 .legal-content h2 {
   margin: 34px 0 14px;
   padding-top: 24px;
