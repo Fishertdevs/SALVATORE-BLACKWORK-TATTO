@@ -1041,6 +1041,7 @@ export default function LookGallery() {
         gsap.set(fullContent, { opacity: 1, y: 0 });
         if (navbar) {
           gsap.set(navbar, { y: "0%", autoAlpha: 1 });
+          navbar.classList.add("is-hero-visible");
           navbar.style.transform = "none";
           navbar.style.willChange = "auto";
         }
@@ -1089,7 +1090,17 @@ export default function LookGallery() {
       if (navbar) {
         tl.to(
           navbar,
-          { y: "0%", autoAlpha: 1, duration: 1.1, ease: "expo.out" },
+          {
+            y: "0%",
+            autoAlpha: 1,
+            duration: 1.1,
+            ease: "expo.out",
+            onComplete: () => {
+              navbar.classList.add("is-hero-visible");
+              navbar.style.transform = "none";
+              navbar.style.willChange = "auto";
+            },
+          },
           ZOOM_DURATION - 0.5,
         );
       }
@@ -1194,6 +1205,7 @@ export default function LookGallery() {
           stagger: 0.04,
         });
       if (navbar) {
+        navbar.classList.remove("is-hero-visible");
         tl.to(
           navbar,
           { y: "-100%", autoAlpha: 0, duration: 0.35, ease: "power2.in" },

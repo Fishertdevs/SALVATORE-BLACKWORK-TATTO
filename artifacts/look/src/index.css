@@ -827,6 +827,12 @@ body,
     transform: translateY(-100%);
   }
 
+  .look-root #hero-navbar.is-hero-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
   .look-root #hero-navbar .nav-links {
     position: absolute;
     left: 50%;
