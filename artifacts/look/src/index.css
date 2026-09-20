@@ -1390,6 +1390,17 @@ body,
 }
 
 @media (min-width: 761px) {
+  .legal-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+
+  .legal-container {
+    padding-top: calc(clamp(66px, 9vw, 124px) + 78px);
+  }
+
   .legal-container h1 {
     transform: translateY(-52px);
   }
