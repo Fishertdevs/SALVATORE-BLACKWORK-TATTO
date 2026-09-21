@@ -378,7 +378,12 @@ export function ContactPage({ language }: StudioProps) {
     <StudioFrame id="studio-contact" className="page-contact">
       <section className="page-contact-reference">
         <header className="page-contact-heading">
-          <h1>{copy.title[0]}<br />{copy.title[1]}</h1>
+          <h1>
+            {language === "es" && <span className="page-contact-question page-contact-question-open" aria-hidden="true">?</span>}
+            {copy.title[0].replace(/^¿/, "")}{" "}
+            {copy.title[1].replace(/\?$/, "")}
+            <span className="page-contact-question" aria-hidden="true">?</span>
+          </h1>
         </header>
 
         <section className="page-contact-form-section page-contact-form-layout">
@@ -392,8 +397,9 @@ export function ContactPage({ language }: StudioProps) {
             >
               <iframe
                 title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-74.12%2C4.62%2C-74.02%2C4.71&layer=mapnik&marker=4.668%2C-74.056"
+                src="https://www.google.com/maps?q=4.668,-74.056&z=13&output=embed"
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
               <span>{copy.mapLabel}</span>
             </a>

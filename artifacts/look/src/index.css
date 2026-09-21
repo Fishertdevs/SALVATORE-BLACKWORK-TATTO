@@ -4727,13 +4727,28 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(2.2rem, 4.4vw, 5.4rem);
+  font-size: clamp(1.65rem, 4.1vw, 5.4rem);
   font-weight: 400;
   letter-spacing: -0.04em;
-  line-height: 0.9;
+  line-height: 1;
   text-transform: uppercase;
   font-style: normal;
   font-synthesis: none;
+  white-space: nowrap;
+}
+
+.page-contact-heading h1 .page-contact-question {
+  display: inline-block;
+  font: inherit;
+  color: inherit;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.page-contact-heading h1 .page-contact-question-open {
+  margin-right: 0.02em;
+  transform: rotate(180deg) translateY(-0.04em);
+  transform-origin: center;
 }
 
 .page-contact-form-layout {
@@ -4829,7 +4844,7 @@ body,
 
 @media (max-width: 600px) {
   .page-contact-heading h1 {
-    font-size: clamp(2.4rem, 10vw, 4.6rem);
+    font-size: clamp(0.92rem, 4.8vw, 2.3rem);
   }
 
   .page-contact-cluster {
