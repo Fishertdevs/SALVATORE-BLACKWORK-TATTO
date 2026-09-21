@@ -1138,6 +1138,12 @@ body,
   color: #ffffff;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
+
+.look-root .footer-social svg,
+.mobile-look-root .footer-social svg {
+  width: 20px;
+  height: 20px;
+}
 .look-root .footer-social:hover,
 .mobile-look-root .footer-social:hover {
   border-color: #ffffff;
