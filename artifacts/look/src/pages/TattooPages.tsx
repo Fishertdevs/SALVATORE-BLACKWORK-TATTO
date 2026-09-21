@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
-import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
@@ -420,14 +419,31 @@ export function ContactPage({ language }: StudioProps) {
             </a>
 
             <div className="page-contact-form-panel">
+              <div className="page-contact-panel-tabs">
+                <a className="is-active" href="#studio-contact">{copy.contactLabel}</a>
+                <a href="#studio-booking">{copy.bookingLabel}</a>
+              </div>
+
               <aside className="page-contact-form-aside">
-                <Eyebrow>{formCopy.asideEyebrow}</Eyebrow>
-                <p>{formCopy.aside[0]}</p>
-                <p>{formCopy.aside[1]}</p>
-                <div className="page-contact-form-links">
-                  <a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a>
-                  <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a>
-                </div>
+                <p className="page-contact-panel-intro">{copy.intro}</p>
+                <dl className="page-contact-info-list">
+                  <div>
+                    <dt>{copy.hours}</dt>
+                    <dd>{copy.days}<br />{copy.appointment}</dd>
+                  </div>
+                  <div>
+                    <dt>{copy.location}</dt>
+                    <dd>{copy.locationNote}</dd>
+                  </div>
+                  <div>
+                    <dt>{copy.email}</dt>
+                    <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
+                  </div>
+                  <div>
+                    <dt>{copy.phone}</dt>
+                    <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
+                  </div>
+                </dl>
               </aside>
 
               <div className="page-contact-form-wrap">
