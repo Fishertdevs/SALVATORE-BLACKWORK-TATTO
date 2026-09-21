@@ -22,6 +22,7 @@ const studioCopy = {
         "Cada pieza comienza con una conversación. Observamos la anatomía, la historia y la energía de quien se sienta frente a nosotros antes de dibujar una sola línea.",
       ],
       process: "DEL CONCEPTO A LA PIEL / 03 PASOS",
+      cta: "CONOCER EL MÉTODO →",
       steps: [
         ["ESCUCHAR", "Entender la idea, el cuerpo y lo que quieres que permanezca."],
         ["DIBUJAR", "Convertir la conversación en una composición clara y propia."],
@@ -108,6 +109,7 @@ const studioCopy = {
         "Every piece begins with a conversation. We study the anatomy, history, and energy of the person in front of us before drawing a single line.",
       ],
       process: "FROM CONCEPT TO SKIN / 03 STEPS",
+      cta: "MEET THE METHOD →",
       steps: [
         ["LISTEN", "Understand the idea, the body, and what you want to keep."],
         ["DRAW", "Turn the conversation into a clear composition of your own."],
@@ -209,23 +211,29 @@ export function AboutPage({ language }: StudioProps) {
   const copy = studioCopy[language].about;
   return (
     <StudioFrame id="studio-about" className="page-about">
-      <section className="page-about-hero">
-        <div className="page-about-title">
+      <section className="page-about-hero page-about-hero-editorial">
+        <header className="page-about-editorial-heading">
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em><br />{copy.title[2]}.</h1>
-          <p>{copy.intro}</p>
-        </div>
-        <figure className="page-about-portrait">
-          <img src={aboutImg} alt={language === "es" ? "Retrato editorial de una modelo con tatuajes blackwork" : "Editorial portrait of a model with blackwork tattoos"} />
-          <figcaption>{copy.studio}</figcaption>
-        </figure>
-      </section>
-      <section className="page-about-story">
-        <div className="page-about-story-label"><Eyebrow>{copy.method}</Eyebrow><span>↓</span></div>
-        <div className="page-about-story-copy">
-          <h2>{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
-          <p>{copy.story[0]}</p>
-          <p>{copy.story[1]}</p>
+          <span>{copy.studio}</span>
+        </header>
+        <div className="page-about-editorial-grid">
+          <article className="page-about-editorial-side page-about-editorial-side-left">
+            <span className="page-about-editorial-index">01 / {language === "es" ? "LA PRÁCTICA" : "THE PRACTICE"}</span>
+            <h2>{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
+            <p>{copy.intro}</p>
+            <a className="tattoo-red-link" href="#studio-services">{copy.cta}</a>
+          </article>
+          <figure className="page-about-portrait">
+            <img src={aboutImg} alt={language === "es" ? "Retrato editorial de una modelo con tatuajes blackwork" : "Editorial portrait of a model with blackwork tattoos"} />
+            <figcaption>{copy.studio}</figcaption>
+          </figure>
+          <article className="page-about-editorial-side page-about-editorial-side-right">
+            <span className="page-about-editorial-index">02 / {language === "es" ? "LA MIRADA" : "THE GAZE"}</span>
+            <h2>{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
+            <p>{copy.story[0]}</p>
+            <p>{copy.story[1]}</p>
+          </article>
         </div>
       </section>
       <section className="page-about-process">

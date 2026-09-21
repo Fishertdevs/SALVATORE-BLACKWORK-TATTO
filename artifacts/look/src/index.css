@@ -4276,13 +4276,8 @@ body,
   min-width: 0;
   flex-direction: column;
   padding: clamp(22px, 2.3vw, 38px);
-  color: #fff8e8;
-  background-color: #151515;
-  background-image:
-    linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%),
-    linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%);
-  background-position: 0 0, 24px 24px;
-  background-size: 48px 48px;
+  color: #fff;
+  background: #111;
 }
 
 .page-contact-card-tabs {
@@ -4290,7 +4285,7 @@ body,
   align-items: center;
   gap: 20px;
   border-bottom: 1px solid rgba(255, 248, 232, 0.25);
-  color: rgba(255, 248, 232, 0.52);
+  color: rgba(255, 255, 255, 0.52);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -4305,7 +4300,7 @@ body,
 }
 
 .page-contact-card-tabs .is-active {
-  color: #fff8e8;
+  color: #fff;
   border-bottom: 2px solid #E63027;
 }
 
@@ -4339,7 +4334,7 @@ body,
 
 .page-contact-card-list dd {
   margin: 0;
-  color: rgba(255, 248, 232, 0.84);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 11px;
   line-height: 1.45;
   overflow-wrap: anywhere;
@@ -4370,17 +4365,17 @@ body,
   justify-content: center;
   width: 28px;
   height: 28px;
-  color: #fff8e8;
-  border: 1px solid rgba(255, 248, 232, 0.38);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.38);
   border-radius: 50%;
   transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
 
 .page-contact-card-socials a:hover,
 .page-contact-card-socials a:focus-visible {
-  color: #151515;
-  background: #fff8e8;
-  border-color: #fff8e8;
+  color: #111;
+  background: #fff;
+  border-color: #fff;
 }
 
 .page-contact-map,
@@ -4496,5 +4491,309 @@ body,
   .page-contact-map iframe,
   .page-contact-portrait img {
     min-height: 112vw;
+  }
+}
+
+/* About section — a direct editorial breakdown of the hero language */
+.page-about-hero-editorial {
+  display: block;
+  min-height: 0;
+  padding: clamp(72px, 8vw, 132px) clamp(20px, 4.8vw, 76px) clamp(90px, 10vw, 150px);
+  background: #fff;
+}
+
+.page-about-editorial-heading {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  max-width: 1380px;
+  margin: 0 auto clamp(42px, 5vw, 76px);
+}
+
+.page-about-editorial-heading .tattoo-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: clamp(22px, 3vw, 38px);
+}
+
+.page-about-editorial-heading h1 {
+  margin: 0;
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(3.3rem, 7.2vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  line-height: 0.78;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-heading h1 em {
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-about-editorial-heading > span {
+  align-self: end;
+  padding-bottom: 0.4em;
+  color: #E63027;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.page-about-editorial-grid {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.72fr) minmax(320px, 1.12fr) minmax(220px, 0.9fr);
+  gap: clamp(16px, 2.3vw, 34px);
+  max-width: 1380px;
+  min-height: clamp(480px, 47vw, 700px);
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.page-about-editorial-side {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(4px, 2vw, 30px);
+}
+
+.page-about-editorial-side-left {
+  justify-content: center;
+  padding-right: clamp(0px, 1.5vw, 24px);
+}
+
+.page-about-editorial-side-right {
+  justify-content: flex-end;
+  padding-left: clamp(0px, 1.5vw, 24px);
+}
+
+.page-about-editorial-index {
+  display: block;
+  margin-bottom: 26px;
+  color: #E63027;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-side h2 {
+  margin: 0 0 28px;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(2.25rem, 3.6vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-side h2 em {
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-about-editorial-side p {
+  max-width: 310px;
+  margin: 0;
+  color: rgba(23, 21, 21, 0.78);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-about-editorial-side-right p + p {
+  margin-top: 18px;
+}
+
+.page-about-editorial-side .tattoo-red-link {
+  align-self: flex-start;
+  margin-top: 34px;
+}
+
+.page-about-editorial-side-right .page-about-editorial-index {
+  margin-bottom: auto;
+}
+
+.page-about-hero-editorial .page-about-portrait {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #E63027;
+}
+
+.page-about-hero-editorial .page-about-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.page-about-hero-editorial .page-about-portrait:hover img {
+  transform: scale(1.035);
+}
+
+.page-about-hero-editorial .page-about-portrait figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.page-about-process {
+  position: relative;
+  padding: clamp(72px, 8vw, 132px) clamp(20px, 4.8vw, 76px) clamp(96px, 11vw, 164px);
+  background: #111;
+  color: #fff;
+}
+
+.page-about-process > .tattoo-eyebrow {
+  max-width: 1380px;
+  margin: 0 auto;
+  color: #E63027;
+}
+
+.page-about-process-grid {
+  max-width: 1380px;
+  margin: clamp(34px, 4vw, 58px) auto 0;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.page-about-process-grid article {
+  border-right-color: rgba(255, 255, 255, 0.3);
+}
+
+.page-about-process-grid article:last-child {
+  border-right: 0;
+}
+
+.page-about-process-grid strong,
+.page-about-process-grid h3 {
+  color: #fff;
+}
+
+.page-about-process-grid p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  .page-about-editorial-grid {
+    grid-template-columns: minmax(170px, 0.8fr) minmax(280px, 1fr);
+  }
+
+  .page-about-editorial-side-right {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(160px, 0.8fr) 1fr;
+    column-gap: 30px;
+    padding: 36px 0 0;
+    border-top: 1px solid rgba(23, 21, 21, 0.22);
+  }
+
+  .page-about-editorial-side-right .page-about-editorial-index {
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  .page-about-editorial-side-right p + p {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about-hero-editorial {
+    padding: 76px 20px 92px;
+  }
+
+  .page-about-editorial-heading {
+    display: block;
+    margin-bottom: 38px;
+  }
+
+  .page-about-editorial-heading h1 {
+    font-size: clamp(3rem, 14vw, 5.2rem);
+  }
+
+  .page-about-editorial-heading > span {
+    display: block;
+    margin-top: 24px;
+  }
+
+  .page-about-editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+  }
+
+  .page-about-hero-editorial .page-about-portrait {
+    order: -1;
+    height: 126vw;
+    min-height: 420px;
+  }
+
+  .page-about-editorial-side,
+  .page-about-editorial-side-left,
+  .page-about-editorial-side-right {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .page-about-editorial-side-left {
+    order: 0;
+  }
+
+  .page-about-editorial-side-right {
+    order: 1;
+    padding-top: 38px;
+    border-top: 1px solid rgba(23, 21, 21, 0.22);
+  }
+
+  .page-about-editorial-side-right .page-about-editorial-index {
+    margin-bottom: 26px;
+  }
+
+  .page-about-editorial-side h2 {
+    font-size: clamp(2.8rem, 13vw, 5rem);
+  }
+
+  .page-about-process {
+    padding: 76px 20px 96px;
+  }
+
+  .page-about-process-grid {
+    margin-top: 38px;
+  }
+
+  .page-about-process-grid article {
+    border-right: 0;
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .page-about-process-grid article:last-child {
+    border-bottom: 0;
   }
 }
