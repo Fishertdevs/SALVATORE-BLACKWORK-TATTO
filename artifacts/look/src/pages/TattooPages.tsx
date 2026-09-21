@@ -84,7 +84,7 @@ const studioCopy = {
       intro: "Cuéntanos tu idea y construimos juntos la solución.",
       contactLabel: "CONTÁCTANOS",
       bookingLabel: "AGENDAR CITA",
-      location: "BOGOTÁ / CO",
+       location: "FUNZA / CO",
       locationNote: "REMOTO GLOBAL",
       email: "EMAIL",
       social: "REDES",
@@ -171,7 +171,7 @@ const studioCopy = {
       intro: "Tell us your idea and we will build the solution together.",
       contactLabel: "CONTACT US",
       bookingLabel: "BOOK AN APPOINTMENT",
-      location: "BOGOTÁ / CO",
+       location: "FUNZA / CO",
       locationNote: "REMOTE WORLDWIDE",
       email: "EMAIL",
       social: "SOCIAL",
@@ -404,14 +404,14 @@ export function ContactPage({ language }: StudioProps) {
           <div className="page-contact-cluster">
             <a
               className="page-contact-map"
-              href="https://www.openstreetmap.org/?mlat=4.668&mlon=-74.056#map=14/4.668/-74.056"
+              href="https://www.google.com/maps/search/?api=1&query=4.716,-74.212"
               target="_blank"
               rel="noreferrer"
               aria-label={copy.mapLabel}
             >
               <iframe
                 title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
-                src="https://www.google.com/maps?q=4.668,-74.056&z=13&output=embed"
+                src="https://www.google.com/maps?q=4.716,-74.212&z=13&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
