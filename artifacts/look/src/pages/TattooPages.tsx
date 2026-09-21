@@ -379,7 +379,6 @@ export function ContactPage({ language }: StudioProps) {
       <section className="page-contact-reference">
         <header className="page-contact-heading">
           <h1>{copy.title[0]}<br />{copy.title[1]}</h1>
-          <span>{copy.eyebrow}</span>
         </header>
 
         <section className="page-contact-form-section page-contact-form-layout">
@@ -432,7 +431,6 @@ export function ContactPage({ language }: StudioProps) {
 
           <figure className="page-contact-portrait">
             <img src={contactPortraitImg} alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"} />
-            <figcaption>{copy.location}</figcaption>
           </figure>
         </section>
       </section>

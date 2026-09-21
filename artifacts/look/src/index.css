@@ -4727,11 +4727,13 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(2.7rem, 6.4vw, 7.2rem);
+  font-size: clamp(2.2rem, 4.4vw, 5.4rem);
   font-weight: 400;
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 0.9;
   text-transform: uppercase;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .page-contact-form-layout {
@@ -4748,11 +4750,14 @@ body,
   gap: clamp(26px, 4vw, 68px);
   min-width: 0;
   min-height: clamp(500px, 43vw, 640px);
+  padding: clamp(18px, 2vw, 30px);
+  border: 1px solid rgba(23, 21, 21, 0.16);
   align-items: stretch;
 }
 
 .page-contact-cluster .page-contact-map {
   min-height: 0;
+  order: 2;
 }
 
 .page-contact-cluster .page-contact-map iframe {
@@ -4762,6 +4767,9 @@ body,
 .page-contact-cluster .page-contact-form-panel {
   min-height: 0;
   padding: 4px 0 0;
+  order: 1;
+  border-right: 1px solid rgba(23, 21, 21, 0.16);
+  padding-right: clamp(20px, 3vw, 54px);
 }
 
 .page-contact-form-layout > .page-contact-portrait {
@@ -4778,15 +4786,13 @@ body,
   padding: 0;
   object-fit: contain;
   object-position: center bottom;
-  filter: none;
+  filter: grayscale(1) contrast(1.08);
+  transition: filter 700ms ease;
 }
 
-.page-contact-form-layout > .page-contact-portrait figcaption {
-  right: 0;
-  bottom: 0;
-  left: auto;
-  color: #171515;
-  text-shadow: none;
+.page-contact-form-layout > .page-contact-portrait:hover img {
+  transform: none;
+  filter: grayscale(1) contrast(1.12);
 }
 
 @media (max-width: 1100px) {
@@ -4823,13 +4829,14 @@ body,
 
 @media (max-width: 600px) {
   .page-contact-heading h1 {
-    font-size: clamp(2.8rem, 14.5vw, 5.2rem);
+    font-size: clamp(2.4rem, 10vw, 4.6rem);
   }
 
   .page-contact-cluster {
     display: flex;
     flex-direction: column;
     gap: 42px;
+    padding: 18px;
   }
 
   .page-contact-cluster .page-contact-map {
@@ -4843,7 +4850,9 @@ body,
   .page-contact-cluster .page-contact-form-panel {
     display: block;
     padding-top: 42px;
+    padding-right: 0;
     border-top: 1px solid rgba(23, 21, 21, 0.22);
+    border-right: 0;
   }
 
   .page-contact-cluster .page-contact-form-aside {
