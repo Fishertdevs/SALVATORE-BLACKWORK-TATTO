@@ -378,60 +378,62 @@ export function ContactPage({ language }: StudioProps) {
     <StudioFrame id="studio-contact" className="page-contact">
       <section className="page-contact-reference">
         <header className="page-contact-heading">
-          <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em></h1>
+          <h1>{copy.title[0]}<br />{copy.title[1]}</h1>
           <span>{copy.eyebrow}</span>
         </header>
 
         <section className="page-contact-form-section page-contact-form-layout">
-          <a
-            className="page-contact-map"
-            href="https://www.openstreetmap.org/?mlat=4.668&mlon=-74.056#map=14/4.668/-74.056"
-            target="_blank"
-            rel="noreferrer"
-            aria-label={copy.mapLabel}
-          >
-            <iframe
-              title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-74.12%2C4.62%2C-74.02%2C4.71&layer=mapnik&marker=4.668%2C-74.056"
-              loading="lazy"
-            />
-            <span>{copy.mapLabel}</span>
-          </a>
+          <div className="page-contact-cluster">
+            <a
+              className="page-contact-map"
+              href="https://www.openstreetmap.org/?mlat=4.668&mlon=-74.056#map=14/4.668/-74.056"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={copy.mapLabel}
+            >
+              <iframe
+                title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-74.12%2C4.62%2C-74.02%2C4.71&layer=mapnik&marker=4.668%2C-74.056"
+                loading="lazy"
+              />
+              <span>{copy.mapLabel}</span>
+            </a>
+
+            <div className="page-contact-form-panel">
+              <aside className="page-contact-form-aside">
+                <Eyebrow>{formCopy.asideEyebrow}</Eyebrow>
+                <p>{formCopy.aside[0]}</p>
+                <p>{formCopy.aside[1]}</p>
+                <div className="page-contact-form-links">
+                  <a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a>
+                  <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a>
+                </div>
+              </aside>
+
+              <div className="page-contact-form-wrap">
+                {sent ? (
+                  <div className="tattoo-form-success">
+                    <Eyebrow>{formCopy.received}</Eyebrow>
+                    <h2>{formCopy.successTitle[0]}<br /><em>{formCopy.successTitle[1]}</em></h2>
+                    <p>{formCopy.successText}</p>
+                    <button type="button" onClick={() => setSent(false)}>{formCopy.another}</button>
+                  </div>
+                ) : (
+                  <form className="tattoo-form page-contact-form" onSubmit={handleSubmit}>
+                    <label>{formCopy.name}<input required name="contact-name" placeholder={formCopy.namePlaceholder} /></label>
+                    <label>{formCopy.email}<input required type="email" name="contact-email" placeholder="EMAIL" /></label>
+                    <label>{formCopy.idea}<textarea required name="contact-idea" rows={5} placeholder={formCopy.ideaPlaceholder} /></label>
+                    <button type="submit">{formCopy.submit} <span>↗</span></button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
 
           <figure className="page-contact-portrait">
             <img src={contactPortraitImg} alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"} />
             <figcaption>{copy.location}</figcaption>
           </figure>
-
-          <div className="page-contact-form-panel">
-          <aside className="page-contact-form-aside">
-            <Eyebrow>{formCopy.asideEyebrow}</Eyebrow>
-            <p>{formCopy.aside[0]}</p>
-            <p>{formCopy.aside[1]}</p>
-            <div className="page-contact-form-links">
-              <a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a>
-              <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a>
-            </div>
-          </aside>
-
-          <div className="page-contact-form-wrap">
-            {sent ? (
-              <div className="tattoo-form-success">
-                <Eyebrow>{formCopy.received}</Eyebrow>
-                <h2>{formCopy.successTitle[0]}<br /><em>{formCopy.successTitle[1]}</em></h2>
-                <p>{formCopy.successText}</p>
-                <button type="button" onClick={() => setSent(false)}>{formCopy.another}</button>
-              </div>
-            ) : (
-              <form className="tattoo-form page-contact-form" onSubmit={handleSubmit}>
-                <label>{formCopy.name}<input required name="contact-name" placeholder={formCopy.namePlaceholder} /></label>
-                <label>{formCopy.email}<input required type="email" name="contact-email" placeholder="EMAIL" /></label>
-                <label>{formCopy.idea}<textarea required name="contact-idea" rows={5} placeholder={formCopy.ideaPlaceholder} /></label>
-                <button type="submit">{formCopy.submit} <span>↗</span></button>
-              </form>
-            )}
-          </div>
-          </div>
         </section>
       </section>
     </StudioFrame>
