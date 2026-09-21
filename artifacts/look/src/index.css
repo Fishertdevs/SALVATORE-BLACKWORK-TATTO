@@ -1057,8 +1057,8 @@ body,
 /* ============ FOOTER ============ */
 .look-root .site-footer,
 .mobile-look-root .site-footer {
-  background: #ffffff;
-  color: #111111;
+  background: #E63027;
+  color: #ffffff;
   padding: 0 60px 46px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: relative;
@@ -1082,8 +1082,8 @@ body,
   white-space: normal;
   background-image: linear-gradient(
     to right,
-    #E63027 0%,
-    #E63027 50%,
+    #ffffff 0%,
+    #ffffff 50%,
     #111111 50%,
     #111111 100%
   );
@@ -1113,7 +1113,7 @@ body,
 .look-root .footer-style-line,
 .mobile-look-root .footer-style-line {
   margin: 0;
-  color: rgba(17, 17, 17, 0.58);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1132,23 +1132,23 @@ body,
   justify-content: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(17, 17, 17, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.62);
   border-radius: 50%;
-  color: #111111;
+  color: #ffffff;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 .look-root .footer-social:hover,
 .mobile-look-root .footer-social:hover {
-  border-color: #E63027;
-  background: #E63027;
-  color: #ffffff;
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #E63027;
 }
 .look-root .footer-rule,
 .mobile-look-root .footer-rule {
   width: 100%;
   height: 1px;
   margin: 24px auto 16px;
-  background: rgba(17, 17, 17, 0.18);
+  background: rgba(255, 255, 255, 0.35);
 }
 .look-root .footer-legal-nav,
 .mobile-look-root .footer-legal-nav {
@@ -1167,7 +1167,7 @@ body,
 }
 .look-root .footer-legal-nav a,
 .mobile-look-root .footer-legal-nav a {
-  color: rgba(17, 17, 17, 0.72);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 10px;
   letter-spacing: 0.06em;
   text-decoration: none;
@@ -1175,7 +1175,7 @@ body,
 }
 .look-root .footer-legal-nav a:hover,
 .mobile-look-root .footer-legal-nav a:hover {
-  color: #E63027;
+  color: #ffffff;
 }
 .look-root .footer-appointment,
 .mobile-look-root .footer-appointment {
@@ -1193,7 +1193,7 @@ body,
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(17, 17, 17, 0.55);
+  color: rgba(255, 255, 255, 0.78);
   font-weight: 400;
 }
 @media (max-width: 900px) {
