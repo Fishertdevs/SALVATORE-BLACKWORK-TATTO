@@ -4438,6 +4438,92 @@ body,
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
+.page-contact-heading h1 {
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+}
+
+.page-contact-heading h1 em {
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.page-contact-portrait {
+  background: #E63027;
+}
+
+.page-contact-portrait img {
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 0 6%;
+  filter: none;
+}
+
+.page-contact-form-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(42px, 8vw, 130px);
+  max-width: 1380px;
+  margin: clamp(70px, 9vw, 130px) auto 0;
+  padding-top: clamp(42px, 5vw, 72px);
+  border-top: 1px solid rgba(23, 21, 21, 0.22);
+}
+
+.page-contact-form-aside {
+  padding-top: 8px;
+}
+
+.page-contact-form-aside > p {
+  max-width: 230px;
+  margin: 34px 0 0;
+  color: rgba(23, 21, 21, 0.84);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-contact-form-aside > p + p {
+  margin-top: 22px;
+}
+
+.page-contact-form-wrap {
+  min-width: 0;
+}
+
+.page-contact-form {
+  gap: clamp(28px, 3.4vw, 48px);
+}
+
+.page-contact-form label {
+  gap: 12px;
+  color: #E63027;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.page-contact-form input,
+.page-contact-form textarea {
+  padding: 13px 0;
+  color: #171515;
+  font-size: 16px;
+  border-bottom-color: rgba(23, 21, 21, 0.42);
+}
+
+.page-contact-form textarea {
+  min-height: 126px;
+}
+
+.page-contact-form button {
+  padding-top: 0;
+  font-weight: 700;
+}
+
+.page-contact-form-wrap .tattoo-form-success h2 {
+  margin-top: 28px;
+}
+
 @media (max-width: 760px) {
   .page-contact-reference {
     padding: 76px 20px 92px;
@@ -4491,6 +4577,25 @@ body,
   .page-contact-map iframe,
   .page-contact-portrait img {
     min-height: 112vw;
+  }
+
+  .page-contact-portrait img {
+    min-height: 112vw;
+    padding: 0 4%;
+  }
+
+  .page-contact-form-section {
+    display: block;
+    margin-top: 72px;
+    padding-top: 38px;
+  }
+
+  .page-contact-form-aside {
+    margin-bottom: 48px;
+  }
+
+  .page-contact-form-aside > p {
+    max-width: 320px;
   }
 }
 
