@@ -1057,7 +1057,7 @@ body,
 /* ============ FOOTER ============ */
 .look-root .site-footer,
 .mobile-look-root .site-footer {
-  background: #E63027;
+  background: #111111;
   color: #ffffff;
   padding: 0 60px 46px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -1082,10 +1082,10 @@ body,
   white-space: normal;
   background-image: linear-gradient(
     to right,
-    #ffffff 0%,
+    #E63027 0%,
+    #E63027 50%,
     #ffffff 50%,
-    #111111 50%,
-    #111111 100%
+    #ffffff 100%
   );
   background-size: 200% 100%;
   background-position: 100% 0%;
