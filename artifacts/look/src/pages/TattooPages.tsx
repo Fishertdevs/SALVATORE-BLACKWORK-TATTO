@@ -467,7 +467,17 @@ export function ContactPage({ language }: StudioProps) {
           </div>
 
           <figure ref={portraitRef} className={`page-contact-portrait ${portraitInView ? "is-in-view" : ""}`}>
-            <img src={contactPortraitImg} alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"} />
+            <img
+              className="page-contact-portrait-color"
+              src={contactPortraitImg}
+              alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"}
+            />
+            <img
+              className="page-contact-portrait-face-gray"
+              src={contactPortraitImg}
+              alt=""
+              aria-hidden="true"
+            />
           </figure>
         </section>
       </section>
