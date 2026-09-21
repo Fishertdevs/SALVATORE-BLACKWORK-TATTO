@@ -382,38 +382,7 @@ export function ContactPage({ language }: StudioProps) {
           <span>{copy.eyebrow}</span>
         </header>
 
-        <div className="page-contact-board">
-          <article className="page-contact-card">
-            <div className="page-contact-card-tabs">
-              <span className="is-active">{copy.contactLabel}</span>
-              <a href="#studio-booking">{copy.bookingLabel}</a>
-            </div>
-            <p className="page-contact-card-intro">{copy.intro}</p>
-            <dl className="page-contact-card-list">
-              <div>
-                <dt>{copy.hours}</dt>
-                <dd>{copy.days}<br />{copy.appointment}</dd>
-              </div>
-              <div>
-                <dt>{copy.location}</dt>
-                <dd>{copy.locationNote}</dd>
-              </div>
-              <div>
-                <dt>{copy.email}</dt>
-                <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
-              </div>
-              <div>
-                <dt>{copy.phone}</dt>
-                <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
-              </div>
-            </dl>
-            <div className="page-contact-card-socials" aria-label={copy.social}>
-              <a href="https://instagram.com/salvatoreblackwork" target="_blank" rel="noreferrer" aria-label="Instagram"><SiInstagram size={15} /></a>
-              <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer" aria-label="WhatsApp"><SiWhatsapp size={15} /></a>
-              <a href="https://tiktok.com/@salvatoreblackwork" target="_blank" rel="noreferrer" aria-label="TikTok"><SiTiktok size={15} /></a>
-            </div>
-          </article>
-
+        <section className="page-contact-form-section page-contact-form-layout">
           <a
             className="page-contact-map"
             href="https://www.openstreetmap.org/?mlat=4.668&mlon=-74.056#map=14/4.668/-74.056"
@@ -433,13 +402,16 @@ export function ContactPage({ language }: StudioProps) {
             <img src={contactPortraitImg} alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"} />
             <figcaption>{copy.location}</figcaption>
           </figure>
-        </div>
 
-        <section className="page-contact-form-section">
+          <div className="page-contact-form-panel">
           <aside className="page-contact-form-aside">
             <Eyebrow>{formCopy.asideEyebrow}</Eyebrow>
             <p>{formCopy.aside[0]}</p>
             <p>{formCopy.aside[1]}</p>
+            <div className="page-contact-form-links">
+              <a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a>
+              <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a>
+            </div>
           </aside>
 
           <div className="page-contact-form-wrap">
@@ -458,6 +430,7 @@ export function ContactPage({ language }: StudioProps) {
                 <button type="submit">{formCopy.submit} <span>↗</span></button>
               </form>
             )}
+          </div>
           </div>
         </section>
       </section>

@@ -4599,6 +4599,129 @@ body,
   }
 }
 
+/* Contact surgery: the form is the section, with the map and portrait beside it. */
+.page-contact-form-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.92fr) minmax(220px, 0.82fr) minmax(300px, 1.3fr);
+  gap: clamp(12px, 1.5vw, 22px);
+  align-items: stretch;
+  max-width: 1380px;
+  margin: clamp(52px, 6vw, 90px) auto 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.page-contact-form-layout .page-contact-map,
+.page-contact-form-layout .page-contact-portrait {
+  min-height: clamp(500px, 43vw, 640px);
+}
+
+.page-contact-form-layout .page-contact-map iframe {
+  min-height: 0;
+}
+
+.page-contact-form-layout .page-contact-portrait {
+  background: #fff;
+  border: 1px solid rgba(23, 21, 21, 0.14);
+}
+
+.page-contact-form-layout .page-contact-portrait img {
+  min-height: 0;
+  padding: 0 3%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: none;
+}
+
+.page-contact-form-panel {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(22px, 3vw, 46px);
+  min-width: 0;
+  padding: clamp(4px, 1vw, 12px) clamp(4px, 1vw, 12px) 0;
+}
+
+.page-contact-form-panel .page-contact-form-aside {
+  padding-top: 4px;
+}
+
+.page-contact-form-panel .page-contact-form-aside > p {
+  max-width: 210px;
+}
+
+.page-contact-form-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.page-contact-form-links a {
+  color: #171515;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.page-contact-form-links a:hover,
+.page-contact-form-links a:focus-visible {
+  color: #E63027;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-contact-form-panel .page-contact-form-wrap {
+  padding-top: 0;
+}
+
+@media (max-width: 1100px) {
+  .page-contact-form-layout {
+    grid-template-columns: minmax(220px, 0.9fr) minmax(210px, 0.78fr);
+  }
+
+  .page-contact-form-panel {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.3fr);
+    padding-top: 44px;
+    border-top: 1px solid rgba(23, 21, 21, 0.22);
+  }
+}
+
+@media (max-width: 760px) {
+  .page-contact-form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 56px;
+  }
+
+  .page-contact-form-layout .page-contact-map,
+  .page-contact-form-layout .page-contact-portrait {
+    min-height: 112vw;
+  }
+
+  .page-contact-form-layout .page-contact-map iframe {
+    min-height: 112vw;
+  }
+
+  .page-contact-form-layout .page-contact-portrait img {
+    min-height: 112vw;
+    padding: 0 2%;
+  }
+
+  .page-contact-form-panel {
+    display: block;
+    padding: 42px 0 0;
+    border-top: 1px solid rgba(23, 21, 21, 0.22);
+  }
+
+  .page-contact-form-panel .page-contact-form-aside {
+    margin-bottom: 48px;
+  }
+}
+
 /* About section — a direct editorial breakdown of the hero language */
 .page-about-hero-editorial {
   display: block;
