@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
@@ -368,6 +368,21 @@ export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
   const formCopy = studioCopy[language].booking;
   const [sent, setSent] = useState(false);
+  const [portraitInView, setPortraitInView] = useState(false);
+  const portraitRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const portrait = portraitRef.current;
+    if (!portrait || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPortraitInView(entry.isIntersecting),
+      { threshold: 0.42, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    observer.observe(portrait);
+    return () => observer.disconnect();
+  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -435,7 +450,7 @@ export function ContactPage({ language }: StudioProps) {
             </div>
           </div>
 
-          <figure className="page-contact-portrait">
+          <figure ref={portraitRef} className={`page-contact-portrait ${portraitInView ? "is-in-view" : ""}`}>
             <img src={contactPortraitImg} alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"} />
           </figure>
         </section>

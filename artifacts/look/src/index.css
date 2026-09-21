@@ -4764,8 +4764,8 @@ body,
   grid-template-columns: minmax(250px, 0.84fr) minmax(320px, 1.16fr);
   gap: clamp(26px, 4vw, 68px);
   min-width: 0;
-  min-height: clamp(500px, 43vw, 640px);
-  padding: clamp(18px, 2vw, 30px);
+  min-height: clamp(360px, 32vw, 500px);
+  padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
   align-items: stretch;
 }
@@ -4789,7 +4789,7 @@ body,
 
 .page-contact-form-layout > .page-contact-portrait {
   min-width: 0;
-  min-height: clamp(500px, 43vw, 640px);
+  min-height: clamp(360px, 32vw, 500px);
   margin: 0;
   overflow: visible;
   background: transparent;
@@ -4805,9 +4805,9 @@ body,
   transition: filter 700ms ease;
 }
 
-.page-contact-form-layout > .page-contact-portrait:hover img {
+.page-contact-form-layout > .page-contact-portrait.is-in-view img {
   transform: none;
-  filter: grayscale(1) contrast(1.12);
+  filter: grayscale(0) saturate(1.04) contrast(1.02);
 }
 
 @media (max-width: 1100px) {
@@ -4837,7 +4837,7 @@ body,
 
   .page-contact-form-layout > .page-contact-portrait {
     width: min(100%, 420px);
-    min-height: 480px;
+    min-height: 400px;
     align-self: flex-end;
   }
 }
