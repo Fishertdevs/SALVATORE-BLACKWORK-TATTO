@@ -4,14 +4,7 @@ import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { StudioHomeSections } from "@/pages/TattooPages";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
-import shoesImg from "@assets/Shoes_1777633894262.png";
-import tableImg from "@assets/Table_1777633894262.png";
-import airpodMaxImg from "@assets/Airpod_max_1777633894262.png";
-import airpodImg from "@assets/Airpod_1777633894263.png";
-import candleImg from "@assets/candle_1777633894263.png";
-import earringsImg from "@assets/Earrings_1777633894263.png";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
-import marqueeStarImg from "@assets/Star1_1777711749898.png";
 
 const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -493,55 +486,6 @@ function MobileLookGallery({
         </p>
       </section>
 
-      {/* ARCHIVE — vertical single column */}
-      <div style={{ backgroundColor: "#FFFFFF", padding: "0 24px 64px" }}>
-        <header className="archive-header" aria-label={copy.cultureMarquee.join(" · ")}>
-          <div className="archive-marquee-track">
-            {[...copy.cultureMarquee, ...copy.cultureMarquee].map((label, i) => (
-              <span className="archive-marquee-item" key={`${label}-${i}`}>
-                {label}
-                <img
-                  src={marqueeStarImg}
-                  alt=""
-                  aria-hidden="true"
-                  className="archive-marquee-sep"
-                />
-              </span>
-            ))}
-          </div>
-        </header>
-
-        {[
-          { img: tableImg, code: "BW-01" },
-          { img: shoesImg, code: "BW-04" },
-          { img: candleImg, code: "BW-02" },
-          { img: earringsImg, code: "BW-05" },
-          { img: airpodImg, code: "BW-03" },
-          { img: airpodMaxImg, code: "BW-06" },
-        ].map((item, i) => (
-          <div key={i} style={{ marginBottom: 40 }}>
-            <div style={{ width: "100%", aspectRatio: "4/5", overflow: "hidden", marginBottom: 12 }}>
-              <img src={item.img} alt={copy.archiveWorks[i][1]} style={{
-                width: "100%", height: "100%", objectFit: "cover", display: "block"
-              }} />
-            </div>
-            <div style={{
-              display: "flex", justifyContent: "space-between", alignItems: "baseline",
-            }}>
-              <span style={{
-                fontFamily: "'Helvetica Neue', sans-serif",
-                fontSize: 11, letterSpacing: "0.1em", color: "#999",
-              }}>{item.code}</span>
-              <span style={{
-                fontFamily: "'Beautique Display', sans-serif",
-                fontSize: 16, letterSpacing: "0.06em", color: "#000",
-                textTransform: "uppercase",
-              }}>{copy.archiveWorks[i][0]}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <StudioHomeSections language={language} />
 
       <SiteFooter copy={copy} language={language} />
@@ -593,9 +537,6 @@ export default function LookGallery() {
     if (heroNavbar && !skipWelcome) {
       gsap.set(heroNavbar, { autoAlpha: 0, y: "-100%" });
     }
-    const archiveImages = Array.from(
-      document.querySelectorAll<HTMLElement>(".archive-section .archive-img"),
-    );
     const featuredTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
         ".product-video-section .featured-welcome-title, .product-video-section .featured-label, .mobile-welcome-section .mobile-welcome-title, .mobile-welcome-section .mobile-welcome-label",
@@ -610,7 +551,6 @@ export default function LookGallery() {
       document.querySelectorAll<HTMLElement>(".site-footer .footer-wordmark"),
     );
     const targets: { el: HTMLElement; threshold: number }[] = [
-      ...archiveImages.map((el) => ({ el, threshold: 0.1 })),
       ...featuredTargets.map((el) => ({ el, threshold: 0.15 })),
       ...heroTargets.map((el) => ({ el, threshold: 0.15 })),
       ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
@@ -1332,90 +1272,6 @@ export default function LookGallery() {
             </div>
           </div>
         </section>
-        <section className="archive-section">
-          <header className="archive-header" aria-label={copy.cultureMarquee.join(" · ")}>
-            <div className="archive-marquee-track">
-              {[...copy.cultureMarquee, ...copy.cultureMarquee].map((label, i) => (
-                <span
-                  key={i}
-                  className="archive-marquee-item"
-                  aria-hidden={i >= 4}
-                >
-                  {label}
-                  <img
-                    src={marqueeStarImg}
-                    alt=""
-                    aria-hidden="true"
-                    className="archive-marquee-sep"
-                  />
-                </span>
-              ))}
-            </div>
-          </header>
-          <div className="archive-grid">
-            <div className="archive-col archive-col-1">
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.5s">
-                  <img src={tableImg} alt={copy.archiveWorks[0][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-01</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[0][0]}</span>
-                </figcaption>
-              </figure>
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.5s">
-                  <img src={shoesImg} alt={copy.archiveWorks[1][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-04</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[1][0]}</span>
-                </figcaption>
-              </figure>
-            </div>
-            <div className="archive-col archive-col-2">
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.7s">
-                  <img src={candleImg} alt={copy.archiveWorks[2][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-02</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[2][0]}</span>
-                </figcaption>
-              </figure>
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.7s">
-                  <img src={earringsImg} alt={copy.archiveWorks[3][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-05</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[3][0]}</span>
-                </figcaption>
-              </figure>
-            </div>
-            <div className="archive-col archive-col-3">
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.9s">
-                  <img src={airpodImg} alt={copy.archiveWorks[4][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-03</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[4][0]}</span>
-                </figcaption>
-              </figure>
-              <figure className="archive-item">
-                <div className="archive-img" data-delay="0.9s">
-                  <img src={airpodMaxImg} alt={copy.archiveWorks[5][1]} />
-                </div>
-                <figcaption className="archive-caption">
-                  <span className="archive-caption-code">BW-06</span>
-                  <span className="archive-caption-name">{copy.archiveWorks[5][0]}</span>
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </section>
-
         <StudioHomeSections language={language} />
 
         <SiteFooter copy={copy} language={language} />
