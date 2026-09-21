@@ -4723,7 +4723,13 @@ body,
 }
 
 /* Final contact composition: one map/form cluster, portrait free on the right. */
+.page-contact-heading {
+  max-width: 1120px;
+  margin: 0 auto 32px;
+}
+
 .page-contact-heading h1 {
+  width: 100%;
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
@@ -4757,7 +4763,7 @@ body,
   gap: clamp(22px, 3.2vw, 46px);
   max-width: 1120px;
   align-items: stretch;
-  margin-top: clamp(52px, 6vw, 90px);
+  margin-top: 0;
 }
 
 .page-contact-cluster {
@@ -4765,7 +4771,7 @@ body,
   grid-template-columns: minmax(250px, 0.84fr) minmax(320px, 1.16fr);
   gap: clamp(26px, 4vw, 68px);
   min-width: 0;
-  height: clamp(320px, 29vw, 430px);
+  height: clamp(360px, 34vw, 500px);
   min-height: 0;
   padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
@@ -4783,15 +4789,83 @@ body,
 
 .page-contact-cluster .page-contact-form-panel {
   min-height: 0;
-  padding: 4px 0 0;
+  padding: 0;
   order: 1;
   border-right: 1px solid rgba(23, 21, 21, 0.16);
   padding-right: clamp(20px, 3vw, 54px);
 }
 
+.page-contact-panel-tabs {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 22px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgba(23, 21, 21, 0.2);
+}
+
+.page-contact-panel-tabs a {
+  padding: 0 0 11px;
+  color: rgba(23, 21, 21, 0.42);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.page-contact-panel-tabs a.is-active {
+  color: #171515;
+  border-bottom: 2px solid #E63027;
+}
+
+.page-contact-panel-intro {
+  max-width: 230px;
+  margin: 0 0 25px;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1rem, 1.35vw, 1.4rem);
+  line-height: 1.04;
+}
+
+.page-contact-info-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  margin: 0;
+}
+
+.page-contact-info-list dt {
+  margin-bottom: 6px;
+  color: #E63027;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-contact-info-list dd {
+  margin: 0;
+  color: rgba(23, 21, 21, 0.76);
+  font-size: 10px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.page-contact-info-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-contact-info-list a:hover,
+.page-contact-info-list a:focus-visible {
+  color: #E63027;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .page-contact-form-layout > .page-contact-portrait {
   min-width: 0;
-  height: clamp(320px, 29vw, 430px);
+  height: clamp(360px, 34vw, 500px);
   min-height: 0;
   margin: 0;
   overflow: visible;
