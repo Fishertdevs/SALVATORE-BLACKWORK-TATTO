@@ -4790,6 +4790,7 @@ body,
   min-width: 0;
   height: clamp(340px, 29vw, 420px);
   min-height: 0;
+  align-self: start;
   padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
   border-radius: 22px;
