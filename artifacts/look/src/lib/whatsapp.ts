@@ -29,3 +29,13 @@ export function getWhatsAppHref(language: Language, now = new Date()) {
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
+
+export function getBookingWhatsAppHref(language: Language, now = new Date()) {
+  const greeting = getGreeting(language, now);
+  const message =
+    language === "es"
+      ? `${greeting}, Salvatore. Quisiera agendar una llamada de 30 minutos para conversar sobre mi proyecto de tatuaje, revisar la idea, la ubicación y el tamaño, y recibir orientación sobre el diseño y la cotización. ¿Podrías indicarme los horarios disponibles?`
+      : `${greeting}, Salvatore. I would like to schedule a 30-minute call to discuss my tattoo project, review the concept, placement, and size, and get guidance on the design and quote. Could you please share your available times?`;
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
