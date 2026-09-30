@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
-import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
@@ -83,7 +83,7 @@ const studioCopy = {
     contact: {
       eyebrow: "CONTACTO / 006",
       title: ["¿TIENES UN PROYECTO", "EN MENTE?"],
-      intro: "Cuéntanos tu idea y construimos juntos la solución.",
+      intro: "Cuéntanos qué tatuaje tienes en mente y lo diseñamos contigo.",
       contactLabel: "CONTÁCTANOS",
       bookingLabel: "AGENDAR CITA",
       bookingIntro: "Cada proyecto comienza con una conversación. Comparte tu idea y coordinamos los siguientes pasos.",
@@ -175,7 +175,7 @@ const studioCopy = {
     contact: {
       eyebrow: "CONTACT / 006",
       title: ["DO YOU HAVE A PROJECT", "IN MIND?"],
-      intro: "Tell us your idea and we will build the solution together.",
+      intro: "Tell us what tattoo you have in mind and we will design it with you.",
       contactLabel: "CONTACT US",
       bookingLabel: "BOOK AN APPOINTMENT",
       bookingIntro: "Every project starts with a conversation. Share your idea and we will coordinate the next steps.",
@@ -481,15 +481,11 @@ export function ContactPage({ language }: StudioProps) {
                   {activePanelTab === "contact" ? (
                     <aside className="page-contact-form-aside">
                       <p className="page-contact-panel-intro">{copy.intro}</p>
+                      <div className="page-contact-hours" aria-label={copy.hours}>
+                        <span>{copy.hoursWeekdays}</span>
+                        <span>{copy.hoursWeekend}</span>
+                      </div>
                       <dl className="page-contact-info-list">
-                        <div>
-                          <Clock3 aria-hidden="true" />
-                          <dt>{copy.hours}</dt>
-                          <dd>
-                            <span>{copy.hoursWeekdays}</span>
-                            <span>{copy.hoursWeekend}</span>
-                          </dd>
-                        </div>
                         <div>
                           <MapPin aria-hidden="true" />
                           <dt>{copy.location}</dt>
