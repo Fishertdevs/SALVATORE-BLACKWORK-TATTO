@@ -4849,9 +4849,9 @@ body,
   background: transparent;
   color: #E63027;
   font: inherit;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   line-height: 1.3;
   text-align: center;
   text-transform: uppercase;
@@ -4923,22 +4923,41 @@ body,
 }
 
 .page-contact-panel-intro {
-  max-width: 230px;
-  margin: 0 0 25px;
+  max-width: 100%;
+  margin: 0 auto 14px;
   color: #171515;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(1rem, 1.35vw, 1.4rem);
   line-height: 1.04;
+  text-align: center;
 }
 
 .page-contact-info-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
   margin: 0;
 }
 
+.page-contact-info-list > div {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  column-gap: 7px;
+  align-items: start;
+}
+
+.page-contact-info-list > div > svg {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 12px;
+  height: 12px;
+  margin-top: 1px;
+  color: #E63027;
+  stroke-width: 2;
+}
+
 .page-contact-info-list dt {
+  grid-column: 2;
   margin-bottom: 6px;
   color: #E63027;
   font-size: 8px;
@@ -4948,6 +4967,9 @@ body,
 }
 
 .page-contact-info-list dd {
+  display: grid;
+  grid-column: 2;
+  gap: 2px;
   margin: 0;
   color: rgba(23, 21, 21, 0.76);
   font-size: 10px;
@@ -4965,6 +4987,32 @@ body,
   color: #E63027;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.page-contact-form-panel .page-contact-card-socials {
+  justify-content: center;
+  gap: 14px;
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+.page-contact-form-panel .page-contact-card-socials a {
+  width: 24px;
+  height: 24px;
+  color: #171515;
+  border-color: rgba(23, 21, 21, 0.25);
+}
+
+.page-contact-form-panel .page-contact-card-socials a svg {
+  width: 13px;
+  height: 13px;
+}
+
+.page-contact-form-panel .page-contact-card-socials a:hover,
+.page-contact-form-panel .page-contact-card-socials a:focus-visible {
+  color: #fff;
+  background: #E63027;
+  border-color: #E63027;
 }
 
 .page-contact-form-layout > .page-contact-portrait {
@@ -5018,6 +5066,17 @@ body,
 
 .page-contact-form-layout > .page-contact-portrait.is-in-view .page-contact-portrait-face-gray {
   opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-contact-panel-tabs button,
+  .page-contact-tabs-indicator {
+    transition: none;
+  }
+
+  .page-contact-tab-content {
+    animation: none;
+  }
 }
 
 @media (max-width: 1100px) {

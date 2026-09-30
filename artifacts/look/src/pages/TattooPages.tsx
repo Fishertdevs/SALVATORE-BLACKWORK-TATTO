@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
+import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
@@ -86,15 +88,18 @@ const studioCopy = {
       bookingLabel: "AGENDAR CITA",
       bookingIntro: "Cada proyecto comienza con una conversación. Comparte tu idea y coordinamos los siguientes pasos.",
       bookingCta: "IR A RESERVAS ↗",
-       location: "FUNZA / CO",
-      locationNote: "REMOTO GLOBAL",
-      email: "EMAIL",
+      location: "UBICACIÓN",
+      locationNote: "Colombia · Remoto global",
+      email: "CORREO ELECTRÓNICO",
+      emailValue: "fisherstudio@gmail.com",
       social: "REDES",
       hours: "HORARIO",
-      days: "LUN — VIE",
-      appointment: "CON CITA PREVIA",
-      phone: "WHATSAPP",
+      hoursWeekdays: "Lun — Vie · 8:00 am — 9:00 pm",
+      hoursWeekend: "Sáb — Dom · 8:00 am — 2:00 pm",
+      phone: "TELÉFONO",
       phoneValue: "+57 311 251 2939",
+      whatsapp: "WHATSAPP",
+      whatsappValue: "+57 311 251 2939",
       mapLabel: "ABRIR EN MAPS ↗",
     },
   },
@@ -175,15 +180,18 @@ const studioCopy = {
       bookingLabel: "BOOK AN APPOINTMENT",
       bookingIntro: "Every project starts with a conversation. Share your idea and we will coordinate the next steps.",
       bookingCta: "GO TO BOOKING ↗",
-       location: "FUNZA / CO",
-      locationNote: "REMOTE WORLDWIDE",
+      location: "LOCATION",
+      locationNote: "Colombia · Remote worldwide",
       email: "EMAIL",
+      emailValue: "fisherstudio@gmail.com",
       social: "SOCIAL",
       hours: "HOURS",
-      days: "MON — FRI",
-      appointment: "BY APPOINTMENT",
-      phone: "WHATSAPP",
+      hoursWeekdays: "Mon — Fri · 8:00 am — 9:00 pm",
+      hoursWeekend: "Sat — Sun · 8:00 am — 2:00 pm",
+      phone: "PHONE",
       phoneValue: "+57 311 251 2939",
+      whatsapp: "WHATSAPP",
+      whatsappValue: "+57 311 251 2939",
       mapLabel: "OPEN IN MAPS ↗",
     },
   },
@@ -475,22 +483,39 @@ export function ContactPage({ language }: StudioProps) {
                       <p className="page-contact-panel-intro">{copy.intro}</p>
                       <dl className="page-contact-info-list">
                         <div>
+                          <Clock3 aria-hidden="true" />
                           <dt>{copy.hours}</dt>
-                          <dd>{copy.days}<br />{copy.appointment}</dd>
+                          <dd>
+                            <span>{copy.hoursWeekdays}</span>
+                            <span>{copy.hoursWeekend}</span>
+                          </dd>
                         </div>
                         <div>
+                          <MapPin aria-hidden="true" />
                           <dt>{copy.location}</dt>
                           <dd>{copy.locationNote}</dd>
                         </div>
                         <div>
+                          <Mail aria-hidden="true" />
                           <dt>{copy.email}</dt>
-                          <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
+                          <dd><a href={`mailto:${copy.emailValue}`}>{copy.emailValue}</a></dd>
                         </div>
                         <div>
+                          <Phone aria-hidden="true" />
                           <dt>{copy.phone}</dt>
-                          <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
+                          <dd><a href="tel:+573112512939">{copy.phoneValue}</a></dd>
+                        </div>
+                        <div>
+                          <SiWhatsapp aria-hidden="true" />
+                          <dt>{copy.whatsapp}</dt>
+                          <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.whatsappValue}</a></dd>
                         </div>
                       </dl>
+                      <nav className="page-contact-card-socials" aria-label={copy.social}>
+                        <a href="#studio-contact" aria-label="Instagram"><SiInstagram aria-hidden="true" /></a>
+                        <a href="#studio-contact" aria-label="Facebook"><SiFacebook aria-hidden="true" /></a>
+                        <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer" aria-label="WhatsApp"><SiWhatsapp aria-hidden="true" /></a>
+                      </nav>
                     </aside>
                   ) : (
                     <aside className="page-contact-booking-content">
