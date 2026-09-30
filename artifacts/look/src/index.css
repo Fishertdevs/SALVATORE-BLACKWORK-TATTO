@@ -4653,7 +4653,9 @@ body,
 }
 
 .page-contact-form-panel .page-contact-form-aside > p {
-  max-width: 210px;
+  width: 100%;
+  max-width: none;
+  text-align: center;
 }
 
 .page-contact-form-links {
