@@ -1,6 +1,6 @@
 import type { Language } from "@/i18n";
 
-const whatsappNumber = "573112512939";
+const whatsappNumber = "573214546835";
 
 function getGreeting(language: Language, now: Date) {
   const hour = Number(

@@ -98,9 +98,9 @@ const studioCopy = {
       hoursWeekdays: "Lun — Vie · 8:00 am — 9:00 pm",
       hoursWeekend: "Sáb — Dom · 8:00 am — 2:00 pm",
       phone: "TELÉFONO",
-      phoneValue: "+57 311 251 2939",
+      phoneValue: "+57 321 454 6835",
       whatsapp: "WHATSAPP",
-      whatsappValue: "+57 311 251 2939",
+      whatsappValue: "+57 321 454 6835",
       mapLabel: "ABRIR EN MAPS ↗",
     },
   },
@@ -190,9 +190,9 @@ const studioCopy = {
       hoursWeekdays: "Mon — Fri · 8:00 am — 9:00 pm",
       hoursWeekend: "Sat — Sun · 8:00 am — 2:00 pm",
       phone: "PHONE",
-      phoneValue: "+57 311 251 2939",
+      phoneValue: "+57 321 454 6835",
       whatsapp: "WHATSAPP",
-      whatsappValue: "+57 311 251 2939",
+      whatsappValue: "+57 321 454 6835",
       mapLabel: "OPEN IN MAPS ↗",
     },
   },
@@ -500,7 +500,7 @@ export function ContactPage({ language }: StudioProps) {
                         <div>
                           <Phone aria-hidden="true" />
                           <dt>{copy.phone}</dt>
-                          <dd><a href="tel:+573112512939">{copy.phoneValue}</a></dd>
+                          <dd><a href="tel:+573214546835">{copy.phoneValue}</a></dd>
                         </div>
                         <div>
                           <SiWhatsapp aria-hidden="true" />
