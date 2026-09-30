@@ -84,6 +84,8 @@ const studioCopy = {
       intro: "Cuéntanos tu idea y construimos juntos la solución.",
       contactLabel: "CONTÁCTANOS",
       bookingLabel: "AGENDAR CITA",
+      bookingIntro: "Cada proyecto comienza con una conversación. Comparte tu idea y coordinamos los siguientes pasos.",
+      bookingCta: "IR A RESERVAS ↗",
        location: "FUNZA / CO",
       locationNote: "REMOTO GLOBAL",
       email: "EMAIL",
@@ -171,6 +173,8 @@ const studioCopy = {
       intro: "Tell us your idea and we will build the solution together.",
       contactLabel: "CONTACT US",
       bookingLabel: "BOOK AN APPOINTMENT",
+      bookingIntro: "Every project starts with a conversation. Share your idea and we will coordinate the next steps.",
+      bookingCta: "GO TO BOOKING ↗",
        location: "FUNZA / CO",
       locationNote: "REMOTE WORLDWIDE",
       email: "EMAIL",
@@ -366,6 +370,7 @@ export function BookingPage({ language }: StudioProps) {
 export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
   const [portraitInView, setPortraitInView] = useState(false);
+  const [activePanelTab, setActivePanelTab] = useState<"contact" | "booking">("contact");
   const portraitRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -413,32 +418,87 @@ export function ContactPage({ language }: StudioProps) {
               </a>
 
               <div className="page-contact-form-panel">
-                <div className="page-contact-panel-tabs">
-                  <a className="is-active" href="#studio-contact">{copy.contactLabel}</a>
-                  <a href="#studio-booking">{copy.bookingLabel}</a>
+                <div
+                  className="page-contact-panel-tabs"
+                  role="tablist"
+                  aria-label={language === "es" ? "Información de contacto y reservas" : "Contact and booking information"}
+                  data-active-tab={activePanelTab}
+                >
+                  <button
+                    type="button"
+                    id="contact-tab-contact"
+                    role="tab"
+                    aria-selected={activePanelTab === "contact"}
+                    aria-controls="contact-tabpanel"
+                    tabIndex={activePanelTab === "contact" ? 0 : -1}
+                    onClick={() => setActivePanelTab("contact")}
+                    onKeyDown={(event) => {
+                      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                        event.preventDefault();
+                        setActivePanelTab(activePanelTab === "contact" ? "booking" : "contact");
+                        document.getElementById(activePanelTab === "contact" ? "contact-tab-booking" : "contact-tab-contact")?.focus();
+                      }
+                    }}
+                  >
+                    {copy.contactLabel}
+                  </button>
+                  <button
+                    type="button"
+                    id="contact-tab-booking"
+                    role="tab"
+                    aria-selected={activePanelTab === "booking"}
+                    aria-controls="contact-tabpanel"
+                    tabIndex={activePanelTab === "booking" ? 0 : -1}
+                    onClick={() => setActivePanelTab("booking")}
+                    onKeyDown={(event) => {
+                      if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                        event.preventDefault();
+                        setActivePanelTab(activePanelTab === "contact" ? "booking" : "contact");
+                        document.getElementById(activePanelTab === "contact" ? "contact-tab-booking" : "contact-tab-contact")?.focus();
+                      }
+                    }}
+                  >
+                    {copy.bookingLabel}
+                  </button>
+                  <span className="page-contact-tabs-indicator" aria-hidden="true" />
                 </div>
 
-                <aside className="page-contact-form-aside">
-                  <p className="page-contact-panel-intro">{copy.intro}</p>
-                  <dl className="page-contact-info-list">
-                    <div>
-                      <dt>{copy.hours}</dt>
-                      <dd>{copy.days}<br />{copy.appointment}</dd>
-                    </div>
-                    <div>
-                      <dt>{copy.location}</dt>
-                      <dd>{copy.locationNote}</dd>
-                    </div>
-                    <div>
-                      <dt>{copy.email}</dt>
-                      <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
-                    </div>
-                    <div>
-                      <dt>{copy.phone}</dt>
-                      <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
-                    </div>
-                  </dl>
-                </aside>
+                <div
+                  className="page-contact-tab-content"
+                  id="contact-tabpanel"
+                  role="tabpanel"
+                  aria-labelledby={activePanelTab === "contact" ? "contact-tab-contact" : "contact-tab-booking"}
+                  key={activePanelTab}
+                >
+                  {activePanelTab === "contact" ? (
+                    <aside className="page-contact-form-aside">
+                      <p className="page-contact-panel-intro">{copy.intro}</p>
+                      <dl className="page-contact-info-list">
+                        <div>
+                          <dt>{copy.hours}</dt>
+                          <dd>{copy.days}<br />{copy.appointment}</dd>
+                        </div>
+                        <div>
+                          <dt>{copy.location}</dt>
+                          <dd>{copy.locationNote}</dd>
+                        </div>
+                        <div>
+                          <dt>{copy.email}</dt>
+                          <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
+                        </div>
+                        <div>
+                          <dt>{copy.phone}</dt>
+                          <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
+                        </div>
+                      </dl>
+                    </aside>
+                  ) : (
+                    <aside className="page-contact-booking-content">
+                      <p className="page-contact-panel-intro">{copy.bookingIntro}</p>
+                      <a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a>
+                    </aside>
+                  )}
+                </div>
               </div>
             </div>
           </div>
