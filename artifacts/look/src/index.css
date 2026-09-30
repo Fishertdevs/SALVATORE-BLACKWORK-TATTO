@@ -4737,7 +4737,7 @@ body,
 .page-contact-heading {
   width: 100%;
   max-width: 1380px;
-  margin: 0 auto clamp(24px, 2.8vw, 38px);
+  margin: 0 auto clamp(12px, 1.5vw, 20px);
 }
 
 .page-contact-heading h1 {
@@ -4788,7 +4788,7 @@ body,
   grid-template-columns: minmax(250px, 0.84fr) minmax(320px, 1.16fr);
   gap: clamp(20px, 2.8vw, 42px);
   min-width: 0;
-  height: clamp(380px, 36vw, 520px);
+  height: clamp(340px, 29vw, 420px);
   min-height: 0;
   padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
@@ -4977,7 +4977,7 @@ body,
   }
 
   .page-contact-heading {
-    margin-bottom: 22px;
+    margin-bottom: 14px;
   }
 
   .page-contact-heading h1 {
