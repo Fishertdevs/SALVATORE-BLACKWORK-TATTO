@@ -4777,7 +4777,7 @@ body,
   gap: clamp(22px, 3vw, 42px);
   width: 100%;
   max-width: 1380px;
-  align-items: end;
+  align-items: stretch;
   margin-top: 0;
   margin-right: auto;
   margin-left: auto;
@@ -4788,9 +4788,9 @@ body,
   grid-template-columns: minmax(250px, 0.84fr) minmax(320px, 1.16fr);
   gap: clamp(20px, 2.8vw, 42px);
   min-width: 0;
-  height: clamp(340px, 29vw, 420px);
+  height: auto;
   min-height: 0;
-  align-self: start;
+  align-self: stretch;
   padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
   border-radius: 22px;
@@ -4892,7 +4892,9 @@ body,
   height: auto;
   aspect-ratio: 819 / 1024;
   min-height: 0;
-  align-self: end;
+  align-self: stretch;
+  justify-self: end;
+  transform: translateX(clamp(8px, 2.2vw, 28px));
   margin: 0;
   position: relative;
   overflow: hidden;
@@ -4961,6 +4963,7 @@ body,
     grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
     height: auto;
     min-height: 0;
+    align-self: stretch;
   }
 
   .page-contact-form-layout > .page-contact-portrait {
@@ -4968,6 +4971,7 @@ body,
     height: auto;
     aspect-ratio: 819 / 1024;
     min-height: 0;
+    transform: translateX(clamp(8px, 2.2vw, 18px));
     align-self: flex-end;
   }
 }
