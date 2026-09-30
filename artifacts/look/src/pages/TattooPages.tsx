@@ -384,60 +384,62 @@ export function ContactPage({ language }: StudioProps) {
   return (
     <StudioFrame id="studio-contact" className="page-contact">
       <section className="page-contact-reference">
-        <header className="page-contact-heading">
-          <h1>
-            {language === "es" && <span className="page-contact-question page-contact-question-open" aria-hidden="true">?</span>}
-            {copy.title[0].replace(/^¿/, "")}{" "}
-            {copy.title[1].replace(/\?$/, "")}
-            <span className="page-contact-question" aria-hidden="true">?</span>
-          </h1>
-        </header>
-
         <section className="page-contact-form-section page-contact-form-layout">
-          <div className="page-contact-cluster">
-            <a
-              className="page-contact-map"
-              href="https://www.google.com/maps/search/?api=1&query=4.716,-74.212"
-              target="_blank"
-              rel="noreferrer"
-              aria-label={copy.mapLabel}
-            >
-              <iframe
-                title={language === "es" ? "Mapa de Funza, Cundinamarca" : "Map of Funza, Cundinamarca"}
-                src="https://maps.google.com/maps?q=Funza%2C%20Cundinamarca%2C%20Colombia&z=15&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <span>{copy.mapLabel}</span>
-            </a>
+          <div className="page-contact-copy-column">
+            <header className="page-contact-heading">
+              <h1>
+                {language === "es" && <span className="page-contact-question page-contact-question-open" aria-hidden="true">?</span>}
+                {copy.title[0].replace(/^¿/, "")}{" "}
+                {copy.title[1].replace(/\?$/, "")}
+                <span className="page-contact-question" aria-hidden="true">?</span>
+              </h1>
+            </header>
 
-            <div className="page-contact-form-panel">
-              <div className="page-contact-panel-tabs">
-                <a className="is-active" href="#studio-contact">{copy.contactLabel}</a>
-                <a href="#studio-booking">{copy.bookingLabel}</a>
+            <div className="page-contact-cluster">
+              <a
+                className="page-contact-map"
+                href="https://www.google.com/maps/search/?api=1&query=Funza%2C%20Cundinamarca%2C%20Colombia"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={copy.mapLabel}
+              >
+                <iframe
+                  title={language === "es" ? "Mapa de Funza, Cundinamarca" : "Map of Funza, Cundinamarca"}
+                  src="https://maps.google.com/maps?q=Funza%2C%20Cundinamarca%2C%20Colombia&z=15&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <span>{copy.mapLabel}</span>
+              </a>
+
+              <div className="page-contact-form-panel">
+                <div className="page-contact-panel-tabs">
+                  <a className="is-active" href="#studio-contact">{copy.contactLabel}</a>
+                  <a href="#studio-booking">{copy.bookingLabel}</a>
+                </div>
+
+                <aside className="page-contact-form-aside">
+                  <p className="page-contact-panel-intro">{copy.intro}</p>
+                  <dl className="page-contact-info-list">
+                    <div>
+                      <dt>{copy.hours}</dt>
+                      <dd>{copy.days}<br />{copy.appointment}</dd>
+                    </div>
+                    <div>
+                      <dt>{copy.location}</dt>
+                      <dd>{copy.locationNote}</dd>
+                    </div>
+                    <div>
+                      <dt>{copy.email}</dt>
+                      <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
+                    </div>
+                    <div>
+                      <dt>{copy.phone}</dt>
+                      <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
+                    </div>
+                  </dl>
+                </aside>
               </div>
-
-              <aside className="page-contact-form-aside">
-                <p className="page-contact-panel-intro">{copy.intro}</p>
-                <dl className="page-contact-info-list">
-                  <div>
-                    <dt>{copy.hours}</dt>
-                    <dd>{copy.days}<br />{copy.appointment}</dd>
-                  </div>
-                  <div>
-                    <dt>{copy.location}</dt>
-                    <dd>{copy.locationNote}</dd>
-                  </div>
-                  <div>
-                    <dt>{copy.email}</dt>
-                    <dd><a href="mailto:hello@salvatoreblackwork.tattoo">hello@salvatoreblackwork.tattoo</a></dd>
-                  </div>
-                  <div>
-                    <dt>{copy.phone}</dt>
-                    <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.phoneValue}</a></dd>
-                  </div>
-                </dl>
-              </aside>
             </div>
           </div>
 
