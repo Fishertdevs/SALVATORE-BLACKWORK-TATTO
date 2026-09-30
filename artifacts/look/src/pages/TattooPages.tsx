@@ -365,8 +365,6 @@ export function BookingPage({ language }: StudioProps) {
 
 export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
-  const formCopy = studioCopy[language].booking;
-  const [sent, setSent] = useState(false);
   const [portraitInView, setPortraitInView] = useState(false);
   const portraitRef = useRef<HTMLElement>(null);
 
@@ -382,11 +380,6 @@ export function ContactPage({ language }: StudioProps) {
     observer.observe(portrait);
     return () => observer.disconnect();
   }, []);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSent(true);
-  }
 
   return (
     <StudioFrame id="studio-contact" className="page-contact">
@@ -410,8 +403,8 @@ export function ContactPage({ language }: StudioProps) {
               aria-label={copy.mapLabel}
             >
               <iframe
-                title={language === "es" ? "Mapa de Bogotá" : "Map of Bogotá"}
-                src="https://www.google.com/maps?q=4.716,-74.212&z=13&output=embed"
+                title={language === "es" ? "Mapa de Funza, Cundinamarca" : "Map of Funza, Cundinamarca"}
+                src="https://maps.google.com/maps?q=Funza%2C%20Cundinamarca%2C%20Colombia&z=15&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -445,24 +438,6 @@ export function ContactPage({ language }: StudioProps) {
                   </div>
                 </dl>
               </aside>
-
-              <div className="page-contact-form-wrap">
-                {sent ? (
-                  <div className="tattoo-form-success">
-                    <Eyebrow>{formCopy.received}</Eyebrow>
-                    <h2>{formCopy.successTitle[0]}<br /><em>{formCopy.successTitle[1]}</em></h2>
-                    <p>{formCopy.successText}</p>
-                    <button type="button" onClick={() => setSent(false)}>{formCopy.another}</button>
-                  </div>
-                ) : (
-                  <form className="tattoo-form page-contact-form" onSubmit={handleSubmit}>
-                    <label>{formCopy.name}<input required name="contact-name" placeholder={formCopy.namePlaceholder} /></label>
-                    <label>{formCopy.email}<input required type="email" name="contact-email" placeholder="EMAIL" /></label>
-                    <label>{formCopy.idea}<textarea required name="contact-idea" rows={5} placeholder={formCopy.ideaPlaceholder} /></label>
-                    <button type="submit">{formCopy.submit} <span>↗</span></button>
-                  </form>
-                )}
-              </div>
             </div>
           </div>
 
