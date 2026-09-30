@@ -4736,8 +4736,8 @@ body,
 
 .page-contact-heading {
   width: 100%;
-  max-width: 1380px;
-  margin: 0 auto clamp(12px, 1.5vw, 20px);
+  max-width: 100%;
+  margin: 0;
 }
 
 .page-contact-heading h1 {
@@ -4746,7 +4746,7 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.45rem, 3.4vw, 3.65rem);
+  font-size: clamp(1.35rem, 3.4vw, 3.65rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -4773,7 +4773,7 @@ body,
 
 .page-contact-form-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.95fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.75fr);
   gap: clamp(22px, 3vw, 42px);
   width: 100%;
   max-width: 1380px;
@@ -4783,13 +4783,22 @@ body,
   margin-left: auto;
 }
 
+.page-contact-copy-column {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+  gap: clamp(14px, 1.5vw, 20px);
+  padding-top: clamp(100px, 11vw, 150px);
+}
+
 .page-contact-cluster {
   display: grid;
   grid-template-columns: minmax(250px, 0.84fr) minmax(320px, 1.16fr);
   gap: clamp(20px, 2.8vw, 42px);
   min-width: 0;
   height: auto;
-  min-height: 0;
+  min-height: clamp(280px, 27vw, 360px);
   align-self: stretch;
   padding: clamp(12px, 1.4vw, 20px);
   border: 1px solid rgba(23, 21, 21, 0.16);
@@ -4941,7 +4950,7 @@ body,
 
 @media (max-width: 1100px) {
   .page-contact-form-layout {
-    grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.9fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.75fr);
     gap: 30px;
   }
 
@@ -4956,6 +4965,11 @@ body,
     display: flex;
     flex-direction: column;
     gap: 28px;
+  }
+
+  .page-contact-copy-column {
+    gap: 18px;
+    padding-top: 0;
   }
 
   .page-contact-cluster {
@@ -4982,7 +4996,7 @@ body,
   }
 
   .page-contact-heading {
-    margin-bottom: 14px;
+    margin-bottom: 0;
   }
 
   .page-contact-heading h1 {
@@ -4993,6 +5007,7 @@ body,
     display: flex;
     flex-direction: column;
     gap: 30px;
+    min-height: 0;
     padding: 18px;
     border-radius: 18px;
   }
