@@ -4734,10 +4734,15 @@ body,
   min-height: 0;
 }
 
+.page-contact-reference {
+  padding-top: clamp(28px, 4vw, 58px);
+}
+
 .page-contact-heading {
   width: 100%;
   max-width: 100%;
   margin: 0;
+  text-align: center;
 }
 
 .page-contact-heading h1 {
@@ -4746,7 +4751,7 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.35rem, 3.4vw, 3.65rem);
+  font-size: clamp(1.25rem, 3vw, 3.15rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -4789,7 +4794,7 @@ body,
   min-height: 0;
   flex-direction: column;
   gap: clamp(14px, 1.5vw, 20px);
-  padding-top: clamp(100px, 11vw, 150px);
+  padding-top: clamp(28px, 4vw, 54px);
 }
 
 .page-contact-cluster {
@@ -4828,16 +4833,82 @@ body,
 }
 
 .page-contact-panel-tabs {
+  position: relative;
   display: flex;
-  grid-column: 1 / -1;
-  gap: 22px;
-  margin-bottom: 26px;
+  width: 100%;
+  gap: 0;
+  margin-bottom: clamp(18px, 2vw, 26px);
   border-bottom: 1px solid rgba(23, 21, 21, 0.2);
 }
 
-.page-contact-panel-tabs a {
-  padding: 0 0 11px;
-  color: rgba(23, 21, 21, 0.42);
+.page-contact-panel-tabs button {
+  flex: 1 1 50%;
+  min-width: 0;
+  padding: 0 4px 10px;
+  border: 0;
+  background: transparent;
+  color: #E63027;
+  font: inherit;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity 220ms ease, color 220ms ease;
+}
+
+.page-contact-panel-tabs button[aria-selected="true"] {
+  color: #E63027;
+  opacity: 1;
+}
+
+.page-contact-panel-tabs button:focus-visible {
+  outline: 1px solid #E63027;
+  outline-offset: 3px;
+}
+
+.page-contact-tabs-indicator {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background: #E63027;
+  transform: translateX(0);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.page-contact-panel-tabs[data-active-tab="booking"] .page-contact-tabs-indicator {
+  transform: translateX(100%);
+}
+
+.page-contact-tab-content {
+  min-height: 0;
+  animation: page-contact-tab-enter 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-contact-tab-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-contact-booking-content .tattoo-red-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: #E63027;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -4845,9 +4916,10 @@ body,
   text-transform: uppercase;
 }
 
-.page-contact-panel-tabs a.is-active {
-  color: #171515;
-  border-bottom: 2px solid #E63027;
+.page-contact-booking-content .tattoo-red-link:hover,
+.page-contact-booking-content .tattoo-red-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .page-contact-panel-intro {
