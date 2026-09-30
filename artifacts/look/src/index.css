@@ -4795,6 +4795,7 @@ body,
   flex-direction: column;
   gap: clamp(14px, 1.5vw, 20px);
   padding-top: clamp(28px, 4vw, 54px);
+  padding-bottom: clamp(24px, 3vw, 40px);
 }
 
 .page-contact-cluster {
@@ -4837,7 +4838,7 @@ body,
   display: flex;
   width: 100%;
   gap: 0;
-  margin-bottom: clamp(18px, 2vw, 26px);
+  margin-bottom: clamp(14px, 1.6vw, 20px);
   border-bottom: 1px solid rgba(23, 21, 21, 0.2);
 }
 
@@ -5101,6 +5102,7 @@ body,
   .page-contact-copy-column {
     gap: 18px;
     padding-top: 0;
+    padding-bottom: 0;
   }
 
   .page-contact-cluster {
