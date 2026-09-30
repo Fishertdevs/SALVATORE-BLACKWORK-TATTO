@@ -3,6 +3,7 @@ import type { FormEvent, ReactNode } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
+import { getWhatsAppHref } from "@/lib/whatsapp";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
 import servicesImg from "@assets/generated_images/services-blackwork-detail.png";
@@ -504,13 +505,34 @@ export function ContactPage({ language }: StudioProps) {
                         <div>
                           <SiWhatsapp aria-hidden="true" />
                           <dt>{copy.whatsapp}</dt>
-                          <dd><a href="https://wa.me/573112512939" target="_blank" rel="noreferrer">{copy.whatsappValue}</a></dd>
+                          <dd>
+                            <a
+                              href={getWhatsAppHref(language)}
+                              onClick={(event) => {
+                                event.currentTarget.href = getWhatsAppHref(language);
+                              }}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {copy.whatsappValue}
+                            </a>
+                          </dd>
                         </div>
                       </dl>
                       <nav className="page-contact-card-socials" aria-label={copy.social}>
                         <a href="#studio-contact" aria-label="Instagram"><SiInstagram aria-hidden="true" /></a>
                         <a href="#studio-contact" aria-label="Facebook"><SiFacebook aria-hidden="true" /></a>
-                        <a href="https://wa.me/573112512939" target="_blank" rel="noreferrer" aria-label="WhatsApp"><SiWhatsapp aria-hidden="true" /></a>
+                        <a
+                          href={getWhatsAppHref(language)}
+                          onClick={(event) => {
+                            event.currentTarget.href = getWhatsAppHref(language);
+                          }}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="WhatsApp"
+                        >
+                          <SiWhatsapp aria-hidden="true" />
+                        </a>
                       </nav>
                     </aside>
                   ) : (

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { StudioHomeSections } from "@/pages/TattooPages";
+import { getWhatsAppHref } from "@/lib/whatsapp";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
@@ -139,7 +140,16 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
           <a className="footer-social" href="#studio-contact" aria-label="Instagram">
             <SiInstagram size={16} aria-hidden="true" />
           </a>
-          <a className="footer-social" href="#studio-contact" aria-label="WhatsApp">
+          <a
+            className="footer-social"
+            href={getWhatsAppHref(language)}
+            onClick={(event) => {
+              event.currentTarget.href = getWhatsAppHref(language);
+            }}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+          >
             <SiWhatsapp size={16} aria-hidden="true" />
           </a>
           <a className="footer-social" href="#studio-contact" aria-label="TikTok">
