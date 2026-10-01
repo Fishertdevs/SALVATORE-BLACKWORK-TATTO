@@ -5497,3 +5497,295 @@ body,
     border-bottom: 0;
   }
 }
+
+/* Booking steps follow the contact panel's white, black, and red visual system. */
+.page-contact-booking-content {
+  display: flex;
+  width: 100%;
+  max-width: 440px;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: clamp(8px, 1.1vw, 14px) 0 4px;
+}
+
+.page-contact-booking-heading {
+  max-width: 330px;
+  margin: 0 auto clamp(14px, 1.6vw, 20px);
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  font-weight: 400;
+  line-height: 1.12;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.page-contact-booking-steps {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.15vw, 14px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-contact-booking-step {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  column-gap: 8px;
+  align-items: start;
+  min-width: 0;
+}
+
+.page-contact-booking-number {
+  padding-top: 1px;
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.page-contact-booking-step h4 {
+  margin: 0 0 3px;
+  color: #171515;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.page-contact-booking-step p {
+  margin: 0;
+  color: rgba(23, 21, 21, 0.76);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.page-contact-booking-cta {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  align-self: flex-end;
+  gap: 7px;
+  margin-top: clamp(10px, 1.2vw, 15px);
+  padding: 0 2px;
+  color: #20B95A;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.page-contact-booking-cta svg {
+  width: 16px;
+  height: 16px;
+}
+
+.page-contact-booking-cta:hover,
+.page-contact-booking-cta:focus-visible {
+  color: #159447;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.page-contact-booking-cta:focus-visible {
+  outline: 1px solid #E63027;
+  outline-offset: 3px;
+}
+
+/* Persistent WhatsApp contact widget. */
+.look-root .floating-whatsapp,
+.mobile-look-root .floating-whatsapp {
+  position: fixed;
+  right: clamp(14px, 2.2vw, 28px);
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 1300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.look-root .floating-whatsapp-trigger,
+.mobile-look-root .floating-whatsapp-trigger {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid rgba(23, 21, 21, 0.85);
+  border-radius: 999px;
+  background: #171515;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.look-root .floating-whatsapp-trigger svg,
+.mobile-look-root .floating-whatsapp-trigger svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: #25D366;
+}
+
+.look-root .floating-whatsapp-trigger:hover,
+.look-root .floating-whatsapp-trigger:focus-visible,
+.mobile-look-root .floating-whatsapp-trigger:hover,
+.mobile-look-root .floating-whatsapp-trigger:focus-visible {
+  border-color: #E63027;
+  transform: translateY(-2px);
+}
+
+.look-root .floating-whatsapp-trigger:focus-visible,
+.mobile-look-root .floating-whatsapp-trigger:focus-visible {
+  outline: 2px solid #E63027;
+  outline-offset: 3px;
+}
+
+.look-root .floating-whatsapp-card,
+.mobile-look-root .floating-whatsapp-card {
+  width: min(300px, calc(100vw - 28px));
+  padding: 17px 18px 16px;
+  border: 1px solid rgba(23, 21, 21, 0.18);
+  border-top: 3px solid #E63027;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  color: #171515;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.look-root .floating-whatsapp-card-heading,
+.mobile-look-root .floating-whatsapp-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #E63027;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.look-root .floating-whatsapp-close,
+.mobile-look-root .floating-whatsapp-close {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(23, 21, 21, 0.18);
+  border-radius: 50%;
+  background: #fff;
+  color: #171515;
+  cursor: pointer;
+  font: 400 20px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.look-root .floating-whatsapp-message,
+.mobile-look-root .floating-whatsapp-message {
+  margin: 12px 0 14px;
+  color: rgba(23, 21, 21, 0.78);
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.look-root .floating-whatsapp-start,
+.mobile-look-root .floating-whatsapp-start {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  color: #20B95A;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.look-root .floating-whatsapp-start svg,
+.mobile-look-root .floating-whatsapp-start svg {
+  width: 16px;
+  height: 16px;
+}
+
+.look-root .floating-whatsapp-start:hover,
+.look-root .floating-whatsapp-start:focus-visible,
+.mobile-look-root .floating-whatsapp-start:hover,
+.mobile-look-root .floating-whatsapp-start:focus-visible {
+  color: #159447;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .page-contact-booking-content {
+    padding-top: 4px;
+  }
+
+  .page-contact-booking-heading {
+    margin-bottom: 13px;
+    font-size: clamp(1rem, 4.5vw, 1.18rem);
+  }
+
+  .page-contact-booking-steps {
+    gap: 10px;
+  }
+
+  .page-contact-booking-step {
+    grid-template-columns: 22px minmax(0, 1fr);
+    column-gap: 7px;
+  }
+
+  .page-contact-booking-number {
+    font-size: 14px;
+  }
+
+  .page-contact-booking-step h4 {
+    font-size: 9.5px;
+  }
+
+  .page-contact-booking-step p {
+    font-size: 8.5px;
+  }
+
+  .page-contact-booking-cta {
+    min-height: 30px;
+    margin-top: 8px;
+    font-size: 9px;
+  }
+
+  .look-root .floating-whatsapp,
+  .mobile-look-root .floating-whatsapp {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .look-root .floating-whatsapp-trigger,
+  .mobile-look-root .floating-whatsapp-trigger {
+    min-height: 42px;
+    gap: 7px;
+    padding: 0 12px;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+}

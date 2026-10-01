@@ -551,7 +551,9 @@ export function ContactPage({ language }: StudioProps) {
                       <ol className="page-contact-booking-steps">
                         {copy.bookingSteps.map(([title, description], index) => (
                           <li key={title} className="page-contact-booking-step">
-                            <span className="page-contact-booking-number" aria-hidden="true">{index + 1}</span>
+                            <span className="page-contact-booking-number" aria-hidden="true">
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
                             <div>
                               <h4>{title}</h4>
                               <p>{description}</p>
