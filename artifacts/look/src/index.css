@@ -5789,3 +5789,92 @@ body,
     letter-spacing: 0.1em;
   }
 }
+
+/* Keep the contact and booking tabs on the same fixed layout footprint. */
+.page-contact-cluster .page-contact-form-panel {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.page-contact-panel-tabs {
+  flex: 0 0 auto;
+}
+
+.page-contact-tab-content {
+  height: 330px;
+  min-height: 330px;
+  flex: 0 0 330px;
+  box-sizing: border-box;
+  animation: none;
+}
+
+.page-contact-booking-content {
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  padding-top: 8px;
+}
+
+.page-contact-booking-heading {
+  font-size: clamp(1rem, 1.35vw, 1.4rem);
+  line-height: 1.04;
+}
+
+.page-contact-booking-number {
+  font-size: 15px;
+}
+
+.page-contact-booking-step h4,
+.page-contact-booking-step p,
+.page-contact-booking-cta {
+  font-size: 10px;
+}
+
+.page-contact-booking-step p {
+  line-height: 1.4;
+}
+
+.page-contact-booking-cta {
+  min-height: 34px;
+  margin-top: auto;
+}
+
+.look-root .floating-whatsapp,
+.mobile-look-root .floating-whatsapp {
+  z-index: 80;
+}
+
+@media (min-width: 601px) and (max-width: 820px) {
+  .page-contact-tab-content {
+    height: 380px;
+    min-height: 380px;
+    flex-basis: 380px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-contact-tab-content {
+    height: 330px;
+    min-height: 330px;
+    flex-basis: 330px;
+  }
+
+  .page-contact-booking-heading {
+    font-size: 1rem;
+  }
+
+  .page-contact-booking-number {
+    font-size: 15px;
+  }
+
+  .page-contact-booking-step h4,
+  .page-contact-booking-step p,
+  .page-contact-booking-cta {
+    font-size: 10px;
+  }
+
+  .page-contact-booking-cta {
+    min-height: 34px;
+  }
+}
