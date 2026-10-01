@@ -5878,3 +5878,27 @@ body,
     min-height: 34px;
   }
 }
+
+/* Tighten only the contact section's top offset and enlarge its social marks. */
+.page-contact-reference {
+  padding-top: clamp(16px, 2vw, 30px);
+}
+
+.page-contact-copy-column {
+  padding-top: clamp(16px, 2vw, 28px);
+}
+
+.page-contact-form-panel .page-contact-card-socials a svg {
+  width: 17px;
+  height: 17px;
+}
+
+@media (max-width: 600px) {
+  .page-contact-reference {
+    padding-top: 12px;
+  }
+
+  .page-contact-copy-column {
+    padding-top: 12px;
+  }
+}
