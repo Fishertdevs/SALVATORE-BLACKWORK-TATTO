@@ -177,6 +177,72 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
   );
 }
 
+function FloatingWhatsAppWidget({ language }: { language: Language }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const isSpanish = language === "es";
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [isOpen]);
+
+  return (
+    <div className="floating-whatsapp">
+      {isOpen && (
+        <section
+          className="floating-whatsapp-card"
+          id="site-whatsapp-popover"
+          role="dialog"
+          aria-label={isSpanish ? "Chat por WhatsApp" : "WhatsApp chat"}
+        >
+          <div className="floating-whatsapp-card-heading">
+            <span>{isSpanish ? "SALVATORE BLACKWORK" : "SALVATORE BLACKWORK"}</span>
+            <button
+              type="button"
+              className="floating-whatsapp-close"
+              onClick={() => setIsOpen(false)}
+              aria-label={isSpanish ? "Cerrar mensaje" : "Close message"}
+            >
+              ×
+            </button>
+          </div>
+          <p className="floating-whatsapp-message">
+            {isSpanish
+              ? "¿Tienes una idea de tatuaje? Escríbenos y conversemos sobre tu proyecto."
+              : "Have a tattoo idea? Message us and let’s talk about your project."}
+          </p>
+          <a
+            className="floating-whatsapp-start"
+            href={getWhatsAppHref(language)}
+            onClick={(event) => {
+              event.currentTarget.href = getWhatsAppHref(language);
+            }}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <SiWhatsapp aria-hidden="true" />
+            {isSpanish ? "INICIAR CHAT" : "START CHAT"}
+          </a>
+        </section>
+      )}
+      <button
+        type="button"
+        className="floating-whatsapp-trigger"
+        aria-expanded={isOpen}
+        aria-controls="site-whatsapp-popover"
+        onClick={() => setIsOpen((open) => !open)}
+      >
+        <SiWhatsapp aria-hidden="true" />
+        <span>{isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}</span>
+      </button>
+    </div>
+  );
+}
+
 function MobileLookGallery({
   language,
   onLanguageChange,
@@ -500,6 +566,7 @@ function MobileLookGallery({
 
       <SiteFooter copy={copy} language={language} />
 
+      <FloatingWhatsAppWidget language={language} />
     </div>
   );
 }
@@ -1287,6 +1354,7 @@ export default function LookGallery() {
         <SiteFooter copy={copy} language={language} />
       </div>
 
+      <FloatingWhatsAppWidget language={language} />
     </div>
   );
 }

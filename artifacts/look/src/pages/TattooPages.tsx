@@ -3,7 +3,7 @@ import type { FormEvent, ReactNode } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
-import { getWhatsAppHref } from "@/lib/whatsapp";
+import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
 import servicesImg from "@assets/generated_images/services-blackwork-detail.png";
@@ -87,8 +87,13 @@ const studioCopy = {
       intro: "Cuéntanos qué tatuaje tienes en mente y lo diseñamos contigo.",
       contactLabel: "CONTÁCTANOS",
       bookingLabel: "AGENDAR CITA",
-      bookingIntro: "Cada proyecto comienza con una conversación. Comparte tu idea y coordinamos los siguientes pasos.",
-      bookingCta: "IR A RESERVAS ↗",
+      bookingHeading: "Agenda una llamada y en 30 min te respondemos.",
+      bookingSteps: [
+        ["Cuéntanos tu proyecto", "Envíanos un mensaje con una breve descripción de tu idea. Respondemos en menos de 24 h."],
+        ["Agendamos una llamada", "Te proponemos un horario de 30 minutos para conocernos y alinear el alcance del proyecto."],
+        ["Recibes la confirmación", "La cita llega directo a tu WhatsApp. Sin formularios, sin fricciones."],
+      ],
+      bookingCta: "AGENDAR",
       location: "UBICACIÓN",
       locationNote: "Colombia · Remoto global",
       email: "CORREO ELECTRÓNICO",
@@ -179,8 +184,13 @@ const studioCopy = {
       intro: "Tell us what tattoo you have in mind and we will design it with you.",
       contactLabel: "CONTACT US",
       bookingLabel: "BOOK AN APPOINTMENT",
-      bookingIntro: "Every project starts with a conversation. Share your idea and we will coordinate the next steps.",
-      bookingCta: "GO TO BOOKING ↗",
+      bookingHeading: "Book a call and we’ll get back to you within 30 minutes.",
+      bookingSteps: [
+        ["Tell us about your project", "Send us a message with a brief description of your idea. We reply within 24 hours."],
+        ["We schedule a call", "We’ll suggest a 30-minute time to meet and align on the project scope."],
+        ["You receive confirmation", "The appointment goes straight to your WhatsApp. No forms, no friction."],
+      ],
+      bookingCta: "BOOK NOW",
       location: "LOCATION",
       locationNote: "Colombia · Remote worldwide",
       email: "EMAIL",
@@ -537,8 +547,30 @@ export function ContactPage({ language }: StudioProps) {
                     </aside>
                   ) : (
                     <aside className="page-contact-booking-content">
-                      <p className="page-contact-panel-intro">{copy.bookingIntro}</p>
-                      <a className="tattoo-red-link" href="#studio-booking">{copy.bookingCta}</a>
+                      <h3 className="page-contact-booking-heading">{copy.bookingHeading}</h3>
+                      <ol className="page-contact-booking-steps">
+                        {copy.bookingSteps.map(([title, description], index) => (
+                          <li key={title} className="page-contact-booking-step">
+                            <span className="page-contact-booking-number" aria-hidden="true">{index + 1}</span>
+                            <div>
+                              <h4>{title}</h4>
+                              <p>{description}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                      <a
+                        className="page-contact-booking-cta"
+                        href={getBookingWhatsAppHref(language)}
+                        onClick={(event) => {
+                          event.currentTarget.href = getBookingWhatsAppHref(language);
+                        }}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <SiWhatsapp aria-hidden="true" />
+                        <span>{copy.bookingCta}</span>
+                      </a>
                     </aside>
                   )}
                 </div>
