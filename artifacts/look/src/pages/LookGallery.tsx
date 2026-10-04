@@ -119,8 +119,49 @@ function LanguageSwitcher({
 type GalleryCopy = (typeof galleryCopy)[Language];
 
 function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language }) {
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer || typeof window === "undefined") return undefined;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (typeof IntersectionObserver === "undefined") return undefined;
+
+    const targets = Array.from(
+      footer.querySelectorAll<HTMLElement>(
+        ".footer-design-label, .footer-style-line, .footer-socials, .footer-rule, .footer-legal-nav, .footer-bottom",
+      ),
+    );
+    if (!targets.length) return undefined;
+
+    let hasRevealed = false;
+    try {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (!entry?.isIntersecting || hasRevealed) return;
+        hasRevealed = true;
+        gsap.fromTo(
+          targets,
+          { opacity: 0, y: 10 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.68,
+            ease: "power3.out",
+            stagger: 0.09,
+          },
+        );
+        observer.disconnect();
+      }, { threshold: 0.12 });
+      observer.observe(footer);
+      return () => observer.disconnect();
+    } catch {
+      gsap.set(targets, { clearProps: "all" });
+      return undefined;
+    }
+  }, []);
+
   return (
-    <footer className="site-footer" aria-label={language === "es" ? "Pie de página" : "Site footer"}>
+    <footer ref={footerRef} className="site-footer" aria-label={language === "es" ? "Pie de página" : "Site footer"}>
       <div
         className="footer-wordmark"
         aria-hidden="true"

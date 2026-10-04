@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
+import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
@@ -389,26 +390,58 @@ export function BookingPage({ language }: StudioProps) {
 
 export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
-  const [portraitInView, setPortraitInView] = useState(false);
   const [activePanelTab, setActivePanelTab] = useState<"contact" | "booking">("contact");
-  const portraitRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const portrait = portraitRef.current;
-    if (!portrait || typeof IntersectionObserver === "undefined") return;
+    const section = contactRef.current;
+    if (!section || typeof window === "undefined") return undefined;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (typeof IntersectionObserver === "undefined") return undefined;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setPortraitInView(entry.isIntersecting),
-      { threshold: 0.42, rootMargin: "0px 0px -8% 0px" },
-    );
+    const title = section.querySelector<HTMLElement>(".page-contact-heading h1");
+    const softTargets = [
+      section.querySelector<HTMLElement>(".page-contact-cluster"),
+      section.querySelector<HTMLElement>(".page-contact-portrait"),
+    ].filter((target): target is HTMLElement => target !== null);
+    if (!title) return undefined;
 
-    observer.observe(portrait);
-    return () => observer.disconnect();
+    let hasRevealed = false;
+    try {
+      gsap.set(title, { clipPath: "inset(0px 100% 0px 0px)" });
+      gsap.set(softTargets, { opacity: 0, y: 12 });
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry?.isIntersecting || hasRevealed) return;
+          hasRevealed = true;
+          gsap.to(title, {
+            clipPath: "inset(0px 0% 0px 0px)",
+            duration: 1.2,
+            ease: "power3.out",
+          });
+          gsap.to(softTargets, {
+            opacity: 1,
+            y: 0,
+            duration: 0.72,
+            ease: "power3.out",
+            stagger: 0.14,
+            delay: 0.18,
+          });
+          observer.disconnect();
+        },
+        { threshold: 0.12 },
+      );
+      observer.observe(section);
+      return () => observer.disconnect();
+    } catch {
+      gsap.set([title, ...softTargets], { clearProps: "all" });
+      return undefined;
+    }
   }, []);
 
   return (
     <StudioFrame id="studio-contact" className="page-contact">
-      <section className="page-contact-reference">
+      <section ref={contactRef} className="page-contact-reference">
         <section className="page-contact-form-section page-contact-form-layout">
           <div className="page-contact-copy-column">
             <header className="page-contact-heading">
@@ -581,17 +614,11 @@ export function ContactPage({ language }: StudioProps) {
             </div>
           </div>
 
-          <figure ref={portraitRef} className={`page-contact-portrait ${portraitInView ? "is-in-view" : ""}`}>
+          <figure className="page-contact-portrait">
             <img
               className="page-contact-portrait-color"
               src={contactPortraitImg}
               alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"}
-            />
-            <img
-              className="page-contact-portrait-face-gray"
-              src={contactPortraitImg}
-              alt=""
-              aria-hidden="true"
             />
           </figure>
         </section>

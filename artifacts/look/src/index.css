@@ -5061,27 +5061,7 @@ body,
 
 .page-contact-form-layout > .page-contact-portrait .page-contact-portrait-color {
   z-index: 0;
-}
-
-.page-contact-form-layout > .page-contact-portrait .page-contact-portrait-face-gray {
-  z-index: 1;
   filter: grayscale(1) contrast(1.08);
-  clip-path: polygon(
-    16% 30%, 27% 29%, 39% 31%, 50% 34%, 60% 38%,
-    65% 45%, 63% 52%, 59% 59%, 55% 66%, 49% 72%,
-    41% 76%, 32% 77%, 24% 73%, 17% 67%, 12% 59%,
-    10% 51%, 12% 43%
-  );
-  opacity: 1;
-  transition: opacity 700ms ease;
-}
-
-.page-contact-form-layout > .page-contact-portrait.is-in-view img {
-  transform: none;
-}
-
-.page-contact-form-layout > .page-contact-portrait.is-in-view .page-contact-portrait-face-gray {
-  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
