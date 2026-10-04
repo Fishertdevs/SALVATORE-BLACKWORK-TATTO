@@ -209,7 +209,7 @@ const studioCopy = {
 } as const;
 
 type StudioProps = { language: Language };
-const bookingStepNumbers = ["I", "II", "III"] as const;
+const bookingStepNumbers = ["1.", "2.", "3."] as const;
 
 function StudioFrame({
   id,
