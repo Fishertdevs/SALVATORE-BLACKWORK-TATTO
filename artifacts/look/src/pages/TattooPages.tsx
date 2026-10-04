@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent, ReactNode } from "react";
+import type { FormEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
@@ -211,6 +211,8 @@ const studioCopy = {
 
 type StudioProps = { language: Language };
 const bookingStepNumbers = ["1.", "2.", "3."] as const;
+const portraitBrushSpacing = 16;
+const portraitBrushLimit = 120;
 
 function StudioFrame({
   id,
@@ -393,6 +395,46 @@ export function ContactPage({ language }: StudioProps) {
   const [activePanelTab, setActivePanelTab] = useState<"contact" | "booking">("contact");
   const [portraitColorSpots, setPortraitColorSpots] = useState<Array<{ x: number; y: number }>>([]);
   const contactRef = useRef<HTMLElement>(null);
+  const lastPortraitBrushPoint = useRef<{ x: number; y: number } | null>(null);
+
+  function handlePortraitPointerMove(event: ReactPointerEvent<HTMLElement>) {
+    if (event.pointerType === "touch") return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    const current = { x: event.clientX, y: event.clientY };
+    const previous = lastPortraitBrushPoint.current;
+
+    if (!previous) {
+      lastPortraitBrushPoint.current = current;
+      setPortraitColorSpots((spots) => [
+        ...spots,
+        {
+          x: ((current.x - bounds.left) / bounds.width) * 100,
+          y: ((current.y - bounds.top) / bounds.height) * 100,
+        },
+      ].slice(-portraitBrushLimit));
+      return;
+    }
+
+    const dx = current.x - previous.x;
+    const dy = current.y - previous.y;
+    const distance = Math.hypot(dx, dy);
+    if (distance < portraitBrushSpacing) return;
+
+    const stampCount = Math.ceil(distance / portraitBrushSpacing);
+    const newSpots = Array.from({ length: stampCount }, (_, index) => {
+      const progress = (index + 1) / stampCount;
+      const x = previous.x + dx * progress;
+      const y = previous.y + dy * progress;
+      return {
+        x: Math.max(0, Math.min(100, ((x - bounds.left) / bounds.width) * 100)),
+        y: Math.max(0, Math.min(100, ((y - bounds.top) / bounds.height) * 100)),
+      };
+    });
+    lastPortraitBrushPoint.current = current;
+    setPortraitColorSpots((spots) => [...spots, ...newSpots].slice(-portraitBrushLimit));
+  }
 
   useEffect(() => {
     const section = contactRef.current;
@@ -413,6 +455,10 @@ export function ContactPage({ language }: StudioProps) {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (!entry) return;
+          if (!entry.isIntersecting) {
+            lastPortraitBrushPoint.current = null;
+            setPortraitColorSpots([]);
+          }
           if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
             gsap.killTweensOf([title, ...entranceTargets]);
             gsap.to(title, {
@@ -619,7 +665,13 @@ export function ContactPage({ language }: StudioProps) {
             </div>
           </div>
 
-          <figure className="page-contact-portrait">
+          <figure
+            className="page-contact-portrait"
+            onPointerMove={handlePortraitPointerMove}
+            onPointerLeave={() => {
+              lastPortraitBrushPoint.current = null;
+            }}
+          >
             <img
               className="page-contact-portrait-base"
               src={contactPortraitImg}
@@ -638,30 +690,6 @@ export function ContactPage({ language }: StudioProps) {
                 }}
               />
             ))}
-            <button
-              className="page-contact-portrait-reveal"
-              type="button"
-              aria-label={language === "es"
-                ? "Revelar un punto de color original en el retrato"
-                : "Reveal a spot of the portrait’s original color"}
-              onClick={(event) => {
-                const bounds = event.currentTarget.getBoundingClientRect();
-                const isPointerClick = event.detail > 0;
-                const x = isPointerClick
-                  ? ((event.clientX - bounds.left) / bounds.width) * 100
-                  : 50;
-                const y = isPointerClick
-                  ? ((event.clientY - bounds.top) / bounds.height) * 100
-                  : 50;
-                setPortraitColorSpots((spots) => [
-                  ...spots,
-                  {
-                    x: Math.max(0, Math.min(100, x)),
-                    y: Math.max(0, Math.min(100, y)),
-                  },
-                ]);
-              }}
-            />
           </figure>
         </section>
       </section>

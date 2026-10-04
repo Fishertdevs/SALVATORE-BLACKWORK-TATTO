@@ -5065,25 +5065,6 @@ body,
   pointer-events: none;
 }
 
-.page-contact-portrait-reveal {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: crosshair;
-  touch-action: manipulation;
-}
-
-.page-contact-portrait-reveal:focus-visible {
-  outline: 2px solid #E63027;
-  outline-offset: -4px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .page-contact-panel-tabs button,
   .page-contact-tabs-indicator {
