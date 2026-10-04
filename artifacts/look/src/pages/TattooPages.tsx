@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { gsap } from "gsap";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
@@ -425,6 +425,18 @@ const faqCopy = {
 
 export function FAQPage({ language }: StudioProps) {
   const copy = faqCopy[language];
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] = useState<"next" | "previous">("next");
+  const activeQuestion = copy.questions[activeQuestionIndex]!;
+
+  function navigateQuestions(direction: "next" | "previous") {
+    setCarouselDirection(direction);
+    setActiveQuestionIndex((currentIndex) => {
+      const offset = direction === "next" ? 1 : -1;
+      return (currentIndex + offset + copy.questions.length) % copy.questions.length;
+    });
+  }
+
   return (
     <StudioFrame id="studio-faq" className="page-faq">
       <div className="page-faq-panel">
@@ -435,17 +447,51 @@ export function FAQPage({ language }: StudioProps) {
             <p>{copy.intro}</p>
             <span className="page-faq-index" aria-hidden="true">S / B — 08</span>
           </header>
-          <div className="page-faq-list">
-            {copy.questions.map(([question, answer], index) => (
-              <details className="page-faq-item" key={question}>
+          <div
+            className="page-faq-carousel"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label={language === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}
+          >
+            <div
+              className={`page-faq-slide page-faq-slide--${carouselDirection}`}
+              key={`${language}-${activeQuestionIndex}`}
+              aria-live="polite"
+            >
+              <details className="page-faq-item">
                 <summary>
-                  <span className="page-faq-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="page-faq-question">{question}</span>
+                  <span className="page-faq-number" aria-hidden="true">
+                    {String(activeQuestionIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span className="page-faq-question">{activeQuestion[0]}</span>
                   <span className="page-faq-toggle" aria-hidden="true" />
                 </summary>
-                <div className="page-faq-answer"><p>{answer}</p></div>
+                <div className="page-faq-answer"><p>{activeQuestion[1]}</p></div>
               </details>
-            ))}
+            </div>
+            <div className="page-faq-carousel-controls">
+              <span className="page-faq-counter" role="status" aria-live="polite">
+                {String(activeQuestionIndex + 1).padStart(2, "0")}
+                <span aria-hidden="true"> / </span>
+                {String(copy.questions.length).padStart(2, "0")}
+              </span>
+              <div className="page-faq-carousel-nav">
+                <button
+                  type="button"
+                  aria-label={language === "es" ? "Pregunta anterior" : "Previous question"}
+                  onClick={() => navigateQuestions("previous")}
+                >
+                  <ArrowLeft aria-hidden="true" size={18} />
+                </button>
+                <button
+                  type="button"
+                  aria-label={language === "es" ? "Pregunta siguiente" : "Next question"}
+                  onClick={() => navigateQuestions("next")}
+                >
+                  <ArrowRight aria-hidden="true" size={18} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
