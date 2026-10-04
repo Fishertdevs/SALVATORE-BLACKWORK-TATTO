@@ -5915,8 +5915,26 @@ body,
   line-height: 1.04;
 }
 
+.look-root #studio-contact {
+  scroll-margin-top: clamp(64px, 4.2vw, 86px);
+}
+
+.page-contact-booking-number {
+  display: block;
+  width: 100%;
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
 .page-contact-form-panel .page-contact-card-socials {
   margin-top: 20px;
+}
+
+.page-contact-form-panel .page-contact-form-aside > .page-contact-panel-intro {
+  color: #111;
+  font-weight: 400;
+  opacity: 1;
 }
 
 .page-contact-form-panel .page-contact-card-socials a {
