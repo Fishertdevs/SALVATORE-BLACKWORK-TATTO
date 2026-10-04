@@ -5935,20 +5935,28 @@ body,
   outline-offset: 2px;
 }
 
-/* FAQ — a quiet editorial pause between booking and contact. */
+/* FAQ — framed red editorial panel between booking and contact. */
 .page-faq {
   position: relative;
   z-index: 1;
-  padding: clamp(76px, 9vw, 142px) 7vw clamp(84px, 10vw, 156px);
+  padding: clamp(42px, 5.5vw, 84px) clamp(16px, 6vw, 88px);
   color: #171515;
   background: #f2eee5;
   scroll-margin-top: 5rem;
 }
 
+.page-faq-panel {
+  width: min(100%, 1600px);
+  margin: 0 auto;
+  padding: clamp(42px, 6.2vw, 96px) clamp(28px, 6.5vw, 104px);
+  color: #171515;
+  background: #E63027;
+}
+
 .page-faq-layout {
   display: grid;
   grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(48px, 9vw, 150px);
+  gap: clamp(38px, 7vw, 110px);
   width: min(100%, 1460px);
   margin: 0 auto;
 }
@@ -5959,9 +5967,13 @@ body,
   align-self: start;
 }
 
+.page-faq-heading > .tattoo-eyebrow {
+  color: #171515;
+}
+
 .page-faq-heading h2 {
   margin: clamp(28px, 4vw, 58px) 0 28px;
-  color: #171515;
+  color: #f2eee5;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(3.8rem, 7vw, 7.8rem);
   font-weight: 400;
@@ -5971,7 +5983,7 @@ body,
 }
 
 .page-faq-heading h2 em {
-  color: #E63027;
+  color: #171515;
   font-family: 'Playfair Display', 'Beautique Display', serif;
   font-size: 0.78em;
   font-weight: 400;
@@ -5982,7 +5994,7 @@ body,
 .page-faq-heading > p {
   max-width: 290px;
   margin: 0;
-  color: rgba(23, 21, 21, 0.72);
+  color: rgba(23, 21, 21, 0.9);
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 15px;
   font-weight: 300;
@@ -5993,8 +6005,8 @@ body,
   display: inline-block;
   margin-top: clamp(42px, 7vw, 100px);
   padding-top: 12px;
-  border-top: 1px solid rgba(23, 21, 21, 0.32);
-  color: rgba(23, 21, 21, 0.62);
+  border-top: 1px solid rgba(23, 21, 21, 0.42);
+  color: rgba(23, 21, 21, 0.78);
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 10px;
   font-weight: 500;
@@ -6002,11 +6014,11 @@ body,
 }
 
 .page-faq-list {
-  border-top: 1px solid rgba(23, 21, 21, 0.4);
+  border-top: 1px solid rgba(23, 21, 21, 0.52);
 }
 
 .page-faq-item {
-  border-bottom: 1px solid rgba(23, 21, 21, 0.28);
+  border-bottom: 1px solid rgba(23, 21, 21, 0.38);
 }
 
 .page-faq-item summary {
@@ -6025,14 +6037,14 @@ body,
 }
 
 .page-faq-item summary:focus-visible {
-  outline: 2px solid #E63027;
+  outline: 2px solid #f2eee5;
   outline-offset: 5px;
 }
 
 .page-faq-number {
   align-self: start;
   padding-top: 4px;
-  color: #E63027;
+  color: #171515;
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 11px;
   font-variant-numeric: tabular-nums;
@@ -6076,12 +6088,12 @@ body,
 }
 
 .page-faq-item[open] .page-faq-toggle {
-  border-color: #E63027;
+  border-color: #f2eee5;
 }
 
 .page-faq-item[open] .page-faq-toggle::before,
 .page-faq-item[open] .page-faq-toggle::after {
-  background: #E63027;
+  background: #f2eee5;
 }
 
 .page-faq-item[open] .page-faq-toggle::after {
@@ -6095,7 +6107,7 @@ body,
 .page-faq-answer p {
   max-width: 610px;
   margin: 0;
-  color: rgba(23, 21, 21, 0.78);
+  color: rgba(23, 21, 21, 0.9);
   font-family: 'Helvetica Neue', sans-serif;
   font-size: clamp(14px, 1.08vw, 16px);
   font-weight: 300;
@@ -6104,12 +6116,16 @@ body,
 
 @media (max-width: 767px) {
   .page-faq {
-    padding: 78px 20px 88px;
+    padding: 34px 14px 52px;
+  }
+
+  .page-faq-panel {
+    padding: 36px 22px 42px;
   }
 
   .page-faq-layout {
     grid-template-columns: 1fr;
-    gap: 44px;
+    gap: 36px;
   }
 
   .page-faq-heading {
@@ -6117,8 +6133,8 @@ body,
   }
 
   .page-faq-heading h2 {
-    margin: 30px 0 22px;
-    font-size: clamp(3.5rem, 16vw, 6rem);
+    margin: 28px 0 22px;
+    font-size: clamp(3.3rem, 15vw, 5.4rem);
   }
 
   .page-faq-heading > p {
