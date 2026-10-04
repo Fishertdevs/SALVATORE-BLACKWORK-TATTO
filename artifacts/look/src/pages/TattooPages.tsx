@@ -458,16 +458,15 @@ export function FAQPage({ language }: StudioProps) {
               key={`${language}-${activeQuestionIndex}`}
               aria-live="polite"
             >
-              <details className="page-faq-item">
-                <summary>
+              <article className="page-faq-item">
+                <div className="page-faq-question-row">
                   <span className="page-faq-number" aria-hidden="true">
                     {String(activeQuestionIndex + 1).padStart(2, "0")}
                   </span>
-                  <span className="page-faq-question">{activeQuestion[0]}</span>
-                  <span className="page-faq-toggle" aria-hidden="true" />
-                </summary>
+                  <h3 className="page-faq-question">{activeQuestion[0]}</h3>
+                </div>
                 <div className="page-faq-answer"><p>{activeQuestion[1]}</p></div>
-              </details>
+              </article>
             </div>
             <div className="page-faq-carousel-controls">
               <span className="page-faq-counter" role="status" aria-live="polite">
