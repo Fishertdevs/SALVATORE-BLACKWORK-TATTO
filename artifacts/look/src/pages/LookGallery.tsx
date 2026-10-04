@@ -274,18 +274,25 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
           </a>
         </section>
       )}
-      <button
-        type="button"
-        className="floating-whatsapp-trigger"
-        aria-label={isSpanish
-          ? (isOpen ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp")
-          : (isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat")}
-        aria-expanded={isOpen}
-        aria-controls="site-whatsapp-popover"
-        onClick={() => setIsOpen((open) => !open)}
-      >
-        <SiWhatsapp aria-hidden="true" />
-      </button>
+      <div className="floating-whatsapp-trigger-row">
+        {isOpen && (
+          <span className="floating-whatsapp-trigger-label" aria-hidden="true">
+            {isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}
+          </span>
+        )}
+        <button
+          type="button"
+          className="floating-whatsapp-trigger"
+          aria-label={isSpanish
+            ? (isOpen ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp")
+            : (isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat")}
+          aria-expanded={isOpen}
+          aria-controls="site-whatsapp-popover"
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <SiWhatsapp aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 }
