@@ -6016,7 +6016,7 @@ body,
   padding-top: 0.08em;
   color: #171515;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.75rem, 5.2vw, 5rem);
+  font-size: clamp(2rem, 6.5vw, 6rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 1.08;
@@ -6201,7 +6201,7 @@ body,
 
   .page-faq-heading h2 {
     margin: 10px auto 8px;
-    font-size: clamp(1.15rem, 5.8vw, 1.7rem);
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
     line-height: 1.08;
   }
 

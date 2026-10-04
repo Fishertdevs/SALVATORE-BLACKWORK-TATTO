@@ -4,3 +4,4 @@
 - [Approved mobile hero heading](approved-mobile-hero-heading.md) — preserve the approved centered title and prominent style keywords during later mobile refinements.
 - [Welcome text animation](welcome-text-animation.md) — replay welcome text on viewport re-entry without clipping glyphs.
 - [Contact-section constraints](contact-section-constraints.md) — preserve approved geometry, hover-reveal behavior, repeatable motion, and keep the FAQ out of the navbar.
+- [FAQ and widget scope](faq-and-widget-scope.md) — make only requested FAQ or WhatsApp changes and verify the affected section before saying the preview is updated.
