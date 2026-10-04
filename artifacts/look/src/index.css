@@ -5934,3 +5934,219 @@ body,
   outline: 1px solid #E63027;
   outline-offset: 2px;
 }
+
+/* FAQ — a quiet editorial pause between booking and contact. */
+.page-faq {
+  position: relative;
+  z-index: 1;
+  padding: clamp(76px, 9vw, 142px) 7vw clamp(84px, 10vw, 156px);
+  color: #171515;
+  background: #f2eee5;
+  scroll-margin-top: 5rem;
+}
+
+.page-faq-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(48px, 9vw, 150px);
+  width: min(100%, 1460px);
+  margin: 0 auto;
+}
+
+.page-faq-heading {
+  position: sticky;
+  top: 6rem;
+  align-self: start;
+}
+
+.page-faq-heading h2 {
+  margin: clamp(28px, 4vw, 58px) 0 28px;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(3.8rem, 7vw, 7.8rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.page-faq-heading h2 em {
+  color: #E63027;
+  font-family: 'Playfair Display', 'Beautique Display', serif;
+  font-size: 0.78em;
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  text-transform: lowercase;
+}
+
+.page-faq-heading > p {
+  max-width: 290px;
+  margin: 0;
+  color: rgba(23, 21, 21, 0.72);
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-faq-index {
+  display: inline-block;
+  margin-top: clamp(42px, 7vw, 100px);
+  padding-top: 12px;
+  border-top: 1px solid rgba(23, 21, 21, 0.32);
+  color: rgba(23, 21, 21, 0.62);
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.page-faq-list {
+  border-top: 1px solid rgba(23, 21, 21, 0.4);
+}
+
+.page-faq-item {
+  border-bottom: 1px solid rgba(23, 21, 21, 0.28);
+}
+
+.page-faq-item summary {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 24px;
+  gap: clamp(12px, 2vw, 28px);
+  align-items: center;
+  min-height: 82px;
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.page-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-faq-item summary:focus-visible {
+  outline: 2px solid #E63027;
+  outline-offset: 5px;
+}
+
+.page-faq-number {
+  align-self: start;
+  padding-top: 4px;
+  color: #E63027;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.page-faq-question {
+  max-width: 620px;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1.32rem, 2.05vw, 2rem);
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+.page-faq-toggle {
+  position: relative;
+  width: 21px;
+  height: 21px;
+  justify-self: end;
+  border: 1px solid rgba(23, 21, 21, 0.4);
+  border-radius: 50%;
+}
+
+.page-faq-toggle::before,
+.page-faq-toggle::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 1px;
+  background: #171515;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.page-faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  transition: transform 180ms ease;
+}
+
+.page-faq-item[open] .page-faq-toggle {
+  border-color: #E63027;
+}
+
+.page-faq-item[open] .page-faq-toggle::before,
+.page-faq-item[open] .page-faq-toggle::after {
+  background: #E63027;
+}
+
+.page-faq-item[open] .page-faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.page-faq-answer {
+  padding: 0 clamp(36px, 5vw, 72px) 27px;
+}
+
+.page-faq-answer p {
+  max-width: 610px;
+  margin: 0;
+  color: rgba(23, 21, 21, 0.78);
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: clamp(14px, 1.08vw, 16px);
+  font-weight: 300;
+  line-height: 1.62;
+}
+
+@media (max-width: 767px) {
+  .page-faq {
+    padding: 78px 20px 88px;
+  }
+
+  .page-faq-layout {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .page-faq-heading {
+    position: static;
+  }
+
+  .page-faq-heading h2 {
+    margin: 30px 0 22px;
+    font-size: clamp(3.5rem, 16vw, 6rem);
+  }
+
+  .page-faq-heading > p {
+    max-width: 340px;
+  }
+
+  .page-faq-index {
+    margin-top: 28px;
+  }
+
+  .page-faq-item summary {
+    grid-template-columns: 30px minmax(0, 1fr) 22px;
+    gap: 12px;
+    min-height: 74px;
+    padding: 17px 0;
+  }
+
+  .page-faq-question {
+    font-size: clamp(1.22rem, 5vw, 1.55rem);
+  }
+
+  .page-faq-answer {
+    padding: 0 27px 22px 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-faq-toggle::after {
+    transition: none;
+  }
+}

@@ -390,6 +390,67 @@ export function BookingPage({ language }: StudioProps) {
   );
 }
 
+const faqCopy = {
+  es: {
+    eyebrow: "PREGUNTAS FRECUENTES",
+    title: <>LO QUE<br /><em>quieres saber.</em></>,
+    intro: "Una conversación clara también forma parte del proceso.",
+    questions: [
+      ["¿Qué estilos realiza el estudio?", "El enfoque es el blackwork, con composiciones ornamentales y tribales. Cada propuesta se desarrolla según tu idea, el tamaño y la zona del cuerpo."],
+      ["¿Cómo solicito una cotización?", "Escríbenos por WhatsApp con una breve descripción, la zona, el tamaño aproximado y referencias visuales. Revisamos cada propuesta personalmente y te orientamos sobre el siguiente paso."],
+      ["¿Los diseños son personalizados?", "Sí. Cada pieza se compone para el proyecto y la anatomía de quien la lleva; no reproducimos exactamente el tatuaje de otro artista."],
+      ["¿Qué información debo enviar para empezar?", "Comparte referencias, ubicación en el cuerpo, medidas aproximadas y cualquier detalle que quieras explicar. Así podemos entender mejor lo que imaginas."],
+      ["¿Cómo reservo una cita?", "Primero conversamos sobre la idea y el alcance. Si hace falta, agendamos una llamada de 30 minutos; la confirmación y los siguientes pasos llegan por WhatsApp."],
+      ["¿Duele tatuarse?", "La sensación varía según la persona, la zona y la duración de la sesión. Podemos conversar sobre la ubicación y organizar pausas durante la jornada."],
+      ["¿Cuánto dura una sesión?", "Depende del tamaño, el nivel de detalle y la ubicación. Después de revisar la propuesta te damos una estimación más precisa."],
+      ["¿Qué cuidados necesita el tatuaje?", "Al terminar te compartimos indicaciones de cuidado adecuadas para tu sesión. Sigue esas indicaciones durante la cicatrización y consúltanos si tienes dudas."],
+    ],
+  },
+  en: {
+    eyebrow: "FREQUENTLY ASKED QUESTIONS",
+    title: <>A FEW<br /><em>things to know.</em></>,
+    intro: "A clear conversation is part of the process, too.",
+    questions: [
+      ["What styles does the studio specialize in?", "The focus is blackwork, including ornamental and tribal compositions. Each proposal is developed around your idea, the size, and the placement."],
+      ["How do I request a quote?", "Message us on WhatsApp with a short description, placement, approximate size, and visual references. We review each proposal personally and guide you through the next step."],
+      ["Are the designs custom?", "Yes. Each piece is composed for the project and the wearer's anatomy; we do not reproduce another artist's tattoo exactly."],
+      ["What should I share before we start?", "Send references, body placement, approximate measurements, and any details you would like to explain. This helps us understand what you have in mind."],
+      ["How do I book an appointment?", "We first discuss the idea and scope. If useful, we arrange a 30-minute call; confirmation and next steps are sent through WhatsApp."],
+      ["Does getting tattooed hurt?", "Sensation varies by person, placement, and session length. We can discuss placement and arrange breaks during the session."],
+      ["How long does a session take?", "It depends on the size, detail, and placement. After reviewing your proposal, we can give you a more accurate estimate."],
+      ["How should I care for a new tattoo?", "We share care instructions tailored to your session afterward. Follow them while it heals, and contact us if you have questions."],
+    ],
+  },
+} as const;
+
+export function FAQPage({ language }: StudioProps) {
+  const copy = faqCopy[language];
+  return (
+    <StudioFrame id="studio-faq" className="page-faq">
+      <div className="page-faq-layout">
+        <header className="page-faq-heading">
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <h2>{copy.title}</h2>
+          <p>{copy.intro}</p>
+          <span className="page-faq-index" aria-hidden="true">S / B — 08</span>
+        </header>
+        <div className="page-faq-list">
+          {copy.questions.map(([question, answer], index) => (
+            <details className="page-faq-item" key={question}>
+              <summary>
+                <span className="page-faq-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span className="page-faq-question">{question}</span>
+                <span className="page-faq-toggle" aria-hidden="true" />
+              </summary>
+              <div className="page-faq-answer"><p>{answer}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </StudioFrame>
+  );
+}
+
 export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
   const [activePanelTab, setActivePanelTab] = useState<"contact" | "booking">("contact");
@@ -704,6 +765,7 @@ export function StudioHomeSections({ language }: StudioProps) {
       <PortfolioPage language={language} />
       <ServicesPage language={language} />
       <BookingPage language={language} />
+      <FAQPage language={language} />
       <ContactPage language={language} />
     </div>
   );
