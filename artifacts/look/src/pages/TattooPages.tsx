@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FormEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { gsap } from "gsap";
-import { ArrowLeft, ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
@@ -431,19 +431,186 @@ const faqCopy = {
 
 export function FAQPage({ language }: StudioProps) {
   const copy = faqCopy[language];
+  const slideCount = Math.ceil(copy.questions.length / 3);
+  const lastSlideIndex = slideCount - 1;
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "previous">("next");
+  const activeSlideIndexRef = useRef(0);
+  const lastNavigationAtRef = useRef(0);
+  const lastNavigationDirectionRef = useRef<"next" | "previous" | null>(null);
+  const wheelAccumulatorRef = useRef(0);
+  const wheelDirectionRef = useRef<"next" | "previous" | null>(null);
+  const touchStateRef = useRef({
+    active: false,
+    consumed: false,
+    previousY: 0,
+    accumulated: 0,
+    direction: null as "next" | "previous" | null,
+  });
   const activeSlideStartIndex = activeSlideIndex * 3;
   const visibleQuestions = copy.questions.slice(activeSlideStartIndex, activeSlideStartIndex + 3);
 
-  function navigateQuestions(direction: "next" | "previous") {
+  const navigateQuestions = useCallback((direction: "next" | "previous") => {
+    const offset = direction === "next" ? 1 : -1;
+    const nextIndex = Math.max(
+      0,
+      Math.min(lastSlideIndex, activeSlideIndexRef.current + offset),
+    );
+    if (nextIndex === activeSlideIndexRef.current) return false;
+
+    activeSlideIndexRef.current = nextIndex;
     setCarouselDirection(direction);
-    setActiveSlideIndex((currentIndex) => {
-      const slideCount = Math.ceil(copy.questions.length / 3);
-      const offset = direction === "next" ? 1 : -1;
-      return (currentIndex + offset + slideCount) % slideCount;
-    });
-  }
+    setActiveSlideIndex(nextIndex);
+    return true;
+  }, [lastSlideIndex]);
+
+  const isFaqActive = useCallback(() => {
+    const section = document.getElementById("studio-faq");
+    if (!section) return false;
+    const bounds = section.getBoundingClientRect();
+    const visibleHeight = Math.max(
+      0,
+      Math.min(bounds.bottom, window.innerHeight) - Math.max(bounds.top, 0),
+    );
+    const activeHeight = Math.min(bounds.height, window.innerHeight);
+    return activeHeight > 0 && visibleHeight / activeHeight >= 0.55;
+  }, []);
+
+  useEffect(() => {
+    const section = document.getElementById("studio-faq");
+    if (!section) return;
+
+    const settleDuration = 760;
+    const inputThreshold = 42;
+    const isInsideFaq = (target: EventTarget | null) =>
+      target instanceof Node && section.contains(target);
+    const canNavigate = (direction: "next" | "previous") =>
+      direction === "next"
+        ? activeSlideIndexRef.current < lastSlideIndex
+        : activeSlideIndexRef.current > 0;
+
+    const handleWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      if (!isFaqActive()) return;
+
+      const multiplier = event.deltaMode === WheelEvent.DOM_DELTA_LINE
+        ? 16
+        : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+          ? window.innerHeight
+          : 1;
+      const delta = event.deltaY * multiplier;
+      if (!delta) return;
+
+      const direction = delta > 0 ? "next" : "previous";
+      const now = performance.now();
+      if (!canNavigate(direction)) {
+        if (
+          lastNavigationDirectionRef.current === direction &&
+          now - lastNavigationAtRef.current < settleDuration
+        ) {
+          event.preventDefault();
+        }
+        wheelAccumulatorRef.current = 0;
+        wheelDirectionRef.current = null;
+        return;
+      }
+
+      event.preventDefault();
+      if (now - lastNavigationAtRef.current < settleDuration) return;
+
+      if (wheelDirectionRef.current !== direction) {
+        wheelDirectionRef.current = direction;
+        wheelAccumulatorRef.current = 0;
+      }
+      wheelAccumulatorRef.current += Math.abs(delta);
+      if (wheelAccumulatorRef.current < inputThreshold) return;
+
+      if (navigateQuestions(direction)) {
+        lastNavigationAtRef.current = now;
+        lastNavigationDirectionRef.current = direction;
+      }
+      wheelAccumulatorRef.current = 0;
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      const state = touchStateRef.current;
+      state.active = isInsideFaq(event.target) || isFaqActive();
+      state.consumed = false;
+      state.previousY = touch.clientY;
+      state.accumulated = 0;
+      state.direction = null;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const state = touchStateRef.current;
+      const touch = event.touches[0];
+      if (!state.active || !touch) return;
+
+      const delta = state.previousY - touch.clientY;
+      state.previousY = touch.clientY;
+      if (Math.abs(delta) < 1) return;
+
+      if (state.consumed) {
+        event.preventDefault();
+        return;
+      }
+
+      const direction = delta > 0 ? "next" : "previous";
+      const now = performance.now();
+      if (!canNavigate(direction)) {
+        if (
+          lastNavigationDirectionRef.current === direction &&
+          now - lastNavigationAtRef.current < settleDuration
+        ) {
+          event.preventDefault();
+          state.consumed = true;
+        } else {
+          state.active = false;
+        }
+        return;
+      }
+
+      event.preventDefault();
+      if (now - lastNavigationAtRef.current < settleDuration) return;
+
+      if (state.direction !== direction) {
+        state.direction = direction;
+        state.accumulated = 0;
+      }
+      state.accumulated += Math.abs(delta);
+      if (state.accumulated < inputThreshold) return;
+
+      if (navigateQuestions(direction)) {
+        lastNavigationAtRef.current = now;
+        lastNavigationDirectionRef.current = direction;
+        state.consumed = true;
+      }
+      state.accumulated = 0;
+    };
+
+    const resetTouchState = () => {
+      touchStateRef.current.active = false;
+      touchStateRef.current.consumed = false;
+      touchStateRef.current.accumulated = 0;
+      touchStateRef.current.direction = null;
+    };
+
+    document.addEventListener("wheel", handleWheel, { capture: true, passive: false });
+    document.addEventListener("touchstart", handleTouchStart, { capture: true, passive: true });
+    document.addEventListener("touchmove", handleTouchMove, { capture: true, passive: false });
+    document.addEventListener("touchend", resetTouchState, true);
+    document.addEventListener("touchcancel", resetTouchState, true);
+
+    return () => {
+      document.removeEventListener("wheel", handleWheel, true);
+      document.removeEventListener("touchstart", handleTouchStart, true);
+      document.removeEventListener("touchmove", handleTouchMove, true);
+      document.removeEventListener("touchend", resetTouchState, true);
+      document.removeEventListener("touchcancel", resetTouchState, true);
+    };
+  }, [isFaqActive, lastSlideIndex, navigateQuestions]);
 
   return (
     <StudioFrame id="studio-faq" className="page-faq">
@@ -459,6 +626,22 @@ export function FAQPage({ language }: StudioProps) {
               role="region"
               aria-roledescription="carousel"
               aria-label={language === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}
+              tabIndex={0}
+              onKeyDown={(event) => {
+                const direction =
+                  event.key === "ArrowDown" || event.key === "PageDown" || event.key === " "
+                    ? "next"
+                    : event.key === "ArrowUp" || event.key === "PageUp"
+                      ? "previous"
+                      : null;
+                if (!direction) return;
+                const canMove = direction === "next"
+                  ? activeSlideIndexRef.current < lastSlideIndex
+                  : activeSlideIndexRef.current > 0;
+                if (!canMove) return;
+                event.preventDefault();
+                navigateQuestions(direction);
+              }}
             >
               <div
                 className={`page-faq-slide page-faq-slide--${carouselDirection}`}
@@ -483,24 +666,6 @@ export function FAQPage({ language }: StudioProps) {
                     </article>
                   );
                 })}
-              </div>
-              <div className="page-faq-carousel-controls">
-                <div className="page-faq-carousel-nav">
-                  <button
-                    type="button"
-                    aria-label={language === "es" ? "Preguntas anteriores" : "Previous questions"}
-                    onClick={() => navigateQuestions("previous")}
-                  >
-                    <ArrowLeft aria-hidden="true" size={18} />
-                  </button>
-                  <button
-                    type="button"
-                    aria-label={language === "es" ? "Preguntas siguientes" : "Next questions"}
-                    onClick={() => navigateQuestions("next")}
-                  >
-                    <ArrowRight aria-hidden="true" size={18} />
-                  </button>
-                </div>
               </div>
             </div>
           </div>
