@@ -393,7 +393,7 @@ export function BookingPage({ language }: StudioProps) {
 const faqCopy = {
   es: {
     eyebrow: "PREGUNTAS FRECUENTES",
-    title: <>LO QUE<br />NECESITAS<br />SABER</>,
+    title: <>LO QUE<br />NECESITAS SABER</>,
     intro: "Una conversación clara también forma parte del proceso.",
     questions: [
       ["¿Qué estilos realiza el estudio?", "El enfoque es el blackwork, con composiciones ornamentales y tribales. Cada propuesta se desarrolla según tu idea, el tamaño y la zona del cuerpo."],
@@ -408,7 +408,7 @@ const faqCopy = {
   },
   en: {
     eyebrow: "FREQUENTLY ASKED QUESTIONS",
-    title: <>WHAT YOU<br />NEED TO<br />KNOW</>,
+    title: <>WHAT YOU NEED<br />TO KNOW</>,
     intro: "A clear conversation is part of the process, too.",
     questions: [
       ["What styles does the studio specialize in?", "The focus is blackwork, including ornamental and tribal compositions. Each proposal is developed around your idea, the size, and the placement."],
