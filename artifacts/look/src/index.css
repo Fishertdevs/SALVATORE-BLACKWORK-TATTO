@@ -5599,11 +5599,13 @@ body,
 .look-root .floating-whatsapp-trigger,
 .mobile-look-root .floating-whatsapp-trigger {
   display: inline-flex;
-  min-height: 44px;
+  width: 56px;
+  height: 56px;
+  min-height: 56px;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  padding: 0 16px;
+  gap: 0;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 999px;
   background: #E63027;
@@ -5621,8 +5623,8 @@ body,
 
 .look-root .floating-whatsapp-trigger svg,
 .mobile-look-root .floating-whatsapp-trigger svg {
-  width: 18px;
-  height: 18px;
+  width: 27px;
+  height: 27px;
   flex: 0 0 auto;
   color: #fff;
 }
@@ -5764,11 +5766,10 @@ body,
 
   .look-root .floating-whatsapp-trigger,
   .mobile-look-root .floating-whatsapp-trigger {
-    min-height: 42px;
-    gap: 7px;
-    padding: 0 12px;
-    font-size: 8px;
-    letter-spacing: 0.1em;
+    width: 52px;
+    height: 52px;
+    min-height: 52px;
+    padding: 0;
   }
 }
 

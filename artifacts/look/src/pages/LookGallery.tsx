@@ -245,7 +245,7 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
           aria-label={isSpanish ? "Chat por WhatsApp" : "WhatsApp chat"}
         >
           <div className="floating-whatsapp-card-heading">
-            <span>{isSpanish ? "SALVATORE BLACKWORK" : "SALVATORE BLACKWORK"}</span>
+            <span>{isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}</span>
             <button
               type="button"
               className="floating-whatsapp-close"
@@ -277,12 +277,14 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
       <button
         type="button"
         className="floating-whatsapp-trigger"
+        aria-label={isSpanish
+          ? (isOpen ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp")
+          : (isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat")}
         aria-expanded={isOpen}
         aria-controls="site-whatsapp-popover"
         onClick={() => setIsOpen((open) => !open)}
       >
         <SiWhatsapp aria-hidden="true" />
-        <span>{isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}</span>
       </button>
     </div>
   );
