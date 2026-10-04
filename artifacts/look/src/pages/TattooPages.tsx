@@ -11,6 +11,7 @@ import servicesImg from "@assets/generated_images/services-blackwork-detail.png"
 import bookingImg from "@assets/generated_images/booking-blackwork-study.png";
 import contactImg from "@assets/generated_images/contact-blackwork-portrait.png";
 import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
+import faqImage from "@assets/image-Photoroom_(33)_1791152119427.png";
 
 const studioCopy = {
   es: {
@@ -393,8 +394,7 @@ export function BookingPage({ language }: StudioProps) {
 const faqCopy = {
   es: {
     eyebrow: "PREGUNTAS FRECUENTES",
-    title: <>LO QUE<br />NECESITAS SABER</>,
-    intro: "Una conversación clara también forma parte del proceso.",
+    title: "LO QUE NECESITAS SABER",
     questions: [
       ["¿Qué estilos realiza el estudio?", "El enfoque es el blackwork, con composiciones ornamentales y tribales. Cada propuesta se desarrolla según tu idea, el tamaño y la zona del cuerpo."],
       ["¿Cómo solicito una cotización?", "Escríbenos por WhatsApp con una breve descripción, la zona, el tamaño aproximado y referencias visuales. Revisamos cada propuesta personalmente y te orientamos sobre el siguiente paso."],
@@ -408,8 +408,7 @@ const faqCopy = {
   },
   en: {
     eyebrow: "FREQUENTLY ASKED QUESTIONS",
-    title: <>WHAT YOU NEED<br />TO KNOW</>,
-    intro: "A clear conversation is part of the process, too.",
+    title: "WHAT YOU NEED TO KNOW",
     questions: [
       ["What styles does the studio specialize in?", "The focus is blackwork, including ornamental and tribal compositions. Each proposal is developed around your idea, the size, and the placement."],
       ["How do I request a quote?", "Message us on WhatsApp with a short description, placement, approximate size, and visual references. We review each proposal personally and guide you through the next step."],
@@ -444,51 +443,54 @@ export function FAQPage({ language }: StudioProps) {
           <header className="page-faq-heading">
             <Eyebrow>{copy.eyebrow}</Eyebrow>
             <h2>{copy.title}</h2>
-            <p>{copy.intro}</p>
-            <span className="page-faq-index" aria-hidden="true">S / B — 08</span>
           </header>
-          <div
-            className="page-faq-carousel"
-            role="region"
-            aria-roledescription="carousel"
-            aria-label={language === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}
-          >
+          <div className="page-faq-columns">
+            <figure className="page-faq-image">
+              <img
+                src={faqImage}
+                alt={language === "es"
+                  ? "Retrato editorial de una mujer con cabello blanco y accesorios metálicos"
+                  : "Editorial portrait of a woman with white hair and metallic accessories"}
+              />
+            </figure>
             <div
-              className={`page-faq-slide page-faq-slide--${carouselDirection}`}
-              key={`${language}-${activeQuestionIndex}`}
-              aria-live="polite"
+              className="page-faq-carousel"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label={language === "es" ? "Preguntas frecuentes" : "Frequently asked questions"}
             >
-              <article className="page-faq-item">
-                <div className="page-faq-question-row">
-                  <span className="page-faq-number" aria-hidden="true">
-                    {String(activeQuestionIndex + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="page-faq-question">{activeQuestion[0]}</h3>
+              <div
+                className={`page-faq-slide page-faq-slide--${carouselDirection}`}
+                key={`${language}-${activeQuestionIndex}`}
+                aria-live="polite"
+              >
+                <article className="page-faq-item">
+                  <div className="page-faq-question-row">
+                    <span className="page-faq-number" aria-hidden="true">
+                      {String(activeQuestionIndex + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="page-faq-question">{activeQuestion[0]}</h3>
+                  </div>
+                  <div className="page-faq-answer"><p>{activeQuestion[1]}</p></div>
+                </article>
+              </div>
+              <div className="page-faq-carousel-controls">
+                <div className="page-faq-carousel-nav">
+                  <button
+                    type="button"
+                    aria-label={language === "es" ? "Pregunta anterior" : "Previous question"}
+                    onClick={() => navigateQuestions("previous")}
+                  >
+                    <ArrowLeft aria-hidden="true" size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={language === "es" ? "Pregunta siguiente" : "Next question"}
+                    onClick={() => navigateQuestions("next")}
+                  >
+                    <ArrowRight aria-hidden="true" size={18} />
+                  </button>
                 </div>
-                <div className="page-faq-answer"><p>{activeQuestion[1]}</p></div>
-              </article>
-            </div>
-            <div className="page-faq-carousel-controls">
-              <span className="page-faq-counter" role="status" aria-live="polite">
-                {String(activeQuestionIndex + 1).padStart(2, "0")}
-                <span aria-hidden="true"> / </span>
-                {String(copy.questions.length).padStart(2, "0")}
-              </span>
-              <div className="page-faq-carousel-nav">
-                <button
-                  type="button"
-                  aria-label={language === "es" ? "Pregunta anterior" : "Previous question"}
-                  onClick={() => navigateQuestions("previous")}
-                >
-                  <ArrowLeft aria-hidden="true" size={18} />
-                </button>
-                <button
-                  type="button"
-                  aria-label={language === "es" ? "Pregunta siguiente" : "Next question"}
-                  onClick={() => navigateQuestions("next")}
-                >
-                  <ArrowRight aria-hidden="true" size={18} />
-                </button>
               </div>
             </div>
           </div>
