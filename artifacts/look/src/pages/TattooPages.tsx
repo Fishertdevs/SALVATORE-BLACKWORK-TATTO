@@ -427,24 +427,26 @@ export function FAQPage({ language }: StudioProps) {
   const copy = faqCopy[language];
   return (
     <StudioFrame id="studio-faq" className="page-faq">
-      <div className="page-faq-layout">
-        <header className="page-faq-heading">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <h2>{copy.title}</h2>
-          <p>{copy.intro}</p>
-          <span className="page-faq-index" aria-hidden="true">S / B — 08</span>
-        </header>
-        <div className="page-faq-list">
-          {copy.questions.map(([question, answer], index) => (
-            <details className="page-faq-item" key={question}>
-              <summary>
-                <span className="page-faq-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <span className="page-faq-question">{question}</span>
-                <span className="page-faq-toggle" aria-hidden="true" />
-              </summary>
-              <div className="page-faq-answer"><p>{answer}</p></div>
-            </details>
-          ))}
+      <div className="page-faq-panel">
+        <div className="page-faq-layout">
+          <header className="page-faq-heading">
+            <Eyebrow>{copy.eyebrow}</Eyebrow>
+            <h2>{copy.title}</h2>
+            <p>{copy.intro}</p>
+            <span className="page-faq-index" aria-hidden="true">S / B — 08</span>
+          </header>
+          <div className="page-faq-list">
+            {copy.questions.map(([question, answer], index) => (
+              <details className="page-faq-item" key={question}>
+                <summary>
+                  <span className="page-faq-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="page-faq-question">{question}</span>
+                  <span className="page-faq-toggle" aria-hidden="true" />
+                </summary>
+                <div className="page-faq-answer"><p>{answer}</p></div>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </StudioFrame>
