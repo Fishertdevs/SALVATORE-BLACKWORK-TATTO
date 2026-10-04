@@ -6047,13 +6047,9 @@ body,
 }
 
 .page-faq-item {
-  min-height: 245px;
   min-width: 0;
   margin: 0;
-  padding: clamp(22px, 2.8vw, 38px);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.035);
+  padding: 22px 12px;
 }
 
 .page-faq-item + .page-faq-item {
@@ -6061,15 +6057,14 @@ body,
 }
 
 .page-faq-question-row {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: clamp(12px, 2vw, 28px);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
 }
 
 .page-faq-number {
-  align-self: start;
-  padding-top: 4px;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
   font-size: 11px;
@@ -6079,28 +6074,33 @@ body,
 }
 
 .page-faq-question {
-  max-width: 620px;
+  max-width: 100%;
   margin: 0;
   color: #fff;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.75rem, 2.8vw, 2.45rem);
+  font-size: clamp(0.85rem, 1.45vw, 1.35rem);
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .page-faq-answer {
-  margin-top: 22px;
-  padding-left: clamp(42px, 5vw, 70px);
+  margin-top: 18px;
+  padding: 0;
+  text-align: center;
 }
 
 .page-faq-answer p {
-  max-width: 650px;
+  max-width: 520px;
   margin: 0;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-size: clamp(0.86rem, 1.05vw, 1rem);
   font-weight: 300;
   line-height: 1.6;
+  text-align: center;
+  margin-inline: auto;
 }
 
 .page-faq-carousel-controls {
@@ -6183,23 +6183,21 @@ body,
   }
 
   .page-faq-slide {
+    grid-template-columns: 1fr;
     min-height: 0;
-    gap: 12px;
+    gap: 10px;
   }
 
   .page-faq-item {
-    min-height: 220px;
-    padding: 16px 12px;
-    border-radius: 12px;
+    padding: 18px 0;
   }
 
   .page-faq-item + .page-faq-item {
-    margin-top: 32px;
+    margin-top: 0;
   }
 
   .page-faq-question-row {
-    grid-template-columns: 1fr;
-    gap: 7px;
+    gap: 6px;
   }
 
   .page-faq-number {
@@ -6207,16 +6205,16 @@ body,
   }
 
   .page-faq-question {
-    font-size: clamp(0.95rem, 4.2vw, 1.28rem);
+    font-size: clamp(1rem, 4.2vw, 1.25rem);
   }
 
   .page-faq-answer {
-    margin-top: 12px;
+    margin-top: 10px;
     padding-left: 0;
   }
 
   .page-faq-answer p {
-    font-size: clamp(0.74rem, 2.8vw, 0.9rem);
+    font-size: 0.9rem;
     line-height: 1.45;
   }
 
