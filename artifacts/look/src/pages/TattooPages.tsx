@@ -11,7 +11,6 @@ import servicesImg from "@assets/generated_images/services-blackwork-detail.png"
 import bookingImg from "@assets/generated_images/booking-blackwork-study.png";
 import contactImg from "@assets/generated_images/contact-blackwork-portrait.png";
 import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
-import faqImage from "@assets/image-Photoroom_(33)_1791152119427.png";
 
 const studioCopy = {
   es: {
@@ -424,15 +423,17 @@ const faqCopy = {
 
 export function FAQPage({ language }: StudioProps) {
   const copy = faqCopy[language];
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
+  const [activePairIndex, setActivePairIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "previous">("next");
-  const activeQuestion = copy.questions[activeQuestionIndex]!;
+  const activePairStartIndex = activePairIndex * 2;
+  const visibleQuestions = copy.questions.slice(activePairStartIndex, activePairStartIndex + 2);
 
   function navigateQuestions(direction: "next" | "previous") {
     setCarouselDirection(direction);
-    setActiveQuestionIndex((currentIndex) => {
+    setActivePairIndex((currentIndex) => {
+      const pairCount = Math.ceil(copy.questions.length / 2);
       const offset = direction === "next" ? 1 : -1;
-      return (currentIndex + offset + copy.questions.length) % copy.questions.length;
+      return (currentIndex + offset + pairCount) % pairCount;
     });
   }
 
@@ -445,14 +446,6 @@ export function FAQPage({ language }: StudioProps) {
             <h2>{copy.title}</h2>
           </header>
           <div className="page-faq-columns">
-            <figure className="page-faq-image">
-              <img
-                src={faqImage}
-                alt={language === "es"
-                  ? "Retrato editorial de una mujer con cabello blanco y accesorios metálicos"
-                  : "Editorial portrait of a woman with white hair and metallic accessories"}
-              />
-            </figure>
             <div
               className="page-faq-carousel"
               role="region"
@@ -461,31 +454,36 @@ export function FAQPage({ language }: StudioProps) {
             >
               <div
                 className={`page-faq-slide page-faq-slide--${carouselDirection}`}
-                key={`${language}-${activeQuestionIndex}`}
+                key={`${language}-${activePairIndex}`}
                 aria-live="polite"
               >
-                <article className="page-faq-item">
-                  <div className="page-faq-question-row">
-                    <span className="page-faq-number" aria-hidden="true">
-                      {String(activeQuestionIndex + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="page-faq-question">{activeQuestion[0]}</h3>
-                  </div>
-                  <div className="page-faq-answer"><p>{activeQuestion[1]}</p></div>
-                </article>
+                {visibleQuestions.map(([question, answer], index) => {
+                  const questionNumber = activePairStartIndex + index + 1;
+                  return (
+                    <article className="page-faq-item" key={questionNumber}>
+                      <div className="page-faq-question-row">
+                        <span className="page-faq-number" aria-hidden="true">
+                          {String(questionNumber).padStart(2, "0")}
+                        </span>
+                        <h3 className="page-faq-question">{question}</h3>
+                      </div>
+                      <div className="page-faq-answer"><p>{answer}</p></div>
+                    </article>
+                  );
+                })}
               </div>
               <div className="page-faq-carousel-controls">
                 <div className="page-faq-carousel-nav">
                   <button
                     type="button"
-                    aria-label={language === "es" ? "Pregunta anterior" : "Previous question"}
+                    aria-label={language === "es" ? "Preguntas anteriores" : "Previous questions"}
                     onClick={() => navigateQuestions("previous")}
                   >
                     <ArrowLeft aria-hidden="true" size={18} />
                   </button>
                   <button
                     type="button"
-                    aria-label={language === "es" ? "Pregunta siguiente" : "Next question"}
+                    aria-label={language === "es" ? "Preguntas siguientes" : "Next questions"}
                     onClick={() => navigateQuestions("next")}
                   >
                     <ArrowRight aria-hidden="true" size={18} />

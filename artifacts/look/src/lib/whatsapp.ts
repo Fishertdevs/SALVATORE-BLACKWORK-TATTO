@@ -20,12 +20,16 @@ function getGreeting(language: Language, now: Date) {
   return language === "es" ? "Buenas noches" : "Good evening";
 }
 
+export function getWhatsAppGreeting(language: Language, now = new Date()) {
+  return getGreeting(language, now);
+}
+
 export function getWhatsAppHref(language: Language, now = new Date()) {
-  const greeting = getGreeting(language, now);
+  const greeting = getWhatsAppGreeting(language, now);
   const message =
     language === "es"
-      ? `${greeting}, Salvatore. Me gustaría cotizar un tatuaje.`
-      : `${greeting}, Salvatore. I'd like to get a quote for a tattoo.`;
+      ? `${greeting}, Salvatore. Quisiera conversar contigo sobre una idea de tatuaje y recibir orientación para cotizarla.`
+      : `${greeting}, Salvatore. I would like to discuss a tattoo idea and receive guidance on a quote.`;
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }

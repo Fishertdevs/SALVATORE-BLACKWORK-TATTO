@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SiInstagram, SiTiktok, SiWhatsapp } from "react-icons/si";
 import { StudioHomeSections } from "@/pages/TattooPages";
-import { getWhatsAppHref } from "@/lib/whatsapp";
+import { getWhatsAppGreeting, getWhatsAppHref } from "@/lib/whatsapp";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
@@ -224,6 +224,7 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
 function FloatingWhatsAppWidget({ language }: { language: Language }) {
   const [isOpen, setIsOpen] = useState(false);
   const isSpanish = language === "es";
+  const greeting = getWhatsAppGreeting(language);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -256,8 +257,8 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
           </div>
           <p className="floating-whatsapp-message">
             {isSpanish
-              ? "¿Tienes una idea de tatuaje? Escríbenos y conversemos sobre tu proyecto."
-              : "Have a tattoo idea? Message us and let’s talk about your project."}
+              ? `${greeting}, Salvatore. Gracias por escribirnos. Cuéntanos tu idea de tatuaje y te orientaremos con gusto.`
+              : `${greeting}, Salvatore. Thanks for reaching out. Tell us about your tattoo idea and we’ll be glad to guide you.`}
           </p>
           <a
             className="floating-whatsapp-start"
