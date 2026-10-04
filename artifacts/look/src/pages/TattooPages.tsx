@@ -403,6 +403,10 @@ const faqCopy = {
       ["¿Duele tatuarse?", "La sensación varía según la persona, la zona y la duración de la sesión. Podemos conversar sobre la ubicación y organizar pausas durante la jornada."],
       ["¿Cuánto dura una sesión?", "Depende del tamaño, el nivel de detalle y la ubicación. Después de revisar la propuesta te damos una estimación más precisa."],
       ["¿Qué cuidados necesita el tatuaje?", "Al terminar te compartimos indicaciones de cuidado adecuadas para tu sesión. Sigue esas indicaciones durante la cicatrización y consúltanos si tienes dudas."],
+      ["¿Puedo llevar una referencia visual?", "Sí. Nos ayuda a entender el estilo y la intención; la propuesta final se adapta a tu idea, tu anatomía y el lenguaje propio del estudio."],
+      ["¿Qué zonas del cuerpo se pueden tatuar?", "Podemos conversar sobre distintas zonas y su tamaño. Revisamos la ubicación contigo para que la composición funcione con la forma y el movimiento del cuerpo."],
+      ["¿Cómo me preparo para la sesión?", "Antes de la cita te compartimos indicaciones sencillas. Llega con tiempo y cuéntanos si tienes alguna duda sobre el proceso."],
+      ["¿Puedo cambiar la fecha de mi cita?", "Sí. Escríbenos con anticipación para revisar disponibilidad y coordinar una nueva fecha."],
     ],
   },
   en: {
@@ -417,23 +421,27 @@ const faqCopy = {
       ["Does getting tattooed hurt?", "Sensation varies by person, placement, and session length. We can discuss placement and arrange breaks during the session."],
       ["How long does a session take?", "It depends on the size, detail, and placement. After reviewing your proposal, we can give you a more accurate estimate."],
       ["How should I care for a new tattoo?", "We share care instructions tailored to your session afterward. Follow them while it heals, and contact us if you have questions."],
+      ["Can I bring a visual reference?", "Yes. It helps us understand the style and intent; the final proposal is tailored to your idea, anatomy, and the studio's own visual language."],
+      ["Which body areas can be tattooed?", "We can discuss different placements and sizes. We review the location with you so the composition works with the body's shape and movement."],
+      ["How should I prepare for my session?", "We’ll send you straightforward instructions before your appointment. Arrive with time to spare and tell us if you have questions about the process."],
+      ["Can I change my appointment date?", "Yes. Message us in advance so we can check availability and coordinate a new date."],
     ],
   },
 } as const;
 
 export function FAQPage({ language }: StudioProps) {
   const copy = faqCopy[language];
-  const [activePairIndex, setActivePairIndex] = useState(0);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "previous">("next");
-  const activePairStartIndex = activePairIndex * 2;
-  const visibleQuestions = copy.questions.slice(activePairStartIndex, activePairStartIndex + 2);
+  const activeSlideStartIndex = activeSlideIndex * 3;
+  const visibleQuestions = copy.questions.slice(activeSlideStartIndex, activeSlideStartIndex + 3);
 
   function navigateQuestions(direction: "next" | "previous") {
     setCarouselDirection(direction);
-    setActivePairIndex((currentIndex) => {
-      const pairCount = Math.ceil(copy.questions.length / 2);
+    setActiveSlideIndex((currentIndex) => {
+      const slideCount = Math.ceil(copy.questions.length / 3);
       const offset = direction === "next" ? 1 : -1;
-      return (currentIndex + offset + pairCount) % pairCount;
+      return (currentIndex + offset + slideCount) % slideCount;
     });
   }
 
@@ -454,11 +462,11 @@ export function FAQPage({ language }: StudioProps) {
             >
               <div
                 className={`page-faq-slide page-faq-slide--${carouselDirection}`}
-                key={`${language}-${activePairIndex}`}
+                key={`${language}-${activeSlideIndex}`}
                 aria-live="polite"
               >
                 {visibleQuestions.map(([question, answer], index) => {
-                  const questionNumber = activePairStartIndex + index + 1;
+                  const questionNumber = activeSlideStartIndex + index + 1;
                   return (
                     <article className="page-faq-item" key={questionNumber}>
                       <div className="page-faq-question-row">
