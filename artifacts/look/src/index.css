@@ -5994,7 +5994,7 @@ body,
 .page-faq-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(30px, 4vw, 54px);
+  gap: clamp(18px, 2.4vw, 32px);
   width: min(100%, 1460px);
   margin: 0 auto;
 }
@@ -6011,7 +6011,7 @@ body,
 }
 
 .page-faq-heading h2 {
-  margin: clamp(24px, 2.5vw, 36px) auto clamp(30px, 3.6vw, 48px);
+  margin: clamp(24px, 2.5vw, 36px) auto clamp(12px, 1.8vw, 24px);
   max-width: 100%;
   padding-top: 0.08em;
   color: #171515;
