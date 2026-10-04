@@ -6011,7 +6011,7 @@ body,
 }
 
 .page-faq-heading h2 {
-  margin: 12px auto 22px;
+  margin: clamp(24px, 2.5vw, 36px) auto clamp(30px, 3.6vw, 48px);
   max-width: 100%;
   padding-top: 0.08em;
   color: #171515;
@@ -6089,6 +6089,10 @@ body,
   line-height: 1.2;
   text-align: center;
   white-space: nowrap;
+}
+
+.page-faq-question--compact {
+  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
 }
 
 .page-faq-answer {
@@ -6232,6 +6236,10 @@ body,
 
   .page-faq-question {
     font-size: clamp(1.1rem, 4.5vw, 1.35rem);
+  }
+
+  .page-faq-question--compact {
+    font-size: clamp(0.9rem, 3.7vw, 0.94rem);
   }
 
   .page-faq-answer {

@@ -473,7 +473,11 @@ export function FAQPage({ language }: StudioProps) {
                         <span className="page-faq-number" aria-hidden="true">
                           {String(questionNumber).padStart(2, "0")}
                         </span>
-                        <h3 className="page-faq-question">{question}</h3>
+                        <h3
+                          className={`page-faq-question${questionNumber === 4 || questionNumber === 10 ? " page-faq-question--compact" : ""}`}
+                        >
+                          {question}
+                        </h3>
                       </div>
                       <div className="page-faq-answer"><p>{answer}</p></div>
                     </article>
