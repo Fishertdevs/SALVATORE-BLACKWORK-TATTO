@@ -391,6 +391,7 @@ export function BookingPage({ language }: StudioProps) {
 export function ContactPage({ language }: StudioProps) {
   const copy = studioCopy[language].contact;
   const [activePanelTab, setActivePanelTab] = useState<"contact" | "booking">("contact");
+  const [portraitColorSpots, setPortraitColorSpots] = useState<Array<{ x: number; y: number }>>([]);
   const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -400,41 +401,45 @@ export function ContactPage({ language }: StudioProps) {
     if (typeof IntersectionObserver === "undefined") return undefined;
 
     const title = section.querySelector<HTMLElement>(".page-contact-heading h1");
-    const softTargets = [
-      section.querySelector<HTMLElement>(".page-contact-cluster"),
-      section.querySelector<HTMLElement>(".page-contact-portrait"),
+    const entranceTargets = [
+      section.querySelector<HTMLElement>(".page-contact-map"),
+      section.querySelector<HTMLElement>(".page-contact-form-panel"),
     ].filter((target): target is HTMLElement => target !== null);
     if (!title) return undefined;
 
-    let hasRevealed = false;
     try {
       gsap.set(title, { clipPath: "inset(0px 100% 0px 0px)" });
-      gsap.set(softTargets, { opacity: 0, y: 12 });
+      gsap.set(entranceTargets, { opacity: 0, y: 12 });
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (!entry?.isIntersecting || hasRevealed) return;
-          hasRevealed = true;
-          gsap.to(title, {
-            clipPath: "inset(0px 0% 0px 0px)",
-            duration: 1.2,
-            ease: "power3.out",
-          });
-          gsap.to(softTargets, {
-            opacity: 1,
-            y: 0,
-            duration: 0.72,
-            ease: "power3.out",
-            stagger: 0.14,
-            delay: 0.18,
-          });
-          observer.disconnect();
+          if (!entry) return;
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+            gsap.killTweensOf([title, ...entranceTargets]);
+            gsap.to(title, {
+              clipPath: "inset(0px 0% 0px 0px)",
+              duration: 1.2,
+              ease: "power3.out",
+            });
+            gsap.to(entranceTargets, {
+              opacity: 1,
+              y: 0,
+              duration: 0.72,
+              ease: "power3.out",
+              stagger: 0.14,
+              delay: 0.18,
+            });
+          } else {
+            gsap.killTweensOf([title, ...entranceTargets]);
+            gsap.set(title, { clipPath: "inset(0px 100% 0px 0px)" });
+            gsap.set(entranceTargets, { opacity: 0, y: 12 });
+          }
         },
-        { threshold: 0.12 },
+        { threshold: [0, 0.12] },
       );
       observer.observe(section);
       return () => observer.disconnect();
     } catch {
-      gsap.set([title, ...softTargets], { clearProps: "all" });
+      gsap.set([title, ...entranceTargets], { clearProps: "all" });
       return undefined;
     }
   }, []);
@@ -616,9 +621,46 @@ export function ContactPage({ language }: StudioProps) {
 
           <figure className="page-contact-portrait">
             <img
-              className="page-contact-portrait-color"
+              className="page-contact-portrait-base"
               src={contactPortraitImg}
               alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"}
+            />
+            {portraitColorSpots.map(({ x, y }, index) => (
+              <img
+                key={`${x}-${y}-${index}`}
+                className="page-contact-portrait-color-spot"
+                src={contactPortraitImg}
+                alt=""
+                aria-hidden="true"
+                style={{
+                  maskImage: `radial-gradient(circle 72px at ${x}% ${y}%, #000 0%, #000 55%, transparent 100%)`,
+                  WebkitMaskImage: `radial-gradient(circle 72px at ${x}% ${y}%, #000 0%, #000 55%, transparent 100%)`,
+                }}
+              />
+            ))}
+            <button
+              className="page-contact-portrait-reveal"
+              type="button"
+              aria-label={language === "es"
+                ? "Revelar un punto de color original en el retrato"
+                : "Reveal a spot of the portrait’s original color"}
+              onClick={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect();
+                const isPointerClick = event.detail > 0;
+                const x = isPointerClick
+                  ? ((event.clientX - bounds.left) / bounds.width) * 100
+                  : 50;
+                const y = isPointerClick
+                  ? ((event.clientY - bounds.top) / bounds.height) * 100
+                  : 50;
+                setPortraitColorSpots((spots) => [
+                  ...spots,
+                  {
+                    x: Math.max(0, Math.min(100, x)),
+                    y: Math.max(0, Math.min(100, y)),
+                  },
+                ]);
+              }}
             />
           </figure>
         </section>

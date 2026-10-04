@@ -129,29 +129,32 @@ function SiteFooter({ copy, language }: { copy: GalleryCopy; language: Language 
 
     const targets = Array.from(
       footer.querySelectorAll<HTMLElement>(
-        ".footer-design-label, .footer-style-line, .footer-socials, .footer-rule, .footer-legal-nav, .footer-bottom",
+        ".footer-design-label, .footer-style-line, .footer-social, .footer-rule, .footer-legal-nav a, .footer-policy-row > span, .footer-bottom",
       ),
     );
     if (!targets.length) return undefined;
 
-    let hasRevealed = false;
     try {
       const observer = new IntersectionObserver(([entry]) => {
-        if (!entry?.isIntersecting || hasRevealed) return;
-        hasRevealed = true;
-        gsap.fromTo(
-          targets,
-          { opacity: 0, y: 10 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.68,
-            ease: "power3.out",
-            stagger: 0.09,
-          },
-        );
-        observer.disconnect();
-      }, { threshold: 0.12 });
+        if (!entry) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          gsap.killTweensOf(targets);
+          gsap.fromTo(
+            targets,
+            { opacity: 0, y: 10 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.68,
+              ease: "power3.out",
+              stagger: 0.09,
+            },
+          );
+        } else {
+          gsap.killTweensOf(targets);
+          gsap.set(targets, { opacity: 0, y: 10 });
+        }
+      }, { threshold: [0, 0.12] });
       observer.observe(footer);
       return () => observer.disconnect();
     } catch {
