@@ -5906,3 +5906,28 @@ body,
     padding-top: 12px;
   }
 }
+
+.page-contact-panel-intro,
+.page-contact-booking-heading {
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1rem, 1.35vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.04;
+}
+
+.page-contact-form-panel .page-contact-card-socials a {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.page-contact-form-panel .page-contact-card-socials a:hover,
+.page-contact-form-panel .page-contact-card-socials a:focus-visible {
+  color: #E63027;
+  background: transparent;
+}
+
+.page-contact-form-panel .page-contact-card-socials a:focus-visible {
+  outline: 1px solid #E63027;
+  outline-offset: 2px;
+}

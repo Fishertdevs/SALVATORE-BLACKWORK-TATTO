@@ -209,6 +209,7 @@ const studioCopy = {
 } as const;
 
 type StudioProps = { language: Language };
+const bookingStepNumbers = ["I", "II", "III"] as const;
 
 function StudioFrame({
   id,
@@ -552,7 +553,7 @@ export function ContactPage({ language }: StudioProps) {
                         {copy.bookingSteps.map(([title, description], index) => (
                           <li key={title} className="page-contact-booking-step">
                             <span className="page-contact-booking-number" aria-hidden="true">
-                              {String(index + 1).padStart(2, "0")}
+                              {bookingStepNumbers[index]}
                             </span>
                             <div>
                               <h4>{title}</h4>
