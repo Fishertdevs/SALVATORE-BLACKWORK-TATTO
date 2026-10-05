@@ -1059,7 +1059,7 @@ body,
 .mobile-look-root .site-footer {
   background: #111111;
   color: #ffffff;
-  border-radius: 32px 32px 0 0;
+  border-radius: 0;
   padding: 0 60px 46px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: relative;
@@ -5033,7 +5033,7 @@ body,
   min-height: 0;
   align-self: stretch;
   justify-self: end;
-  transform: translateX(clamp(8px, 2.2vw, 28px));
+  transform: translateX(clamp(30px, 6vw, 72px));
   margin: 0;
   position: relative;
   overflow: hidden;
@@ -5051,6 +5051,8 @@ body,
   padding: 0;
   object-fit: contain;
   object-position: center bottom;
+  transform: scale(1.08);
+  transform-origin: left center;
 }
 
 .page-contact-form-layout > .page-contact-portrait .page-contact-portrait-base {
@@ -5114,7 +5116,7 @@ body,
     height: auto;
     aspect-ratio: 819 / 1024;
     min-height: 0;
-    transform: translateX(clamp(8px, 2.2vw, 18px));
+    transform: translateX(clamp(40px, 10.5vw, 64px));
     align-self: flex-end;
   }
 }
