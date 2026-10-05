@@ -5601,58 +5601,93 @@ body,
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 0;
 }
 
 .look-root .floating-whatsapp-trigger-label,
 .mobile-look-root .floating-whatsapp-trigger-label {
-  padding: 12px 16px;
-  border: 1px solid #E63027;
+  display: inline-flex;
+  max-width: 0;
+  min-width: 0;
+  min-height: 48px;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
   border-radius: 999px;
   background: #fff;
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
   color: #171515;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   line-height: 1;
+  opacity: 0;
+  transform: translateX(8px);
+  visibility: hidden;
   white-space: nowrap;
-  animation: whatsapp-label-appear 180ms ease-out both;
+  transition:
+    max-width 180ms ease,
+    padding 180ms ease,
+    opacity 150ms ease,
+    transform 180ms ease,
+    visibility 0s linear 180ms;
 }
 
-@keyframes whatsapp-label-appear {
-  from { opacity: 0; transform: translateX(8px); }
-  to { opacity: 1; transform: translateX(0); }
+.look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-label,
+.mobile-look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-label,
+.mobile-look-root .floating-whatsapp-trigger:focus-visible .floating-whatsapp-trigger-label,
+.mobile-look-root .floating-whatsapp-trigger.is-open .floating-whatsapp-trigger-label {
+  max-width: 220px;
+  padding: 0 22px;
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    max-width 180ms ease,
+    padding 180ms ease,
+    opacity 150ms ease,
+    transform 180ms ease,
+    visibility 0s;
+}
+
+.look-root .floating-whatsapp-trigger-icon,
+.mobile-look-root .floating-whatsapp-trigger-icon {
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+  color: #fff;
 }
 
 .look-root .floating-whatsapp-trigger,
 .mobile-look-root .floating-whatsapp-trigger {
   display: inline-flex;
-  width: 56px;
-  height: 56px;
-  min-height: 56px;
+  width: auto;
+  height: auto;
+  min-height: 0;
   align-items: center;
-  justify-content: center;
-  gap: 0;
+  justify-content: flex-end;
+  gap: 8px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 0;
   border-radius: 999px;
-  background: #E63027;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+  background: transparent;
+  box-shadow: none;
   color: #fff;
   cursor: pointer;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  text-transform: uppercase;
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition: transform 180ms ease;
 }
 
-.look-root .floating-whatsapp-trigger svg,
-.mobile-look-root .floating-whatsapp-trigger svg {
+.look-root .floating-whatsapp-trigger-icon svg,
+.mobile-look-root .floating-whatsapp-trigger-icon svg {
   width: 27px;
   height: 27px;
   flex: 0 0 auto;
@@ -5663,14 +5698,17 @@ body,
 .look-root .floating-whatsapp-trigger:focus-visible,
 .mobile-look-root .floating-whatsapp-trigger:hover,
 .mobile-look-root .floating-whatsapp-trigger:focus-visible {
-  border-color: #fff;
-  background: #C8201A;
   transform: translateY(-2px);
+}
+
+.look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-icon,
+.mobile-look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-icon {
+  background: #1FA855;
 }
 
 .look-root .floating-whatsapp-trigger:focus-visible,
 .mobile-look-root .floating-whatsapp-trigger:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid #171515;
   outline-offset: 3px;
 }
 
@@ -5796,10 +5834,27 @@ body,
 
   .look-root .floating-whatsapp-trigger,
   .mobile-look-root .floating-whatsapp-trigger {
+    gap: 6px;
+  }
+
+  .look-root .floating-whatsapp-trigger-label,
+  .mobile-look-root .floating-whatsapp-trigger-label {
+    min-height: 44px;
+    font-size: 8.5px;
+  }
+
+  .look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-label,
+  .mobile-look-root .floating-whatsapp-trigger:hover .floating-whatsapp-trigger-label,
+  .mobile-look-root .floating-whatsapp-trigger:focus-visible .floating-whatsapp-trigger-label,
+  .mobile-look-root .floating-whatsapp-trigger.is-open .floating-whatsapp-trigger-label {
+    padding: 0 14px;
+  }
+
+  .look-root .floating-whatsapp-trigger-icon,
+  .mobile-look-root .floating-whatsapp-trigger-icon {
     width: 52px;
     height: 52px;
-    min-height: 52px;
-    padding: 0;
+    flex-basis: 52px;
   }
 }
 
@@ -5987,7 +6042,7 @@ body,
   padding: clamp(42px, 6.2vw, 96px) clamp(28px, 6.5vw, 104px);
   color: #171515;
   background: #E63027;
-  border-radius: clamp(20px, 2.8vw, 36px);
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -6041,6 +6096,46 @@ body,
   outline-offset: 6px;
 }
 
+.page-faq-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(22px, 3vw, 40px);
+}
+
+.page-faq-carousel-dots button:focus-visible {
+  outline: 2px solid #171515;
+  outline-offset: 3px;
+}
+
+.page-faq-carousel-dots {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-faq-carousel-dots button {
+  display: block;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.page-faq-carousel-dots button.is-active {
+  flex-basis: 24px;
+  width: 24px;
+  border-radius: 999px;
+  background: #fff;
+}
+
 .page-faq-slide {
   position: relative;
   display: grid;
@@ -6083,21 +6178,23 @@ body,
 }
 
 .page-faq-question {
+  display: flex;
   width: 100%;
   max-width: 100%;
+  justify-content: center;
   margin: 0;
   color: #fff;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-size: clamp(1.125rem, 1.35vw, 1.3rem);
   font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1.2;
   text-align: center;
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
-.page-faq-question--compact {
-  font-size: clamp(1.2rem, 1.45vw, 1.35rem);
+.page-faq-question > span {
+  flex: 0 0 auto;
 }
 
 .page-faq-answer {
@@ -6111,7 +6208,7 @@ body,
   margin: 0;
   color: #fff;
   font-family: 'Helvetica Neue', sans-serif;
-  font-size: clamp(1.125rem, 1.25vw, 1.25rem);
+  font-size: clamp(0.86rem, 1.05vw, 1rem);
   font-weight: 300;
   line-height: 1.6;
   text-align: center;
@@ -6162,7 +6259,7 @@ body,
 
   .page-faq-panel {
     padding: 36px 22px 42px;
-    border-radius: 22px;
+    border-radius: 0;
   }
 
   .page-faq-layout {
@@ -6204,11 +6301,7 @@ body,
   }
 
   .page-faq-question {
-    font-size: clamp(1.3rem, 5.2vw, 1.5rem);
-  }
-
-  .page-faq-question--compact {
-    font-size: clamp(1.15rem, 4.5vw, 1.3rem);
+    font-size: clamp(1.125rem, 4.8vw, 1.3rem);
   }
 
   .page-faq-answer {
@@ -6217,15 +6310,24 @@ body,
   }
 
   .page-faq-answer p {
-    font-size: 1.05rem;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    line-height: 1.45;
   }
+
+  .page-faq-carousel-controls {
+    margin-top: 18px;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
   .page-faq-slide--next,
   .page-faq-slide--previous {
     animation: none;
+  }
+
+  .page-faq-carousel-dots button {
+    transition: none;
   }
 
 }

@@ -275,14 +275,9 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
         </section>
       )}
       <div className="floating-whatsapp-trigger-row">
-        {isOpen && (
-          <span className="floating-whatsapp-trigger-label" aria-hidden="true">
-            {isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}
-          </span>
-        )}
         <button
           type="button"
-          className="floating-whatsapp-trigger"
+          className={`floating-whatsapp-trigger${isOpen ? " is-open" : ""}`}
           aria-label={isSpanish
             ? (isOpen ? "Cerrar chat de WhatsApp" : "Abrir chat de WhatsApp")
             : (isOpen ? "Close WhatsApp chat" : "Open WhatsApp chat")}
@@ -290,7 +285,12 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
           aria-controls="site-whatsapp-popover"
           onClick={() => setIsOpen((open) => !open)}
         >
-          <SiWhatsapp aria-hidden="true" />
+          <span className="floating-whatsapp-trigger-label">
+            {isSpanish ? "CHATEAR CON NOSOTROS" : "CHAT WITH US"}
+          </span>
+          <span className="floating-whatsapp-trigger-icon">
+            <SiWhatsapp aria-hidden="true" />
+          </span>
         </button>
       </div>
     </div>
@@ -300,9 +300,11 @@ function FloatingWhatsAppWidget({ language }: { language: Language }) {
 function MobileLookGallery({
   language,
   onLanguageChange,
+  onWelcomeComplete,
 }: {
   language: Language;
   onLanguageChange: (language: Language) => void;
+  onWelcomeComplete: (isComplete: boolean) => void;
 }) {
   const copy = galleryCopy[language];
   const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
@@ -328,6 +330,10 @@ function MobileLookGallery({
       document.body.style.overflow = "";
     };
   }, [isMenuOpen, showWelcome]);
+
+  useEffect(() => {
+    if (!showWelcome) onWelcomeComplete(true);
+  }, [onWelcomeComplete, showWelcome]);
 
   useEffect(() => {
     // Handle header scroll style
@@ -423,6 +429,7 @@ function MobileLookGallery({
       const keywords = hero.querySelector(".mobile-hero-kicker");
       const actions = hero.querySelectorAll(".mobile-hero-side-action");
       const elements = [title, keywords, ...Array.from(actions)].filter(Boolean);
+      const replayElements = keywords ? [keywords] : [];
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         gsap.set(elements, { clipPath: "inset(0px 0% 0px 0px)" });
@@ -447,15 +454,9 @@ function MobileLookGallery({
       const replayHero = () => {
         if (!initialRevealComplete) return;
         const replay = gsap.timeline();
-        if (title) replay.fromTo(title, {
-          clipPath: "inset(0px 100% 0px 0px)",
-        }, reveal, 0);
         if (keywords) replay.fromTo(keywords, {
           clipPath: "inset(0px 100% 0px 0px)",
-        }, reveal, 0.5);
-        replay.fromTo(actions, {
-          clipPath: "inset(0px 100% 0px 0px)",
-        }, reveal, 1);
+        }, reveal, 0);
       };
 
       heroObserver = new IntersectionObserver(
@@ -464,8 +465,8 @@ function MobileLookGallery({
           if (entry?.isIntersecting && entry.intersectionRatio >= 0.15) {
             replayHero();
           } else if (entry && !entry.isIntersecting) {
-            gsap.killTweensOf(elements);
-            gsap.set(elements, { clipPath: "inset(0px 100% 0px 0px)" });
+            gsap.killTweensOf(replayElements);
+            gsap.set(replayElements, { clipPath: "inset(0px 100% 0px 0px)" });
           }
         },
         { threshold: [0, 0.15] },
@@ -620,7 +621,7 @@ function MobileLookGallery({
 
       <SiteFooter copy={copy} language={language} />
 
-      <FloatingWhatsAppWidget language={language} />
+      {!showWelcome && <FloatingWhatsAppWidget language={language} />}
     </div>
   );
 }
@@ -630,6 +631,7 @@ export default function LookGallery() {
     typeof window !== "undefined" && window.innerWidth < 768,
   );
   const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
+  const [isWelcomeComplete, setIsWelcomeComplete] = useState(() => shouldSkipWelcome());
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
     persistLanguage(nextLanguage);
@@ -687,7 +689,10 @@ export default function LookGallery() {
       ...footerTargets.map((el) => ({ el, threshold: 0.2 })),
     ];
     const replayTargets = new Set([...featuredTargets, ...heroTargets, ...footerTargets]);
-    const heroReplayTargets = new Set(heroTargets);
+    const heroTargetSet = new Set(heroTargets);
+    const heroReplayTargets = new Set(
+      heroTargets.filter((el) => el.matches(".hero-image-keywords")),
+    );
     const footerReplayTargets = new Set(footerTargets);
     if (!targets.length) return;
     const reduceMotion =
@@ -730,6 +735,7 @@ export default function LookGallery() {
     };
     const resetReplayTarget = (el: HTMLElement) => {
       if (!replayTargets.has(el)) return;
+      if (heroTargetSet.has(el) && !heroReplayTargets.has(el)) return;
       if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       gsap.killTweensOf(el);
       replayActive.delete(el);
@@ -743,6 +749,7 @@ export default function LookGallery() {
     };
     const replayReveal = (el: HTMLElement) => {
       if (!replayTargets.has(el) || replayActive.has(el)) return;
+      if (heroTargetSet.has(el) && !heroReplayTargets.has(el)) return;
       if (heroReplayTargets.has(el) && !heroReplayReadyRef.current) return;
       replayActive.add(el);
       gsap.killTweensOf(el);
@@ -1105,6 +1112,7 @@ export default function LookGallery() {
       if (immediate) {
         expandedRef.current = true;
         heroReplayReadyRef.current = true;
+        setIsWelcomeComplete(true);
         gsap.set(gallery, { opacity: 0, pointerEvents: "none", zIndex: 110 });
         gsap.set(fullSection, {
           opacity: 1,
@@ -1222,6 +1230,7 @@ export default function LookGallery() {
       }
       tl.eventCallback("onComplete", () => {
         heroReplayReadyRef.current = true;
+        setIsWelcomeComplete(true);
         if (navbar) {
           navbar.style.transform = "none";
           navbar.style.willChange = "auto";
@@ -1331,7 +1340,13 @@ export default function LookGallery() {
   }, []);
 
   if (isMobile) {
-    return <MobileLookGallery language={language} onLanguageChange={handleLanguageChange} />;
+    return (
+      <MobileLookGallery
+        language={language}
+        onLanguageChange={handleLanguageChange}
+        onWelcomeComplete={setIsWelcomeComplete}
+      />
+    );
   }
 
   return (
@@ -1408,7 +1423,7 @@ export default function LookGallery() {
         <SiteFooter copy={copy} language={language} />
       </div>
 
-      <FloatingWhatsAppWidget language={language} />
+      {isWelcomeComplete && <FloatingWhatsAppWidget language={language} />}
     </div>
   );
 }
