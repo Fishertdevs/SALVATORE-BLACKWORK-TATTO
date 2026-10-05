@@ -438,10 +438,7 @@ export function FAQPage({ language }: StudioProps) {
   const activeSlideIndexRef = useRef(0);
   const lastNavigationAtRef = useRef(0);
   const lastNavigationDirectionRef = useRef<"next" | "previous" | null>(null);
-  const wheelAccumulatorRef = useRef(0);
-  const wheelDirectionRef = useRef<"next" | "previous" | null>(null);
   const touchStateRef = useRef({
-    active: false,
     consumed: false,
     previousY: 0,
     accumulated: 0,
@@ -464,34 +461,18 @@ export function FAQPage({ language }: StudioProps) {
     return true;
   }, [lastSlideIndex]);
 
-  const isFaqActive = useCallback(() => {
-    const section = document.getElementById("studio-faq");
-    if (!section) return false;
-    const bounds = section.getBoundingClientRect();
-    const visibleHeight = Math.max(
-      0,
-      Math.min(bounds.bottom, window.innerHeight) - Math.max(bounds.top, 0),
-    );
-    const activeHeight = Math.min(bounds.height, window.innerHeight);
-    return activeHeight > 0 && visibleHeight / activeHeight >= 0.55;
-  }, []);
-
   useEffect(() => {
     const section = document.getElementById("studio-faq");
     if (!section) return;
 
     const settleDuration = 760;
-    const inputThreshold = 42;
-    const isInsideFaq = (target: EventTarget | null) =>
-      target instanceof Node && section.contains(target);
     const canNavigate = (direction: "next" | "previous") =>
       direction === "next"
         ? activeSlideIndexRef.current < lastSlideIndex
         : activeSlideIndexRef.current > 0;
 
     const handleWheel = (event: WheelEvent) => {
-      if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-      if (!isFaqActive()) return;
+      if (event.ctrlKey || Math.abs(event.deltaY) < Math.abs(event.deltaX) * 0.8) return;
 
       const multiplier = event.deltaMode === WheelEvent.DOM_DELTA_LINE
         ? 16
@@ -510,33 +491,22 @@ export function FAQPage({ language }: StudioProps) {
         ) {
           event.preventDefault();
         }
-        wheelAccumulatorRef.current = 0;
-        wheelDirectionRef.current = null;
         return;
       }
 
       event.preventDefault();
       if (now - lastNavigationAtRef.current < settleDuration) return;
 
-      if (wheelDirectionRef.current !== direction) {
-        wheelDirectionRef.current = direction;
-        wheelAccumulatorRef.current = 0;
-      }
-      wheelAccumulatorRef.current += Math.abs(delta);
-      if (wheelAccumulatorRef.current < inputThreshold) return;
-
       if (navigateQuestions(direction)) {
         lastNavigationAtRef.current = now;
         lastNavigationDirectionRef.current = direction;
       }
-      wheelAccumulatorRef.current = 0;
     };
 
     const handleTouchStart = (event: TouchEvent) => {
       const touch = event.touches[0];
       if (!touch) return;
       const state = touchStateRef.current;
-      state.active = isInsideFaq(event.target) || isFaqActive();
       state.consumed = false;
       state.previousY = touch.clientY;
       state.accumulated = 0;
@@ -546,7 +516,7 @@ export function FAQPage({ language }: StudioProps) {
     const handleTouchMove = (event: TouchEvent) => {
       const state = touchStateRef.current;
       const touch = event.touches[0];
-      if (!state.active || !touch) return;
+      if (!touch) return;
 
       const delta = state.previousY - touch.clientY;
       state.previousY = touch.clientY;
@@ -566,8 +536,6 @@ export function FAQPage({ language }: StudioProps) {
         ) {
           event.preventDefault();
           state.consumed = true;
-        } else {
-          state.active = false;
         }
         return;
       }
@@ -580,7 +548,7 @@ export function FAQPage({ language }: StudioProps) {
         state.accumulated = 0;
       }
       state.accumulated += Math.abs(delta);
-      if (state.accumulated < inputThreshold) return;
+      if (state.accumulated < 22) return;
 
       if (navigateQuestions(direction)) {
         lastNavigationAtRef.current = now;
@@ -591,26 +559,25 @@ export function FAQPage({ language }: StudioProps) {
     };
 
     const resetTouchState = () => {
-      touchStateRef.current.active = false;
       touchStateRef.current.consumed = false;
       touchStateRef.current.accumulated = 0;
       touchStateRef.current.direction = null;
     };
 
-    document.addEventListener("wheel", handleWheel, { capture: true, passive: false });
-    document.addEventListener("touchstart", handleTouchStart, { capture: true, passive: true });
-    document.addEventListener("touchmove", handleTouchMove, { capture: true, passive: false });
-    document.addEventListener("touchend", resetTouchState, true);
-    document.addEventListener("touchcancel", resetTouchState, true);
+    section.addEventListener("wheel", handleWheel, { capture: true, passive: false });
+    section.addEventListener("touchstart", handleTouchStart, { capture: true, passive: true });
+    section.addEventListener("touchmove", handleTouchMove, { capture: true, passive: false });
+    section.addEventListener("touchend", resetTouchState, true);
+    section.addEventListener("touchcancel", resetTouchState, true);
 
     return () => {
-      document.removeEventListener("wheel", handleWheel, true);
-      document.removeEventListener("touchstart", handleTouchStart, true);
-      document.removeEventListener("touchmove", handleTouchMove, true);
-      document.removeEventListener("touchend", resetTouchState, true);
-      document.removeEventListener("touchcancel", resetTouchState, true);
+      section.removeEventListener("wheel", handleWheel, true);
+      section.removeEventListener("touchstart", handleTouchStart, true);
+      section.removeEventListener("touchmove", handleTouchMove, true);
+      section.removeEventListener("touchend", resetTouchState, true);
+      section.removeEventListener("touchcancel", resetTouchState, true);
     };
-  }, [isFaqActive, lastSlideIndex, navigateQuestions]);
+  }, [lastSlideIndex, navigateQuestions]);
 
   return (
     <StudioFrame id="studio-faq" className="page-faq">
