@@ -5033,7 +5033,7 @@ body,
   min-height: 0;
   align-self: stretch;
   justify-self: end;
-  transform: translateX(clamp(30px, 6vw, 72px));
+  transform: translateX(clamp(56px, 8vw, 98px));
   margin: 0;
   position: relative;
   overflow: hidden;
