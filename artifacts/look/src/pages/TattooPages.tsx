@@ -61,7 +61,7 @@ const studioCopy = {
       cta: "CONOCER EL ESTUDIO →",
     },
     manifesto: {
-      phraseLines: ["Que cada línea", "negra revele", "la fuerza que", "llevas dentro."],
+      phraseLines: ["La creatividad", "hace la vida", "más alegre,", "una línea a la vez."],
     },
     contact: {
       eyebrow: "CONTACTO / 006",
@@ -140,7 +140,7 @@ const studioCopy = {
       cta: "MEET THE STUDIO →",
     },
     manifesto: {
-      phraseLines: ["Let every black", "line reveal", "the strength", "you carry within."],
+      phraseLines: ["Creativity makes", "life brighter,", "one line at a time."],
     },
     contact: {
       eyebrow: "CONTACT / 006",
@@ -313,9 +313,7 @@ export function ManifestoPage({ language }: StudioProps) {
         className="page-manifesto-quote"
         aria-label={copy.phraseLines.join(" ")}
       >
-        {copy.phraseLines.map((line, index) => index === 2 ? (
-          <em key={line} aria-hidden="true">{line}</em>
-        ) : (
+        {copy.phraseLines.map((line) => (
           <span key={line} aria-hidden="true">{line}</span>
         ))}
       </h1>
