@@ -6088,6 +6088,8 @@ body,
 }
 
 .page-faq-carousel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   width: 100%;
   margin: 0;
@@ -6099,6 +6101,7 @@ body,
 }
 
 .page-faq-carousel-controls {
+  grid-area: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6139,12 +6142,18 @@ body,
 }
 
 .page-faq-slide {
+  grid-area: 1 / 1;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   gap: clamp(18px, 2.5vw, 36px);
   overflow: visible;
+}
+
+.page-faq-slide:not(.is-active) {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .page-faq-item {
@@ -6192,11 +6201,12 @@ body,
   letter-spacing: -0.035em;
   line-height: 1.2;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .page-faq-question > span {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .page-faq-answer {

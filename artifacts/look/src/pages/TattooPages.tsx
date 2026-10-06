@@ -522,8 +522,6 @@ export function FAQPage({ language }: StudioProps) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<"next" | "previous">("next");
   const activeSlideIndexRef = useRef(0);
-  const activeSlideStartIndex = activeSlideIndex * 3;
-  const visibleQuestions = copy.questions.slice(activeSlideStartIndex, activeSlideStartIndex + 3);
 
   const goToSlide = useCallback((slideIndex: number) => {
     const nextIndex = Math.max(
@@ -569,7 +567,11 @@ export function FAQPage({ language }: StudioProps) {
   useEffect(() => {
     const section = document.getElementById("studio-faq");
     const questionTitles = section
-      ? Array.from(section.querySelectorAll<HTMLElement>(".page-faq-question"))
+      ? Array.from(
+          section.querySelectorAll<HTMLElement>(
+            ".page-faq-slide.is-active .page-faq-question",
+          ),
+        )
       : [];
     if (questionTitles.length === 0) return undefined;
 
@@ -611,28 +613,41 @@ export function FAQPage({ language }: StudioProps) {
                 navigateQuestions(direction);
               }}
             >
-              <div
-                className={`page-faq-slide page-faq-slide--${carouselDirection}`}
-                key={`${language}-${activeSlideIndex}`}
-                aria-live="polite"
-              >
-                {visibleQuestions.map(([question, answer], index) => {
-                  const questionNumber = activeSlideStartIndex + index + 1;
-                  return (
-                    <article className="page-faq-item" key={questionNumber}>
-                      <div className="page-faq-question-row">
-                        <span className="page-faq-number" aria-hidden="true">
-                          {String(questionNumber).padStart(2, "0")}
-                        </span>
-                        <h3 className="page-faq-question">
-                          <span>{question}</span>
-                        </h3>
-                      </div>
-                      <div className="page-faq-answer"><p>{answer}</p></div>
-                    </article>
-                  );
-                })}
-              </div>
+              {Array.from({ length: slideCount }, (_, slideIndex) => {
+                const questionStartIndex = slideIndex * 3;
+                const isActive = slideIndex === activeSlideIndex;
+                return (
+                  <div
+                    className={[
+                      "page-faq-slide",
+                      isActive ? "is-active" : "",
+                      isActive ? `page-faq-slide--${carouselDirection}` : "",
+                    ].filter(Boolean).join(" ")}
+                    key={`${language}-${slideIndex}`}
+                    aria-hidden={!isActive}
+                    aria-live={isActive ? "polite" : "off"}
+                  >
+                    {copy.questions
+                      .slice(questionStartIndex, questionStartIndex + 3)
+                      .map(([question, answer], index) => {
+                        const questionNumber = questionStartIndex + index + 1;
+                        return (
+                          <article className="page-faq-item" key={questionNumber}>
+                            <div className="page-faq-question-row">
+                              <span className="page-faq-number" aria-hidden="true">
+                                {String(questionNumber).padStart(2, "0")}
+                              </span>
+                              <h3 className="page-faq-question">
+                                <span>{question}</span>
+                              </h3>
+                            </div>
+                            <div className="page-faq-answer"><p>{answer}</p></div>
+                          </article>
+                        );
+                      })}
+                  </div>
+                );
+              })}
               <div className="page-faq-carousel-controls">
                 <div
                   className="page-faq-carousel-dots"
