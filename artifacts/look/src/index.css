@@ -3259,16 +3259,26 @@ body,
   padding-top: 10px;
 }
 
-.page-booking-aside p {
-  max-width: 220px;
-  margin: 35px 0 0;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.55;
+.page-booking-quote {
+  max-width: 18ch;
+  margin: 26px 0 0;
+  color: #171515;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1.25rem, 1.7vw, 1.7rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+  text-wrap: balance;
 }
 
-.page-booking-aside p + p {
-  margin-top: 20px;
+.page-booking-quote::before {
+  display: block;
+  width: 30px;
+  height: 1px;
+  margin-bottom: 22px;
+  background: #E63027;
+  content: "";
 }
 
 .page-booking .tattoo-form {
@@ -3713,8 +3723,9 @@ body,
     gap: 54px;
   }
 
-  .page-booking-aside p {
-    max-width: 300px;
+  .page-booking-quote {
+    max-width: 22ch;
+    margin-top: 0;
   }
 
   .page-contact-details {

@@ -66,11 +66,7 @@ const studioCopy = {
       title: ["EMPIEZA CON", "una idea"],
       intro: "Cuéntanos qué quieres llevar en la piel. Revisamos cada propuesta personalmente.",
       imageCaption: "PREPARA LA IDEA / DESPUÉS LA PIEL",
-      asideEyebrow: "ANTES DE ESCRIBIR",
-      aside: [
-        "Incluye referencias visuales, tamaño aproximado, ubicación y cualquier detalle que sientas importante.",
-        "Respondemos las solicitudes de lunes a viernes.",
-      ],
+      quote: "Que cada trazo en negro te recuerde la fuerza que llevas dentro.",
       received: "RECIBIDO / 005",
       successTitle: ["Tu idea ya está", "en el estudio."],
       successText: "Gracias por escribir. Te contactaremos para continuar la conversación.",
@@ -163,11 +159,7 @@ const studioCopy = {
       title: ["START WITH", "an idea"],
       intro: "Tell us what you want to carry on your skin. We review every proposal personally.",
       imageCaption: "PREPARE THE IDEA / THEN THE SKIN",
-      asideEyebrow: "BEFORE YOU WRITE",
-      aside: [
-        "Include visual references, approximate size, placement, and any detail that feels important.",
-        "We answer requests Monday through Friday.",
-      ],
+      quote: "Let every black line remind you of the strength you carry within.",
       received: "RECEIVED / 005",
       successTitle: ["Your idea is now", "in the studio."],
       successText: "Thanks for writing. We will contact you to continue the conversation.",
@@ -364,11 +356,7 @@ export function BookingPage({ language }: StudioProps) {
           <figcaption>{copy.imageCaption}</figcaption>
         </figure>
         <div className="page-booking-form-wrap">
-          <div className="page-booking-aside">
-            <Eyebrow>{copy.asideEyebrow}</Eyebrow>
-            <p>{copy.aside[0]}</p>
-            <p>{copy.aside[1]}</p>
-          </div>
+          <blockquote className="page-booking-quote">{copy.quote}</blockquote>
           {sent ? (
             <div className="tattoo-form-success">
               <Eyebrow>{copy.received}</Eyebrow>
