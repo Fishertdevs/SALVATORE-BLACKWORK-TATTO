@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { FormEvent, PointerEvent as ReactPointerEvent, ReactNode } from "react";
+import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
@@ -8,7 +8,6 @@ import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
 import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
 import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
 import servicesImg from "@assets/generated_images/services-blackwork-detail.png";
-import bookingImg from "@assets/generated_images/booking-blackwork-study.png";
 import contactImg from "@assets/generated_images/contact-blackwork-portrait.png";
 import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
 
@@ -61,22 +60,8 @@ const studioCopy = {
       callout: ["PRECISIÓN", "sobre el ruido"],
       cta: "CONOCER EL ESTUDIO →",
     },
-    booking: {
-      eyebrow: "RESERVAS / 005",
-      title: ["EMPIEZA CON", "una idea"],
-      intro: "Cuéntanos qué quieres llevar en la piel. Revisamos cada propuesta personalmente.",
-      imageCaption: "PREPARA LA IDEA / DESPUÉS LA PIEL",
-      quote: "Que cada trazo en negro te recuerde la fuerza que llevas dentro.",
-      received: "RECIBIDO / 005",
-      successTitle: ["Tu idea ya está", "en el estudio."],
-      successText: "Gracias por escribir. Te contactaremos para continuar la conversación.",
-      another: "ENVIAR OTRA CONSULTA →",
-      name: "Tu nombre",
-      email: "Tu email",
-      idea: "Cuéntanos tu idea",
-      namePlaceholder: "NOMBRE COMPLETO",
-      ideaPlaceholder: "IDEA, UBICACIÓN, TAMAÑO...",
-      submit: "ENVIAR CONSULTA",
+    manifesto: {
+      phraseLines: ["Que cada línea", "negra revele", "la fuerza que", "llevas dentro."],
     },
     contact: {
       eyebrow: "CONTACTO / 006",
@@ -154,22 +139,8 @@ const studioCopy = {
       callout: ["PRECISION", "over noise"],
       cta: "MEET THE STUDIO →",
     },
-    booking: {
-      eyebrow: "BOOKING / 005",
-      title: ["START WITH", "an idea"],
-      intro: "Tell us what you want to carry on your skin. We review every proposal personally.",
-      imageCaption: "PREPARE THE IDEA / THEN THE SKIN",
-      quote: "Let every black line remind you of the strength you carry within.",
-      received: "RECEIVED / 005",
-      successTitle: ["Your idea is now", "in the studio."],
-      successText: "Thanks for writing. We will contact you to continue the conversation.",
-      another: "SEND ANOTHER REQUEST →",
-      name: "Your name",
-      email: "Your email",
-      idea: "Tell us your idea",
-      namePlaceholder: "FULL NAME",
-      ideaPlaceholder: "IDEA, PLACEMENT, SIZE...",
-      submit: "SEND REQUEST",
+    manifesto: {
+      phraseLines: ["Let every black", "line reveal", "the strength", "you carry within."],
     },
     contact: {
       eyebrow: "CONTACT / 006",
@@ -294,7 +265,7 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-note">
         <Eyebrow>{copy.note}</Eyebrow>
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
-        <a className="tattoo-red-link" href="#studio-booking">{copy.cta}</a>
+        <a className="tattoo-red-link" href="#studio-about">{copy.cta}</a>
       </section>
     </StudioFrame>
   );
@@ -334,46 +305,20 @@ export function ServicesPage({ language }: StudioProps) {
   );
 }
 
-export function BookingPage({ language }: StudioProps) {
-  const [sent, setSent] = useState(false);
-  const copy = studioCopy[language].booking;
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSent(true);
-  }
-
+export function ManifestoPage({ language }: StudioProps) {
+  const copy = studioCopy[language].manifesto;
   return (
-    <StudioFrame id="studio-booking" className="page-booking">
-      <section className="page-booking-heading">
-        <Eyebrow>{copy.eyebrow}</Eyebrow>
-        <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
-        <p>{copy.intro}</p>
-      </section>
-      <section className="page-booking-layout">
-        <figure className="page-booking-image">
-          <img src={bookingImg} alt={language === "es" ? "Estudio de dibujo y preparación para una sesión de tatuaje" : "Drawing studio prepared for a tattoo session"} />
-          <figcaption>{copy.imageCaption}</figcaption>
-        </figure>
-        <div className="page-booking-form-wrap">
-          <blockquote className="page-booking-quote">{copy.quote}</blockquote>
-          {sent ? (
-            <div className="tattoo-form-success">
-              <Eyebrow>{copy.received}</Eyebrow>
-              <h2>{copy.successTitle[0]}<br /><em>{copy.successTitle[1]}</em></h2>
-              <p>{copy.successText}</p>
-              <button type="button" onClick={() => setSent(false)}>{copy.another}</button>
-            </div>
-          ) : (
-            <form className="tattoo-form" onSubmit={handleSubmit}>
-              <label>{copy.name}<input required name="name" placeholder={copy.namePlaceholder} /></label>
-              <label>{copy.email}<input required type="email" name="email" placeholder="EMAIL" /></label>
-              <label>{copy.idea}<textarea required name="idea" rows={5} placeholder={copy.ideaPlaceholder} /></label>
-              <button type="submit">{copy.submit} <span>↗</span></button>
-            </form>
-          )}
-        </div>
-      </section>
+    <StudioFrame id="studio-manifesto" className="page-manifesto">
+      <h1
+        className="page-manifesto-quote"
+        aria-label={copy.phraseLines.join(" ")}
+      >
+        {copy.phraseLines.map((line, index) => index === 2 ? (
+          <em key={line} aria-hidden="true">{line}</em>
+        ) : (
+          <span key={line} aria-hidden="true">{line}</span>
+        ))}
+      </h1>
     </StudioFrame>
   );
 }
@@ -979,7 +924,7 @@ export function StudioHomeSections({ language }: StudioProps) {
       <AboutPage language={language} />
       <PortfolioPage language={language} />
       <ServicesPage language={language} />
-      <BookingPage language={language} />
+      <ManifestoPage language={language} />
       <FAQPage language={language} />
       <ContactPage language={language} />
     </div>

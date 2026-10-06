@@ -3259,26 +3259,47 @@ body,
   padding-top: 10px;
 }
 
-.page-booking-quote {
-  max-width: 18ch;
-  margin: 26px 0 0;
-  color: #171515;
-  font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.25rem, 1.7vw, 1.7rem);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.16;
-  text-wrap: balance;
+.page-manifesto {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(110px, 15vh, 180px) clamp(28px, 8vw, 120px);
+  color: #FFF8C9;
+  background: #0B0A0A;
 }
 
-.page-booking-quote::before {
-  display: block;
-  width: 30px;
-  height: 1px;
-  margin-bottom: 22px;
-  background: #E63027;
+.page-manifesto::before {
+  position: absolute;
+  inset: clamp(16px, 3vw, 44px);
+  border: 1px solid rgba(255, 248, 201, 0.18);
   content: "";
+  pointer-events: none;
+}
+
+.page-manifesto-quote {
+  position: relative;
+  width: min(100%, 1440px);
+  margin: 0;
+  color: inherit;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(2.6rem, 8.1vw, 7.8rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.page-manifesto-quote > span,
+.page-manifesto-quote > em {
+  display: block;
+}
+
+.page-manifesto-quote > em {
+  color: #E63027;
+  font-style: italic;
 }
 
 .page-booking .tattoo-form {
@@ -3580,6 +3601,17 @@ body,
     font-size: clamp(4rem, 18vw, 7rem);
   }
 
+  .page-manifesto {
+    min-height: 100svh;
+    padding: 120px 28px;
+  }
+
+  .page-manifesto-quote {
+    font-size: clamp(2.05rem, 9vw, 3.5rem);
+    letter-spacing: -0.055em;
+    line-height: 1;
+  }
+
   .page-home-hero-image,
   .page-about-portrait,
   .page-services-image,
@@ -3721,11 +3753,6 @@ body,
     display: flex;
     flex-direction: column;
     gap: 54px;
-  }
-
-  .page-booking-quote {
-    max-width: 22ch;
-    margin-top: 0;
   }
 
   .page-contact-details {
