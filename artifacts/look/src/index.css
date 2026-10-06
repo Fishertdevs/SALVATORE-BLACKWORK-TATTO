@@ -5091,8 +5091,8 @@ body,
   aspect-ratio: 819 / 1024;
   min-height: 0;
   align-self: stretch;
-  justify-self: end;
-  transform: translateX(clamp(56px, 8vw, 98px));
+  justify-self: center;
+  transform: none;
   margin: 0;
   position: relative;
   overflow: hidden;
@@ -5111,7 +5111,7 @@ body,
   object-fit: contain;
   object-position: center bottom;
   transform: scale(1.08);
-  transform-origin: left center;
+  transform-origin: center center;
 }
 
 .page-contact-form-layout > .page-contact-portrait .page-contact-portrait-base {
@@ -5175,8 +5175,8 @@ body,
     height: auto;
     aspect-ratio: 819 / 1024;
     min-height: 0;
-    transform: translateX(clamp(40px, 10.5vw, 64px));
-    align-self: flex-end;
+    transform: none;
+    align-self: center;
   }
 }
 
@@ -5228,7 +5228,7 @@ body,
     height: auto;
     aspect-ratio: 819 / 1024;
     min-height: 0;
-    align-self: stretch;
+    align-self: center;
   }
 
   .page-contact-form-layout > .page-contact-portrait img {
