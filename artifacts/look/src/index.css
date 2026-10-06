@@ -3263,7 +3263,8 @@ body,
   position: relative;
   display: grid;
   min-height: 100svh;
-  place-items: center;
+  align-items: center;
+  justify-items: stretch;
   overflow: hidden;
   padding: clamp(110px, 15vh, 180px) clamp(28px, 8vw, 120px);
   color: #E63027;
@@ -3280,12 +3281,34 @@ body,
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
 }
 
-.page-manifesto-quote > span {
+.page-manifesto-line {
   display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+
+.page-manifesto-line:nth-child(2) {
+  margin-left: clamp(28px, 8vw, 120px);
+}
+
+.page-manifesto-line:nth-child(3) {
+  margin-left: clamp(52px, 4vw, 72px);
+}
+
+.page-manifesto-line:nth-child(4) {
+  margin-left: clamp(16px, 14vw, 210px);
+}
+
+.page-manifesto-line-inner {
+  display: block;
+  will-change: transform, opacity, filter;
 }
 
 .page-booking .tattoo-form {
@@ -3596,6 +3619,18 @@ body,
     font-size: clamp(2.05rem, 9vw, 3.5rem);
     letter-spacing: -0.04em;
     line-height: 1;
+  }
+
+  .page-manifesto-line:nth-child(2) {
+    margin-left: clamp(14px, 5vw, 30px);
+  }
+
+  .page-manifesto-line:nth-child(3) {
+    margin-left: clamp(28px, 10vw, 52px);
+  }
+
+  .page-manifesto-line:nth-child(4) {
+    margin-left: clamp(8px, 6vw, 26px);
   }
 
   .page-home-hero-image,

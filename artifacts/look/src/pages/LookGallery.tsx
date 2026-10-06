@@ -307,7 +307,7 @@ function MobileLookGallery({
   onWelcomeComplete: (isComplete: boolean) => void;
 }) {
   const copy = galleryCopy[language];
-  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-manifesto", "#studio-contact"];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -582,7 +582,7 @@ function MobileLookGallery({
           />
 
           <div className={`mobile-hero-actions ${showWelcome ? "is-welcome-active" : ""}`}>
-            <a href="#studio-booking" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
+            <a href="#studio-contact" className="mobile-hero-side-action">{copy.heroLeftAction}</a>
             <a href="#studio-portfolio" className="mobile-hero-side-action">{copy.heroRightAction}</a>
           </div>
         </div>
@@ -643,7 +643,7 @@ export default function LookGallery() {
   }, []);
 
   const copy = galleryCopy[language];
-  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-booking", "#studio-contact"];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-manifesto", "#studio-contact"];
   const galleryRef = useRef<HTMLDivElement>(null);
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);
@@ -1377,7 +1377,7 @@ export default function LookGallery() {
               {copy.heroLeftTitle.join(" ")}
             </div>
             <p className="hero-side-desc" ref={heroLookRef}>{copy.heroLeftDescription}</p>
-            <a className="hero-side-action" href="#studio-booking">{copy.heroLeftAction}</a>
+            <a className="hero-side-action" href="#studio-contact">{copy.heroLeftAction}</a>
           </div>
           <div className="hero-side hero-side-right">
             <div className="hero-side-title" ref={heroFutureRef} aria-label={copy.heroRightTitle.join(" ")}>

@@ -14,7 +14,7 @@ const legalNav = [
   ["ACERCA DE", "#studio-about"],
   ["PORTFOLIO", "#studio-portfolio"],
   ["SERVICIOS", "#studio-services"],
-  ["RESERVAS", "#studio-booking"],
+  ["MANIFIESTO", "#studio-manifesto"],
   ["CONTACTO", "#studio-contact"],
 ] as const;
 
@@ -244,7 +244,7 @@ function LegalLayout({
             <li><a href={`${appBasePath}?skipWelcome=1#studio-about`}>ACERCA DE</a></li>
             <li><a href={`${appBasePath}?skipWelcome=1#studio-portfolio`}>PORTFOLIO</a></li>
             <li><a href={`${appBasePath}?skipWelcome=1#studio-services`}>SERVICIOS</a></li>
-            <li><a href={`${appBasePath}?skipWelcome=1#studio-booking`}>RESERVAS</a></li>
+            <li><a href={`${appBasePath}?skipWelcome=1#studio-manifesto`}>MANIFIESTO</a></li>
             <li><a href={`${appBasePath}?skipWelcome=1#studio-contact`}>CONTACTO</a></li>
           </ul>
           <div className="language-switch" aria-label="Language selector">

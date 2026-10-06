@@ -13,7 +13,7 @@ export function persistLanguage(language: Language) {
 
 export const galleryCopy = {
   es: {
-    nav: ["INICIO", "ACERCA DE", "PORTFOLIO", "SERVICIOS", "RESERVAS", "CONTACTO"],
+    nav: ["INICIO", "ACERCA DE", "PORTFOLIO", "SERVICIOS", "MANIFIESTO", "CONTACTO"],
     heroEyebrow: "SALVATORE — BLACKWORK",
     heroTitle: ["TATUAJE", "BLACKWORK"],
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
@@ -66,7 +66,7 @@ export const galleryCopy = {
     footerLegalPrivacy: "POLÍTICA DE PRIVACIDAD",
   },
   en: {
-    nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "BOOKING", "CONTACT"],
+    nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "MANIFESTO", "CONTACT"],
     heroEyebrow: "SALVATORE — BLACKWORK",
     heroTitle: ["BLACKWORK", "TATTOO"],
     heroFuture: ["INK IS", "ARCHITECTURE"],

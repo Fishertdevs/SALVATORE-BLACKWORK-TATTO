@@ -307,6 +307,52 @@ export function ServicesPage({ language }: StudioProps) {
 
 export function ManifestoPage({ language }: StudioProps) {
   const copy = studioCopy[language].manifesto;
+  useEffect(() => {
+    const section = document.getElementById("studio-manifesto");
+    const lines = section
+      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line-inner"))
+      : [];
+
+    if (
+      !section ||
+      lines.length === 0 ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
+      typeof IntersectionObserver === "undefined"
+    ) {
+      return undefined;
+    }
+
+    const hiddenState = { autoAlpha: 0, yPercent: 110, filter: "blur(8px)" };
+    gsap.set(lines, hiddenState);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        gsap.killTweensOf(lines);
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          gsap.to(lines, {
+            autoAlpha: 1,
+            yPercent: 0,
+            filter: "blur(0px)",
+            duration: 1.05,
+            stagger: 0.18,
+            ease: "power4.out",
+            overwrite: true,
+          });
+        } else {
+          gsap.set(lines, hiddenState);
+        }
+      },
+      { root: document.getElementById("fullscreen-section"), threshold: [0, 0.12] },
+    );
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(lines);
+      gsap.set(lines, { clearProps: "all" });
+    };
+  }, [language]);
+
   return (
     <StudioFrame id="studio-manifesto" className="page-manifesto">
       <h1
@@ -314,7 +360,9 @@ export function ManifestoPage({ language }: StudioProps) {
         aria-label={copy.phraseLines.join(" ")}
       >
         {copy.phraseLines.map((line) => (
-          <span key={line} aria-hidden="true">{line}</span>
+          <span className="page-manifesto-line" key={line} aria-hidden="true">
+            <span className="page-manifesto-line-inner">{line}</span>
+          </span>
         ))}
       </h1>
     </StudioFrame>
