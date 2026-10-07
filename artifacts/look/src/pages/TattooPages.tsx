@@ -61,7 +61,7 @@ const studioCopy = {
       cta: "CONOCER EL ESTUDIO →",
     },
     manifesto: {
-      phraseLines: ["La creatividad", "hace la vida", "más alegre,", "una línea a la vez."],
+      phraseLines: ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
     },
     contact: {
       eyebrow: "CONTACTO / 006",
@@ -140,7 +140,7 @@ const studioCopy = {
       cta: "MEET THE STUDIO →",
     },
     manifesto: {
-      phraseLines: ["Creativity makes", "life brighter,", "one line at a time."],
+      phraseLines: ["Blackwork:", "shadow finds", "its voice", "on your skin."],
     },
     contact: {
       eyebrow: "CONTACT / 006",
@@ -309,37 +309,55 @@ export function ManifestoPage({ language }: StudioProps) {
   const copy = studioCopy[language].manifesto;
   useEffect(() => {
     const section = document.getElementById("studio-manifesto");
-    const lines = section
-      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line-inner"))
+    const lineGroups = section
+      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line")).map((line) =>
+          Array.from(line.querySelectorAll<HTMLElement>(".page-manifesto-word")),
+        )
       : [];
+    const words = lineGroups.flat();
 
     if (
       !section ||
-      lines.length === 0 ||
+      words.length === 0 ||
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
       typeof IntersectionObserver === "undefined"
     ) {
       return undefined;
     }
 
-    const hiddenState = { autoAlpha: 0, yPercent: 110, filter: "blur(8px)" };
-    gsap.set(lines, hiddenState);
+    const hiddenState = {
+      autoAlpha: 0,
+      yPercent: 115,
+      rotateX: -48,
+      filter: "blur(10px)",
+    };
+    gsap.set(words, hiddenState);
+    let entranceTimeline: gsap.core.Timeline | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
-        gsap.killTweensOf(lines);
+        entranceTimeline?.kill();
+        gsap.killTweensOf(words);
         if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-          gsap.to(lines, {
-            autoAlpha: 1,
-            yPercent: 0,
-            filter: "blur(0px)",
-            duration: 1.05,
-            stagger: 0.18,
-            ease: "power4.out",
-            overwrite: true,
+          entranceTimeline = gsap.timeline();
+          lineGroups.forEach((lineWords, index) => {
+            entranceTimeline?.to(
+              lineWords,
+              {
+                autoAlpha: 1,
+                yPercent: 0,
+                rotateX: 0,
+                filter: "blur(0px)",
+                duration: 0.95,
+                stagger: { each: 0.075, from: "start" },
+                ease: "power4.out",
+                overwrite: true,
+              },
+              index === 0 ? 0 : ">-0.58",
+            );
           });
         } else {
-          gsap.set(lines, hiddenState);
+          gsap.set(words, hiddenState);
         }
       },
       { root: document.getElementById("fullscreen-section"), threshold: [0, 0.12] },
@@ -348,8 +366,9 @@ export function ManifestoPage({ language }: StudioProps) {
 
     return () => {
       observer.disconnect();
-      gsap.killTweensOf(lines);
-      gsap.set(lines, { clearProps: "all" });
+      entranceTimeline?.kill();
+      gsap.killTweensOf(words);
+      gsap.set(words, { clearProps: "all" });
     };
   }, [language]);
 
@@ -361,7 +380,11 @@ export function ManifestoPage({ language }: StudioProps) {
       >
         {copy.phraseLines.map((line) => (
           <span className="page-manifesto-line" key={line} aria-hidden="true">
-            <span className="page-manifesto-line-inner">{line}</span>
+            <span className="page-manifesto-line-inner">
+              {line.split(/\s+/).map((word) => (
+                <span className="page-manifesto-word" key={word}>{word}</span>
+              ))}
+            </span>
           </span>
         ))}
       </h1>

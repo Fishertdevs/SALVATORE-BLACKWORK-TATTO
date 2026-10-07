@@ -3281,6 +3281,7 @@ body,
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1;
+  perspective: 900px;
   text-align: left;
   text-transform: uppercase;
 }
@@ -3308,7 +3309,19 @@ body,
 
 .page-manifesto-line-inner {
   display: block;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+}
+
+.page-manifesto-word {
+  display: inline-block;
+  margin-right: 0.18em;
+  transform-origin: 50% 100%;
   will-change: transform, opacity, filter;
+}
+
+.page-manifesto-word:last-child {
+  margin-right: 0;
 }
 
 .page-booking .tattoo-form {
@@ -3616,9 +3629,9 @@ body,
   }
 
   .page-manifesto-quote {
-    font-size: clamp(2.05rem, 9vw, 3.5rem);
+    font-size: clamp(1.4rem, 7vw, 3.5rem);
     letter-spacing: -0.04em;
-    line-height: 1;
+    line-height: 1.04;
   }
 
   .page-manifesto-line:nth-child(2) {
