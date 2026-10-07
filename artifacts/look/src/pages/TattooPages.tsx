@@ -434,7 +434,7 @@ const faqCopy = {
 function observeFaqEntrance(
   targets: HTMLElement[],
   root: Element | null,
-  options: { stagger?: number } = {},
+  options: { stagger?: number; revealWords?: boolean } = {},
 ): (() => void) | undefined {
   if (
     targets.length === 0 ||
@@ -445,11 +445,20 @@ function observeFaqEntrance(
 
   const visibleTargets = new Set<HTMLElement>();
   const initialState = { clipPath: "inset(0px 100% 0px 0px)" };
+  const wordInitialState = {
+    autoAlpha: 0,
+    yPercent: 115,
+    rotateX: -42,
+    filter: "blur(8px)",
+  };
   const finalState = {
     clipPath: "inset(0px 0% 0px 0px)",
     duration: 1.2,
     ease: "power3.out",
   };
+  const animationTargets = (target: HTMLElement) => options.revealWords
+    ? Array.from(target.querySelectorAll<HTMLElement>(".page-faq-word"))
+    : [target];
 
   const updateVisibility = () => {
     const rootRect = root?.getBoundingClientRect();
@@ -470,20 +479,32 @@ function observeFaqEntrance(
       if (visibleRatio >= 0.12) {
         if (visibleTargets.has(target)) continue;
         visibleTargets.add(target);
-        gsap.killTweensOf(target);
-        gsap.fromTo(
-          target,
-          initialState,
-          {
-            ...finalState,
-            delay: targets.indexOf(target) * (options.stagger ?? 0),
-            overwrite: true,
-          },
-        );
+          const animatedElements = animationTargets(target);
+          gsap.killTweensOf(animatedElements);
+          if (options.revealWords) {
+            gsap.fromTo(animatedElements, wordInitialState, {
+              autoAlpha: 1,
+              yPercent: 0,
+              rotateX: 0,
+              filter: "blur(0px)",
+              duration: 0.85,
+              stagger: { each: 0.035, from: "start" },
+              delay: targets.indexOf(target) * (options.stagger ?? 0),
+              ease: "power4.out",
+              overwrite: true,
+            });
+          } else {
+            gsap.fromTo(target, initialState, {
+              ...finalState,
+              delay: targets.indexOf(target) * (options.stagger ?? 0),
+              overwrite: true,
+            });
+          }
       } else {
         visibleTargets.delete(target);
-        gsap.killTweensOf(target);
-        gsap.set(target, initialState);
+          const animatedElements = animationTargets(target);
+          gsap.killTweensOf(animatedElements);
+          gsap.set(animatedElements, options.revealWords ? wordInitialState : initialState);
       }
     }
   };
@@ -512,8 +533,13 @@ function observeFaqEntrance(
     root?.removeEventListener("scroll", scheduleVisibilityCheck);
     window.removeEventListener("scroll", scheduleVisibilityCheck);
     window.removeEventListener("resize", scheduleVisibilityCheck);
-    gsap.killTweensOf(targets);
-    gsap.set(targets, { clearProps: "clipPath" });
+    const animatedElements = targets.flatMap(animationTargets);
+    gsap.killTweensOf(animatedElements);
+    gsap.set(animatedElements, {
+      clearProps: options.revealWords
+        ? "clipPath,opacity,transform,filter,visibility"
+        : "clipPath",
+    });
   };
 }
 
@@ -580,7 +606,7 @@ export function FAQPage({ language }: StudioProps) {
     return observeFaqEntrance(
       questionTitles,
       document.getElementById("fullscreen-section"),
-      { stagger: 0.14 },
+      { stagger: 0.14, revealWords: true },
     );
   }, [activeSlideIndex, language]);
 
@@ -639,8 +665,16 @@ export function FAQPage({ language }: StudioProps) {
                               <span className="page-faq-number" aria-hidden="true">
                                 {String(questionNumber).padStart(2, "0")}
                               </span>
-                              <h3 className="page-faq-question">
-                                <span>{question}</span>
+                              <h3 className="page-faq-question" aria-label={question}>
+                                <span aria-hidden="true">
+                                  {question.split(/(\s+)/).map((part, partIndex) =>
+                                    /^\s+$/.test(part) ? part : (
+                                      <span className="page-faq-word" key={`${questionNumber}-${partIndex}`}>
+                                        {part}
+                                      </span>
+                                    ),
+                                  )}
+                                </span>
                               </h3>
                             </div>
                             <div className="page-faq-answer"><p>{answer}</p></div>
