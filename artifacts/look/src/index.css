@@ -6757,20 +6757,24 @@ body,
 .reservation-embedded .reservation-contact-grid { margin-left: 0; }
 .reservation-embedded .reservation-upload-grid { gap: clamp(1.25rem, 3vw, 2.5rem); }
 .reservation-embedded .reservation-upload-head {
-  display: grid;
-  justify-items: center;
-  align-items: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: .28rem;
+  width: 100%;
   margin-bottom: .75rem;
   text-align: center;
 }
 .reservation-embedded .reservation-upload-head label {
+  width: 100%;
   color: var(--rf-ink);
   font-size: .75rem;
   letter-spacing: .09em;
   text-transform: uppercase;
+  text-align: center;
 }
-.reservation-embedded .reservation-upload-head > span { font-size: .68rem; }
+.reservation-embedded .reservation-upload-head > span { width: 100%; font-size: .68rem; text-align: center; }
 .reservation-embedded .reservation-dropzone { aspect-ratio: 2.1 / 1; border-radius: 1rem; }
 .reservation-embedded .reservation-temporary-note { color: var(--rf-muted); margin: 1rem 0 1.3rem; }
 .reservation-embedded .reservation-consent { color: var(--rf-ink); margin: 1rem 0 .4rem; }
