@@ -6459,11 +6459,9 @@ body,
 }
 .reservation-wordmark span { font-family: 'Helvetica Neue', sans-serif; font-size: .49rem; letter-spacing: .19em; }
 .reservation-masthead-note,
-.reservation-eyebrow,
 .reservation-index,
 .reservation-section-heading h2,
 .reservation-steps,
-.reservation-mark-caption,
 .reservation-aside-label,
 .reservation-footer {
   font-size: .62rem;
@@ -6485,7 +6483,6 @@ body,
   animation: reservation-rise .7s cubic-bezier(.2,.75,.25,1) both;
 }
 .reservation-hero-copy { position: relative; z-index: 1; }
-.reservation-eyebrow { color: var(--rf-red); margin: 0 0 1.5rem; }
 .reservation-hero h1 {
   margin: 0;
   font-family: 'Beautique Display', serif;
@@ -6503,28 +6500,6 @@ body,
   line-height: 1.5;
   text-wrap: pretty;
 }
-.reservation-hero-mark {
-  position: relative;
-  width: min(100%, 290px);
-  aspect-ratio: 1;
-  justify-self: center;
-  display: grid;
-  place-items: center;
-  color: var(--rf-red);
-}
-.reservation-mark-ring,
-.reservation-mark-ring::before,
-.reservation-mark-ring::after {
-  position: absolute;
-  inset: 6%;
-  border: 1px solid var(--rf-red);
-  border-radius: 50%;
-  content: "";
-}
-.reservation-mark-ring::before { inset: 13%; transform: rotate(27deg) scaleX(.48); }
-.reservation-mark-ring::after { inset: 13%; transform: rotate(-27deg) scaleX(.48); }
-.reservation-mark-center { font-family: 'Beautique Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: -.12em; }
-.reservation-mark-caption { position: absolute; bottom: 2%; font-size: .48rem; letter-spacing: .2em; }
 .reservation-steps {
   grid-column: 1 / -1;
   display: flex;
@@ -6674,8 +6649,6 @@ body,
 @media (max-width: 760px) {
   .reservation-masthead { min-height: 68px; }
   .reservation-hero { min-height: auto; padding: 4.2rem 0 2rem; grid-template-columns: 1fr; }
-  .reservation-hero-mark { position: absolute; right: -5%; top: 2.7rem; width: 34%; opacity: .24; }
-  .reservation-mark-center { font-size: 2.5rem; }
   .reservation-hero h1 { font-size: clamp(4rem, 17vw, 7rem); }
   .reservation-intro { max-width: 340px; margin-top: 1.5rem; }
   .reservation-steps { gap: 1.1rem; justify-content: space-between; margin-top: 3rem; font-size: .52rem; }
@@ -6728,7 +6701,24 @@ body,
 .reservation-embedded .reservation-hero {
   min-height: 0;
   padding: 0 0 clamp(2rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
 }
+.reservation-embedded .reservation-hero-copy { width: min(100%, 1000px); text-align: center; }
+.reservation-embedded .reservation-hero h1 {
+  margin: 0 auto clamp(12px, 1.8vw, 24px);
+  max-width: 100%;
+  padding-top: .08em;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(2rem, 6.5vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: 1.08;
+  text-align: center;
+  text-transform: uppercase;
+}
+.reservation-embedded .reservation-hero h1 em { font-style: normal; font-weight: 400; }
+.reservation-embedded .reservation-intro { max-width: 700px; margin: 0 auto; }
 .reservation-embedded .reservation-process,
 .reservation-embedded .reservation-result {
   padding: clamp(2rem, 4vw, 3.5rem) 0 1rem;
@@ -6816,6 +6806,12 @@ body,
 @media (max-width: 760px) {
   .page-services-callout.reservation-callout { margin: 0 20px clamp(2rem, 8vw, 4rem); }
   .reservation-slider { min-height: 0; }
+  .reservation-embedded .reservation-hero h1 {
+    margin: 10px auto 8px;
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
+    line-height: 1.08;
+  }
+  .reservation-embedded .reservation-intro { max-width: 500px; }
   .reservation-embedded .reservation-dropzone { aspect-ratio: 1.6 / 1; }
   .reservation-step-button { gap: .35rem; }
   .reservation-slide-actions { margin-top: 1.5rem; }
