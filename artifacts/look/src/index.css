@@ -6860,6 +6860,10 @@ body,
   margin-inline: auto;
   text-align: center;
 }
+.reservation-embedded .reservation-result .reservation-section-heading {
+  justify-content: center;
+  text-align: center;
+}
 .reservation-embedded .reservation-preview-unavailable .reservation-alert {
   border-top: 1px solid #fff;
   border-left: 0;
@@ -6881,14 +6885,16 @@ body,
 .reservation-embedded .reservation-contact-form input::placeholder { color: rgba(255, 248, 201, .75); }
 .reservation-embedded .reservation-confirmation-note { color: var(--rf-ink); }
 .reservation-embedded .reservation-primary-button {
-  border-color: var(--rf-ink);
-  background: var(--rf-ink);
-  color: var(--rf-paper);
+  border-color: #fff;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--rf-red);
   transition: background-color .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
 }
 .reservation-embedded .reservation-primary-button:hover:not(:disabled) {
-  background: transparent;
-  color: var(--rf-ink);
+  border-color: #fff;
+  background: #fff;
+  color: var(--rf-red);
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(11, 10, 10, .12);
 }
