@@ -373,8 +373,14 @@ export function PrivacyPolicyPage() {
       <p>
         Se aplican medidas razonables de seguridad y acceso restringido. Los datos se conservarán
         durante el tiempo necesario para cumplir la finalidad informada, obligaciones legales y
-        atender posibles responsabilidades. Si se incorporan proveedores de agenda, correo,
-        analítica o almacenamiento, deberán ser identificados y actualizados en esta política.
+        atender posibles responsabilidades.
+      </p>
+      <p>
+        Si utilizas la previsualización con IA, las imágenes de la zona del cuerpo y de referencia
+        se envían temporalmente a Gemini mediante Replit AI Integrations para generar una
+        aproximación. Este sitio no guarda esos archivos en una base de datos ni en almacenamiento
+        propio; el proveedor puede tratar la solicitud conforme a sus propias condiciones. No
+        subas imágenes íntimas ni fotografías de otras personas sin autorización.
       </p>
 
       <h2>8. Menores de edad</h2>

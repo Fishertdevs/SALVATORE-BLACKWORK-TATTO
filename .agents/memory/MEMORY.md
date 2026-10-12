@@ -5,3 +5,4 @@
 - [Welcome text animation](welcome-text-animation.md) — replay welcome text on viewport re-entry without clipping glyphs.
 - [Contact-section constraints](contact-section-constraints.md) — preserve approved geometry, hover-reveal behavior, repeatable motion, and keep the FAQ out of the navbar.
 - [FAQ and widget scope](faq-and-widget-scope.md) — make only requested FAQ or WhatsApp changes and verify the affected section before saying the preview is updated.
+- [Workspace server runtime dependencies](workspace-server-runtime-dependencies.md) — server-bundled apps may need direct runtime dependencies even when a shared workspace library declares them.

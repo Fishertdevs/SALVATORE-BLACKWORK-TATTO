@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: reservations
+    description: Tattoo preview operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /reservations/tattoo-preview:
+    post:
+      operationId: generateTattooPreview
+      tags: [reservations]
+      summary: Generate an approximate tattoo placement preview
+      description: Processes the two supplied images for this request only; images are not persisted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TattooPreviewInput"
+      responses:
+        "200":
+          description: Approximate generated preview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TattooPreviewResult"
+        "400":
+          description: Invalid request
+        "413":
+          description: Request images are too large
+        "429":
+          description: Preview rate limit reached
+        "503":
+          description: AI preview service is unavailable
 components:
   schemas:
     HealthStatus:
@@ -33,4 +62,49 @@ components:
           type: string
       required:
         - status
+    TattooPreviewInput:
+      type: object
+      required:
+        - bodyPhotoBase64
+        - bodyPhotoMimeType
+        - referencePhotoBase64
+        - referencePhotoMimeType
+        - placement
+      properties:
+        bodyPhotoBase64:
+          type: string
+          format: byte
+          maxLength: 3500000
+        bodyPhotoMimeType:
+          type: string
+          enum: [image/jpeg, image/png, image/webp]
+        referencePhotoBase64:
+          type: string
+          format: byte
+          maxLength: 3500000
+        referencePhotoMimeType:
+          type: string
+          enum: [image/jpeg, image/png, image/webp]
+        placement:
+          type: string
+          minLength: 2
+          maxLength: 180
+    TattooPreviewResult:
+      type: object
+      required: [previewBase64, mimeType, disclaimer]
+      properties:
+        previewBase64:
+          type: string
+          format: byte
+        mimeType:
+          type: string
+          enum: [image/png, image/jpeg, image/webp]
+        disclaimer:
+          type: string
+    ApiError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
 

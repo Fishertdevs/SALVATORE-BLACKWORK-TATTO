@@ -43,3 +43,50 @@ export function getBookingWhatsAppHref(language: Language, now = new Date()) {
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
+
+export function getReservationWhatsAppHref(
+  language: Language,
+  details: {
+    name: string;
+    email?: string;
+    placement: string;
+    date: string;
+    time: string;
+    hasPreview: boolean;
+  },
+  now = new Date(),
+) {
+  const greeting = getGreeting(language, now);
+  const message =
+    language === "es"
+      ? [
+          `${greeting}, Salvatore. Quisiera solicitar una consulta de 30 minutos sobre mi tatuaje.`,
+          `Nombre: ${details.name}`,
+          details.email ? `Correo: ${details.email}` : "",
+          `Zona: ${details.placement}`,
+          `Fecha preferida: ${details.date}`,
+          `Hora preferida: ${details.time}`,
+          details.hasPreview
+            ? "Adjuntaré la previsualización aproximada al enviar este mensaje."
+            : "No tengo una previsualización disponible; revisaremos la idea durante la consulta.",
+          "Entiendo que el horario queda pendiente de confirmación del estudio.",
+        ]
+          .filter(Boolean)
+          .join("\n")
+      : [
+          `${greeting}, Salvatore. I would like to request a 30-minute consultation about my tattoo.`,
+          `Name: ${details.name}`,
+          details.email ? `Email: ${details.email}` : "",
+          `Placement: ${details.placement}`,
+          `Preferred date: ${details.date}`,
+          `Preferred time: ${details.time}`,
+          details.hasPreview
+            ? "I will attach the approximate preview when I send this message."
+            : "I do not have a preview available; we can review the idea during the consultation.",
+          "I understand the time is pending studio confirmation.",
+        ]
+          .filter(Boolean)
+          .join("\n");
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
