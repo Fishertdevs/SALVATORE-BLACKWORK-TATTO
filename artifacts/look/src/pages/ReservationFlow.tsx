@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type DragEvent, type FormEvent } from "react";
 import { useGenerateTattooPreview } from "@workspace/api-client-react";
 import { ArrowDownToLine, ArrowLeft, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
@@ -27,7 +27,8 @@ const copy = {
     bodyHint: "Piel visible y buena luz.",
     referenceLabel: "Imagen de referencia",
     referenceHint: "Una pieza o estilo que te inspire.",
-    addPhoto: "Seleccionar imagen",
+    addPhoto: "Seleccionar o soltar imagen",
+    dropHere: "Suelta la imagen aquí",
     replacePhoto: "Cambiar imagen",
     formats: "JPG, PNG o WebP · hasta 1600 px tras el procesamiento",
     placementLabel: "¿Dónde irá el tatuaje?",
@@ -74,7 +75,8 @@ const copy = {
     bodyHint: "Visible skin and good light.",
     referenceLabel: "Reference image",
     referenceHint: "A piece or style that inspires you.",
-    addPhoto: "Choose image",
+    addPhoto: "Choose or drop image",
+    dropHere: "Drop image here",
     replacePhoto: "Change image",
     formats: "JPG, PNG or WebP · resized to 1600 px maximum",
     placementLabel: "Where would you like the tattoo?",
@@ -218,6 +220,7 @@ function PhotoUpload({
   onChange,
   error,
   chooseLabel,
+  dropHere,
   changeLabel,
   formats,
 }: {
@@ -228,19 +231,52 @@ function PhotoUpload({
   onChange: (image: CompressedImage | null) => void;
   error?: string;
   chooseLabel: string;
+  dropHere: string;
   changeLabel: string;
   formats: string;
 }) {
-  const handleFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    event.target.value = "";
+  const [isDragging, setIsDragging] = useState(false);
+  const dragDepth = useRef(0);
+
+  const processFile = async (file?: File) => {
     if (!file) return;
     try {
       onChange(await compressImage(file));
     } catch {
       onChange(null);
-      event.currentTarget?.setCustomValidity("");
     }
+  };
+
+  const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    void processFile(file);
+  };
+  const hasFiles = (event: DragEvent<HTMLLabelElement>) =>
+    Array.from(event.dataTransfer.types).includes("Files");
+  const handleDragEnter = (event: DragEvent<HTMLLabelElement>) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    dragDepth.current += 1;
+    setIsDragging(true);
+  };
+  const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+  };
+  const handleDragLeave = (event: DragEvent<HTMLLabelElement>) => {
+    if (!isDragging) return;
+    event.preventDefault();
+    dragDepth.current = Math.max(0, dragDepth.current - 1);
+    if (dragDepth.current === 0) setIsDragging(false);
+  };
+  const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    dragDepth.current = 0;
+    setIsDragging(false);
+    void processFile(event.dataTransfer.files[0]);
   };
 
   return (
@@ -249,13 +285,23 @@ function PhotoUpload({
         <label htmlFor={id}>{title}</label>
         <span>{hint}</span>
       </div>
-      <label className={`reservation-dropzone${image ? " has-image" : ""}`} htmlFor={id}>
+      <label
+        className={`reservation-dropzone${image ? " has-image" : ""}${isDragging ? " is-dragging" : ""}`}
+        htmlFor={id}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
         {image ? (
-          <img src={image.previewUrl} alt={`${title}: ${image.fileName}`} />
+          <>
+            <img src={image.previewUrl} alt={`${title}: ${image.fileName}`} />
+            {isDragging && <span className="reservation-drop-overlay">{dropHere}</span>}
+          </>
         ) : (
           <span className="reservation-upload-empty">
             <ImagePlus aria-hidden="true" size={25} strokeWidth={1.4} />
-            <span>{chooseLabel}</span>
+            <span>{isDragging ? dropHere : chooseLabel}</span>
           </span>
         )}
         <span className="reservation-change">{image ? changeLabel : "+"}</span>
@@ -517,8 +563,8 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
               </div>
               <form onSubmit={generatePreview} className="reservation-brief-form">
                 <div className="reservation-upload-grid">
-                  <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
-                  <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
+                  <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} dropHere={text.dropHere} changeLabel={text.replacePhoto} formats={text.formats} />
+                  <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} dropHere={text.dropHere} changeLabel={text.replacePhoto} formats={text.formats} />
                 </div>
                 <div className="reservation-consent-row">
                   <label className="reservation-consent">
