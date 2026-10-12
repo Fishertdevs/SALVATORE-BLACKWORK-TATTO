@@ -1,6 +1,7 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useGenerateTattooPreview } from "@workspace/api-client-react";
 import { ArrowDownToLine, ArrowLeft, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
+import { gsap } from "gsap";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
@@ -111,6 +112,55 @@ const copy = {
 } as const;
 
 const acceptedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+function observeReservationEntrance(
+  target: HTMLElement,
+  root: Element | null,
+  onVisibilityChange: (visible: boolean) => void,
+) {
+  let visible: boolean | null = null;
+  let checkScheduled = false;
+  const updateVisibility = () => {
+    const rootRect = root?.getBoundingClientRect();
+    const bounds = rootRect ?? {
+      top: 0,
+      right: window.innerWidth,
+      bottom: window.innerHeight,
+      left: 0,
+    };
+    const rect = target.getBoundingClientRect();
+    const visibleWidth = Math.max(0, Math.min(rect.right, bounds.right) - Math.max(rect.left, bounds.left));
+    const visibleHeight = Math.max(0, Math.min(rect.bottom, bounds.bottom) - Math.max(rect.top, bounds.top));
+    const visibleRatio = (visibleWidth * visibleHeight) / Math.max(1, rect.width * rect.height);
+    const nextVisible = visibleRatio >= 0.12;
+    if (nextVisible === visible) return;
+    visible = nextVisible;
+    onVisibilityChange(visible);
+  };
+  const scheduleVisibilityCheck = () => {
+    if (checkScheduled) return;
+    checkScheduled = true;
+    window.requestAnimationFrame(() => {
+      checkScheduled = false;
+      updateVisibility();
+    });
+  };
+  const observer = typeof IntersectionObserver === "undefined"
+    ? undefined
+    : new IntersectionObserver(scheduleVisibilityCheck, { root, threshold: [0, 0.12] });
+  observer?.observe(target);
+  root?.addEventListener("scroll", scheduleVisibilityCheck, { passive: true });
+  window.addEventListener("scroll", scheduleVisibilityCheck, { passive: true });
+  window.addEventListener("resize", scheduleVisibilityCheck);
+  updateVisibility();
+
+  return () => {
+    observer?.disconnect();
+    root?.removeEventListener("scroll", scheduleVisibilityCheck);
+    window.removeEventListener("scroll", scheduleVisibilityCheck);
+    window.removeEventListener("resize", scheduleVisibilityCheck);
+  };
+}
 
 function compressImage(file: File): Promise<CompressedImage> {
   return new Promise((resolve, reject) => {
@@ -241,6 +291,129 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>(".reservation-embedded .reservation-hero");
+    const title = hero?.querySelector<HTMLElement>("h1");
+    const intro = hero?.querySelector<HTMLElement>(".reservation-intro");
+    const steps = hero
+      ? Array.from(hero.querySelectorAll<HTMLElement>(".reservation-steps li"))
+      : [];
+    if (!hero || !title || !intro || steps.length === 0 || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+
+    const root = document.getElementById("fullscreen-section");
+    const titleHidden = { clipPath: "inset(0 100% 0 0)" };
+    const introHidden = { autoAlpha: 0, y: 16, filter: "blur(6px)" };
+    const stepsHidden = { autoAlpha: 0, x: -12 };
+    let timeline: gsap.core.Timeline | undefined;
+    const play = (isVisible: boolean) => {
+      timeline?.kill();
+      gsap.killTweensOf([title, intro, ...steps]);
+      if (isVisible) {
+        timeline = gsap.timeline()
+          .fromTo(title, titleHidden, {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.9,
+            ease: "power3.out",
+            overwrite: true,
+          })
+          .fromTo(intro, introHidden, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.72,
+            ease: "power4.out",
+            overwrite: true,
+          }, "-=.48")
+          .fromTo(steps, stepsHidden, {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.48,
+            stagger: 0.1,
+            ease: "power3.out",
+            overwrite: true,
+          }, "-=.3");
+      } else {
+        gsap.set(title, titleHidden);
+        gsap.set(intro, introHidden);
+        gsap.set(steps, stepsHidden);
+      }
+    };
+
+    const stopObserving = observeReservationEntrance(hero, root, play);
+    return () => {
+      stopObserving();
+      timeline?.kill();
+      gsap.killTweensOf([title, intro, ...steps]);
+      gsap.set([title, intro, ...steps], { clearProps: "all" });
+    };
+  }, [language]);
+
+  useEffect(() => {
+    const slide = document.querySelector<HTMLElement>(".reservation-embedded .reservation-slide");
+    if (!slide || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+
+    const heading = slide.querySelector<HTMLElement>(".reservation-section-heading");
+    const content = Array.from(
+      slide.querySelectorAll<HTMLElement>(
+        ".reservation-upload, .reservation-consent, .reservation-privacy-details, .reservation-placement, .reservation-generate-button, .reservation-preview-layout, .reservation-preview-unavailable, .reservation-contact-grid, .reservation-slide-actions",
+      ),
+    );
+    if (!heading) return undefined;
+
+    const hiddenContent = {
+      autoAlpha: 0,
+      y: 18,
+      rotateX: -5,
+      filter: "blur(7px)",
+      transformPerspective: 900,
+      transformOrigin: "50% 0%",
+    };
+    const hiddenHeading = { clipPath: "inset(0 100% 0 0)" };
+    let timeline: gsap.core.Timeline | undefined;
+    const play = (isVisible: boolean) => {
+      timeline?.kill();
+      gsap.killTweensOf([heading, ...content]);
+      if (isVisible) {
+        timeline = gsap.timeline()
+          .fromTo(heading, hiddenHeading, {
+            clipPath: "inset(0 0% 0 0)",
+            duration: 0.72,
+            ease: "power3.out",
+            overwrite: true,
+          })
+          .fromTo(content, hiddenContent, {
+            autoAlpha: 1,
+            y: 0,
+            rotateX: 0,
+            filter: "blur(0px)",
+            duration: 0.72,
+            stagger: { each: 0.11, from: "start" },
+            ease: "power4.out",
+            overwrite: true,
+          }, "-=.24");
+      } else {
+        gsap.set(heading, hiddenHeading);
+        gsap.set(content, hiddenContent);
+      }
+    };
+
+    const stopObserving = observeReservationEntrance(
+      slide,
+      document.getElementById("fullscreen-section"),
+      play,
+    );
+    return () => {
+      stopObserving();
+      timeline?.kill();
+      gsap.killTweensOf([heading, ...content]);
+      gsap.set([heading, ...content], { clearProps: "all" });
+    };
+  }, [activeStep, language]);
 
   const onBodyChange = (image: CompressedImage | null) => {
     setBodyPhoto(image);
