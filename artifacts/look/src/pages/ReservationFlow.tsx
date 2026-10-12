@@ -520,29 +520,33 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
                   <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
                 </div>
-                <label className="reservation-consent">
-                  <input
-                    type="checkbox"
-                    checked={imageConsent}
-                    onChange={(event) => setImageConsent(event.target.checked)}
-                    required
-                    data-testid="checkbox-image-consent"
-                  />
-                  <span>{text.consent} <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">{text.consentLink}</a></span>
-                </label>
-                <details className="reservation-privacy-details">
-                  <summary><ShieldCheck size={14} aria-hidden="true" />{text.privacyDetailsTitle}</summary>
-                  <p>{text.privacyDetailsBody}</p>
-                </details>
-                <div className="reservation-placement">
-                  <label htmlFor="tattoo-placement">{text.placementLabel}</label>
-                  <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
+                <div className="reservation-consent-row">
+                  <label className="reservation-consent">
+                    <input
+                      type="checkbox"
+                      checked={imageConsent}
+                      onChange={(event) => setImageConsent(event.target.checked)}
+                      required
+                      data-testid="checkbox-image-consent"
+                    />
+                    <span>{text.consent} <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">{text.consentLink}</a></span>
+                  </label>
+                  <details className="reservation-privacy-details">
+                    <summary><ShieldCheck size={14} aria-hidden="true" />{text.privacyDetailsTitle}</summary>
+                    <p>{text.privacyDetailsBody}</p>
+                  </details>
+                </div>
+                <div className="reservation-placement-action-row">
+                  <div className="reservation-placement">
+                    <label htmlFor="tattoo-placement">{text.placementLabel}</label>
+                    <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
+                  </div>
+                  <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
+                    {previewMutation.isPending ? text.generating : text.generate}
+                    {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
+                  </button>
                 </div>
                 {previewMutation.isPending && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
-                <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
-                  {previewMutation.isPending ? text.generating : text.generate}
-                  {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
-                </button>
               </form>
             </section>
           )}
