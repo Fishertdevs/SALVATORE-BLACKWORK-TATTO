@@ -7,4 +7,4 @@ Keep the original phrase, “Blackwork: la sombra encuentra su voz en tu piel”
 
 **Why:** The user clarified that the phrase must remain independent and that Reservations must replace the text inside the existing red callout.
 
-**How to apply:** Preserve both existing content areas as distinct destinations, with the RESERVAS navigation link pointing to the red callout and MANIFIESTO pointing to the phrase.
+**How to apply:** Preserve both content areas independently. The RESERVAS navigation link points to the red callout; do not add MANIFIESTO to the navbar unless explicitly requested.
