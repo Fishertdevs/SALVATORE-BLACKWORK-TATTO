@@ -1,10 +1,10 @@
 ---
-name: Approved manifesto phrase
-description: Preserve the studio's existing motivational phrase when repurposing the manifesto page.
+name: Manifesto and reservations placement
+description: Keep the existing studio phrase independent and place reservations in the existing red callout.
 ---
 
-Keep the original phrase, “Blackwork: la sombra encuentra su voz en tu piel” (English: “Blackwork: shadow finds its voice on your skin”), in the Reservations composition when the manifesto content is repurposed.
+Keep the original phrase, “Blackwork: la sombra encuentra su voz en tu piel” (English: “Blackwork: shadow finds its voice on your skin”), in its own manifesto section. Put the Reservations flow inside the existing red “Precisión sobre el ruido” callout; do not add a separate top-level reservations page or put the phrase inside Reservations.
 
-**Why:** The user explicitly said they had not asked to remove the motivational phrase and asked for it to be restored.
+**Why:** The user clarified that the phrase must remain independent and that Reservations must replace the text inside the existing red callout.
 
-**How to apply:** Preserve this phrase when updating the Reservations page; do not restore a separate manifesto navigation item unless explicitly requested.
+**How to apply:** Preserve both existing content areas as distinct destinations, with the RESERVAS navigation link pointing to the red callout and MANIFIESTO pointing to the phrase.

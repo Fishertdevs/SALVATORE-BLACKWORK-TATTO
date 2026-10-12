@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useGenerateTattooPreview } from "@workspace/api-client-react";
 import { ArrowDownToLine, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
-import { gsap } from "gsap";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
@@ -18,8 +17,6 @@ const copy = {
   es: {
     eyebrow: "SALVATORE BLACKWORK TATTO · RESERVAS",
     title: <>Una idea.<br /><em>En tu piel.</em></>,
-    manifestoPhraseLines: ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
-    manifestoPhraseLabel: "Manifiesto del estudio",
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
     sectionTitle: "01 — TU PUNTO DE PARTIDA",
@@ -63,8 +60,6 @@ const copy = {
   en: {
     eyebrow: "SALVATORE BLACKWORK TATTO · RESERVATIONS",
     title: <>An idea.<br /><em>On your skin.</em></>,
-    manifestoPhraseLines: ["Blackwork:", "shadow finds", "its voice", "on your skin."],
-    manifestoPhraseLabel: "Studio manifesto",
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
     sectionTitle: "01 — YOUR STARTING POINT",
@@ -225,7 +220,6 @@ function PhotoUpload({
 export default function ReservationFlow({ language }: ReservationFlowProps) {
   const text = copy[language];
   const previewMutation = useGenerateTattooPreview();
-  const manifestoPhraseRef = useRef<HTMLElement>(null);
   const [bodyPhoto, setBodyPhoto] = useState<CompressedImage | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<CompressedImage | null>(null);
   const [placement, setPlacement] = useState("");
@@ -238,57 +232,6 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const section = manifestoPhraseRef.current;
-    const lineGroups = section
-      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line")).map((line) =>
-          Array.from(line.querySelectorAll<HTMLElement>(".page-manifesto-word")),
-        )
-      : [];
-    const words = lineGroups.flat();
-
-    if (
-      !section ||
-      words.length === 0 ||
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
-      typeof IntersectionObserver === "undefined"
-    ) return;
-
-    const hiddenState = { autoAlpha: 0, yPercent: 115, rotateX: -48, filter: "blur(10px)" };
-    gsap.set(words, hiddenState);
-    let timeline: gsap.core.Timeline | undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry) return;
-      timeline?.kill();
-      gsap.killTweensOf(words);
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-        timeline = gsap.timeline();
-        lineGroups.forEach((lineWords, index) => {
-          timeline?.to(lineWords, {
-            autoAlpha: 1,
-            yPercent: 0,
-            rotateX: 0,
-            filter: "blur(0px)",
-            duration: 0.95,
-            stagger: { each: 0.075, from: "start" },
-            ease: "power4.out",
-            overwrite: true,
-          }, index === 0 ? 0 : ">-0.58");
-        });
-      } else {
-        gsap.set(words, hiddenState);
-      }
-    }, { root: document.getElementById("fullscreen-section"), threshold: [0, 0.12] });
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      timeline?.kill();
-      gsap.killTweensOf(words);
-      gsap.set(words, { clearProps: "all" });
-    };
-  }, [language]);
 
   const onBodyChange = (image: CompressedImage | null) => {
     setBodyPhoto(image);
@@ -348,13 +291,8 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   };
 
   return (
-    <section id="studio-reservas" className="reservation-page">
+    <div className="reservation-page reservation-embedded">
       <div className="reservation-frame">
-        <header className="reservation-masthead">
-          <a className="reservation-wordmark" href="/" aria-label="Salvatore Blackwork Tattoo">SALVATORE<br /><span>BLACKWORK TATTO</span></a>
-          <span className="reservation-masthead-note">{language === "es" ? "ESTUDIO · BOGOTÁ" : "STUDIO · BOGOTÁ"}</span>
-        </header>
-
         <section className="reservation-hero">
           <div className="reservation-hero-copy">
             <p className="reservation-eyebrow">{text.eyebrow}</p>
@@ -369,20 +307,6 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
           <ol className="reservation-steps" aria-label={language === "es" ? "Pasos de la reserva" : "Reservation steps"}>
             {text.steps.map((step, index) => <li key={step}><span>0{index + 1}</span>{step}</li>)}
           </ol>
-        </section>
-
-        <section className="reservation-manifesto" ref={manifestoPhraseRef} aria-label={text.manifestoPhraseLabel}>
-          <h2 className="page-manifesto-quote" aria-label={text.manifestoPhraseLines.join(" ")}>
-            {text.manifestoPhraseLines.map((line) => (
-              <span className="page-manifesto-line" key={line} aria-hidden="true">
-                <span className="page-manifesto-line-inner">
-                  {line.split(/\s+/).map((word) => (
-                    <span className="page-manifesto-word" key={word}>{word}</span>
-                  ))}
-                </span>
-              </span>
-            ))}
-          </h2>
         </section>
 
         <section className="reservation-process" aria-labelledby="reservation-start-title">
@@ -469,12 +393,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
           </section>
         )}
 
-        <footer className="reservation-footer">
-          <span>SALVATORE BLACKWORK TATTO</span>
-          <span>{language === "es" ? "HECHO PARA TU ANATOMÍA" : "MADE FOR YOUR ANATOMY"}</span>
-          <span>BOGOTÁ · COLOMBIA</span>
-        </footer>
       </div>
-    </section>
+    </div>
   );
 }

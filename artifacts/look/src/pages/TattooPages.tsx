@@ -297,17 +297,95 @@ export function ServicesPage({ language }: StudioProps) {
           </article>
         ))}
       </section>
-      <section className="page-services-callout">
-        <Eyebrow>{copy.method}</Eyebrow>
-        <h2>{copy.callout[0]}<br /><em>{copy.callout[1]}.</em></h2>
-        <a className="tattoo-light-link" href="#studio-about">{copy.cta}</a>
+      <section id="studio-reservas" className="page-services-callout reservation-callout">
+        <ReservationFlow language={language} />
       </section>
     </StudioFrame>
   );
 }
 
 export function ManifestoPage({ language }: StudioProps) {
-  return <ReservationFlow language={language} />;
+  const copy = studioCopy[language].manifesto;
+  useEffect(() => {
+    const section = document.getElementById("studio-manifesto");
+    const lineGroups = section
+      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line")).map((line) =>
+          Array.from(line.querySelectorAll<HTMLElement>(".page-manifesto-word")),
+        )
+      : [];
+    const words = lineGroups.flat();
+
+    if (
+      !section ||
+      words.length === 0 ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
+      typeof IntersectionObserver === "undefined"
+    ) {
+      return undefined;
+    }
+
+    const hiddenState = {
+      autoAlpha: 0,
+      yPercent: 115,
+      rotateX: -48,
+      filter: "blur(10px)",
+    };
+    gsap.set(words, hiddenState);
+    let entranceTimeline: gsap.core.Timeline | undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        entranceTimeline?.kill();
+        gsap.killTweensOf(words);
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          entranceTimeline = gsap.timeline();
+          lineGroups.forEach((lineWords, index) => {
+            entranceTimeline?.to(
+              lineWords,
+              {
+                autoAlpha: 1,
+                yPercent: 0,
+                rotateX: 0,
+                filter: "blur(0px)",
+                duration: 0.95,
+                stagger: { each: 0.075, from: "start" },
+                ease: "power4.out",
+                overwrite: true,
+              },
+              index === 0 ? 0 : ">-0.58",
+            );
+          });
+        } else {
+          gsap.set(words, hiddenState);
+        }
+      },
+      { root: document.getElementById("fullscreen-section"), threshold: [0, 0.12] },
+    );
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      entranceTimeline?.kill();
+      gsap.killTweensOf(words);
+      gsap.set(words, { clearProps: "all" });
+    };
+  }, [language]);
+
+  return (
+    <StudioFrame id="studio-manifesto" className="page-manifesto">
+      <h1 className="page-manifesto-quote" aria-label={copy.phraseLines.join(" ")}>
+        {copy.phraseLines.map((line) => (
+          <span className="page-manifesto-line" key={line} aria-hidden="true">
+            <span className="page-manifesto-line-inner">
+              {line.split(/\s+/).map((word) => (
+                <span className="page-manifesto-word" key={word}>{word}</span>
+              ))}
+            </span>
+          </span>
+        ))}
+      </h1>
+    </StudioFrame>
+  );
 }
 
 const faqCopy = {

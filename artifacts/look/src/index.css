@@ -6536,14 +6536,6 @@ body,
 }
 .reservation-steps li { display: flex; gap: .65rem; align-items: center; }
 .reservation-steps li span { color: var(--rf-red); font-variant-numeric: tabular-nums; }
-.reservation-manifesto {
-  padding: clamp(3rem, 7vw, 6.5rem) 0;
-  border-bottom: 1px solid var(--rf-line);
-  color: var(--rf-red);
-}
-.reservation-manifesto .page-manifesto-quote {
-  font-size: clamp(2.5rem, 6vw, 6.6rem);
-}
 .reservation-process,
 .reservation-result { padding: clamp(3.2rem, 7vw, 6.5rem) 0; border-bottom: 1px solid var(--rf-line); }
 .reservation-section-heading { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2.4rem; }
@@ -6712,6 +6704,45 @@ body,
   .reservation-section-heading h2 { font-size: .59rem; }
   .reservation-datetime { gap: .8rem; }
   .reservation-preview-aside { grid-template-columns: 1fr; }
+}
+
+/* Reservations replaces the existing red services callout; it is not a new page. */
+.page-services-callout.reservation-callout {
+  margin-bottom: clamp(2.5rem, 8vw, 7rem);
+  padding: clamp(1.5rem, 5vw, 4.5rem);
+}
+.reservation-page.reservation-embedded {
+  --rf-paper: #E63027;
+  --rf-ink: #FFF8C9;
+  --rf-red: #0B0A0A;
+  --rf-muted: rgba(255, 248, 201, .78);
+  --rf-line: rgba(255, 248, 201, .38);
+  min-height: 0;
+  padding: 0;
+  color: var(--rf-ink);
+  background: transparent;
+}
+.reservation-embedded .reservation-frame { width: 100%; }
+.reservation-embedded .reservation-masthead,
+.reservation-embedded .reservation-footer { display: none; }
+.reservation-embedded .reservation-hero {
+  min-height: 0;
+  padding: 0 0 clamp(2rem, 4vw, 3.5rem);
+}
+.reservation-embedded .reservation-process,
+.reservation-embedded .reservation-result {
+  padding: clamp(2rem, 4vw, 3.5rem) 0;
+}
+.reservation-embedded .reservation-dropzone { background: rgba(255, 248, 201, .1); border-color: rgba(255, 248, 201, .6); }
+.reservation-embedded .reservation-dropzone:hover { background: rgba(255, 248, 201, .18); }
+.reservation-embedded .reservation-field-error,
+.reservation-embedded .reservation-alert { color: #FFF8C9; }
+.reservation-embedded .reservation-alert { border-color: #FFF8C9; }
+.reservation-embedded .reservation-placement input::placeholder,
+.reservation-embedded .reservation-contact-form input::placeholder { color: rgba(255, 248, 201, .62); }
+.reservation-embedded .reservation-confirmation-note { background: rgba(255, 248, 201, .12); }
+@media (max-width: 760px) {
+  .page-services-callout.reservation-callout { margin: 0 20px clamp(2rem, 8vw, 4rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   .reservation-page *,
