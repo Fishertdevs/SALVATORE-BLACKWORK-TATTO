@@ -6817,6 +6817,23 @@ body,
 }
 .reservation-placement-action-row .reservation-placement { max-width: none; }
 .reservation-placement-action-row .reservation-primary-button { margin-top: 0; }
+.reservation-embedded .reservation-placement-action-row .reservation-placement,
+.reservation-embedded .reservation-placement-action-row .reservation-placement > label {
+  text-align: center;
+}
+.reservation-embedded .reservation-placement-action-row .reservation-placement input {
+  border: 1px solid #fff;
+  color: #fff;
+  padding-inline: .75rem;
+  text-align: center;
+}
+.reservation-embedded .reservation-placement-action-row .reservation-placement input::placeholder {
+  color: rgba(255, 255, 255, .78);
+  text-align: center;
+}
+.reservation-embedded .reservation-placement-action-row .reservation-placement input:focus-visible {
+  outline-color: #fff;
+}
 .reservation-embedded .reservation-upload-meta { margin-top: .4rem; font-size: .62rem; }
 .reservation-slider { min-height: 260px; }
 .reservation-slide-actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2rem; }
@@ -6839,6 +6856,21 @@ body,
 .reservation-back-button:hover { opacity: .7; }
 .reservation-preview-unavailable { max-width: 680px; }
 .reservation-preview-unavailable > p:not(.reservation-alert) { font-family: 'Beautique Display', serif; font-size: 1.1rem; line-height: 1.5; }
+.reservation-embedded .reservation-preview-unavailable {
+  margin-inline: auto;
+  text-align: center;
+}
+.reservation-embedded .reservation-preview-unavailable .reservation-alert {
+  border-top: 1px solid #fff;
+  border-left: 0;
+  padding: .8rem 0;
+  text-align: center;
+}
+.reservation-embedded .reservation-preview-unavailable > p:not(.reservation-alert) { margin-inline: auto; }
+.reservation-embedded .reservation-preview-unavailable .reservation-reset {
+  justify-content: center;
+  margin-inline: auto;
+}
 .reservation-preview-unavailable .reservation-reset { color: var(--rf-ink); border-bottom: 1px solid currentColor; }
 .reservation-embedded .reservation-preview-figure img { max-height: 520px; }
 .reservation-embedded .reservation-contact-form { max-width: 700px; }
@@ -6861,6 +6893,16 @@ body,
   box-shadow: 0 8px 22px rgba(11, 10, 10, .12);
 }
 .reservation-embedded .reservation-generate-button { border-radius: 999px; padding-inline: 1.5rem; }
+.reservation-embedded .reservation-primary-button.reservation-generate-button {
+  border-color: #fff;
+  background: #fff;
+  color: var(--rf-red);
+}
+.reservation-embedded .reservation-primary-button.reservation-generate-button:hover:not(:disabled) {
+  border-color: #fff;
+  background: #fff;
+  color: var(--rf-red);
+}
 .reservation-embedded .reservation-generate-button svg { transition: transform .25s ease; }
 .reservation-embedded .reservation-generate-button:hover:not(:disabled) svg { transform: translateX(4px); }
 .reservation-embedded .reservation-dropzone {
