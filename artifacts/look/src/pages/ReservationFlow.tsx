@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type ChangeEvent, type DragEvent, type FormEvent } from "react";
-import { useGenerateTattooPreview } from "@workspace/api-client-react";
 import { ArrowDownToLine, ArrowLeft, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
@@ -34,21 +33,21 @@ const copy = {
     placementLabel: "¿Dónde irá el tatuaje?",
     placementPlaceholder: "Por ejemplo: antebrazo exterior, hombro izquierdo…",
     generate: "Generar",
-    generating: "Preparando tu aproximación…",
-    generatingNote: "Las imágenes se procesan temporalmente para esta solicitud.",
-    required: "Añade las dos imágenes, indica la zona y acepta el procesamiento con IA para continuar.",
-    consent: "Acepto enviar temporalmente estas imágenes a Gemini para generar una aproximación.",
+    generating: "Montando la aproximación…",
+    generatingNote: "Tus fotos se combinan en este navegador; no se envían a un servicio externo.",
+    required: "Añade las dos imágenes, indica la zona y acepta procesarlas localmente para continuar.",
+    consent: "Acepto combinar estas imágenes localmente en mi navegador para crear una aproximación.",
     consentLink: "Lee la política de privacidad.",
     privacyDetailsTitle: "Privacidad de tus imágenes",
-    privacyDetailsBody: "Se procesan con Gemini mediante Replit AI Integrations solo para preparar esta propuesta. El sitio no guarda las imágenes originales ni el resultado.",
+    privacyDetailsBody: "La aproximación se crea en este navegador. Las imágenes no se envían a un servicio externo ni se guardan en el sitio.",
     uploadError: "No pudimos leer esta imagen. Prueba con un JPG, PNG o WebP.",
-    apiError: "La vista previa no está disponible ahora. Inténtalo de nuevo más tarde.",
+    localPreviewError: "No pudimos combinar las imágenes en este navegador. Revisa los archivos e inténtalo de nuevo.",
     noPreviewContinue: "Puedes pedir la consulta por WhatsApp aunque la previsualización no esté disponible; revisaremos el diseño contigo.",
     previewTitle: "02 — UNA PRIMERA LECTURA",
     previewAlt: "Aproximación visual del tatuaje en la zona seleccionada",
-    disclaimerFallback: "Esta imagen es una aproximación visual; el diseño final se definirá contigo en el estudio.",
+    disclaimerFallback: "Montaje visual local aproximado, no generado por IA. El diseño final se definirá contigo en el estudio.",
     approximate: "La escala, el ajuste y el resultado son aproximados. La pieza final se adapta a tu anatomía y se define en consulta.",
-    temporary: "Tus imágenes se procesan solo para generar esta aproximación. No guardamos las imágenes originales ni el resultado.",
+    temporary: "Tus imágenes se combinan solo en este navegador. No se envían ni se guardan en un servicio externo.",
     download: "Descargar aproximación",
     redo: "Probar otras imágenes",
     requestTitle: "03 — HABLEMOS DE FECHAS",
@@ -82,21 +81,21 @@ const copy = {
     placementLabel: "Where would you like the tattoo?",
     placementPlaceholder: "For example: outer forearm, left shoulder…",
     generate: "Generate",
-    generating: "Preparing your approximation…",
-    generatingNote: "Images are processed temporarily for this request.",
-    required: "Add both images, specify the placement, and consent to AI processing to continue.",
-    consent: "I agree to send these images temporarily to Gemini to create an approximation.",
+    generating: "Composing your approximation…",
+    generatingNote: "Your photos are combined in this browser and are not sent to an external service.",
+    required: "Add both images, specify the placement, and consent to local processing to continue.",
+    consent: "I agree to combine these images locally in my browser to create an approximation.",
     consentLink: "Read the privacy policy.",
     privacyDetailsTitle: "Image privacy",
-    privacyDetailsBody: "Images are processed with Gemini through Replit AI Integrations only to prepare this proposal. The site does not store the original images or the result.",
+    privacyDetailsBody: "The approximation is created in this browser. Images are not sent to an external service or saved by the site.",
     uploadError: "We couldn’t read this image. Please try a JPG, PNG, or WebP.",
-    apiError: "The preview is unavailable right now. Please try again later.",
+    localPreviewError: "We couldn’t combine the images in this browser. Check the files and try again.",
     noPreviewContinue: "You can still request a WhatsApp consultation while the preview is unavailable; we can review the design together.",
     previewTitle: "02 — A FIRST READING",
     previewAlt: "Visual approximation of the tattoo on the selected area",
-    disclaimerFallback: "This is a visual approximation; the final design will be developed with you at the studio.",
+    disclaimerFallback: "A local visual mockup, not AI-generated. The final design will be developed with you at the studio.",
     approximate: "Scale, fit, and result are approximate. Your final piece is adapted to your anatomy and decided in consultation.",
-    temporary: "Your images are processed only to generate this approximation. Neither the originals nor the result are stored.",
+    temporary: "Your images are combined only in this browser. They are not sent to or stored by an external service.",
     download: "Download approximation",
     redo: "Try different images",
     requestTitle: "03 — LET’S TALK DATES",
@@ -213,6 +212,65 @@ function compressImage(file: File): Promise<CompressedImage> {
   });
 }
 
+function loadPreviewImage(source: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("image-decode"));
+    image.src = source;
+  });
+}
+
+function getTattooAnchor(placement: string) {
+  const normalized = placement.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  if (/hombro|shoulder|clavicula|collarbone/.test(normalized)) return { x: 0.68, y: 0.3 };
+  if (/antebrazo|forearm|muneca|wrist/.test(normalized)) return { x: 0.34, y: 0.48 };
+  if (/brazo|arm|bicep|biceps/.test(normalized)) return { x: 0.68, y: 0.48 };
+  if (/pecho|chest|torso/.test(normalized)) return { x: 0.52, y: 0.38 };
+  if (/espalda|back/.test(normalized)) return { x: 0.52, y: 0.48 };
+  if (/muslo|pantorrilla|pierna|thigh|calf|leg/.test(normalized)) return { x: 0.5, y: 0.62 };
+  if (/cuello|neck/.test(normalized)) return { x: 0.5, y: 0.2 };
+  return { x: 0.5, y: 0.5 };
+}
+
+async function createLocalTattooPreview(
+  bodySource: string,
+  referenceSource: string,
+  placement: string,
+): Promise<string> {
+  const [bodyImage, referenceImage] = await Promise.all([
+    loadPreviewImage(bodySource),
+    loadPreviewImage(referenceSource),
+  ]);
+  const canvas = document.createElement("canvas");
+  const scale = Math.min(1, 1600 / Math.max(bodyImage.naturalWidth, bodyImage.naturalHeight));
+  canvas.width = Math.max(1, Math.round(bodyImage.naturalWidth * scale));
+  canvas.height = Math.max(1, Math.round(bodyImage.naturalHeight * scale));
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("canvas-unavailable");
+
+  context.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+  const overlayScale = Math.min(
+    (canvas.width * 0.28) / referenceImage.naturalWidth,
+    (canvas.height * 0.22) / referenceImage.naturalHeight,
+  );
+  const overlayWidth = Math.max(1, referenceImage.naturalWidth * overlayScale);
+  const overlayHeight = Math.max(1, referenceImage.naturalHeight * overlayScale);
+  const anchor = getTattooAnchor(placement);
+  context.save();
+  context.globalCompositeOperation = "multiply";
+  context.globalAlpha = 0.78;
+  context.drawImage(
+    referenceImage,
+    canvas.width * anchor.x - overlayWidth / 2,
+    canvas.height * anchor.y - overlayHeight / 2,
+    overlayWidth,
+    overlayHeight,
+  );
+  context.restore();
+  return canvas.toDataURL("image/jpeg", 0.9);
+}
+
 function PhotoUpload({
   id,
   title,
@@ -325,12 +383,12 @@ function PhotoUpload({
 
 export default function ReservationFlow({ language }: ReservationFlowProps) {
   const text = copy[language];
-  const previewMutation = useGenerateTattooPreview();
   const [bodyPhoto, setBodyPhoto] = useState<CompressedImage | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<CompressedImage | null>(null);
   const [placement, setPlacement] = useState("");
   const [imageConsent, setImageConsent] = useState(false);
   const [preview, setPreview] = useState<{ src: string; disclaimer: string } | null>(null);
+  const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
   const [canRequestWithoutPreview, setCanRequestWithoutPreview] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [requestError, setRequestError] = useState("");
@@ -487,29 +545,27 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       setRequestError(text.required);
       return;
     }
+    setIsGeneratingPreview(true);
     try {
-      const result = await previewMutation.mutateAsync({
-        data: {
-          bodyPhotoBase64: bodyPhoto.base64,
-          bodyPhotoMimeType: bodyPhoto.mimeType,
-          referencePhotoBase64: referencePhoto.base64,
-          referencePhotoMimeType: referencePhoto.mimeType,
-          placement: placement.trim(),
-        },
-      });
-      if (!result?.previewBase64 || !result.mimeType) throw new Error("unavailable");
+      const src = await createLocalTattooPreview(
+        bodyPhoto.previewUrl,
+        referencePhoto.previewUrl,
+        placement.trim(),
+      );
       setPreview({
-        src: `data:${result.mimeType};base64,${result.previewBase64}`,
-        disclaimer: result.disclaimer || text.disclaimerFallback,
+        src,
+        disclaimer: text.disclaimerFallback,
       });
       setCanRequestWithoutPreview(false);
       setActiveStep(1);
       setTimeout(() => document.getElementById("reservation-result")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
     } catch {
       setPreview(null);
-      setRequestError(text.apiError);
+      setRequestError(text.localPreviewError);
       setCanRequestWithoutPreview(true);
       setActiveStep(1);
+    } finally {
+      setIsGeneratingPreview(false);
     }
   };
 
@@ -589,12 +645,12 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     <label htmlFor="tattoo-placement">{text.placementLabel}</label>
                     <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
                   </div>
-                  <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
-                    {previewMutation.isPending ? text.generating : text.generate}
-                    {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
+                  <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={isGeneratingPreview} data-testid="button-generate-preview">
+                    {isGeneratingPreview ? text.generating : text.generate}
+                    {!isGeneratingPreview && <ArrowRight aria-hidden="true" size={17} />}
                   </button>
                 </div>
-                {previewMutation.isPending && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
+                {isGeneratingPreview && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
               </form>
             </section>
           )}
