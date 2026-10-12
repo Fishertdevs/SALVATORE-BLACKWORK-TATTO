@@ -114,6 +114,7 @@ const copy = {
 } as const;
 
 const acceptedTypes = ["image/jpeg", "image/png", "image/webp"];
+const acceptedImageName = /\.(jpe?g|png|webp)$/i;
 
 function observeReservationEntrance(
   target: HTMLElement,
@@ -166,7 +167,7 @@ function observeReservationEntrance(
 
 function compressImage(file: File): Promise<CompressedImage> {
   return new Promise((resolve, reject) => {
-    if (!acceptedTypes.includes(file.type)) {
+    if (!acceptedTypes.includes(file.type) && !acceptedImageName.test(file.name)) {
       reject(new Error("unsupported"));
       return;
     }
@@ -253,17 +254,18 @@ function PhotoUpload({
     void processFile(file);
   };
   const hasFiles = (event: DragEvent<HTMLLabelElement>) =>
-    Array.from(event.dataTransfer.types).includes("Files");
+    Array.from(event.dataTransfer.types).includes("Files") ||
+    Array.from(event.dataTransfer.items).some((item) => item.kind === "file");
   const handleDragEnter = (event: DragEvent<HTMLLabelElement>) => {
-    if (!hasFiles(event)) return;
     event.preventDefault();
-    dragDepth.current += 1;
-    setIsDragging(true);
+    if (hasFiles(event)) {
+      dragDepth.current += 1;
+      setIsDragging(true);
+    }
   };
   const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
-    if (!hasFiles(event)) return;
     event.preventDefault();
-    event.dataTransfer.dropEffect = "copy";
+    if (hasFiles(event)) event.dataTransfer.dropEffect = "copy";
   };
   const handleDragLeave = (event: DragEvent<HTMLLabelElement>) => {
     if (!isDragging) return;
@@ -272,8 +274,8 @@ function PhotoUpload({
     if (dragDepth.current === 0) setIsDragging(false);
   };
   const handleDrop = (event: DragEvent<HTMLLabelElement>) => {
-    if (!hasFiles(event)) return;
     event.preventDefault();
+    event.stopPropagation();
     dragDepth.current = 0;
     setIsDragging(false);
     void processFile(event.dataTransfer.files[0]);
@@ -310,7 +312,7 @@ function PhotoUpload({
         className="reservation-file-input"
         id={id}
         type="file"
-        accept="image/jpeg,image/png,image/webp"
+        accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
         onChange={handleFile}
         aria-describedby={`${id}-formats${error ? ` ${id}-error` : ""}`}
         data-testid={`input-${id}`}
