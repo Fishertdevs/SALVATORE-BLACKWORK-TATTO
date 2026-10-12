@@ -6536,6 +6536,14 @@ body,
 }
 .reservation-steps li { display: flex; gap: .65rem; align-items: center; }
 .reservation-steps li span { color: var(--rf-red); font-variant-numeric: tabular-nums; }
+.reservation-manifesto {
+  padding: clamp(3rem, 7vw, 6.5rem) 0;
+  border-bottom: 1px solid var(--rf-line);
+  color: var(--rf-red);
+}
+.reservation-manifesto .page-manifesto-quote {
+  font-size: clamp(2.5rem, 6vw, 6.6rem);
+}
 .reservation-process,
 .reservation-result { padding: clamp(3.2rem, 7vw, 6.5rem) 0; border-bottom: 1px solid var(--rf-line); }
 .reservation-section-heading { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2.4rem; }
