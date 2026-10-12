@@ -15,7 +15,7 @@ type ReservationFlowProps = { language: Language };
 
 const copy = {
   es: {
-    title: <>Una idea.<br /><em>En tu piel.</em></>,
+    title: <>Una idea.<br /><span>En tu piel.</span></>,
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
     back: "VOLVER",
@@ -23,9 +23,9 @@ const copy = {
     retry: "Cambiar las imágenes",
     sectionTitle: "01 — TU PUNTO DE PARTIDA",
     bodyLabel: "Fotografía de la zona",
-    bodyHint: "Una imagen clara, con la piel visible y buena luz.",
+    bodyHint: "Piel visible y buena luz.",
     referenceLabel: "Imagen de referencia",
-    referenceHint: "Una pieza, textura o dirección visual que te atraiga.",
+    referenceHint: "Una pieza o estilo que te inspire.",
     addPhoto: "Seleccionar imagen",
     replacePhoto: "Cambiar imagen",
     formats: "JPG, PNG o WebP · hasta 1600 px tras el procesamiento",
@@ -35,8 +35,10 @@ const copy = {
     generating: "Preparando tu aproximación…",
     generatingNote: "Las imágenes se procesan temporalmente para esta solicitud.",
     required: "Añade las dos imágenes, indica la zona y acepta el procesamiento con IA para continuar.",
-    consent: "Acepto que estas imágenes se envíen temporalmente a Gemini mediante Replit AI Integrations para generar la aproximación. Este sitio no guarda los archivos.",
+    consent: "Acepto enviar temporalmente estas imágenes a Gemini para generar una aproximación.",
     consentLink: "Lee la política de privacidad.",
+    privacyDetailsTitle: "Privacidad de tus imágenes",
+    privacyDetailsBody: "Se procesan con Gemini mediante Replit AI Integrations solo para preparar esta propuesta. El sitio no guarda las imágenes originales ni el resultado.",
     uploadError: "No pudimos leer esta imagen. Prueba con un JPG, PNG o WebP.",
     apiError: "La vista previa no está disponible ahora. Inténtalo de nuevo más tarde.",
     noPreviewContinue: "Puedes pedir la consulta por WhatsApp aunque la previsualización no esté disponible; revisaremos el diseño contigo.",
@@ -60,7 +62,7 @@ const copy = {
     privacy: "Al continuar se abrirá WhatsApp con los datos de tu solicitud. Adjunta allí la aproximación descargada si quieres compartirla.",
   },
   en: {
-    title: <>An idea.<br /><em>On your skin.</em></>,
+    title: <>An idea.<br /><span>On your skin.</span></>,
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
     back: "BACK",
@@ -68,9 +70,9 @@ const copy = {
     retry: "Change images",
     sectionTitle: "01 — YOUR STARTING POINT",
     bodyLabel: "Photo of the area",
-    bodyHint: "A clear image, with the skin visible and good light.",
+    bodyHint: "Visible skin and good light.",
     referenceLabel: "Reference image",
-    referenceHint: "A piece, texture, or visual direction that draws you in.",
+    referenceHint: "A piece or style that inspires you.",
     addPhoto: "Choose image",
     replacePhoto: "Change image",
     formats: "JPG, PNG or WebP · resized to 1600 px maximum",
@@ -80,8 +82,10 @@ const copy = {
     generating: "Preparing your approximation…",
     generatingNote: "Images are processed temporarily for this request.",
     required: "Add both images, specify the placement, and consent to AI processing to continue.",
-    consent: "I agree to send these images temporarily to Gemini through Replit AI Integrations to generate the approximation. This site does not store the files.",
+    consent: "I agree to send these images temporarily to Gemini to create an approximation.",
     consentLink: "Read the privacy policy.",
+    privacyDetailsTitle: "Image privacy",
+    privacyDetailsBody: "Images are processed with Gemini through Replit AI Integrations only to prepare this proposal. The site does not store the original images or the result.",
     uploadError: "We couldn’t read this image. Please try a JPG, PNG, or WebP.",
     apiError: "The preview is unavailable right now. Please try again later.",
     noPreviewContinue: "You can still request a WhatsApp consultation while the preview is unavailable; we can review the design together.",
@@ -343,7 +347,6 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
                   <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
                 </div>
-                <p className="reservation-temporary-note"><ShieldCheck size={15} aria-hidden="true" />{text.temporary}</p>
                 <label className="reservation-consent">
                   <input
                     type="checkbox"
@@ -354,6 +357,10 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   />
                   <span>{text.consent} <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">{text.consentLink}</a></span>
                 </label>
+                <details className="reservation-privacy-details">
+                  <summary><ShieldCheck size={14} aria-hidden="true" />{text.privacyDetailsTitle}</summary>
+                  <p>{text.privacyDetailsBody}</p>
+                </details>
                 <div className="reservation-placement">
                   <label htmlFor="tattoo-placement">{text.placementLabel}</label>
                   <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
