@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useGenerateTattooPreview } from "@workspace/api-client-react";
-import { ArrowDownToLine, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
+import { ArrowDownToLine, ArrowLeft, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
@@ -19,6 +19,9 @@ const copy = {
     title: <>Una idea.<br /><em>En tu piel.</em></>,
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
+    back: "VOLVER",
+    continue: "CONTINUAR",
+    retry: "Cambiar las imágenes",
     sectionTitle: "01 — TU PUNTO DE PARTIDA",
     bodyLabel: "Fotografía de la zona",
     bodyHint: "Una imagen clara, con la piel visible y buena luz.",
@@ -62,6 +65,9 @@ const copy = {
     title: <>An idea.<br /><em>On your skin.</em></>,
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
+    back: "BACK",
+    continue: "CONTINUE",
+    retry: "Change images",
     sectionTitle: "01 — YOUR STARTING POINT",
     bodyLabel: "Photo of the area",
     bodyHint: "A clear image, with the skin visible and good light.",
@@ -232,18 +238,23 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [activeStep, setActiveStep] = useState(0);
 
   const onBodyChange = (image: CompressedImage | null) => {
     setBodyPhoto(image);
     if (!image) setUploadError(text.uploadError);
     else setUploadError("");
     setPreview(null);
+    setCanRequestWithoutPreview(false);
+    setActiveStep(0);
   };
   const onReferenceChange = (image: CompressedImage | null) => {
     setReferencePhoto(image);
     if (!image) setUploadError(text.uploadError);
     else setUploadError("");
     setPreview(null);
+    setCanRequestWithoutPreview(false);
+    setActiveStep(0);
   };
 
   const generatePreview = async (event: FormEvent<HTMLFormElement>) => {
@@ -269,11 +280,13 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
         disclaimer: result.disclaimer || text.disclaimerFallback,
       });
       setCanRequestWithoutPreview(false);
-      setTimeout(() => document.getElementById("reservation-result")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+      setActiveStep(1);
+      setTimeout(() => document.getElementById("reservation-result")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
     } catch {
       setPreview(null);
       setRequestError(text.apiError);
       setCanRequestWithoutPreview(true);
+      setActiveStep(1);
     }
   };
 
@@ -288,6 +301,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     setPreview(null);
     setCanRequestWithoutPreview(false);
     setRequestError("");
+    setActiveStep(0);
   };
 
   return (
@@ -305,52 +319,69 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
             <span className="reservation-mark-caption">FORM / SKIN / INK</span>
           </div>
           <ol className="reservation-steps" aria-label={language === "es" ? "Pasos de la reserva" : "Reservation steps"}>
-            {text.steps.map((step, index) => <li key={step}><span>0{index + 1}</span>{step}</li>)}
+            {text.steps.map((step, index) => {
+              const isAvailable = index === 0 || Boolean(preview || canRequestWithoutPreview);
+              return (
+                <li key={step}>
+                  <button
+                    type="button"
+                    className="reservation-step-button"
+                    aria-current={activeStep === index ? "step" : undefined}
+                    aria-label={`${String(index + 1).padStart(2, "0")} ${step}`}
+                    disabled={!isAvailable}
+                    onClick={() => setActiveStep(index)}
+                  >
+                    <span>0{index + 1}</span>{step}
+                  </button>
+                </li>
+              );
+            })}
           </ol>
         </section>
 
-        <section className="reservation-process" aria-labelledby="reservation-start-title">
-          <div className="reservation-section-heading">
-            <span className="reservation-index">01 / 03</span>
-            <h2 id="reservation-start-title">{text.sectionTitle}</h2>
-          </div>
-          <form onSubmit={generatePreview} className="reservation-brief-form">
-            <div className="reservation-upload-grid">
-              <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
-              <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
-            </div>
-            <p className="reservation-temporary-note"><ShieldCheck size={15} aria-hidden="true" />{text.temporary}</p>
-            <label className="reservation-consent">
-              <input
-                type="checkbox"
-                checked={imageConsent}
-                onChange={(event) => setImageConsent(event.target.checked)}
-                required
-                data-testid="checkbox-image-consent"
-              />
-              <span>{text.consent} <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">{text.consentLink}</a></span>
-            </label>
-            <div className="reservation-placement">
-              <label htmlFor="tattoo-placement">{text.placementLabel}</label>
-              <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
-            </div>
-            {requestError && !preview && <p className="reservation-alert" role="alert" data-testid="status-preview-error">{requestError}</p>}
-            {previewMutation.isPending && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
-            <button className="reservation-primary-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
-              {previewMutation.isPending ? text.generating : text.generate}
-              {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
-            </button>
-          </form>
-        </section>
+        <div className="reservation-slider" aria-live="polite">
+          {activeStep === 0 && (
+            <section className="reservation-process reservation-slide" aria-labelledby="reservation-start-title">
+              <div className="reservation-section-heading">
+                <span className="reservation-index">01 / 03</span>
+                <h2 id="reservation-start-title">{text.sectionTitle}</h2>
+              </div>
+              <form onSubmit={generatePreview} className="reservation-brief-form">
+                <div className="reservation-upload-grid">
+                  <PhotoUpload id="body-photo" title={text.bodyLabel} hint={text.bodyHint} image={bodyPhoto} onChange={onBodyChange} error={uploadError && !bodyPhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
+                  <PhotoUpload id="reference-photo" title={text.referenceLabel} hint={text.referenceHint} image={referencePhoto} onChange={onReferenceChange} error={uploadError && !referencePhoto ? uploadError : undefined} chooseLabel={text.addPhoto} changeLabel={text.replacePhoto} formats={text.formats} />
+                </div>
+                <p className="reservation-temporary-note"><ShieldCheck size={15} aria-hidden="true" />{text.temporary}</p>
+                <label className="reservation-consent">
+                  <input
+                    type="checkbox"
+                    checked={imageConsent}
+                    onChange={(event) => setImageConsent(event.target.checked)}
+                    required
+                    data-testid="checkbox-image-consent"
+                  />
+                  <span>{text.consent} <a href="/politica-de-privacidad" target="_blank" rel="noreferrer">{text.consentLink}</a></span>
+                </label>
+                <div className="reservation-placement">
+                  <label htmlFor="tattoo-placement">{text.placementLabel}</label>
+                  <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
+                </div>
+                {previewMutation.isPending && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
+                <button className="reservation-primary-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
+                  {previewMutation.isPending ? text.generating : text.generate}
+                  {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
+                </button>
+              </form>
+            </section>
+          )}
 
-        {(preview || canRequestWithoutPreview) && (
-          <section className="reservation-result" id="reservation-result" aria-labelledby="reservation-result-title">
-            <div className="reservation-section-heading">
-              <span className="reservation-index">02 / 03</span>
-              <h2 id="reservation-result-title">{preview ? text.previewTitle : text.requestTitle}</h2>
-            </div>
-            {preview ? (
-              <>
+          {activeStep === 1 && (
+            <section className="reservation-result reservation-slide" id="reservation-result" aria-labelledby="reservation-result-title">
+              <div className="reservation-section-heading">
+                <span className="reservation-index">02 / 03</span>
+                <h2 id="reservation-result-title">{text.previewTitle}</h2>
+              </div>
+              {preview ? (
                 <div className="reservation-preview-layout">
                   <figure className="reservation-preview-figure">
                     <img src={preview.src} alt={text.previewAlt} data-testid="img-generated-preview" />
@@ -366,32 +397,50 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     <button type="button" className="reservation-reset" onClick={resetPreview} data-testid="button-reset-preview"><RotateCcw size={14} aria-hidden="true" />{text.redo}</button>
                   </aside>
                 </div>
-                <div className="reservation-section-heading reservation-contact-heading">
-                  <span className="reservation-index">03 / 03</span>
-                  <h2>{text.requestTitle}</h2>
+              ) : (
+                <div className="reservation-preview-unavailable">
+                  {requestError && <p className="reservation-alert" role="alert" data-testid="status-preview-error">{requestError}</p>}
+                  <p>{text.noPreviewContinue}</p>
+                  <button type="button" className="reservation-reset" onClick={resetPreview} data-testid="button-retry-preview">
+                    <RotateCcw size={14} aria-hidden="true" />{text.retry}
+                  </button>
                 </div>
-              </>
-            ) : (
-              <p className="reservation-confirmation-note">{text.noPreviewContinue}</p>
-            )}
-            <div className="reservation-contact-grid">
-              <p className="reservation-contact-intro">{text.requestIntro}</p>
-              <form className="reservation-contact-form" onSubmit={submitRequest}>
-                <label htmlFor="reservation-name">{text.name}</label>
-                <input id="reservation-name" value={name} onChange={(event) => setName(event.target.value)} placeholder={text.namePlaceholder} autoComplete="name" required data-testid="input-name" />
-                <label htmlFor="reservation-email">{text.email} <span>({text.optional})</span></label>
-                <input id="reservation-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" autoComplete="email" data-testid="input-email" />
-                <div className="reservation-datetime">
-                  <div><label htmlFor="reservation-date">{text.date}</label><input id="reservation-date" type="date" min={new Intl.DateTimeFormat("sv-SE", { timeZone: "America/Bogota", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required data-testid="input-date" /></div>
-                  <div><label htmlFor="reservation-time">{text.time}</label><input id="reservation-time" type="time" value={time} onChange={(event) => setTime(event.target.value)} required data-testid="input-time" /></div>
-                </div>
-                <p className="reservation-confirmation-note">{text.requestNotice}</p>
-                <button className="reservation-primary-button reservation-whatsapp-button" type="submit" data-testid="button-whatsapp-request">{text.request}<ArrowRight size={17} aria-hidden="true" /></button>
-                <p className="reservation-privacy-note">{text.privacy}</p>
-              </form>
-            </div>
-          </section>
-        )}
+              )}
+              <div className="reservation-slide-actions">
+                <button type="button" className="reservation-back-button" onClick={() => setActiveStep(0)}><ArrowLeft size={15} aria-hidden="true" />{text.back}</button>
+                <button type="button" className="reservation-primary-button" onClick={() => setActiveStep(2)}>{text.continue}<ArrowRight size={17} aria-hidden="true" /></button>
+              </div>
+            </section>
+          )}
+
+          {activeStep === 2 && (
+            <section className="reservation-result reservation-slide" aria-labelledby="reservation-talk-title">
+              <div className="reservation-section-heading">
+                <span className="reservation-index">03 / 03</span>
+                <h2 id="reservation-talk-title">{text.requestTitle}</h2>
+              </div>
+              <div className="reservation-contact-grid">
+                <p className="reservation-contact-intro">{text.requestIntro}</p>
+                <form className="reservation-contact-form" onSubmit={submitRequest}>
+                  <label htmlFor="reservation-name">{text.name}</label>
+                  <input id="reservation-name" value={name} onChange={(event) => setName(event.target.value)} placeholder={text.namePlaceholder} autoComplete="name" required data-testid="input-name" />
+                  <label htmlFor="reservation-email">{text.email} <span>({text.optional})</span></label>
+                  <input id="reservation-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" autoComplete="email" data-testid="input-email" />
+                  <div className="reservation-datetime">
+                    <div><label htmlFor="reservation-date">{text.date}</label><input id="reservation-date" type="date" min={new Intl.DateTimeFormat("sv-SE", { timeZone: "America/Bogota", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required data-testid="input-date" /></div>
+                    <div><label htmlFor="reservation-time">{text.time}</label><input id="reservation-time" type="time" value={time} onChange={(event) => setTime(event.target.value)} required data-testid="input-time" /></div>
+                  </div>
+                  <p className="reservation-confirmation-note">{text.requestNotice}</p>
+                  <button className="reservation-primary-button reservation-whatsapp-button" type="submit" data-testid="button-whatsapp-request">{text.request}<ArrowRight size={17} aria-hidden="true" /></button>
+                  <p className="reservation-privacy-note">{text.privacy}</p>
+                </form>
+              </div>
+              <div className="reservation-slide-actions">
+                <button type="button" className="reservation-back-button" onClick={() => setActiveStep(1)}><ArrowLeft size={15} aria-hidden="true" />{text.back}</button>
+              </div>
+            </section>
+          )}
+        </div>
 
       </div>
     </div>
