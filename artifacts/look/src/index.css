@@ -6709,6 +6709,7 @@ body,
   margin: 0 auto clamp(12px, 1.8vw, 24px);
   max-width: 100%;
   padding-top: .08em;
+  color: var(--rf-red);
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(2rem, 6.5vw, 6rem);
   font-weight: 400;
@@ -6716,8 +6717,8 @@ body,
   line-height: 1.08;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-.reservation-embedded .reservation-hero h1 span { color: inherit; font-style: normal; font-weight: inherit; }
 .reservation-embedded .reservation-intro { max-width: 700px; margin: 0 auto; }
 .reservation-embedded .reservation-process,
 .reservation-embedded .reservation-result {
@@ -6829,6 +6830,7 @@ body,
   color: var(--rf-paper);
 }
 .reservation-embedded .reservation-primary-button:hover:not(:disabled) { background: transparent; color: var(--rf-ink); }
+.reservation-embedded .reservation-generate-button { border-radius: 999px; padding-inline: 1.5rem; }
 .reservation-embedded .reservation-dropzone { background: rgba(255, 248, 201, .1); border-color: rgba(255, 248, 201, .6); }
 .reservation-embedded .reservation-dropzone:hover { background: rgba(255, 248, 201, .18); }
 .reservation-embedded .reservation-field-error,
@@ -6846,7 +6848,7 @@ body,
   .reservation-slider { min-height: 0; }
   .reservation-embedded .reservation-hero h1 {
     margin: 10px auto 8px;
-    font-size: clamp(1.2rem, 6vw, 1.6rem);
+    font-size: clamp(1.15rem, 6.8vw, 2.8rem);
     line-height: 1.08;
   }
   .reservation-embedded .reservation-intro { max-width: 500px; }

@@ -15,7 +15,7 @@ type ReservationFlowProps = { language: Language };
 
 const copy = {
   es: {
-    title: <>Una idea.<br /><span>En tu piel.</span></>,
+    title: "Una idea en tu piel.",
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
     back: "VOLVER",
@@ -31,7 +31,7 @@ const copy = {
     formats: "JPG, PNG o WebP · hasta 1600 px tras el procesamiento",
     placementLabel: "¿Dónde irá el tatuaje?",
     placementPlaceholder: "Por ejemplo: antebrazo exterior, hombro izquierdo…",
-    generate: "Crear aproximación",
+    generate: "Generar",
     generating: "Preparando tu aproximación…",
     generatingNote: "Las imágenes se procesan temporalmente para esta solicitud.",
     required: "Añade las dos imágenes, indica la zona y acepta el procesamiento con IA para continuar.",
@@ -62,7 +62,7 @@ const copy = {
     privacy: "Al continuar se abrirá WhatsApp con los datos de tu solicitud. Adjunta allí la aproximación descargada si quieres compartirla.",
   },
   en: {
-    title: <>An idea.<br /><span>On your skin.</span></>,
+    title: "An idea on your skin.",
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
     back: "BACK",
@@ -78,7 +78,7 @@ const copy = {
     formats: "JPG, PNG or WebP · resized to 1600 px maximum",
     placementLabel: "Where would you like the tattoo?",
     placementPlaceholder: "For example: outer forearm, left shoulder…",
-    generate: "Create approximation",
+    generate: "Generate",
     generating: "Preparing your approximation…",
     generatingNote: "Images are processed temporarily for this request.",
     required: "Add both images, specify the placement, and consent to AI processing to continue.",
@@ -366,7 +366,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
                 </div>
                 {previewMutation.isPending && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
-                <button className="reservation-primary-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
+                <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={previewMutation.isPending} data-testid="button-generate-preview">
                   {previewMutation.isPending ? text.generating : text.generate}
                   {!previewMutation.isPending && <ArrowRight aria-hidden="true" size={17} />}
                 </button>
