@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ChangeEvent, type DragEvent, type FormEvent } from "react";
 import { ArrowDownToLine, ArrowLeft, ArrowRight, ImagePlus, LoaderCircle, RotateCcw, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
-import { getReservationWhatsAppHref } from "@/lib/whatsapp";
+import { getReservationWhatsAppHref, getReservationWhatsAppMessage } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
 type CompressedImage = {
@@ -35,28 +35,35 @@ const copy = {
     placementLabel: "¿Dónde irá el tatuaje?",
     placementPlaceholder: "Por ejemplo: antebrazo exterior, hombro izquierdo…",
     generate: "Generar",
-    generating: "Montando la aproximación…",
-    generatingNote: "Tus fotos se combinan en este navegador; no se envían a un servicio externo.",
-    required: "Añade las dos imágenes, indica la zona y acepta procesarlas localmente para continuar.",
-    consent: "Acepto combinar estas imágenes localmente en mi navegador para crear una aproximación.",
+    generating: "Generando tu aproximación con IA…",
+    generatingNote: "Tus fotos se envían temporalmente a Gemini mediante Replit AI Integrations y no se guardan en este sitio.",
+    required: "Añade las dos imágenes, indica la zona y acepta enviarlas temporalmente a Gemini.",
+    consent: "Acepto enviar temporalmente mis imágenes a Gemini mediante Replit AI Integrations para generar una aproximación.",
     consentLink: "Lee la política de privacidad.",
     privacyDetailsTitle: "Privacidad de tus imágenes",
-    privacyDetailsBody: "La aproximación se crea en este navegador. Las imágenes no se envían a un servicio externo ni se guardan en el sitio.",
+    privacyDetailsBody: "Las imágenes se envían temporalmente a Gemini mediante Replit AI Integrations solo para generar esta aproximación. Este sitio no las guarda en una base de datos ni en almacenamiento propio.",
     uploadError: "No pudimos leer esta imagen. Prueba con un JPG, PNG o WebP.",
-    localPreviewError: "No pudimos combinar las imágenes en este navegador. Revisa los archivos e inténtalo de nuevo.",
+    localPreviewError: "No pudimos generar la aproximación con IA ahora. Inténtalo otra vez o continúa por WhatsApp.",
     noPreviewContinue: "Puedes pedir la consulta por WhatsApp aunque la previsualización no esté disponible; revisaremos el diseño contigo.",
     previewTitle: "02 — UNA PRIMERA LECTURA",
     previewAlt: "Aproximación visual del tatuaje en la zona seleccionada",
-    disclaimerFallback: "Montaje visual local aproximado, no generado por IA. El diseño final se definirá contigo en el estudio.",
+    disclaimerFallback: "Previsualización aproximada generada con IA; el diseño final se definirá contigo en el estudio.",
     approximate: "La escala, el ajuste y el resultado son aproximados. La pieza final se adapta a tu anatomía y se define en consulta.",
-    temporary: "Tus imágenes se combinan solo en este navegador. No se envían ni se guardan en un servicio externo.",
+    temporary: "Las imágenes se envían temporalmente a Gemini para esta generación y este sitio no las guarda.",
     download: "Descargar aproximación",
     redo: "Probar otras imágenes",
     requestTitle: "03 — CONTINUAR POR WHATSAPP",
     requestIntro: "Tu zona y el estado de la aproximación irán en el mensaje. La fecha la coordinamos por WhatsApp.",
+    designLabel: "Idea o estilo (opcional)",
+    designPlaceholder: "Ej. blackwork floral, calavera, ornamental…",
+    sizeLabel: "Tamaño aproximado (opcional)",
+    sizePlaceholder: "Ej. 12 cm",
+    budgetLabel: "Presupuesto estimado en COP (opcional)",
+    budgetPlaceholder: "Ej. 500.000",
     request: "Abrir WhatsApp",
+    shareFailed: "No se pudo compartir el archivo. Descárgalo y adjúntalo en WhatsApp.",
     requestNotice: "El estudio confirmará disponibilidad por WhatsApp; enviar el mensaje no reserva una cita.",
-    privacy: "WhatsApp abrirá con el mensaje listo. Si descargaste la aproximación, puedes adjuntarla allí.",
+    privacy: "En móviles compatibles podrás compartir la imagen junto con el mensaje. En otros dispositivos, descárgala y adjúntala en WhatsApp.",
   },
   en: {
     eyebrow: "BOOK YOUR PROJECT",
@@ -79,28 +86,35 @@ const copy = {
     placementLabel: "Where would you like the tattoo?",
     placementPlaceholder: "For example: outer forearm, left shoulder…",
     generate: "Generate",
-    generating: "Composing your approximation…",
-    generatingNote: "Your photos are combined in this browser and are not sent to an external service.",
-    required: "Add both images, specify the placement, and consent to local processing to continue.",
-    consent: "I agree to combine these images locally in my browser to create an approximation.",
+    generating: "Generating your AI approximation…",
+    generatingNote: "Your photos are temporarily sent to Gemini through Replit AI Integrations and are not stored by this site.",
+    required: "Add both images, specify the placement, and consent to temporarily send them to Gemini.",
+    consent: "I agree to temporarily send my images to Gemini through Replit AI Integrations to generate an approximation.",
     consentLink: "Read the privacy policy.",
     privacyDetailsTitle: "Image privacy",
-    privacyDetailsBody: "The approximation is created in this browser. Images are not sent to an external service or saved by the site.",
+    privacyDetailsBody: "Images are temporarily sent to Gemini through Replit AI Integrations only to generate this approximation. This site does not store them in a database or its own file storage.",
     uploadError: "We couldn’t read this image. Please try a JPG, PNG, or WebP.",
-    localPreviewError: "We couldn’t combine the images in this browser. Check the files and try again.",
+    localPreviewError: "We couldn’t generate the AI approximation right now. Try again or continue on WhatsApp.",
     noPreviewContinue: "You can still request a WhatsApp consultation while the preview is unavailable; we can review the design together.",
     previewTitle: "02 — A FIRST READING",
     previewAlt: "Visual approximation of the tattoo on the selected area",
-    disclaimerFallback: "A local visual mockup, not AI-generated. The final design will be developed with you at the studio.",
+    disclaimerFallback: "An AI-generated approximation; the final design will be developed with you at the studio.",
     approximate: "Scale, fit, and result are approximate. Your final piece is adapted to your anatomy and decided in consultation.",
-    temporary: "Your images are combined only in this browser. They are not sent to or stored by an external service.",
+    temporary: "Images are sent temporarily to Gemini for this generation and are not stored by this site.",
     download: "Download approximation",
     redo: "Try different images",
     requestTitle: "03 — CONTINUE ON WHATSAPP",
     requestIntro: "Your placement and preview status are added to the message. You can coordinate a date on WhatsApp.",
+    designLabel: "Idea or style (optional)",
+    designPlaceholder: "E.g. floral blackwork, ornamental…",
+    sizeLabel: "Approximate size (optional)",
+    sizePlaceholder: "E.g. 12 cm",
+    budgetLabel: "Estimated budget in COP (optional)",
+    budgetPlaceholder: "E.g. 500,000",
     request: "Open WhatsApp",
+    shareFailed: "The image could not be shared. Download it and attach it in WhatsApp.",
     requestNotice: "The studio will confirm availability on WhatsApp; sending the message does not book an appointment.",
-    privacy: "WhatsApp opens with the message ready. Attach the downloaded preview there if you want to share it.",
+    privacy: "On supported phones, share the image with the message. On other devices, download it and attach it in WhatsApp.",
   },
 } as const;
 
@@ -204,63 +218,11 @@ function compressImage(file: File): Promise<CompressedImage> {
   });
 }
 
-function loadPreviewImage(source: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("image-decode"));
-    image.src = source;
-  });
-}
-
-function getTattooAnchor(placement: string) {
-  const normalized = placement.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  if (/hombro|shoulder|clavicula|collarbone/.test(normalized)) return { x: 0.68, y: 0.3 };
-  if (/antebrazo|forearm|muneca|wrist/.test(normalized)) return { x: 0.34, y: 0.48 };
-  if (/brazo|arm|bicep|biceps/.test(normalized)) return { x: 0.68, y: 0.48 };
-  if (/pecho|chest|torso/.test(normalized)) return { x: 0.52, y: 0.38 };
-  if (/espalda|back/.test(normalized)) return { x: 0.52, y: 0.48 };
-  if (/muslo|pantorrilla|pierna|thigh|calf|leg/.test(normalized)) return { x: 0.5, y: 0.62 };
-  if (/cuello|neck/.test(normalized)) return { x: 0.5, y: 0.2 };
-  return { x: 0.5, y: 0.5 };
-}
-
-async function createLocalTattooPreview(
-  bodySource: string,
-  referenceSource: string,
-  placement: string,
-): Promise<string> {
-  const [bodyImage, referenceImage] = await Promise.all([
-    loadPreviewImage(bodySource),
-    loadPreviewImage(referenceSource),
-  ]);
-  const canvas = document.createElement("canvas");
-  const scale = Math.min(1, 1600 / Math.max(bodyImage.naturalWidth, bodyImage.naturalHeight));
-  canvas.width = Math.max(1, Math.round(bodyImage.naturalWidth * scale));
-  canvas.height = Math.max(1, Math.round(bodyImage.naturalHeight * scale));
-  const context = canvas.getContext("2d");
-  if (!context) throw new Error("canvas-unavailable");
-
-  context.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
-  const overlayScale = Math.min(
-    (canvas.width * 0.28) / referenceImage.naturalWidth,
-    (canvas.height * 0.22) / referenceImage.naturalHeight,
-  );
-  const overlayWidth = Math.max(1, referenceImage.naturalWidth * overlayScale);
-  const overlayHeight = Math.max(1, referenceImage.naturalHeight * overlayScale);
-  const anchor = getTattooAnchor(placement);
-  context.save();
-  context.globalCompositeOperation = "multiply";
-  context.globalAlpha = 0.78;
-  context.drawImage(
-    referenceImage,
-    canvas.width * anchor.x - overlayWidth / 2,
-    canvas.height * anchor.y - overlayHeight / 2,
-    overlayWidth,
-    overlayHeight,
-  );
-  context.restore();
-  return canvas.toDataURL("image/jpeg", 0.9);
+function dataUrlToFile(dataUrl: string, fileName: string): File {
+  const [metadata, encoded] = dataUrl.split(",", 2);
+  const mimeType = metadata.match(/^data:(.+);base64$/)?.[1] ?? "image/png";
+  const bytes = Uint8Array.from(atob(encoded ?? ""), (character) => character.charCodeAt(0));
+  return new File([bytes], fileName, { type: mimeType });
 }
 
 function PhotoUpload({
@@ -378,6 +340,9 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [bodyPhoto, setBodyPhoto] = useState<CompressedImage | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<CompressedImage | null>(null);
   const [placement, setPlacement] = useState("");
+  const [designIdea, setDesignIdea] = useState("");
+  const [tattooSize, setTattooSize] = useState("");
+  const [budget, setBudget] = useState("");
   const [imageConsent, setImageConsent] = useState(false);
   const [preview, setPreview] = useState<{ src: string; disclaimer: string } | null>(null);
   const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
@@ -536,21 +501,36 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     }
     setIsGeneratingPreview(true);
     try {
-      const src = await createLocalTattooPreview(
-        bodyPhoto.previewUrl,
-        referencePhoto.previewUrl,
-        placement.trim(),
-      );
+      const response = await fetch("/api/reservations/tattoo-preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bodyPhotoBase64: bodyPhoto.base64,
+          bodyPhotoMimeType: bodyPhoto.mimeType,
+          referencePhotoBase64: referencePhoto.base64,
+          referencePhotoMimeType: referencePhoto.mimeType,
+          placement: placement.trim(),
+        }),
+      });
+      const result = await response.json() as {
+        previewBase64?: string;
+        mimeType?: string;
+        disclaimer?: string;
+        error?: string;
+      };
+      if (!response.ok || !result.previewBase64 || !result.mimeType) {
+        throw new Error(result.error || text.localPreviewError);
+      }
       setPreview({
-        src,
-        disclaimer: text.disclaimerFallback,
+        src: `data:${result.mimeType};base64,${result.previewBase64}`,
+        disclaimer: result.disclaimer || text.disclaimerFallback,
       });
       setCanRequestWithoutPreview(false);
       setActiveStep(1);
       setTimeout(() => document.getElementById("reservation-result")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 80);
-    } catch {
+    } catch (error) {
       setPreview(null);
-      setRequestError(text.localPreviewError);
+      setRequestError(error instanceof Error ? error.message : text.localPreviewError);
       setCanRequestWithoutPreview(true);
       setActiveStep(1);
     } finally {
@@ -560,10 +540,29 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
 
   const openWhatsAppRequest = () => {
     if (!preview && !canRequestWithoutPreview) return;
-    const href = getReservationWhatsAppHref(language, {
+    const details = {
       placement: placement.trim(),
+      designIdea: designIdea.trim(),
+      tattooSize: tattooSize.trim(),
+      budget: budget.trim(),
       hasPreview: Boolean(preview),
-    });
+    };
+    const message = getReservationWhatsAppMessage(language, details);
+    if (preview && typeof navigator.share === "function" && typeof navigator.canShare === "function") {
+      const file = dataUrlToFile(preview.src, "salvatore-blackwork-tattoo-approximation.png");
+      if (navigator.canShare({ files: [file] })) {
+        void navigator.share({
+          files: [file],
+          title: language === "es" ? "Solicitud de cita" : "Appointment request",
+          text: message,
+        }).catch((error: unknown) => {
+          if (error instanceof DOMException && error.name === "AbortError") return;
+          setRequestError(text.shareFailed);
+        });
+        return;
+      }
+    }
+    const href = getReservationWhatsAppHref(language, details);
     window.open(href, "_blank", "noopener,noreferrer");
   };
 
