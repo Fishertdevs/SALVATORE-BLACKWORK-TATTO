@@ -399,6 +399,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [activeStep, setActiveStep] = useState(0);
+  const [hasOpenedStepContent, setHasOpenedStepContent] = useState(false);
 
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>(".reservation-embedded .reservation-hero");
@@ -521,7 +522,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       gsap.killTweensOf([heading, ...content]);
       gsap.set([heading, ...content], { clearProps: "all" });
     };
-  }, [activeStep, language]);
+  }, [activeStep, hasOpenedStepContent, language]);
 
   const onBodyChange = (image: CompressedImage | null) => {
     setBodyPhoto(image);
@@ -603,9 +604,23 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     type="button"
                     className="reservation-step-button"
                     aria-current={activeStep === index ? "step" : undefined}
+                    aria-expanded={hasOpenedStepContent && activeStep === index}
+                    aria-controls="reservation-step-content"
                     aria-label={`${String(index + 1).padStart(2, "0")} ${step}`}
                     disabled={!isAvailable}
-                    onClick={() => setActiveStep(index)}
+                    onClick={() => {
+                      const shouldReveal = !hasOpenedStepContent;
+                      setHasOpenedStepContent(true);
+                      setActiveStep(index);
+                      if (shouldReveal) {
+                        window.setTimeout(() => {
+                          document.getElementById("reservation-start-title")?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                          });
+                        }, 80);
+                      }
+                    }}
                   >
                     <span>0{index + 1}</span>{step}
                   </button>
@@ -615,8 +630,12 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
           </ol>
         </section>
 
-        <div className="reservation-slider" aria-live="polite">
-          {activeStep === 0 && (
+        <div
+          className={`reservation-slider${hasOpenedStepContent ? "" : " is-overview"}`}
+          id="reservation-step-content"
+          aria-live="polite"
+        >
+          {hasOpenedStepContent && activeStep === 0 && (
             <section className="reservation-process reservation-slide" aria-labelledby="reservation-start-title">
               <div className="reservation-section-heading">
                 <span className="reservation-index">01 / 03</span>
@@ -658,7 +677,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
             </section>
           )}
 
-          {activeStep === 1 && (
+          {hasOpenedStepContent && activeStep === 1 && (
             <section className="reservation-result reservation-slide" id="reservation-result" aria-labelledby="reservation-result-title">
               <div className="reservation-section-heading">
                 <span className="reservation-index">02 / 03</span>
@@ -696,7 +715,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
             </section>
           )}
 
-          {activeStep === 2 && (
+          {hasOpenedStepContent && activeStep === 2 && (
             <section className="reservation-result reservation-slide" aria-labelledby="reservation-talk-title">
               <div className="reservation-section-heading">
                 <span className="reservation-index">03 / 03</span>

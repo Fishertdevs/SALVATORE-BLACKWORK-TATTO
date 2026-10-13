@@ -6859,6 +6859,7 @@ body,
 }
 .reservation-embedded .reservation-upload-meta { margin-top: .4rem; font-size: .62rem; }
 .reservation-slider { min-height: 260px; }
+.reservation-embedded .reservation-slider.is-overview { min-height: 0; }
 .reservation-slide-actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 2rem; }
 .reservation-slide-actions .reservation-primary-button { margin-top: 0; }
 .reservation-back-button {
