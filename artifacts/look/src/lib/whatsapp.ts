@@ -47,10 +47,9 @@ export function getBookingWhatsAppHref(language: Language, now = new Date()) {
 export type ReservationWhatsAppDetails = {
   name?: string;
   email?: string;
-  placement: string;
+  tattooBrief: string;
   date?: string;
   time?: string;
-  tattooDetails?: string;
   hasPreview: boolean;
 };
 
@@ -64,8 +63,7 @@ export function getReservationWhatsAppMessage(
     ? [
         `${greeting}, Salvatore. Quisiera solicitar una cita de consulta para un proyecto de tatuaje.`,
         details.name ? `Nombre: ${details.name}` : "",
-        `Zona del cuerpo: ${details.placement}`,
-        details.tattooDetails ? `Detalles del tatuaje: ${details.tattooDetails}` : "",
+        `Detalles del tatuaje: ${details.tattooBrief}`,
         details.hasPreview
           ? "Incluyo una aproximación visual generada con IA para conversar sobre el proyecto."
           : "No se generó una aproximación; quisiera revisar la idea durante la consulta.",
@@ -76,8 +74,7 @@ export function getReservationWhatsAppMessage(
     : [
         `${greeting}, Salvatore. I would like to request a consultation for a tattoo project.`,
         details.name ? `Name: ${details.name}` : "",
-        `Body placement: ${details.placement}`,
-        details.tattooDetails ? `Tattoo details: ${details.tattooDetails}` : "",
+        `Tattoo details: ${details.tattooBrief}`,
         details.hasPreview
           ? "I am including an AI-generated visual approximation to discuss the project."
           : "No preview was generated; I would like to review the idea during the consultation.",

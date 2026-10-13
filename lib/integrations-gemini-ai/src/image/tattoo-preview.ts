@@ -29,7 +29,7 @@ export async function generateTattooPreview(input: {
             text: [
               "Create one realistic, approximate tattoo placement preview by editing the first image.",
               "The first image is the customer's body-area photo. The second image is the tattoo design reference.",
-              `Apply the reference design to this exact placement: ${input.placement}.`,
+              `Use this tattoo brief to identify the body area and design intent: ${input.placement}. Apply the reference design to the specified body area.`,
               "Keep the person's body, pose, skin tone, lighting, background, and framing unchanged.",
               "Adapt the tattoo to the skin's curvature, perspective, scale, and lighting. Do not add other tattoos, text, or objects.",
               "Do not redesign the reference beyond what is necessary to fit the body. Return only the edited image.",

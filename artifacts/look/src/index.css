@@ -7217,8 +7217,62 @@ body,
   text-underline-offset: .15em;
 }
 .reservation-embedded .reservation-brief-form > .reservation-generate-button {
-  margin: 1rem auto 0 !important;
+  margin: 1rem 0 0 !important;
+}
+.reservation-embedded .reservation-start-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+.reservation-embedded .reservation-start-heading .reservation-exit-button {
+  justify-self: start;
+  margin-left: 0 !important;
+}
+.reservation-embedded .reservation-start-heading-title {
+  display: grid;
+  justify-items: center;
+  gap: .25rem;
+  text-align: center;
+}
+.reservation-embedded .reservation-start-heading-title .reservation-index {
+  color: #FFF8C9;
+}
+.reservation-embedded .reservation-start-heading-title h2 {
+  color: #FFF8C9;
+}
+.reservation-embedded .reservation-start-heading-spacer {
+  visibility: hidden;
+}
+.reservation-embedded .reservation-tattoo-brief {
+  max-width: none;
+}
+.reservation-embedded .reservation-tattoo-brief textarea {
+  width: 100%;
+  min-height: 76px;
+  padding: .75rem 1rem;
+  border: 1px solid rgba(255, 248, 201, .55);
+  border-radius: 1rem;
+  background: transparent;
+  color: #FFF8C9;
+  font: inherit;
+  font-size: .88rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+.reservation-embedded .reservation-tattoo-brief textarea::placeholder {
+  color: rgba(255, 248, 201, .72);
+}
+.reservation-embedded .reservation-tattoo-brief textarea:focus-visible {
+  outline: 2px solid #FFF8C9;
+  outline-offset: 3px;
+  border-color: transparent;
 }
 @media (max-width: 760px) {
-  .reservation-embedded .reservation-project-details { grid-template-columns: minmax(0, 1fr); }
+  .reservation-embedded .reservation-start-heading {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: .3rem;
+  }
+  .reservation-embedded .reservation-start-heading-title h2 {
+    font-size: clamp(.56rem, 2.5vw, .76rem);
+  }
 }

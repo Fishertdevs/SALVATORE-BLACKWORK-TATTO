@@ -32,8 +32,8 @@ const copy = {
     dropHere: "Suelta la imagen aquí",
     replacePhoto: "Cambiar imagen",
     formats: "JPG, PNG o WebP · hasta 1600 px tras el procesamiento",
-    placementLabel: "¿Dónde irá el tatuaje?",
-    placementPlaceholder: "Por ejemplo: antebrazo exterior, hombro izquierdo…",
+    placementLabel: "Información del tatuaje",
+    placementPlaceholder: "Indica la zona del cuerpo, el diseño o estilo, el tamaño y el presupuesto aproximado.",
     generate: "Generar",
     generating: "Generando tu aproximación con IA…",
     generatingNote: "Las imágenes se procesan temporalmente para crear esta vista previa.",
@@ -54,8 +54,6 @@ const copy = {
     redo: "Probar otras imágenes",
     requestTitle: "03 — CONTINUAR POR WHATSAPP",
     requestIntro: "La ubicación y los detalles de la pieza irán en un mensaje claro. La fecha se coordina por WhatsApp.",
-    designLabel: "Detalles del tatuaje (opcional)",
-    designPlaceholder: "Describe el diseño o estilo, el tamaño aproximado y tu presupuesto en COP.",
     request: "Abrir WhatsApp",
     shareFailed: "No se pudo compartir el archivo. Descárgalo y adjúntalo en WhatsApp.",
     requestNotice: "El estudio confirmará disponibilidad por WhatsApp; enviar el mensaje no reserva una cita.",
@@ -79,8 +77,8 @@ const copy = {
     dropHere: "Drop image here",
     replacePhoto: "Change image",
     formats: "JPG, PNG or WebP · resized to 1600 px maximum",
-    placementLabel: "Where would you like the tattoo?",
-    placementPlaceholder: "For example: outer forearm, left shoulder…",
+    placementLabel: "Tattoo information",
+    placementPlaceholder: "Include the body area, design or style, approximate size, and budget.",
     generate: "Generate",
     generating: "Generating your AI approximation…",
     generatingNote: "Images are processed temporarily to create this preview.",
@@ -101,8 +99,6 @@ const copy = {
     redo: "Try different images",
     requestTitle: "03 — CONTINUE ON WHATSAPP",
     requestIntro: "Your placement and tattoo details go into a clear message. Coordinate a date on WhatsApp.",
-    designLabel: "Tattoo details (optional)",
-    designPlaceholder: "Describe the design or style, approximate size, and budget in COP.",
     request: "Open WhatsApp",
     shareFailed: "The image could not be shared. Download it and attach it in WhatsApp.",
     requestNotice: "The studio will confirm availability on WhatsApp; sending the message does not book an appointment.",
@@ -331,8 +327,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const text = copy[language];
   const [bodyPhoto, setBodyPhoto] = useState<CompressedImage | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<CompressedImage | null>(null);
-  const [placement, setPlacement] = useState("");
-  const [tattooDetails, setTattooDetails] = useState("");
+  const [tattooBrief, setTattooBrief] = useState("");
   const [imageConsent, setImageConsent] = useState(false);
   const [preview, setPreview] = useState<{ src: string; disclaimer: string } | null>(null);
   const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
@@ -485,7 +480,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const generatePreview = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setRequestError("");
-    if (!bodyPhoto || !referencePhoto || placement.trim().length < 2 || !imageConsent) {
+    if (!bodyPhoto || !referencePhoto || tattooBrief.trim().length < 2 || !imageConsent) {
       setRequestError(text.required);
       return;
     }
@@ -499,7 +494,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
           bodyPhotoMimeType: bodyPhoto.mimeType,
           referencePhotoBase64: referencePhoto.base64,
           referencePhotoMimeType: referencePhoto.mimeType,
-          placement: placement.trim(),
+          placement: tattooBrief.trim(),
         }),
       });
       const result = await response.json() as {
@@ -531,8 +526,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const openWhatsAppRequest = () => {
     if (!preview && !canRequestWithoutPreview) return;
     const details = {
-      placement: placement.trim(),
-      tattooDetails: tattooDetails.trim(),
+      tattooBrief: tattooBrief.trim(),
       hasPreview: Boolean(preview),
     };
     const message = getReservationWhatsAppMessage(language, details);
@@ -623,12 +617,15 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
         >
           {hasOpenedStepContent && activeStep === 0 && (
             <section className="reservation-process reservation-slide" aria-labelledby="reservation-start-title">
-              <div className="reservation-section-heading">
-                <span className="reservation-index">01 / 03</span>
-                <h2 id="reservation-start-title">{text.sectionTitle}</h2>
+              <div className="reservation-section-heading reservation-start-heading">
                 <button type="button" className="reservation-exit-button" onClick={exitStepOne}>
                   <ArrowLeft size={14} aria-hidden="true" />{text.exit}
                 </button>
+                <div className="reservation-start-heading-title">
+                  <span className="reservation-index">01 / 03</span>
+                  <h2 id="reservation-start-title">{text.sectionTitle}</h2>
+                </div>
+                <span className="reservation-start-heading-spacer" aria-hidden="true" />
               </div>
               <form onSubmit={generatePreview} className="reservation-brief-form">
                 <div className="reservation-upload-grid">
@@ -651,13 +648,9 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     <p>{text.privacyDetailsBody}</p>
                   </details>
                 </div>
-                <div className="reservation-placement">
-                  <label htmlFor="tattoo-placement">{text.placementLabel}</label>
-                  <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
-                </div>
-                <div className="reservation-project-details">
-                  <label htmlFor="tattoo-details">{text.designLabel}</label>
-                  <textarea id="tattoo-details" value={tattooDetails} onChange={(event) => setTattooDetails(event.target.value)} maxLength={500} rows={2} placeholder={text.designPlaceholder} />
+                <div className="reservation-placement reservation-tattoo-brief">
+                  <label htmlFor="tattoo-brief">{text.placementLabel}</label>
+                  <textarea id="tattoo-brief" value={tattooBrief} onChange={(event) => { setTattooBrief(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} rows={2} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-tattoo-brief" />
                 </div>
                 <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={isGeneratingPreview} data-testid="button-generate-preview">
                   {isGeneratingPreview ? text.generating : text.generate}
