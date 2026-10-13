@@ -53,7 +53,7 @@ const copy = {
     download: "Descargar aproximación",
     redo: "Probar otras imágenes",
     requestTitle: "03 — CONTINUAR POR WHATSAPP",
-    requestIntro: "Tu zona y el estado de la aproximación irán en el mensaje. La fecha la coordinamos por WhatsApp.",
+    requestIntro: "La idea, la zona y los datos opcionales de tamaño y presupuesto irán en una solicitud clara. La fecha se coordina por WhatsApp.",
     designLabel: "Idea o estilo (opcional)",
     designPlaceholder: "Ej. blackwork floral, calavera, ornamental…",
     sizeLabel: "Tamaño aproximado (opcional)",
@@ -104,7 +104,7 @@ const copy = {
     download: "Download approximation",
     redo: "Try different images",
     requestTitle: "03 — CONTINUE ON WHATSAPP",
-    requestIntro: "Your placement and preview status are added to the message. You can coordinate a date on WhatsApp.",
+    requestIntro: "Your idea, placement, and optional size and budget details go into a clear request. Coordinate a date on WhatsApp.",
     designLabel: "Idea or style (optional)",
     designPlaceholder: "E.g. floral blackwork, ornamental…",
     sizeLabel: "Approximate size (optional)",
@@ -673,6 +673,20 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     {!isGeneratingPreview && <ArrowRight aria-hidden="true" size={17} />}
                   </button>
                 </div>
+                <div className="reservation-project-details">
+                  <div className="reservation-project-idea">
+                    <label htmlFor="tattoo-idea">{text.designLabel}</label>
+                    <input id="tattoo-idea" value={designIdea} onChange={(event) => setDesignIdea(event.target.value)} maxLength={180} placeholder={text.designPlaceholder} />
+                  </div>
+                  <div>
+                    <label htmlFor="tattoo-size">{text.sizeLabel}</label>
+                    <input id="tattoo-size" value={tattooSize} onChange={(event) => setTattooSize(event.target.value)} maxLength={60} placeholder={text.sizePlaceholder} />
+                  </div>
+                  <div>
+                    <label htmlFor="tattoo-budget">{text.budgetLabel}</label>
+                    <input id="tattoo-budget" value={budget} onChange={(event) => setBudget(event.target.value)} maxLength={60} inputMode="decimal" placeholder={text.budgetPlaceholder} />
+                  </div>
+                </div>
                 {isGeneratingPreview && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
               </form>
             </section>
@@ -726,6 +740,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                 <p className="reservation-contact-intro">{text.requestIntro}</p>
                 <div className="reservation-contact-form reservation-contact-quick">
                   <p className="reservation-confirmation-note">{text.requestNotice}</p>
+                    {requestError && <p className="reservation-alert" role="alert">{requestError}</p>}
                   <button className="reservation-primary-button reservation-whatsapp-button" type="button" onClick={openWhatsAppRequest} data-testid="button-whatsapp-request">{text.request}<ArrowRight size={17} aria-hidden="true" /></button>
                   <p className="reservation-privacy-note">{text.privacy}</p>
                 </div>

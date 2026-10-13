@@ -7102,3 +7102,115 @@ body,
   .reservation-page *::before,
   .reservation-page *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Reservation actions use the same red text-and-underline treatment as the hero CTA. */
+.reservation-embedded .reservation-primary-button,
+.reservation-embedded .reservation-exit-button,
+.reservation-embedded .reservation-back-button,
+.reservation-embedded .reservation-reset,
+.reservation-embedded .reservation-step-button,
+.reservation-embedded .reservation-download,
+.reservation-embedded .reservation-preview-unavailable .reservation-reset {
+  display: inline-flex !important;
+  width: max-content !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: .55rem !important;
+  margin: 0 !important;
+  padding: 0 0 .35rem !important;
+  border: 0 !important;
+  border-bottom: 1px solid #E63027 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #E63027 !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: clamp(.75rem, .9vw, .95rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: .12em !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+  transition: color 180ms ease, border-color 180ms ease !important;
+}
+.reservation-embedded .reservation-primary-button:hover:not(:disabled),
+.reservation-embedded .reservation-exit-button:hover,
+.reservation-embedded .reservation-back-button:hover,
+.reservation-embedded .reservation-reset:hover,
+.reservation-embedded .reservation-step-button:hover,
+.reservation-embedded .reservation-download:hover {
+  border-color: #1a1a1a;
+  background: transparent;
+  color: #1a1a1a;
+}
+.reservation-embedded .reservation-primary-button:focus-visible,
+.reservation-embedded .reservation-exit-button:focus-visible,
+.reservation-embedded .reservation-back-button:focus-visible,
+.reservation-embedded .reservation-reset:focus-visible,
+.reservation-embedded .reservation-step-button:focus-visible,
+.reservation-embedded .reservation-download:focus-visible {
+  outline: 2px solid #E63027;
+  outline-offset: 4px;
+}
+.reservation-embedded .reservation-slide-actions .reservation-back-button,
+.reservation-embedded .reservation-slide-actions .reservation-primary-button,
+.reservation-embedded .reservation-contact-quick .reservation-whatsapp-button,
+.reservation-embedded .reservation-placement-action-row .reservation-generate-button,
+.reservation-embedded .reservation-preview-aside .reservation-reset {
+  width: max-content !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 0 .35rem !important;
+  border: 0 !important;
+  border-bottom: 1px solid #E63027 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #E63027 !important;
+  box-shadow: none !important;
+  justify-content: flex-start !important;
+}
+.reservation-embedded .reservation-placement input,
+.reservation-embedded .reservation-project-details input {
+  border-radius: 999px;
+}
+.reservation-embedded .reservation-project-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.reservation-embedded .reservation-project-details > div {
+  display: grid;
+  gap: .45rem;
+}
+.reservation-embedded .reservation-project-details label {
+  color: var(--rf-muted);
+  font-size: .65rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.reservation-embedded .reservation-project-details input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--rf-line);
+  background: transparent;
+  color: var(--rf-ink);
+  font: inherit;
+  font-size: .82rem;
+}
+.reservation-embedded .reservation-project-details input:focus-visible {
+  outline: 2px solid var(--rf-red);
+  outline-offset: 3px;
+  border-color: transparent;
+}
+@media (max-width: 760px) {
+  .reservation-embedded .reservation-project-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
