@@ -6683,6 +6683,7 @@ body,
 .page-services-callout.reservation-callout {
   margin-bottom: clamp(2.5rem, 8vw, 7rem);
   padding: clamp(1.5rem, 5vw, 4.5rem);
+  padding-top: clamp(2.25rem, 4vw, 3.25rem);
   scroll-margin-top: clamp(4rem, 9vh, 6rem);
 }
 .reservation-page.reservation-embedded {
@@ -6701,7 +6702,7 @@ body,
 .reservation-embedded .reservation-footer { display: none; }
 .reservation-embedded .reservation-hero {
   min-height: 0;
-  padding: clamp(2rem, 4vh, 3rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vh, 2.25rem) 0 clamp(1.5rem, 3vw, 2.5rem);
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
   animation: none;
@@ -7012,9 +7013,12 @@ body,
   to { opacity: 1; transform: scale(1); }
 }
 @media (max-width: 760px) {
-  .page-services-callout.reservation-callout { margin: 0 20px clamp(2rem, 8vw, 4rem); }
+  .page-services-callout.reservation-callout {
+    margin: 0 20px clamp(2rem, 8vw, 4rem);
+    padding-top: clamp(1.25rem, 4vw, 1.5rem);
+  }
   .reservation-slider { min-height: 0; }
-  .reservation-embedded .reservation-hero { padding-top: clamp(2rem, 8vw, 2.8rem); }
+  .reservation-embedded .reservation-hero { padding-top: clamp(1.5rem, 7vw, 2.25rem); }
   .reservation-embedded .reservation-eyebrow { font-size: .58rem; }
   .reservation-embedded .reservation-hero h1 {
     margin: 10px auto 8px;
