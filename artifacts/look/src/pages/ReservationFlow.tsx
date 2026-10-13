@@ -19,6 +19,7 @@ const copy = {
     title: "Una idea en tu piel.",
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
+    exit: "Salir",
     back: "VOLVER",
     continue: "CONTINUAR",
     retry: "Cambiar las imágenes",
@@ -68,6 +69,7 @@ const copy = {
     title: "An idea on your skin.",
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
+    exit: "Exit",
     back: "BACK",
     continue: "CONTINUE",
     retry: "Change images",
@@ -586,6 +588,17 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     setActiveStep(0);
   };
 
+  const exitStepOne = () => {
+    setHasOpenedStepContent(false);
+    setActiveStep(0);
+    window.setTimeout(() => {
+      document.querySelector(".reservation-embedded .reservation-hero")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 80);
+  };
+
   return (
     <div className="reservation-page reservation-embedded">
       <div className="reservation-frame">
@@ -640,6 +653,9 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
               <div className="reservation-section-heading">
                 <span className="reservation-index">01 / 03</span>
                 <h2 id="reservation-start-title">{text.sectionTitle}</h2>
+                <button type="button" className="reservation-exit-button" onClick={exitStepOne}>
+                  <ArrowLeft size={14} aria-hidden="true" />{text.exit}
+                </button>
               </div>
               <form onSubmit={generatePreview} className="reservation-brief-form">
                 <div className="reservation-upload-grid">
