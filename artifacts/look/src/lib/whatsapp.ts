@@ -50,9 +50,7 @@ export type ReservationWhatsAppDetails = {
   placement: string;
   date?: string;
   time?: string;
-  designIdea?: string;
-  tattooSize?: string;
-  budget?: string;
+  tattooDetails?: string;
   hasPreview: boolean;
 };
 
@@ -66,10 +64,8 @@ export function getReservationWhatsAppMessage(
     ? [
         `${greeting}, Salvatore. Quisiera solicitar una cita de consulta para un proyecto de tatuaje.`,
         details.name ? `Nombre: ${details.name}` : "",
-        details.designIdea ? `Idea o estilo: ${details.designIdea}` : "",
         `Zona del cuerpo: ${details.placement}`,
-        details.tattooSize ? `Tamaño aproximado: ${details.tattooSize}` : "",
-        details.budget ? `Presupuesto estimado: ${details.budget} COP` : "",
+        details.tattooDetails ? `Detalles del tatuaje: ${details.tattooDetails}` : "",
         details.hasPreview
           ? "Incluyo una aproximación visual generada con IA para conversar sobre el proyecto."
           : "No se generó una aproximación; quisiera revisar la idea durante la consulta.",
@@ -80,10 +76,8 @@ export function getReservationWhatsAppMessage(
     : [
         `${greeting}, Salvatore. I would like to request a consultation for a tattoo project.`,
         details.name ? `Name: ${details.name}` : "",
-        details.designIdea ? `Idea or style: ${details.designIdea}` : "",
         `Body placement: ${details.placement}`,
-        details.tattooSize ? `Approximate size: ${details.tattooSize}` : "",
-        details.budget ? `Estimated budget: ${details.budget} COP` : "",
+        details.tattooDetails ? `Tattoo details: ${details.tattooDetails}` : "",
         details.hasPreview
           ? "I am including an AI-generated visual approximation to discuss the project."
           : "No preview was generated; I would like to review the idea during the consultation.",

@@ -36,12 +36,12 @@ const copy = {
     placementPlaceholder: "Por ejemplo: antebrazo exterior, hombro izquierdo…",
     generate: "Generar",
     generating: "Generando tu aproximación con IA…",
-    generatingNote: "Tus fotos se envían temporalmente a Gemini mediante Replit AI Integrations y no se guardan en este sitio.",
-    required: "Añade las dos imágenes, indica la zona y acepta enviarlas temporalmente a Gemini.",
-    consent: "Acepto enviar temporalmente mis imágenes a Gemini mediante Replit AI Integrations para generar una aproximación.",
-    consentLink: "Lee la política de privacidad.",
+    generatingNote: "Las imágenes se procesan temporalmente para crear esta vista previa.",
+    required: "Agrega ambas imágenes, indica la zona y autoriza su uso temporal.",
+    consent: "Autorizo el envío temporal de mis imágenes a Gemini para generar esta vista previa.",
+    consentLink: "Política de privacidad",
     privacyDetailsTitle: "Privacidad de tus imágenes",
-    privacyDetailsBody: "Las imágenes se envían temporalmente a Gemini mediante Replit AI Integrations solo para generar esta aproximación. Este sitio no las guarda en una base de datos ni en almacenamiento propio.",
+    privacyDetailsBody: "Las imágenes se envían a Gemini mediante Replit AI Integrations únicamente para generar esta vista previa. Este sitio no almacena los archivos.",
     uploadError: "No pudimos leer esta imagen. Prueba con un JPG, PNG o WebP.",
     localPreviewError: "No pudimos generar la aproximación con IA ahora. Inténtalo otra vez o continúa por WhatsApp.",
     noPreviewContinue: "Puedes pedir la consulta por WhatsApp aunque la previsualización no esté disponible; revisaremos el diseño contigo.",
@@ -53,13 +53,9 @@ const copy = {
     download: "Descargar aproximación",
     redo: "Probar otras imágenes",
     requestTitle: "03 — CONTINUAR POR WHATSAPP",
-    requestIntro: "La idea, la zona y los datos opcionales de tamaño y presupuesto irán en una solicitud clara. La fecha se coordina por WhatsApp.",
-    designLabel: "Idea o estilo (opcional)",
-    designPlaceholder: "Ej. blackwork floral, calavera, ornamental…",
-    sizeLabel: "Tamaño aproximado (opcional)",
-    sizePlaceholder: "Ej. 12 cm",
-    budgetLabel: "Presupuesto estimado en COP (opcional)",
-    budgetPlaceholder: "Ej. 500.000",
+    requestIntro: "La ubicación y los detalles de la pieza irán en un mensaje claro. La fecha se coordina por WhatsApp.",
+    designLabel: "Detalles del tatuaje (opcional)",
+    designPlaceholder: "Describe el diseño o estilo, el tamaño aproximado y tu presupuesto en COP.",
     request: "Abrir WhatsApp",
     shareFailed: "No se pudo compartir el archivo. Descárgalo y adjúntalo en WhatsApp.",
     requestNotice: "El estudio confirmará disponibilidad por WhatsApp; enviar el mensaje no reserva una cita.",
@@ -87,12 +83,12 @@ const copy = {
     placementPlaceholder: "For example: outer forearm, left shoulder…",
     generate: "Generate",
     generating: "Generating your AI approximation…",
-    generatingNote: "Your photos are temporarily sent to Gemini through Replit AI Integrations and are not stored by this site.",
-    required: "Add both images, specify the placement, and consent to temporarily send them to Gemini.",
-    consent: "I agree to temporarily send my images to Gemini through Replit AI Integrations to generate an approximation.",
+    generatingNote: "Images are processed temporarily to create this preview.",
+    required: "Add both images, specify the placement, and authorize temporary use.",
+    consent: "I authorize temporarily sending my images to Gemini to generate this preview.",
     consentLink: "Read the privacy policy.",
     privacyDetailsTitle: "Image privacy",
-    privacyDetailsBody: "Images are temporarily sent to Gemini through Replit AI Integrations only to generate this approximation. This site does not store them in a database or its own file storage.",
+    privacyDetailsBody: "Images are sent to Gemini through Replit AI Integrations only to generate this preview. This site does not store the files.",
     uploadError: "We couldn’t read this image. Please try a JPG, PNG, or WebP.",
     localPreviewError: "We couldn’t generate the AI approximation right now. Try again or continue on WhatsApp.",
     noPreviewContinue: "You can still request a WhatsApp consultation while the preview is unavailable; we can review the design together.",
@@ -104,13 +100,9 @@ const copy = {
     download: "Download approximation",
     redo: "Try different images",
     requestTitle: "03 — CONTINUE ON WHATSAPP",
-    requestIntro: "Your idea, placement, and optional size and budget details go into a clear request. Coordinate a date on WhatsApp.",
-    designLabel: "Idea or style (optional)",
-    designPlaceholder: "E.g. floral blackwork, ornamental…",
-    sizeLabel: "Approximate size (optional)",
-    sizePlaceholder: "E.g. 12 cm",
-    budgetLabel: "Estimated budget in COP (optional)",
-    budgetPlaceholder: "E.g. 500,000",
+    requestIntro: "Your placement and tattoo details go into a clear message. Coordinate a date on WhatsApp.",
+    designLabel: "Tattoo details (optional)",
+    designPlaceholder: "Describe the design or style, approximate size, and budget in COP.",
     request: "Open WhatsApp",
     shareFailed: "The image could not be shared. Download it and attach it in WhatsApp.",
     requestNotice: "The studio will confirm availability on WhatsApp; sending the message does not book an appointment.",
@@ -340,9 +332,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [bodyPhoto, setBodyPhoto] = useState<CompressedImage | null>(null);
   const [referencePhoto, setReferencePhoto] = useState<CompressedImage | null>(null);
   const [placement, setPlacement] = useState("");
-  const [designIdea, setDesignIdea] = useState("");
-  const [tattooSize, setTattooSize] = useState("");
-  const [budget, setBudget] = useState("");
+  const [tattooDetails, setTattooDetails] = useState("");
   const [imageConsent, setImageConsent] = useState(false);
   const [preview, setPreview] = useState<{ src: string; disclaimer: string } | null>(null);
   const [isGeneratingPreview, setIsGeneratingPreview] = useState(false);
@@ -542,9 +532,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     if (!preview && !canRequestWithoutPreview) return;
     const details = {
       placement: placement.trim(),
-      designIdea: designIdea.trim(),
-      tattooSize: tattooSize.trim(),
-      budget: budget.trim(),
+      tattooDetails: tattooDetails.trim(),
       hasPreview: Boolean(preview),
     };
     const message = getReservationWhatsAppMessage(language, details);
@@ -663,30 +651,18 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     <p>{text.privacyDetailsBody}</p>
                   </details>
                 </div>
-                <div className="reservation-placement-action-row">
-                  <div className="reservation-placement">
-                    <label htmlFor="tattoo-placement">{text.placementLabel}</label>
-                    <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
-                  </div>
-                  <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={isGeneratingPreview} data-testid="button-generate-preview">
-                    {isGeneratingPreview ? text.generating : text.generate}
-                    {!isGeneratingPreview && <ArrowRight aria-hidden="true" size={17} />}
-                  </button>
+                <div className="reservation-placement">
+                  <label htmlFor="tattoo-placement">{text.placementLabel}</label>
+                  <input id="tattoo-placement" value={placement} onChange={(event) => { setPlacement(event.target.value); setPreview(null); setCanRequestWithoutPreview(false); }} maxLength={180} placeholder={text.placementPlaceholder} required minLength={2} data-testid="input-placement" />
                 </div>
                 <div className="reservation-project-details">
-                  <div className="reservation-project-idea">
-                    <label htmlFor="tattoo-idea">{text.designLabel}</label>
-                    <input id="tattoo-idea" value={designIdea} onChange={(event) => setDesignIdea(event.target.value)} maxLength={180} placeholder={text.designPlaceholder} />
-                  </div>
-                  <div>
-                    <label htmlFor="tattoo-size">{text.sizeLabel}</label>
-                    <input id="tattoo-size" value={tattooSize} onChange={(event) => setTattooSize(event.target.value)} maxLength={60} placeholder={text.sizePlaceholder} />
-                  </div>
-                  <div>
-                    <label htmlFor="tattoo-budget">{text.budgetLabel}</label>
-                    <input id="tattoo-budget" value={budget} onChange={(event) => setBudget(event.target.value)} maxLength={60} inputMode="decimal" placeholder={text.budgetPlaceholder} />
-                  </div>
+                  <label htmlFor="tattoo-details">{text.designLabel}</label>
+                  <textarea id="tattoo-details" value={tattooDetails} onChange={(event) => setTattooDetails(event.target.value)} maxLength={500} rows={2} placeholder={text.designPlaceholder} />
                 </div>
+                <button className="reservation-primary-button reservation-generate-button" type="submit" disabled={isGeneratingPreview} data-testid="button-generate-preview">
+                  {isGeneratingPreview ? text.generating : text.generate}
+                  {!isGeneratingPreview && <ArrowRight aria-hidden="true" size={17} />}
+                </button>
                 {isGeneratingPreview && <div className="reservation-progress" role="status" aria-live="polite"><LoaderCircle size={18} className="reservation-spinner" />{text.generating}<small>{text.generatingNote}</small></div>}
               </form>
             </section>
