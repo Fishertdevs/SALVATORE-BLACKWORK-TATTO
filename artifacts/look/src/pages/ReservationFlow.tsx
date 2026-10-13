@@ -15,6 +15,7 @@ type ReservationFlowProps = { language: Language };
 
 const copy = {
   es: {
+    eyebrow: "RESERVA TU PROYECTO",
     title: "Una idea en tu piel.",
     intro: "Cuéntame dónde imaginas la pieza. Empezaremos por una aproximación visual, y luego conversaremos sobre lo que realmente funciona para ti.",
     steps: ["IMAGINA", "VISUALIZA", "CONVERSEMOS"],
@@ -63,6 +64,7 @@ const copy = {
     privacy: "Al continuar se abrirá WhatsApp con los datos de tu solicitud. Adjunta allí la aproximación descargada si quieres compartirla.",
   },
   en: {
+    eyebrow: "BOOK YOUR PROJECT",
     title: "An idea on your skin.",
     intro: "Tell me where you imagine the piece. We’ll begin with a visual approximation, then talk through what truly works for you.",
     steps: ["IMAGINE", "VISUALIZE", "LET’S TALK"],
@@ -588,6 +590,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       <div className="reservation-frame">
         <section className="reservation-hero">
           <div className="reservation-hero-copy">
+            <p className="reservation-eyebrow">{text.eyebrow}</p>
             <h1>{text.title}</h1>
             <p className="reservation-intro">{text.intro}</p>
           </div>
