@@ -44,49 +44,60 @@ export function getBookingWhatsAppHref(language: Language, now = new Date()) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-export function getReservationWhatsAppHref(
+export type ReservationWhatsAppDetails = {
+  name?: string;
+  email?: string;
+  placement: string;
+  date?: string;
+  time?: string;
+  designIdea?: string;
+  tattooSize?: string;
+  budget?: string;
+  hasPreview: boolean;
+};
+
+export function getReservationWhatsAppMessage(
   language: Language,
-  details: {
-    name?: string;
-    email?: string;
-    placement: string;
-    date?: string;
-    time?: string;
-    hasPreview: boolean;
-  },
+  details: ReservationWhatsAppDetails,
   now = new Date(),
 ) {
   const greeting = getGreeting(language, now);
-  const message =
-    language === "es"
-      ? [
-          `${greeting}, Salvatore. Quisiera solicitar una consulta de 30 minutos sobre mi tatuaje.`,
-          details.name ? `Nombre: ${details.name}` : "",
-          details.email ? `Correo: ${details.email}` : "",
-          `Zona: ${details.placement}`,
-          details.date ? `Fecha preferida: ${details.date}` : "",
-          details.time ? `Hora preferida: ${details.time}` : "",
-          details.hasPreview
-            ? "Adjuntaré la previsualización aproximada al enviar este mensaje."
-            : "No tengo una previsualización disponible; revisaremos la idea durante la consulta.",
-          "Coordinaremos la fecha por WhatsApp; enviar el mensaje no confirma una cita.",
-        ]
-          .filter(Boolean)
-          .join("\n")
-      : [
-          `${greeting}, Salvatore. I would like to request a 30-minute consultation about my tattoo.`,
-          details.name ? `Name: ${details.name}` : "",
-          details.email ? `Email: ${details.email}` : "",
-          `Placement: ${details.placement}`,
-          details.date ? `Preferred date: ${details.date}` : "",
-          details.time ? `Preferred time: ${details.time}` : "",
-          details.hasPreview
-            ? "I will attach the approximate preview when I send this message."
-            : "I do not have a preview available; we can review the idea during the consultation.",
-          "We will coordinate a date on WhatsApp; sending this message does not confirm an appointment.",
-        ]
-          .filter(Boolean)
-          .join("\n");
+  return language === "es"
+    ? [
+        `${greeting}, Salvatore. Quisiera solicitar una cita de consulta para un proyecto de tatuaje.`,
+        details.name ? `Nombre: ${details.name}` : "",
+        details.designIdea ? `Idea o estilo: ${details.designIdea}` : "",
+        `Zona del cuerpo: ${details.placement}`,
+        details.tattooSize ? `Tamaño aproximado: ${details.tattooSize}` : "",
+        details.budget ? `Presupuesto estimado: ${details.budget} COP` : "",
+        details.hasPreview
+          ? "Incluyo una aproximación visual generada con IA para conversar sobre el proyecto."
+          : "No se generó una aproximación; quisiera revisar la idea durante la consulta.",
+        "Quedo atento/a a la disponibilidad. Entiendo que este mensaje es una solicitud y no confirma una cita.",
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : [
+        `${greeting}, Salvatore. I would like to request a consultation for a tattoo project.`,
+        details.name ? `Name: ${details.name}` : "",
+        details.designIdea ? `Idea or style: ${details.designIdea}` : "",
+        `Body placement: ${details.placement}`,
+        details.tattooSize ? `Approximate size: ${details.tattooSize}` : "",
+        details.budget ? `Estimated budget: ${details.budget} COP` : "",
+        details.hasPreview
+          ? "I am including an AI-generated visual approximation to discuss the project."
+          : "No preview was generated; I would like to review the idea during the consultation.",
+        "Please share your availability. I understand this is a request, not a confirmed appointment.",
+      ]
+        .filter(Boolean)
+        .join("\n");
+}
 
+export function getReservationWhatsAppHref(
+  language: Language,
+  details: ReservationWhatsAppDetails,
+  now = new Date(),
+) {
+  const message = getReservationWhatsAppMessage(language, details, now);
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
