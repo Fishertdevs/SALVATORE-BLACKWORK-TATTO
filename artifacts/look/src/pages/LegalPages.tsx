@@ -314,8 +314,8 @@ function LegalLayout({
 export function PrivacyPolicyPage() {
   return (
     <LegalLayout
-      title="Política de Privacidad"
-      updated="enero 2026"
+      title="Política de Tratamiento de Datos Personales"
+      updated="octubre 2026"
     >
       <h2>1. Responsable del tratamiento</h2>
       <p>
@@ -376,11 +376,12 @@ export function PrivacyPolicyPage() {
         atender posibles responsabilidades.
       </p>
       <p>
-        Si utilizas la previsualización con IA, las imágenes de la zona del cuerpo y de referencia
-        se envían temporalmente a Gemini mediante Replit AI Integrations para generar una
-        aproximación. Este sitio no guarda esos archivos en una base de datos ni en almacenamiento
-        propio; el proveedor puede tratar la solicitud conforme a sus propias condiciones. No
-        subas imágenes íntimas ni fotografías de otras personas sin autorización.
+         Si utilizas la previsualización con inteligencia artificial, las imágenes de la zona del
+         cuerpo y de referencia se procesan temporalmente mediante un proveedor externo de
+         tecnología para generar una aproximación. Este sitio no conserva esos archivos en una base
+         de datos ni en almacenamiento propio; el proveedor externo puede tratar la solicitud
+         conforme a sus propias condiciones y políticas. No subas imágenes íntimas ni fotografías
+         de otras personas sin autorización.
       </p>
 
       <h2>8. Menores de edad</h2>
