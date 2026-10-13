@@ -52,17 +52,11 @@ const copy = {
     temporary: "Tus imágenes se combinan solo en este navegador. No se envían ni se guardan en un servicio externo.",
     download: "Descargar aproximación",
     redo: "Probar otras imágenes",
-    requestTitle: "03 — HABLEMOS DE FECHAS",
-    requestIntro: "Déjame tus datos y una fecha preferida. El estudio revisará la solicitud contigo por WhatsApp.",
-    name: "Nombre",
-    namePlaceholder: "Tu nombre",
-    email: "Correo electrónico",
-    optional: "opcional",
-    date: "Fecha preferida",
-    time: "Hora preferida",
-    request: "Solicitar por WhatsApp",
-    requestNotice: "Esto es solo una solicitud, no una cita confirmada. El horario queda pendiente de confirmación del estudio.",
-    privacy: "Al continuar se abrirá WhatsApp con los datos de tu solicitud. Adjunta allí la aproximación descargada si quieres compartirla.",
+    requestTitle: "03 — CONTINUAR POR WHATSAPP",
+    requestIntro: "Tu zona y el estado de la aproximación irán en el mensaje. La fecha la coordinamos por WhatsApp.",
+    request: "Abrir WhatsApp",
+    requestNotice: "El estudio confirmará disponibilidad por WhatsApp; enviar el mensaje no reserva una cita.",
+    privacy: "WhatsApp abrirá con el mensaje listo. Si descargaste la aproximación, puedes adjuntarla allí.",
   },
   en: {
     eyebrow: "BOOK YOUR PROJECT",
@@ -102,17 +96,11 @@ const copy = {
     temporary: "Your images are combined only in this browser. They are not sent to or stored by an external service.",
     download: "Download approximation",
     redo: "Try different images",
-    requestTitle: "03 — LET’S TALK DATES",
-    requestIntro: "Leave your details and a preferred date. The studio will review your request with you on WhatsApp.",
-    name: "Name",
-    namePlaceholder: "Your name",
-    email: "Email address",
-    optional: "optional",
-    date: "Preferred date",
-    time: "Preferred time",
-    request: "Request via WhatsApp",
-    requestNotice: "This is a request only, not a confirmed appointment. The time remains pending studio confirmation.",
-    privacy: "Continuing opens WhatsApp with your request details. Attach the downloaded approximation there if you’d like to share it.",
+    requestTitle: "03 — CONTINUE ON WHATSAPP",
+    requestIntro: "Your placement and preview status are added to the message. You can coordinate a date on WhatsApp.",
+    request: "Open WhatsApp",
+    requestNotice: "The studio will confirm availability on WhatsApp; sending the message does not book an appointment.",
+    privacy: "WhatsApp opens with the message ready. Attach the downloaded preview there if you want to share it.",
   },
 } as const;
 
@@ -396,10 +384,6 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [canRequestWithoutPreview, setCanRequestWithoutPreview] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [requestError, setRequestError] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
   const [activeStep, setActiveStep] = useState(0);
   const [hasOpenedStepContent, setHasOpenedStepContent] = useState(false);
 
@@ -574,10 +558,12 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     }
   };
 
-  const submitRequest = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const openWhatsAppRequest = () => {
     if (!preview && !canRequestWithoutPreview) return;
-    const href = getReservationWhatsAppHref(language, { name: name.trim(), email: email.trim() || undefined, placement: placement.trim(), date, time, hasPreview: Boolean(preview) });
+    const href = getReservationWhatsAppHref(language, {
+      placement: placement.trim(),
+      hasPreview: Boolean(preview),
+    });
     window.open(href, "_blank", "noopener,noreferrer");
   };
 
@@ -739,19 +725,11 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
               </div>
               <div className="reservation-contact-grid">
                 <p className="reservation-contact-intro">{text.requestIntro}</p>
-                <form className="reservation-contact-form" onSubmit={submitRequest}>
-                  <label htmlFor="reservation-name">{text.name}</label>
-                  <input id="reservation-name" value={name} onChange={(event) => setName(event.target.value)} placeholder={text.namePlaceholder} autoComplete="name" required data-testid="input-name" />
-                  <label htmlFor="reservation-email">{text.email} <span>({text.optional})</span></label>
-                  <input id="reservation-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="name@example.com" autoComplete="email" data-testid="input-email" />
-                  <div className="reservation-datetime">
-                    <div><label htmlFor="reservation-date">{text.date}</label><input id="reservation-date" type="date" min={new Intl.DateTimeFormat("sv-SE", { timeZone: "America/Bogota", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date())} value={date} onChange={(event) => setDate(event.target.value)} required data-testid="input-date" /></div>
-                    <div><label htmlFor="reservation-time">{text.time}</label><input id="reservation-time" type="time" value={time} onChange={(event) => setTime(event.target.value)} required data-testid="input-time" /></div>
-                  </div>
+                <div className="reservation-contact-form reservation-contact-quick">
                   <p className="reservation-confirmation-note">{text.requestNotice}</p>
-                  <button className="reservation-primary-button reservation-whatsapp-button" type="submit" data-testid="button-whatsapp-request">{text.request}<ArrowRight size={17} aria-hidden="true" /></button>
+                  <button className="reservation-primary-button reservation-whatsapp-button" type="button" onClick={openWhatsAppRequest} data-testid="button-whatsapp-request">{text.request}<ArrowRight size={17} aria-hidden="true" /></button>
                   <p className="reservation-privacy-note">{text.privacy}</p>
-                </form>
+                </div>
               </div>
               <div className="reservation-slide-actions">
                 <button type="button" className="reservation-back-button" onClick={() => setActiveStep(1)}><ArrowLeft size={15} aria-hidden="true" />{text.back}</button>

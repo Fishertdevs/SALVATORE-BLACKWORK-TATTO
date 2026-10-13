@@ -7008,6 +7008,58 @@ body,
 .reservation-embedded .reservation-placement input::placeholder,
 .reservation-embedded .reservation-contact-form input::placeholder { color: rgba(255, 248, 201, .62); }
 .reservation-embedded .reservation-confirmation-note { background: rgba(255, 248, 201, .12); }
+.reservation-embedded .reservation-preview-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(200px, .72fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 900px;
+  margin-inline: auto;
+  align-items: center;
+}
+.reservation-embedded .reservation-preview-figure {
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
+}
+.reservation-embedded .reservation-preview-figure img {
+  max-height: 340px;
+  object-position: center;
+}
+.reservation-embedded .reservation-slide-actions .reservation-back-button,
+.reservation-embedded .reservation-slide-actions .reservation-primary-button {
+  display: inline-flex;
+  width: 132px;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  padding: 0 .8rem;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--rf-red);
+  font: inherit;
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.reservation-embedded .reservation-slide-actions .reservation-back-button:hover,
+.reservation-embedded .reservation-slide-actions .reservation-primary-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(11, 10, 10, .12);
+}
+.reservation-embedded .reservation-contact-quick {
+  align-content: center;
+  gap: .7rem;
+}
+.reservation-embedded .reservation-contact-quick .reservation-confirmation-note {
+  margin: 0;
+}
+.reservation-embedded .reservation-contact-quick .reservation-whatsapp-button {
+  min-width: 220px;
+  margin-top: .35rem;
+}
+.reservation-embedded .reservation-contact-quick .reservation-privacy-note { margin-top: .25rem; }
 @keyframes reservation-image-reveal {
   from { opacity: 0; transform: scale(1.015); }
   to { opacity: 1; transform: scale(1); }
@@ -7031,6 +7083,14 @@ body,
   .reservation-embedded .reservation-steps { margin-top: 1.4rem; gap: .8rem; }
   .reservation-embedded .reservation-section-heading { flex-wrap: wrap; }
   .reservation-slide-actions { margin-top: 1.5rem; }
+  .reservation-embedded .reservation-preview-layout {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 500px;
+    gap: 1.25rem;
+  }
+  .reservation-embedded .reservation-preview-figure { max-width: 400px; }
+  .reservation-embedded .reservation-preview-figure img { max-height: 300px; }
+  .reservation-embedded .reservation-slide-actions { justify-content: center; flex-wrap: wrap; }
   .reservation-consent-row { grid-template-columns: minmax(0, 1fr); gap: .35rem; }
   .reservation-privacy-details { padding: .25rem 0; }
   .reservation-placement-action-row { grid-template-columns: minmax(0, 1fr); justify-items: center; }

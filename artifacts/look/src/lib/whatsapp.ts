@@ -47,11 +47,11 @@ export function getBookingWhatsAppHref(language: Language, now = new Date()) {
 export function getReservationWhatsAppHref(
   language: Language,
   details: {
-    name: string;
+    name?: string;
     email?: string;
     placement: string;
-    date: string;
-    time: string;
+    date?: string;
+    time?: string;
     hasPreview: boolean;
   },
   now = new Date(),
@@ -61,29 +61,29 @@ export function getReservationWhatsAppHref(
     language === "es"
       ? [
           `${greeting}, Salvatore. Quisiera solicitar una consulta de 30 minutos sobre mi tatuaje.`,
-          `Nombre: ${details.name}`,
+          details.name ? `Nombre: ${details.name}` : "",
           details.email ? `Correo: ${details.email}` : "",
           `Zona: ${details.placement}`,
-          `Fecha preferida: ${details.date}`,
-          `Hora preferida: ${details.time}`,
+          details.date ? `Fecha preferida: ${details.date}` : "",
+          details.time ? `Hora preferida: ${details.time}` : "",
           details.hasPreview
             ? "Adjuntaré la previsualización aproximada al enviar este mensaje."
             : "No tengo una previsualización disponible; revisaremos la idea durante la consulta.",
-          "Entiendo que el horario queda pendiente de confirmación del estudio.",
+          "Coordinaremos la fecha por WhatsApp; enviar el mensaje no confirma una cita.",
         ]
           .filter(Boolean)
           .join("\n")
       : [
           `${greeting}, Salvatore. I would like to request a 30-minute consultation about my tattoo.`,
-          `Name: ${details.name}`,
+          details.name ? `Name: ${details.name}` : "",
           details.email ? `Email: ${details.email}` : "",
           `Placement: ${details.placement}`,
-          `Preferred date: ${details.date}`,
-          `Preferred time: ${details.time}`,
+          details.date ? `Preferred date: ${details.date}` : "",
+          details.time ? `Preferred time: ${details.time}` : "",
           details.hasPreview
             ? "I will attach the approximate preview when I send this message."
             : "I do not have a preview available; we can review the idea during the consultation.",
-          "I understand the time is pending studio confirmation.",
+          "We will coordinate a date on WhatsApp; sending this message does not confirm an appointment.",
         ]
           .filter(Boolean)
           .join("\n");
