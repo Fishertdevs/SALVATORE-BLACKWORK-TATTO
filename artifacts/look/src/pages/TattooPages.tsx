@@ -6,11 +6,11 @@ import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
 import ReservationFlow from "@/pages/ReservationFlow";
-import aboutImg from "@assets/generated_images/about-blackwork-portrait.png";
-import portfolioImg from "@assets/generated_images/portfolio-blackwork-shoulder.png";
-import servicesImg from "@assets/generated_images/services-blackwork-detail.png";
-import contactImg from "@assets/generated_images/contact-blackwork-portrait.png";
-import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
+import aboutImg from "@assets/image_1792110990340.png";
+import portfolioImg from "@assets/image_1792111018777.png";
+import servicesImg from "@assets/image_1792111032350.png";
+import contactImg from "@assets/image_1792111044918.png";
+import contactPortraitImg from "@assets/image_1792111126909.png";
 
 const studioCopy = {
   es: {
@@ -86,9 +86,9 @@ const studioCopy = {
       hoursWeekdays: "Lun — Vie · 8:00 am — 9:00 pm",
       hoursWeekend: "Sáb — Dom · 8:00 am — 2:00 pm",
       phone: "TELÉFONO",
-      phoneValue: "+57 321 454 6835",
+      phoneValue: "+57 320 815 6043",
       whatsapp: "WHATSAPP",
-      whatsappValue: "+57 321 454 6835",
+      whatsappValue: "+57 320 815 6043",
       mapLabel: "ABRIR EN MAPS ↗",
     },
   },
@@ -165,9 +165,9 @@ const studioCopy = {
       hoursWeekdays: "Mon — Fri · 8:00 am — 9:00 pm",
       hoursWeekend: "Sat — Sun · 8:00 am — 2:00 pm",
       phone: "PHONE",
-      phoneValue: "+57 321 454 6835",
+      phoneValue: "+57 320 815 6043",
       whatsapp: "WHATSAPP",
-      whatsappValue: "+57 321 454 6835",
+      whatsappValue: "+57 320 815 6043",
       mapLabel: "OPEN IN MAPS ↗",
     },
   },
@@ -216,7 +216,7 @@ export function AboutPage({ language }: StudioProps) {
             <a className="tattoo-red-link" href="#studio-services">{copy.cta}</a>
           </article>
           <figure className="page-about-portrait">
-            <img src={aboutImg} alt={language === "es" ? "Retrato editorial de una modelo con tatuajes blackwork" : "Editorial portrait of a model with blackwork tattoos"} />
+            <img src={aboutImg} alt={language === "es" ? "Retrato editorial con una franja naranja sobre el rostro" : "Editorial portrait with an orange streak across the face"} />
             <figcaption>{copy.studio}</figcaption>
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
@@ -915,7 +915,7 @@ export function ContactPage({ language }: StudioProps) {
                         <div>
                           <Phone aria-hidden="true" />
                           <dt>{copy.phone}</dt>
-                          <dd><a href="tel:+573214546835">{copy.phoneValue}</a></dd>
+                          <dd><a href="tel:+573208156043">{copy.phoneValue}</a></dd>
                         </div>
                         <div>
                           <SiWhatsapp aria-hidden="true" />
@@ -995,7 +995,7 @@ export function ContactPage({ language }: StudioProps) {
             <img
               className="page-contact-portrait-base"
               src={contactPortraitImg}
-              alt={language === "es" ? "Retrato editorial con gafas escultóricas y estética blackwork" : "Editorial portrait with sculptural eyewear and blackwork styling"}
+              alt={language === "es" ? "Retrato editorial con tatuajes y accesorios metálicos" : "Editorial portrait with tattoos and metal accessories"}
             />
             {portraitColorSpots.map(({ x, y }, index) => (
               <img
