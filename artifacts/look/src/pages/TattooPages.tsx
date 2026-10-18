@@ -15,7 +15,7 @@ import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
 const studioCopy = {
   es: {
     about: {
-      title: ["LA MANO", "detrás", "DE LA TINTA"],
+      title: "CÓMO INICIÓ ESTE PROYECTO",
       intro: "Salvatore Blackwork parte de una convicción: cada pieza debe nacer de una conversación y encontrar su forma en el cuerpo.",
       storyTitle: ["Líneas precisas.", "Ritmo humano."],
       story: [
@@ -84,7 +84,7 @@ const studioCopy = {
   },
   en: {
     about: {
-      title: ["THE HAND", "behind", "THE INK"],
+      title: "HOW THIS PROJECT BEGAN",
       intro: "Salvatore Blackwork starts with a belief: every piece should grow from conversation and find its form on the body.",
       storyTitle: ["Sharp lines.", "Human rhythm."],
       story: [
@@ -184,7 +184,7 @@ export function AboutPage({ language }: StudioProps) {
     <StudioFrame id="studio-about" className="page-about">
       <section className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
-          <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em><br />{copy.title[2]}.</h1>
+          <h1>{copy.title}</h1>
         </header>
         <div className="page-about-editorial-grid">
           <article className="page-about-editorial-side page-about-editorial-side-left">
@@ -192,7 +192,7 @@ export function AboutPage({ language }: StudioProps) {
             <p>{copy.intro}</p>
           </article>
           <figure className="page-about-portrait">
-            <img src={aboutImg} alt={language === "es" ? "Retrato editorial con una franja naranja sobre el rostro" : "Editorial portrait with an orange streak across the face"} />
+            <img src={aboutImg} alt={language === "es" ? "Retrato editorial con tratamiento rojo sobre el rostro" : "Editorial portrait with a red tint across the face"} />
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
             <h2>{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>

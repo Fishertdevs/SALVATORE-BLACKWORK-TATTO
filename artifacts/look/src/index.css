@@ -7550,3 +7550,66 @@ body,
     margin: 0 auto;
   }
 }
+
+/* Softly fade into the About section, then keep its title on one line. */
+.page-about .page-about-hero-editorial {
+  position: relative;
+  isolation: isolate;
+  padding-top: clamp(190px, 15vw, 220px);
+  background: #BC2820;
+}
+
+.page-about .page-about-hero-editorial::before {
+  position: absolute;
+  z-index: 0;
+  top: -12px;
+  right: -4%;
+  left: -4%;
+  height: clamp(120px, 13vw, 180px);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 244, 233, .96) 0%,
+    rgba(255, 244, 233, .52) 42%,
+    rgba(255, 244, 233, 0) 100%
+  );
+  content: "";
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.page-about .page-about-editorial-heading,
+.page-about .page-about-editorial-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.page-about .page-about-editorial-heading h1 {
+  color: #FFF4E9;
+  font-size: clamp(1.25rem, 6.1vw, 7rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait {
+  background: #BC2820;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait img {
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-hero-editorial {
+    padding: 132px 20px 72px;
+  }
+
+  .page-about .page-about-hero-editorial::before {
+    height: 120px;
+  }
+
+  .page-about .page-about-editorial-heading h1 {
+    font-size: clamp(1.2rem, 6.2vw, 2.5rem);
+    line-height: 1;
+  }
+}
