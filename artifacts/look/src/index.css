@@ -7613,3 +7613,102 @@ body,
     line-height: 1;
   }
 }
+
+/* Match the hero image scale and let its perimeter dissolve into the red field. */
+.page-about .page-about-hero-editorial {
+  padding-bottom: 0;
+}
+
+.page-about .page-about-hero-editorial::before {
+  top: 0;
+  height: clamp(120px, 13vw, 180px);
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #fff 12%,
+    rgba(255, 255, 255, .84) 38%,
+    rgba(255, 255, 255, .42) 68%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: none;
+}
+
+.page-about .page-about-editorial-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(55vw, 820px)) minmax(0, 1fr);
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait {
+  width: min(55vw, 820px);
+  height: 100vh;
+  align-self: end;
+  background: #BC2820;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait img {
+  -webkit-mask-image: radial-gradient(ellipse 74% 66% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 74% 66% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
+}
+
+@media (max-width: 900px) {
+  .page-about .page-about-editorial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+    row-gap: 32px;
+  }
+
+  .page-about .page-about-editorial-side-left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .page-about .page-about-editorial-side-right {
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0;
+    border: 0;
+  }
+
+  .page-about .page-about-hero-editorial .page-about-portrait {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: min(55vw, 820px);
+    height: 100vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-hero-editorial {
+    padding-bottom: 0;
+  }
+
+  .page-about .page-about-hero-editorial::before {
+    height: 120px;
+  }
+
+  .page-about .page-about-editorial-grid {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .page-about .page-about-editorial-side-left {
+    order: 0;
+  }
+
+  .page-about .page-about-editorial-side-right {
+    order: 1;
+  }
+
+  .page-about .page-about-hero-editorial .page-about-portrait {
+    order: 2;
+    width: min(100%, 480px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+  }
+}

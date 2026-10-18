@@ -180,24 +180,85 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 export function AboutPage({ language }: StudioProps) {
   const copy = studioCopy[language].about;
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const section = aboutSectionRef.current;
+    if (
+      !section ||
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+
+    const targets = Array.from(section.querySelectorAll<HTMLElement>("[data-about-reveal]"));
+    if (!targets.length) return;
+
+    const getStartState = (element: HTMLElement) => {
+      const kind = element.dataset.aboutReveal;
+      const isTitle = kind === "title";
+      const isCopy = kind === "copy";
+      return {
+        autoAlpha: 0,
+        y: isTitle ? 42 : isCopy ? 18 : 30,
+        scale: isTitle ? 0.96 : 1,
+        filter: `blur(${isTitle ? 10 : isCopy ? 5 : 7}px)`,
+      };
+    };
+
+    targets.forEach((target) => gsap.set(target, getStartState(target)));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const element = entry.target as HTMLElement;
+        const kind = element.dataset.aboutReveal;
+        const isTitle = kind === "title";
+        const isCopy = kind === "copy";
+
+        gsap.killTweensOf(element);
+        gsap.fromTo(element, getStartState(element), {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: isTitle ? 1.3 : isCopy ? 0.86 : 1.05,
+          ease: isTitle ? "power4.out" : isCopy ? "power2.out" : "power3.out",
+          delay: isTitle ? 0 : isCopy ? 0.1 : 0.04,
+          overwrite: true,
+        });
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -8% 0px",
+    });
+
+    targets.forEach((target) => observer.observe(target));
+    return () => {
+      observer.disconnect();
+      gsap.killTweensOf(targets);
+      gsap.set(targets, { clearProps: "all" });
+    };
+  }, []);
+
   return (
     <StudioFrame id="studio-about" className="page-about">
-      <section className="page-about-hero page-about-hero-editorial">
+      <section ref={aboutSectionRef} className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
-          <h1>{copy.title}</h1>
+          <h1 data-about-reveal="title">{copy.title}</h1>
         </header>
         <div className="page-about-editorial-grid">
           <article className="page-about-editorial-side page-about-editorial-side-left">
-            <h2>{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
-            <p>{copy.intro}</p>
+            <h2 data-about-reveal="heading">{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
+            <p data-about-reveal="copy">{copy.intro}</p>
           </article>
           <figure className="page-about-portrait">
             <img src={aboutImg} alt={language === "es" ? "Retrato editorial con tratamiento rojo sobre el rostro" : "Editorial portrait with a red tint across the face"} />
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
-            <h2>{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
-            <p>{copy.story[0]}</p>
-            <p>{copy.story[1]}</p>
+            <h2 data-about-reveal="heading">{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
+            <p data-about-reveal="copy">{copy.story[0]}</p>
+            <p data-about-reveal="copy">{copy.story[1]}</p>
           </article>
         </div>
       </section>
