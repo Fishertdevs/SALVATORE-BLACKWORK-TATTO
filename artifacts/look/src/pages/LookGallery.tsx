@@ -5,7 +5,7 @@ import { StudioHomeSections } from "@/pages/TattooPages";
 import { getWhatsAppGreeting, getWhatsAppHref } from "@/lib/whatsapp";
 import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
-import mainImg from "@assets/image_1792110922850.png";
+import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
 
 const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL

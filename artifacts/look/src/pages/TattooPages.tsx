@@ -10,7 +10,7 @@ import aboutImg from "@assets/image_1792110990340.png";
 import portfolioImg from "@assets/image_1792111018777.png";
 import servicesImg from "@assets/image_1792111032350.png";
 import contactImg from "@assets/image_1792111044918.png";
-import contactPortraitImg from "@assets/image_1792111126909.png";
+import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
 
 const studioCopy = {
   es: {
