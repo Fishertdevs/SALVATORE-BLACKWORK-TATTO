@@ -687,3 +687,62 @@ body,
     padding: 18px 20px 70px;
   }
 }
+
+.about-center-story .page-about-editorial-heading {
+  display: block;
+  text-align: center;
+}
+
+.about-center-story .page-about-editorial-heading h1 {
+  width: 100%;
+  color: #fff4e9;
+  font-size: clamp(3.3rem, 7.2vw, 9rem);
+  line-height: .78;
+  text-align: center;
+}
+
+.about-center-story .page-about-editorial-heading h1 em {
+  color: #fff4e9;
+  font-family: "Beautique Display", "Helvetica Neue", serif;
+  font-style: normal;
+}
+
+.about-center-story .page-about-hero-editorial .page-about-portrait {
+  width: min(100%, 440px);
+  height: clamp(500px, 49vw, 660px);
+  justify-self: center;
+  overflow: visible;
+  background: transparent;
+}
+
+.about-center-story .page-about-hero-editorial .page-about-portrait img {
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: normal;
+  filter: none;
+  transform: none;
+  transition: none;
+  animation: none;
+  will-change: auto;
+  -webkit-mask-image: radial-gradient(ellipse 78% 84% at 50% 44%, #000 61%, rgba(0, 0, 0, .9) 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 84% at 50% 44%, #000 61%, rgba(0, 0, 0, .9) 78%, transparent 100%);
+}
+
+.about-center-story .page-about-hero-editorial .page-about-portrait:hover img {
+  transform: none;
+}
+
+@media (max-width: 700px) {
+  .about-center-story .page-about-editorial-heading h1 {
+    font-size: clamp(2.7rem, 12vw, 4.6rem);
+    line-height: .82;
+  }
+
+  .about-center-story .page-about-hero-editorial .page-about-portrait {
+    width: min(100%, 420px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+  }
+}

@@ -6,7 +6,7 @@ import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
 import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
 import ReservationFlow from "@/pages/ReservationFlow";
-import aboutImg from "@assets/image_1792110990340.png";
+import aboutImg from "@assets/image-Photoroom_(34)_1792364239140.png";
 import portfolioImg from "@assets/image_1792111018777.png";
 import servicesImg from "@assets/image_1792111032350.png";
 import contactImg from "@assets/image_1792111044918.png";
@@ -15,21 +15,12 @@ import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
 const studioCopy = {
   es: {
     about: {
-      eyebrow: "ACERCA DE / 002",
       title: ["LA MANO", "detrás", "DE LA TINTA"],
       intro: "Salvatore Blackwork parte de una convicción: cada pieza debe nacer de una conversación y encontrar su forma en el cuerpo.",
-      studio: "EL ESTUDIO / BOGOTÁ / 2026",
-      method: "EL MÉTODO SALVATORE",
       storyTitle: ["Líneas precisas.", "Ritmo humano."],
       story: [
         "El blackwork es el punto de partida: masas de sombra, espacio negativo controlado y formas que siguen el movimiento real del cuerpo.",
         "Cada pieza comienza con una conversación. Observamos la anatomía, la historia y la energía de quien se sienta frente a nosotros antes de dibujar una sola línea.",
-      ],
-      process: "DEL CONCEPTO A LA PIEL / 03 PASOS",
-      steps: [
-        ["ESCUCHAR", "Entender la idea, el cuerpo y lo que quieres que permanezca."],
-        ["DIBUJAR", "Convertir la conversación en una composición clara y propia."],
-        ["MARCAR", "Trabajar con calma para que el resultado se sienta inevitable."],
       ],
     },
     portfolio: {
@@ -93,21 +84,12 @@ const studioCopy = {
   },
   en: {
     about: {
-      eyebrow: "ABOUT / 002",
       title: ["THE HAND", "behind", "THE INK"],
       intro: "Salvatore Blackwork starts with a belief: every piece should grow from conversation and find its form on the body.",
-      studio: "THE STUDIO / BOGOTÁ / 2026",
-      method: "THE SALVATORE METHOD",
       storyTitle: ["Sharp lines.", "Human rhythm."],
       story: [
         "Blackwork is the starting point: fields of shadow, controlled negative space, and forms that follow the body's real movement.",
         "Every piece begins with a conversation. We study the anatomy, history, and energy of the person in front of us before drawing a single line.",
-      ],
-      process: "FROM CONCEPT TO SKIN / 03 STEPS",
-      steps: [
-        ["LISTEN", "Understand the idea, the body, and what you want to keep."],
-        ["DRAW", "Turn the conversation into a clear composition of your own."],
-        ["MARK", "Work patiently until the result feels inevitable."],
       ],
     },
     portfolio: {
@@ -202,34 +184,21 @@ export function AboutPage({ language }: StudioProps) {
     <StudioFrame id="studio-about" className="page-about">
       <section className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em><br />{copy.title[2]}.</h1>
-          <span>{copy.studio}</span>
         </header>
         <div className="page-about-editorial-grid">
           <article className="page-about-editorial-side page-about-editorial-side-left">
-              <span className="page-about-editorial-index">01 / {language === "es" ? "EL ORIGEN" : "OUR ORIGIN"}</span>
             <h2>{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
             <p>{copy.intro}</p>
           </article>
           <figure className="page-about-portrait">
             <img src={aboutImg} alt={language === "es" ? "Retrato editorial con una franja naranja sobre el rostro" : "Editorial portrait with an orange streak across the face"} />
-            <figcaption>{copy.studio}</figcaption>
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
-              <span className="page-about-editorial-index">02 / {language === "es" ? "EL LENGUAJE" : "THE LANGUAGE"}</span>
             <h2>{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
             <p>{copy.story[0]}</p>
             <p>{copy.story[1]}</p>
           </article>
-        </div>
-      </section>
-      <section className="page-about-process">
-        <Eyebrow>{copy.process}</Eyebrow>
-        <div className="page-about-process-grid">
-          {copy.steps.map(([title, description], index) => (
-            <article key={title}><strong>0{index + 1}</strong><h3>{title}</h3><p>{description}</p></article>
-          ))}
         </div>
       </section>
     </StudioFrame>
