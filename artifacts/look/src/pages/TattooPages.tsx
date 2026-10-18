@@ -17,7 +17,7 @@ const studioCopy = {
     about: {
       eyebrow: "ACERCA DE / 002",
       title: ["LA MANO", "detrás", "DE LA TINTA"],
-      intro: "Una práctica construida alrededor de la paciencia, la precisión y la confianza.",
+      intro: "Salvatore Blackwork parte de una convicción: cada pieza debe nacer de una conversación y encontrar su forma en el cuerpo.",
       studio: "EL ESTUDIO / BOGOTÁ / 2026",
       method: "EL MÉTODO SALVATORE",
       storyTitle: ["Líneas precisas.", "Ritmo humano."],
@@ -26,7 +26,6 @@ const studioCopy = {
         "Cada pieza comienza con una conversación. Observamos la anatomía, la historia y la energía de quien se sienta frente a nosotros antes de dibujar una sola línea.",
       ],
       process: "DEL CONCEPTO A LA PIEL / 03 PASOS",
-      cta: "CONOCER EL MÉTODO →",
       steps: [
         ["ESCUCHAR", "Entender la idea, el cuerpo y lo que quieres que permanezca."],
         ["DIBUJAR", "Convertir la conversación en una composición clara y propia."],
@@ -96,7 +95,7 @@ const studioCopy = {
     about: {
       eyebrow: "ABOUT / 002",
       title: ["THE HAND", "behind", "THE INK"],
-      intro: "A practice built around patience, precision, and trust.",
+      intro: "Salvatore Blackwork starts with a belief: every piece should grow from conversation and find its form on the body.",
       studio: "THE STUDIO / BOGOTÁ / 2026",
       method: "THE SALVATORE METHOD",
       storyTitle: ["Sharp lines.", "Human rhythm."],
@@ -105,7 +104,6 @@ const studioCopy = {
         "Every piece begins with a conversation. We study the anatomy, history, and energy of the person in front of us before drawing a single line.",
       ],
       process: "FROM CONCEPT TO SKIN / 03 STEPS",
-      cta: "MEET THE METHOD →",
       steps: [
         ["LISTEN", "Understand the idea, the body, and what you want to keep."],
         ["DRAW", "Turn the conversation into a clear composition of your own."],
@@ -210,17 +208,16 @@ export function AboutPage({ language }: StudioProps) {
         </header>
         <div className="page-about-editorial-grid">
           <article className="page-about-editorial-side page-about-editorial-side-left">
-            <span className="page-about-editorial-index">01 / {language === "es" ? "LA PRÁCTICA" : "THE PRACTICE"}</span>
+              <span className="page-about-editorial-index">01 / {language === "es" ? "EL ORIGEN" : "OUR ORIGIN"}</span>
             <h2>{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
             <p>{copy.intro}</p>
-            <a className="tattoo-red-link" href="#studio-services">{copy.cta}</a>
           </article>
           <figure className="page-about-portrait">
             <img src={aboutImg} alt={language === "es" ? "Retrato editorial con una franja naranja sobre el rostro" : "Editorial portrait with an orange streak across the face"} />
             <figcaption>{copy.studio}</figcaption>
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
-            <span className="page-about-editorial-index">02 / {language === "es" ? "LA MIRADA" : "THE GAZE"}</span>
+              <span className="page-about-editorial-index">02 / {language === "es" ? "EL LENGUAJE" : "THE LANGUAGE"}</span>
             <h2>{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
             <p>{copy.story[0]}</p>
             <p>{copy.story[1]}</p>

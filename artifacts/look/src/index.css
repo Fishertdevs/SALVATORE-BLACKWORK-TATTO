@@ -7276,3 +7276,191 @@ body,
     font-size: clamp(.56rem, 2.5vw, .76rem);
   }
 }
+
+/* About section: extend the portrait's rendered red across the whole story. */
+.page-about {
+  background: #BC2820;
+  color: #FFF4E9;
+}
+
+.page-about .page-about-hero-editorial,
+.page-about .page-about-process {
+  background: #BC2820;
+}
+
+.page-about .page-about-hero-editorial {
+  padding: clamp(52px, 6vw, 84px) clamp(20px, 5vw, 76px) 46px;
+}
+
+.page-about .page-about-editorial-heading {
+  margin-bottom: clamp(30px, 3.4vw, 48px);
+}
+
+.page-about .page-about-editorial-heading .tattoo-eyebrow,
+.page-about .page-about-editorial-index {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-editorial-heading h1 {
+  color: #FFF4E9;
+  font-size: clamp(3rem, 6.5vw, 7.5rem);
+}
+
+.page-about .page-about-editorial-heading h1 em {
+  color: #24100F;
+}
+
+.page-about .page-about-editorial-heading > span {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-editorial-grid {
+  grid-template-columns: minmax(170px, .82fr) minmax(280px, 1fr) minmax(190px, .82fr);
+  gap: clamp(18px, 3vw, 44px);
+  min-height: clamp(500px, 49vw, 660px);
+}
+
+.page-about .page-about-editorial-side-left,
+.page-about .page-about-editorial-side-right {
+  justify-content: center;
+}
+
+.page-about .page-about-editorial-side-right .page-about-editorial-index {
+  margin-bottom: 26px;
+}
+
+.page-about .page-about-editorial-side h2,
+.page-about .page-about-editorial-side h2 em {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-editorial-side p {
+  color: rgba(255, 244, 233, .9);
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait {
+  width: 100%;
+  height: clamp(500px, 49vw, 660px);
+  aspect-ratio: 2 / 3;
+  align-self: center;
+  background: #E63027;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait img {
+  object-fit: cover;
+  object-position: center top;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait figcaption {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-process {
+  padding: 22px clamp(20px, 5vw, 76px) clamp(72px, 8vw, 112px);
+  color: #FFF4E9;
+}
+
+.page-about .page-about-process > .tattoo-eyebrow {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-process-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 24px;
+  border-color: rgba(36, 16, 15, .34);
+}
+
+.page-about .page-about-process-grid article {
+  border-color: rgba(36, 16, 15, .34);
+}
+
+.page-about .page-about-process-grid strong {
+  color: #24100F;
+}
+
+.page-about .page-about-process-grid h3 {
+  color: #FFF4E9;
+}
+
+.page-about .page-about-process-grid p {
+  color: rgba(255, 244, 233, .84);
+}
+
+@media (max-width: 900px) {
+  .page-about .page-about-editorial-grid {
+    grid-template-columns: minmax(160px, .8fr) minmax(280px, 1fr);
+  }
+
+  .page-about .page-about-editorial-side-right {
+    border-top-color: rgba(255, 244, 233, .32);
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-hero-editorial {
+    padding: 46px 20px 36px;
+  }
+
+  .page-about .page-about-editorial-heading {
+    margin-bottom: 28px;
+  }
+
+  .page-about .page-about-editorial-heading h1 {
+    font-size: clamp(2.7rem, 12vw, 4.6rem);
+  }
+
+  .page-about .page-about-editorial-heading > span {
+    margin-top: 18px;
+  }
+
+  .page-about .page-about-editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .page-about .page-about-hero-editorial .page-about-portrait {
+    order: -1;
+    width: min(100%, 420px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+  }
+
+  .page-about .page-about-editorial-side,
+  .page-about .page-about-editorial-side-left,
+  .page-about .page-about-editorial-side-right {
+    display: block;
+    padding: 0;
+  }
+
+  .page-about .page-about-editorial-side h2 {
+    font-size: clamp(2.6rem, 11vw, 4.5rem);
+  }
+
+  .page-about .page-about-editorial-side-right {
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 244, 233, .32);
+  }
+
+  .page-about .page-about-process {
+    padding: 18px 20px 70px;
+  }
+
+  .page-about .page-about-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-about .page-about-process-grid article {
+    min-height: 210px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(36, 16, 15, .34);
+  }
+
+  .page-about .page-about-process-grid article:last-child {
+    border-bottom: 0;
+  }
+}

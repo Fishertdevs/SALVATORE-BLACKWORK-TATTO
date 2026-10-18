@@ -1,0 +1,689 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap");
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/__mockup/images/HelveticaNeueLight.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/__mockup/images/HelveticaNeueMedium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/__mockup/images/HelveticaNeueBold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Beautique Display";
+  src: url("/__mockup/images/BeautiqueDisplay-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Beautique Display";
+  src: url("/__mockup/images/BeautiqueDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --button-outline: rgba(0, 0, 0, .10);
+  --badge-outline: rgba(0, 0, 0, .05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(0, 0, 0, .03);
+  --elevate-2: rgba(0, 0, 0, .08);
+  --background: 45 24% 96%;
+  --foreground: 0 0% 11%;
+  --border: 0 0% 76%;
+  --card: 45 24% 96%;
+  --card-foreground: 0 0% 11%;
+  --card-border: 0 0% 76%;
+  --sidebar: 45 24% 96%;
+  --sidebar-foreground: 0 0% 11%;
+  --sidebar-border: 0 0% 76%;
+  --sidebar-primary: 3 77% 52%;
+  --sidebar-primary-foreground: 45 24% 96%;
+  --sidebar-accent: 45 20% 90%;
+  --sidebar-accent-foreground: 0 0% 11%;
+  --sidebar-ring: 3 77% 52%;
+  --popover: 45 24% 96%;
+  --popover-foreground: 0 0% 11%;
+  --popover-border: 0 0% 76%;
+  --primary: 3 77% 52%;
+  --primary-foreground: 45 24% 96%;
+  --secondary: 0 0% 11%;
+  --secondary-foreground: 45 24% 96%;
+  --muted: 45 16% 90%;
+  --muted-foreground: 0 0% 38%;
+  --accent: 3 77% 52%;
+  --accent-foreground: 45 24% 96%;
+  --destructive: 3 77% 52%;
+  --destructive-foreground: 45 24% 96%;
+  --input: 0 0% 76%;
+  --ring: 3 77% 52%;
+  --chart-1: 3 77% 52%;
+  --chart-2: 0 0% 11%;
+  --chart-3: 45 20% 70%;
+  --chart-4: 45 30% 55%;
+  --chart-5: 0 0% 38%;
+  --app-font-sans: "Helvetica Neue", sans-serif;
+  --app-font-serif: "Beautique Display", serif;
+  --app-font-mono: "Helvetica Neue", monospace;
+  --radius: .5rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 2px 4px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 4px 6px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 8px 10px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  --tracking-normal: 0em;
+  --spacing: .25rem;
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+  --primary-border: hsl(var(--primary));
+  --secondary-border: hsl(var(--secondary));
+  --muted-border: hsl(var(--muted));
+  --accent-border: hsl(var(--accent));
+  --destructive-border: hsl(var(--destructive));
+}
+
+.dark {
+  --button-outline: rgba(255, 255, 255, .10);
+  --badge-outline: rgba(255, 255, 255, .05);
+  --opaque-button-border-intensity: 9;
+  --elevate-1: rgba(255, 255, 255, .04);
+  --elevate-2: rgba(255, 255, 255, .09);
+  --background: 0 0% 8%;
+  --foreground: 45 24% 96%;
+  --border: 0 0% 28%;
+  --card: 0 0% 11%;
+  --card-foreground: 45 24% 96%;
+  --card-border: 0 0% 28%;
+  --sidebar: 0 0% 8%;
+  --sidebar-foreground: 45 24% 96%;
+  --sidebar-border: 0 0% 28%;
+  --sidebar-primary: 3 77% 52%;
+  --sidebar-primary-foreground: 45 24% 96%;
+  --sidebar-accent: 0 0% 16%;
+  --sidebar-accent-foreground: 45 24% 96%;
+  --sidebar-ring: 3 77% 52%;
+  --popover: 0 0% 11%;
+  --popover-foreground: 45 24% 96%;
+  --popover-border: 0 0% 28%;
+  --primary: 3 77% 52%;
+  --primary-foreground: 45 24% 96%;
+  --secondary: 45 24% 96%;
+  --secondary-foreground: 0 0% 11%;
+  --muted: 0 0% 16%;
+  --muted-foreground: 45 12% 72%;
+  --accent: 3 77% 52%;
+  --accent-foreground: 45 24% 96%;
+  --destructive: 3 77% 52%;
+  --destructive-foreground: 45 24% 96%;
+  --input: 0 0% 28%;
+  --ring: 3 77% 52%;
+  --chart-1: 3 77% 52%;
+  --chart-2: 45 24% 96%;
+  --chart-3: 0 0% 38%;
+  --chart-4: 45 20% 70%;
+  --chart-5: 45 12% 72%;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 2px 4px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 4px 6px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0), 0px 8px 10px -1px hsl(202.8169 89.1213% 53.1373% / 0);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+.about-mockup-root {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.tattoo-page {
+  min-height: 100vh;
+  color: #171515;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.tattoo-page *,
+.tattoo-page *::before,
+.tattoo-page *::after {
+  box-sizing: border-box;
+}
+
+.tattoo-page a {
+  color: inherit;
+}
+
+.tattoo-eyebrow {
+  margin: 0;
+  color: #e63027;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Exact baseline copied from the app's current About section. */
+.page-about-hero-editorial {
+  display: block;
+  min-height: 0;
+  padding: clamp(72px, 8vw, 132px) clamp(20px, 4.8vw, 76px) clamp(90px, 10vw, 150px);
+  background: #fff;
+}
+
+.page-about-editorial-heading {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  max-width: 1380px;
+  margin: 0 auto clamp(42px, 5vw, 76px);
+}
+
+.page-about-editorial-heading .tattoo-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: clamp(22px, 3vw, 38px);
+}
+
+.page-about-editorial-heading h1 {
+  margin: 0;
+  color: #e63027;
+  font-family: "Beautique Display", "Helvetica Neue", serif;
+  font-size: clamp(3.3rem, 7.2vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -.075em;
+  line-height: .78;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-heading h1 em {
+  color: #171515;
+  font-family: "Beautique Display", "Helvetica Neue", serif;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-about-editorial-heading > span {
+  align-self: end;
+  padding-bottom: .4em;
+  color: #e63027;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.page-about-editorial-grid {
+  display: grid;
+  grid-template-columns: minmax(190px, .72fr) minmax(320px, 1.12fr) minmax(220px, .9fr);
+  gap: clamp(16px, 2.3vw, 34px);
+  max-width: 1380px;
+  min-height: clamp(480px, 47vw, 700px);
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.page-about-editorial-side {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: clamp(4px, 2vw, 30px);
+}
+
+.page-about-editorial-side-left {
+  justify-content: center;
+  padding-right: clamp(0px, 1.5vw, 24px);
+}
+
+.page-about-editorial-side-right {
+  justify-content: flex-end;
+  padding-left: clamp(0px, 1.5vw, 24px);
+}
+
+.page-about-editorial-index {
+  display: block;
+  margin-bottom: 26px;
+  color: #e63027;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-side h2 {
+  margin: 0 0 28px;
+  color: #171515;
+  font-family: "Beautique Display", "Helvetica Neue", serif;
+  font-size: clamp(2.25rem, 3.6vw, 4.8rem);
+  font-weight: 400;
+  letter-spacing: -.06em;
+  line-height: .82;
+  text-transform: uppercase;
+}
+
+.page-about-editorial-side h2 em {
+  color: #e63027;
+  font-family: "Beautique Display", "Helvetica Neue", serif;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.page-about-editorial-side p {
+  max-width: 310px;
+  margin: 0;
+  color: rgba(23, 21, 21, .78);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.page-about-editorial-side-right p + p {
+  margin-top: 18px;
+}
+
+.page-about-editorial-side .tattoo-red-link {
+  align-self: flex-start;
+  margin-top: 34px;
+}
+
+.page-about-editorial-side-right .page-about-editorial-index {
+  margin-bottom: auto;
+}
+
+.page-about-hero-editorial .page-about-portrait {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #e63027;
+}
+
+.page-about-hero-editorial .page-about-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+  transition: transform 700ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.page-about-hero-editorial .page-about-portrait:hover img {
+  transform: scale(1.035);
+}
+
+.page-about-hero-editorial .page-about-portrait figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.page-about-process {
+  position: relative;
+  padding: clamp(72px, 8vw, 132px) clamp(20px, 4.8vw, 76px) clamp(96px, 11vw, 164px);
+  background: #111;
+  color: #fff;
+}
+
+.page-about-process > .tattoo-eyebrow {
+  max-width: 1380px;
+  margin: 0 auto;
+  color: #e63027;
+}
+
+.page-about-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 1380px;
+  margin: clamp(34px, 4vw, 58px) auto 0;
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
+}
+
+.page-about-process-grid article {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  border-right: 1px solid rgba(255, 255, 255, .3);
+}
+
+.page-about-process-grid article:last-child {
+  border-right: 0;
+}
+
+.page-about-process-grid strong {
+  color: #e63027;
+  font-family: "Beautique Display", serif;
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.page-about-process-grid h3 {
+  margin: 30px 0 0;
+  color: #fff;
+  font-family: "Beautique Display", serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 400;
+  line-height: .9;
+}
+
+.page-about-process-grid p {
+  max-width: 220px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, .72);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .page-about-editorial-grid {
+    grid-template-columns: minmax(170px, .8fr) minmax(280px, 1fr);
+  }
+
+  .page-about-editorial-side-right {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(160px, .8fr) 1fr;
+    column-gap: 30px;
+    padding: 36px 0 0;
+    border-top: 1px solid rgba(23, 21, 21, .22);
+  }
+
+  .page-about-editorial-side-right .page-about-editorial-index {
+    grid-row: span 2;
+    margin: 0;
+  }
+
+  .page-about-editorial-side-right p + p {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about-hero-editorial {
+    padding: 76px 20px 92px;
+  }
+
+  .page-about-editorial-heading {
+    display: block;
+    margin-bottom: 38px;
+  }
+
+  .page-about-editorial-heading h1 {
+    font-size: clamp(3rem, 14vw, 5.2rem);
+  }
+
+  .page-about-editorial-heading > span {
+    display: block;
+    margin-top: 24px;
+  }
+
+  .page-about-editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+  }
+
+  .page-about-hero-editorial .page-about-portrait {
+    order: -1;
+    height: 126vw;
+    min-height: 420px;
+  }
+
+  .page-about-editorial-side,
+  .page-about-editorial-side-left,
+  .page-about-editorial-side-right {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+
+  .page-about-editorial-side-left {
+    order: 0;
+  }
+
+  .page-about-editorial-side-right {
+    order: 1;
+    padding-top: 38px;
+    border-top: 1px solid rgba(23, 21, 21, .22);
+  }
+
+  .page-about-editorial-side-right .page-about-editorial-index {
+    margin-bottom: 26px;
+  }
+
+  .page-about-editorial-side h2 {
+    font-size: clamp(2.8rem, 13vw, 5rem);
+  }
+
+  .page-about-process {
+    padding: 76px 20px 96px;
+  }
+
+  .page-about-process-grid {
+    margin-top: 38px;
+  }
+
+  .page-about-process-grid article {
+    min-height: 210px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+  }
+
+  .page-about-process-grid article:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* Proposed treatment: saturated color pulled from the current portrait. */
+.about-center-story {
+  --about-red: #bc2820;
+  min-height: 100vh;
+  background: var(--about-red);
+}
+
+.about-center-story .page-about-hero-editorial {
+  padding: clamp(42px, 5vw, 72px) clamp(20px, 5vw, 76px) 56px;
+  background: var(--about-red);
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-editorial-heading {
+  grid-template-columns: minmax(0, 1fr) auto;
+  max-width: 1380px;
+  margin-bottom: clamp(24px, 3vw, 42px);
+}
+
+.about-center-story .page-about-editorial-heading .tattoo-eyebrow,
+.about-center-story .page-about-editorial-index {
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-editorial-heading h1 {
+  color: #fff4e9;
+  font-size: clamp(3rem, 6.5vw, 7.5rem);
+}
+
+.about-center-story .page-about-editorial-heading h1 em {
+  color: #24100f;
+}
+
+.about-center-story .page-about-editorial-heading > span {
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-editorial-grid {
+  grid-template-columns: minmax(190px, .82fr) minmax(320px, 1fr) minmax(210px, .82fr);
+  gap: clamp(18px, 3.2vw, 48px);
+  min-height: clamp(500px, 49vw, 650px);
+}
+
+.about-center-story .page-about-editorial-side-left {
+  justify-content: center;
+}
+
+.about-center-story .page-about-editorial-side-right {
+  justify-content: center;
+}
+
+.about-center-story .page-about-editorial-side-right .page-about-editorial-index {
+  margin-bottom: 26px;
+}
+
+.about-center-story .page-about-editorial-side h2,
+.about-center-story .page-about-editorial-side h2 em {
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-editorial-side p {
+  color: rgba(255, 244, 233, .9);
+}
+
+.about-center-story .page-about-hero-editorial .page-about-portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  align-self: center;
+  background: #e63027;
+}
+
+.about-center-story .page-about-hero-editorial .page-about-portrait img {
+  object-fit: cover;
+  object-position: center top;
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.1);
+}
+
+.about-center-story .page-about-process {
+  padding: 16px clamp(20px, 5vw, 76px) clamp(72px, 8vw, 112px);
+  background: var(--about-red);
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-process > .tattoo-eyebrow {
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-process-grid {
+  margin-top: 24px;
+  border-color: rgba(36, 16, 15, .34);
+}
+
+.about-center-story .page-about-process-grid article {
+  border-color: rgba(36, 16, 15, .34);
+}
+
+.about-center-story .page-about-process-grid strong {
+  color: #24100f;
+}
+
+.about-center-story .page-about-process-grid h3 {
+  color: #fff4e9;
+}
+
+.about-center-story .page-about-process-grid p {
+  color: rgba(255, 244, 233, .84);
+}
+
+@media (max-width: 900px) {
+  .about-center-story .page-about-editorial-grid {
+    grid-template-columns: minmax(160px, .8fr) minmax(280px, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .about-center-story .page-about-hero-editorial {
+    padding: 46px 20px 36px;
+  }
+
+  .about-center-story .page-about-editorial-heading {
+    margin-bottom: 28px;
+  }
+
+  .about-center-story .page-about-editorial-heading h1 {
+    font-size: clamp(2.7rem, 12vw, 4.6rem);
+  }
+
+  .about-center-story .page-about-editorial-heading > span {
+    margin-top: 18px;
+  }
+
+  .about-center-story .page-about-editorial-grid {
+    display: flex;
+    gap: 32px;
+  }
+
+  .about-center-story .page-about-hero-editorial .page-about-portrait {
+    order: -1;
+    width: min(100%, 420px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+  }
+
+  .about-center-story .page-about-editorial-side,
+  .about-center-story .page-about-editorial-side-left,
+  .about-center-story .page-about-editorial-side-right {
+    display: block;
+    padding: 0;
+  }
+
+  .about-center-story .page-about-editorial-side h2 {
+    font-size: clamp(2.6rem, 11vw, 4.5rem);
+  }
+
+  .about-center-story .page-about-editorial-side-right {
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 244, 233, .32);
+  }
+
+  .about-center-story .page-about-process {
+    padding: 18px 20px 70px;
+  }
+}
