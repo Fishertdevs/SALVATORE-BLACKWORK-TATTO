@@ -7647,8 +7647,8 @@ body,
 }
 
 .page-about .page-about-hero-editorial .page-about-portrait img {
-  -webkit-mask-image: radial-gradient(ellipse 74% 66% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
-  mask-image: radial-gradient(ellipse 74% 66% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 74% 52% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 74% 52% at 50% 50%, #000 48%, rgba(0, 0, 0, .86) 62%, rgba(0, 0, 0, .48) 80%, transparent 100%);
 }
 
 @media (max-width: 900px) {
@@ -7711,4 +7711,44 @@ body,
     aspect-ratio: 2 / 3;
     margin: 0 auto;
   }
+}
+
+/* Pure white About palette; the portrait is the only red element. */
+.page-about {
+  background: #fff;
+  color: #111;
+}
+
+.page-about .page-about-hero-editorial,
+.page-about .page-about-process {
+  background: #fff;
+  color: #111;
+}
+
+.page-about .page-about-hero-editorial::before {
+  display: none;
+}
+
+.page-about .page-about-editorial-heading h1,
+.page-about .page-about-editorial-heading h1 em,
+.page-about .page-about-editorial-side h2,
+.page-about .page-about-editorial-side h2 em {
+  color: #111;
+}
+
+.page-about .page-about-editorial-side p {
+  color: #111;
+}
+
+.page-about .page-about-editorial-side-right {
+  border-top-color: rgba(17, 17, 17, .2);
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait {
+  background: #fff;
+}
+
+.page-about .page-about-hero-editorial .page-about-portrait img {
+  mix-blend-mode: normal;
+  filter: grayscale(1) sepia(1) saturate(7) hue-rotate(320deg) contrast(1.08) brightness(.9);
 }

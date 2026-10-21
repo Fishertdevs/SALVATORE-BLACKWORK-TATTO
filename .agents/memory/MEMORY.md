@@ -8,3 +8,4 @@
 - [Workspace server runtime dependencies](workspace-server-runtime-dependencies.md) — server-bundled apps may need direct runtime dependencies even when a shared workspace library declares them.
 - [Manifesto and reservations placement](approved-manifesto-phrase.md) — keep the quote independent; put reservations in the existing red services callout, not a new page.
 - [Reservations visual flow](reservations-visual-flow.md) — keep the red booking panel concise with a one-step-at-a-time three-stage slider.
+- [Scroll-reveal visibility](about-reveal-intersection.md) — don't pre-clip observed text; use opacity offscreen so intersection checks can trigger replay.

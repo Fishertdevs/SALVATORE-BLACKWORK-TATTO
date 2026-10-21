@@ -184,60 +184,67 @@ export function AboutPage({ language }: StudioProps) {
 
   useEffect(() => {
     const section = aboutSectionRef.current;
-    if (
-      !section ||
-      typeof IntersectionObserver === "undefined" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) return;
+    if (!section || typeof IntersectionObserver === "undefined") return;
 
     const targets = Array.from(section.querySelectorAll<HTMLElement>("[data-about-reveal]"));
     if (!targets.length) return;
 
-    const getStartState = (element: HTMLElement) => {
-      const kind = element.dataset.aboutReveal;
-      const isTitle = kind === "title";
-      const isCopy = kind === "copy";
-      return {
-        autoAlpha: 0,
-        y: isTitle ? 42 : isCopy ? 18 : 30,
-        scale: isTitle ? 0.96 : 1,
-        filter: `blur(${isTitle ? 10 : isCopy ? 5 : 7}px)`,
-      };
+    const revealFrom = {
+      clipPath: "inset(0px 100% 0px 0px)",
+      opacity: 1,
+    };
+    const revealTo = {
+      clipPath: "inset(0px 0% 0px 0px)",
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.out",
     };
 
-    targets.forEach((target) => gsap.set(target, getStartState(target)));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(targets, { clipPath: "inset(0px 0% 0px 0px)", opacity: 1 });
+      return () => gsap.set(targets, { clearProps: "clipPath,opacity" });
+    }
+
+    const activeTargets = new WeakSet<HTMLElement>();
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
         const element = entry.target as HTMLElement;
-        const kind = element.dataset.aboutReveal;
-        const isTitle = kind === "title";
-        const isCopy = kind === "copy";
-
-        gsap.killTweensOf(element);
-        gsap.fromTo(element, getStartState(element), {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: isTitle ? 1.3 : isCopy ? 0.86 : 1.05,
-          ease: isTitle ? "power4.out" : isCopy ? "power2.out" : "power3.out",
-          delay: isTitle ? 0 : isCopy ? 0.1 : 0.04,
-          overwrite: true,
-        });
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+          if (activeTargets.has(element)) return;
+          activeTargets.add(element);
+          gsap.killTweensOf(element);
+          gsap.fromTo(element, revealFrom, {
+            ...revealTo,
+            delay: element.dataset.aboutReveal === "title"
+              ? 0
+              : element.dataset.aboutReveal === "heading"
+                ? 0.18
+                : 0.32,
+          });
+        } else if (!entry.isIntersecting) {
+          gsap.killTweensOf(element);
+          activeTargets.delete(element);
+          gsap.set(element, {
+            clipPath: "inset(0px 0% 0px 0px)",
+            opacity: 0,
+          });
+        } else if (!activeTargets.has(element)) {
+          gsap.set(element, {
+            clipPath: "inset(0px 0% 0px 0px)",
+            opacity: 0,
+          });
+        }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -8% 0px",
+      threshold: [0, 0.15],
     });
 
     targets.forEach((target) => observer.observe(target));
     return () => {
       observer.disconnect();
       gsap.killTweensOf(targets);
-      gsap.set(targets, { clearProps: "all" });
+      gsap.set(targets, { clearProps: "clipPath,opacity" });
     };
   }, []);
 
