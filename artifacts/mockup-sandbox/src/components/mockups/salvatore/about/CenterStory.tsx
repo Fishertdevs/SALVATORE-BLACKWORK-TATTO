@@ -50,10 +50,7 @@ export function CenterStory() {
       <section ref={sectionRef} className="tattoo-page page-about about-center-story">
         <section className="page-about-hero-editorial">
           <header className="page-about-editorial-heading">
-            <h1 data-about-reveal="title">
-              <span>CÓMO INICIÓ</span>
-              <span>ESTE PROYECTO</span>
-            </h1>
+            <h1 data-about-reveal="title">CÓMO INICIÓ ESTE PROYECTO</h1>
           </header>
           <div className="page-about-editorial-grid">
             <article className="page-about-editorial-side page-about-editorial-side-left">

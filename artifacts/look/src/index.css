@@ -7796,22 +7796,22 @@ body,
 
 .page-about .page-about-editorial-heading {
   margin: 0 auto clamp(56px, 7vw, 96px);
+  overflow: visible;
+  padding-inline: clamp(4px, 1vw, 16px);
   text-align: center;
 }
 
 .page-about .page-about-editorial-heading h1 {
-  display: grid;
-  justify-items: center;
-  gap: .02em;
-  color: #111;
-  font-size: clamp(1.85rem, 5.2vw, 5.6rem);
-  line-height: .88;
-  letter-spacing: -.055em;
-  white-space: normal;
-}
-
-.page-about .page-about-editorial-heading h1 span {
   display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: .08em .04em .16em;
+  color: #111;
+  font-size: clamp(1rem, 5.2vw, 4.9rem);
+  line-height: 1.18;
+  letter-spacing: -.05em;
+  overflow: visible;
+  white-space: nowrap;
 }
 
 .page-about .page-about-editorial-grid {
@@ -7944,8 +7944,8 @@ body,
   }
 
   .page-about .page-about-editorial-heading h1 {
-    font-size: clamp(1.8rem, 8.8vw, 2.8rem);
-    line-height: .92;
+    font-size: clamp(.9rem, 5.2vw, 1.35rem);
+    line-height: 1.18;
   }
 
   .page-about .page-about-editorial-grid {

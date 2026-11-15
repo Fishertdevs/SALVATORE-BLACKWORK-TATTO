@@ -214,14 +214,17 @@ export function AboutPage({ language }: StudioProps) {
           if (activeTargets.has(element)) return;
           activeTargets.add(element);
           gsap.killTweensOf(element);
-          gsap.fromTo(element, revealFrom, {
-            ...revealTo,
-            delay: element.dataset.aboutReveal === "title"
-              ? 0
-              : element.dataset.aboutReveal === "heading"
-                ? 0.18
-                : 0.32,
-          });
+          const isTitle = element.dataset.aboutReveal === "title";
+          gsap.fromTo(
+            element,
+            isTitle ? { opacity: 0, x: -14 } : revealFrom,
+            {
+              ...(isTitle ? { opacity: 1, x: 0 } : revealTo),
+              duration: 1.2,
+              ease: "power3.out",
+              delay: isTitle ? 0 : element.dataset.aboutReveal === "heading" ? 0.18 : 0.32,
+            },
+          );
         } else if (!entry.isIntersecting) {
           gsap.killTweensOf(element);
           activeTargets.delete(element);
@@ -253,8 +256,7 @@ export function AboutPage({ language }: StudioProps) {
       <section ref={aboutSectionRef} className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
           <h1 data-about-reveal="title">
-            <span>{copy.title[0]}</span>
-            <span>{copy.title[1]}</span>
+            {copy.title.join(" ")}
           </h1>
         </header>
         <div className="page-about-editorial-grid">
