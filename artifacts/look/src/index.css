@@ -8331,10 +8331,40 @@ body,
   text-transform: uppercase;
 }
 
+.page-portfolio .page-portfolio-title-line {
+  display: block;
+  will-change: transform, opacity, filter;
+}
+
+.page-portfolio .page-portfolio-hero-copy {
+  max-width: 380px;
+  margin: 0 0 10px;
+  transform: translateY(-clamp(18px, 3vw, 40px));
+}
+
+.page-portfolio .page-portfolio-hero-copy .tattoo-eyebrow {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.page-portfolio .page-portfolio-hero-copy p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
 @media (max-width: 700px) {
   .page-portfolio .page-portfolio-hero h1 {
     font-size: clamp(.9rem, 5.2vw, 1.35rem);
     line-height: 1.18;
+  }
+}
+
+@media (max-width: 900px) {
+  .page-portfolio .page-portfolio-hero-copy {
+    margin-top: 12px;
+    transform: none;
   }
 }
 

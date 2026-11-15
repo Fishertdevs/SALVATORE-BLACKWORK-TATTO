@@ -25,7 +25,8 @@ const studioCopy = {
     },
     portfolio: {
       title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
-      intro: "Una selección de tatuajes blackwork creados a medida, pensados para integrarse con la forma y el movimiento de cada cuerpo.",
+      specialtyLabel: "ESPECIALIDADES · FUNZA",
+      intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
       works: [
         ["HOMBRO / LLAMA NEGRA", "Tatuaje blackwork en el hombro"],
         ["CUELLO / ESTUDIO DE ESPINAS", "Composición blackwork ornamental en el cuello"],
@@ -92,7 +93,8 @@ const studioCopy = {
     },
     portfolio: {
       title: ["SELECTED", "BLACKWORK", "WORKS"],
-      intro: "A selection of custom blackwork tattoos, designed to follow each body's shape and movement.",
+      specialtyLabel: "SPECIALTIES · FUNZA",
+      intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
       works: [
         ["SHOULDER / BLACK FLAME", "Blackwork tattoo on the shoulder"],
         ["NECK / THORN STUDY", "Ornamental blackwork composition on the neck"],
@@ -310,14 +312,66 @@ export function PortfolioPage({ language }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
   const classes = ["page-portfolio-card-large", "page-portfolio-card-small", "page-portfolio-card-small"];
+  const portfolioHeroRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const title = portfolioHeroRef.current?.querySelector("h1");
+    if (!title || typeof IntersectionObserver === "undefined") return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const root = document.getElementById("fullscreen-section");
+    const titleLines = Array.from(title.querySelectorAll<HTMLElement>(".page-portfolio-title-line"));
+    let entrance: gsap.core.Tween | undefined;
+    const hiddenState = { autoAlpha: 0, y: 32, filter: "blur(6px)" };
+    gsap.set(titleLines, hiddenState);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        entrance?.kill();
+        gsap.killTweensOf(titleLines);
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          entrance = gsap.to(titleLines, {
+            autoAlpha: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 1,
+            stagger: 0.14,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        } else if (!entry.isIntersecting) {
+          gsap.set(titleLines, hiddenState);
+        }
+      },
+      { root, threshold: [0, 0.12] },
+    );
+    observer.observe(title);
+
+    return () => {
+      observer.disconnect();
+      entrance?.kill();
+      gsap.killTweensOf(titleLines);
+      gsap.set(titleLines, { clearProps: "all" });
+    };
+  }, [language]);
 
   return (
     <StudioFrame id="studio-portfolio" className="page-portfolio">
-      <section className="page-portfolio-hero">
+      <section className="page-portfolio-hero" ref={portfolioHeroRef}>
         <div>
-          <h1>{copy.title[0]}<br />{copy.title[1]}<br />{copy.title[2]}.</h1>
+          <h1>
+            <span className="page-portfolio-title-line">{copy.title[0]}</span>
+            <span className="page-portfolio-title-line">{copy.title[1]}</span>
+            <span className="page-portfolio-title-line">{copy.title[2]}.</span>
+          </h1>
         </div>
-        <p>{copy.intro}</p>
+        <div className="page-portfolio-hero-copy">
+          <Eyebrow>{copy.specialtyLabel}</Eyebrow>
+          <p>{copy.intro}</p>
+        </div>
       </section>
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (
