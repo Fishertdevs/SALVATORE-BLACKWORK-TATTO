@@ -8056,6 +8056,22 @@ body,
   }
 }
 
+.page-about .page-about-editorial-beat h2,
+.page-about .page-about-editorial-beat p {
+  width: min(230px, calc(100% + 48px));
+  max-width: 230px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .page-about .page-about-editorial-beat h2,
+  .page-about .page-about-editorial-beat p {
+    width: 100%;
+  }
+}
+
 .page-about .page-about-editorial-side p {
   font-size: clamp(1.1rem, 1.35vw, 1.4rem);
   line-height: 1.45;
