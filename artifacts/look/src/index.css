@@ -713,7 +713,7 @@ body,
   border: 0;
   padding: 0;
   background: transparent;
-  color: #E63027;
+  color: #FFFFFF;
   cursor: pointer;
   font: inherit;
   font-size: 15px;
@@ -743,7 +743,7 @@ body,
 
 .look-root .announcement-arrow:hover,
 .look-root .announcement-arrow:focus-visible {
-  color: #FFF4E9;
+  color: #FFFFFF;
 }
 
 .look-root .announcement-arrow:focus-visible {
@@ -4227,7 +4227,7 @@ body,
   border: 0;
   padding: 0;
   background: transparent;
-  color: #E63027;
+  color: #FFFFFF;
   cursor: pointer;
   font: inherit;
   font-size: 14px;
