@@ -6855,6 +6855,9 @@ body,
   --rf-red: #0B0A0A;
   --rf-muted: rgba(255, 248, 201, .78);
   --rf-line: rgba(255, 248, 201, .38);
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 100%;
   min-height: 0;
   padding: 0;
   color: var(--rf-ink);
