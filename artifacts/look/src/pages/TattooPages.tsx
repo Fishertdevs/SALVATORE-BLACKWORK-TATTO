@@ -369,6 +369,8 @@ export function PortfolioPage({ language }: StudioProps) {
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
   const portfolioKeywordsRef = useRef<HTMLDivElement | null>(null);
+  const galleryTagsRef = useRef<HTMLDivElement | null>(null);
+  const portfolioGalleryRef = useRef<HTMLElement | null>(null);
   const [activeStyleIndex, setActiveStyleIndex] = useState<number | null>(null);
   const [activeStyleSlide, setActiveStyleSlide] = useState(0);
 
@@ -498,6 +500,75 @@ export function PortfolioPage({ language }: StudioProps) {
     };
   }, [language]);
 
+  useEffect(() => {
+    const tagRow = galleryTagsRef.current;
+    const gallery = portfolioGalleryRef.current;
+    if (!tagRow || !gallery || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const tags = Array.from(tagRow.querySelectorAll<HTMLElement>(".tattoo-eyebrow"));
+    const visuals = Array.from(
+      gallery.querySelectorAll<HTMLElement>(".page-portfolio-card-visual"),
+    );
+    if (!tags.length || !visuals.length) return;
+
+    const targets = [tagRow, ...visuals];
+    const hiddenTagState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
+    const hiddenVisualState = { autoAlpha: 0, y: 32, scale: .97, filter: "blur(7px)" };
+    const activeTweens = new Map<HTMLElement, gsap.core.Tween>();
+    gsap.set(tags, hiddenTagState);
+    gsap.set(visuals, hiddenVisualState);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          const targetItems = target === tagRow ? tags : [target];
+          const hiddenState = target === tagRow ? hiddenTagState : hiddenVisualState;
+
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+            activeTweens.get(target)?.kill();
+            gsap.killTweensOf(targetItems);
+            const tween = target === tagRow
+              ? gsap.to(tags, {
+                  autoAlpha: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  duration: .75,
+                  stagger: .12,
+                  ease: "power3.out",
+                  overwrite: true,
+                })
+              : gsap.to(target, {
+                  autoAlpha: 1,
+                  y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                  duration: .9,
+                  ease: "power3.out",
+                  overwrite: true,
+                });
+            activeTweens.set(target, tween);
+          } else if (!entry.isIntersecting) {
+            activeTweens.get(target)?.kill();
+            activeTweens.delete(target);
+            gsap.killTweensOf(targetItems);
+            gsap.set(targetItems, hiddenState);
+          }
+        });
+      },
+      { root: document.getElementById("fullscreen-section"), threshold: [0, 0.15] },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => {
+      observer.disconnect();
+      activeTweens.forEach((tween) => tween.kill());
+      gsap.killTweensOf([...tags, ...visuals]);
+      gsap.set([...tags, ...visuals], { clearProps: "all" });
+    };
+  }, [language]);
+
   const moveStyleSlide = (direction: number) => {
     setActiveStyleSlide((current) => (current + direction + 2) % 2);
   };
@@ -527,10 +598,18 @@ export function PortfolioPage({ language }: StudioProps) {
           </span>
         ))}
       </div>
-      <div className="page-portfolio-gallery-tags" aria-label={language === "es" ? "Etiquetas de la galería" : "Gallery labels"}>
-        {copy.galleryTags.map((tag) => <span className="tattoo-eyebrow" key={tag}>{tag}</span>)}
+      <div
+        className="page-portfolio-gallery-tags"
+        ref={galleryTagsRef}
+        aria-label={language === "es" ? "Etiquetas de la galería" : "Gallery labels"}
+      >
+        {copy.galleryTags.map((tag) => (
+          <span className="tattoo-eyebrow" aria-label={tag} key={tag}>
+            {tag.replace("Ñ", "N\u0303")}
+          </span>
+        ))}
       </div>
-      <section className="page-portfolio-gallery">
+      <section className="page-portfolio-gallery" ref={portfolioGalleryRef}>
         {copy.works.map(([name, alt], index) => (
           <article className="page-portfolio-card" key={name}>
             <div className={`page-portfolio-card-visual${activeStyleIndex === index ? " is-open" : ""}`}>
