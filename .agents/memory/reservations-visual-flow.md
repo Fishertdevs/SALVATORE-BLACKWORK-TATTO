@@ -3,9 +3,9 @@ name: Reservations visual flow
 description: Visual structure and copy for the booking flow inside the red callout.
 ---
 
-Keep reservations in the existing red callout and preserve its compact “RESERVA TU PROYECTO” header, title, and three-step dropdown navigation. Show one step at a time; open the first step when the section loads so the booking form is not mistaken for hidden content. The tattoo artist creates the design; do not generate or preview designs with AI in the reservation flow. Collect the project idea, body placement, and the customer's preferred date and time, then send those details to WhatsApp for the artist to confirm manually. A requested time is not a confirmed appointment.
+Keep reservations in the existing red callout and preserve its compact “RESERVA TU PROYECTO” header, title, and three-step dropdown navigation. Keep the steps collapsed initially and show one at a time when selected. Leave enough top spacing below the navigation so the section does not appear pressed against it. The tattoo artist creates the design; do not generate or preview designs with AI in the reservation flow. Collect the project idea, body placement, and the customer's preferred date and time, then send those details to WhatsApp for the artist to confirm manually. A requested time is not a confirmed appointment.
 
-**Why:** The user asked to keep the approved title and compact menu, removed AI because tattoo design is the artist's work, and chose WhatsApp confirmation for proposed appointment times.
+**Why:** The user asked to keep the approved title and compact menu, clarified that the preview issue was vertical placement rather than the collapsed menu, removed AI because tattoo design is the artist's work, and chose WhatsApp confirmation for proposed appointment times.
 
 **How to apply:** Make future reservation changes inside the existing red callout; do not replace the header or menu with a taller booking layout.
 

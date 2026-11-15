@@ -6840,6 +6840,7 @@ body,
 
 /* Reservations replaces the existing red services callout; it is not a new page. */
 .page-services-callout.reservation-callout {
+  margin-top: clamp(2.5rem, 7vh, 4rem);
   margin-bottom: clamp(2.5rem, 8vw, 7rem);
   padding: clamp(1.5rem, 5vw, 4.5rem);
   padding-top: clamp(2.25rem, 4vw, 3.25rem);
@@ -7225,7 +7226,7 @@ body,
 }
 @media (max-width: 760px) {
   .page-services-callout.reservation-callout {
-    margin: 0 20px clamp(2rem, 8vw, 4rem);
+    margin: clamp(1.5rem, 6vh, 2.5rem) 20px clamp(2rem, 8vw, 4rem);
     padding-top: clamp(1.25rem, 4vw, 1.5rem);
   }
   .reservation-slider { min-height: 0; }
