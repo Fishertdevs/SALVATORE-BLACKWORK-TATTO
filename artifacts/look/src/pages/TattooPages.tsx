@@ -27,6 +27,7 @@ const studioCopy = {
       title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
       specialtyLabel: "ESPECIALIDADES",
       intro: "Salvatore es tatuador en Funza y desarrolla proyectos de blackwork, ornamental y neotribal. Cada proceso comienza con una conversación para conocer tu idea, tus referencias y lo que quieres expresar. A partir de ahí, considera la ubicación y el movimiento del cuerpo para crear un diseño original, pensado para tu anatomía y para el flujo natural de la zona. Trabaja con tinta negra, líneas precisas, contraste y espacios negativos para construir composiciones equilibradas, desde piezas pequeñas hasta proyectos de mayor escala. El tamaño, la ubicación y cada detalle se definen contigo para que el resultado tenga identidad propia y se sienta parte de ti.",
+      keywords: ["TINTA NEGRA", "CONTRASTE", "LÍNEA PRECISA", "ANATOMÍA"],
       galleryTags: ["BLACKWORK", "DISEÑO A MEDIDA"],
       works: [
         ["BLACKWORK / CONTRASTE", "Tatuaje blackwork de alto contraste"],
@@ -122,6 +123,7 @@ const studioCopy = {
       title: ["SELECTED", "BLACKWORK", "WORKS"],
       specialtyLabel: "SPECIALTIES",
       intro: "Salvatore is a tattoo artist in Funza who develops blackwork, ornamental, and neo-tribal projects. Each process begins with a conversation about your idea, references, and what you want to express. He then considers placement and body movement to create an original design shaped for your anatomy and the natural flow of the area. Black ink, precise lines, contrast, and negative space build balanced compositions, from small pieces to larger projects. Size, placement, and every detail are defined with you so the result feels personal and true to you.",
+      keywords: ["BLACK INK", "CONTRAST", "PRECISE LINES", "ANATOMY"],
       galleryTags: ["BLACKWORK", "CUSTOM DESIGN"],
       works: [
         ["BLACKWORK / CONTRAST", "High-contrast blackwork tattoo"],
@@ -469,6 +471,17 @@ export function PortfolioPage({ language }: StudioProps) {
           <p>{copy.intro}</p>
         </div>
       </section>
+      <div
+        className="page-portfolio-keywords"
+        aria-label={language === "es" ? "Palabras clave del estudio" : "Studio keywords"}
+      >
+        {copy.keywords.map((keyword, index) => (
+          <span className="tattoo-eyebrow" key={keyword}>
+            {keyword}
+            {index < copy.keywords.length - 1 && <span className="page-portfolio-keyword-separator" aria-hidden="true">·</span>}
+          </span>
+        ))}
+      </div>
       <div className="page-portfolio-gallery-tags" aria-label={language === "es" ? "Etiquetas de la galería" : "Gallery labels"}>
         {copy.galleryTags.map((tag) => <span className="tattoo-eyebrow" key={tag}>{tag}</span>)}
       </div>
