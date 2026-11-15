@@ -56,11 +56,10 @@ export function getBookingWhatsAppHref(language: Language, now = new Date()) {
 
 export type ReservationWhatsAppDetails = {
   name?: string;
-  email?: string;
+  placement: string;
   tattooBrief: string;
-  date?: string;
-  time?: string;
-  hasPreview: boolean;
+  date: string;
+  time: string;
 };
 
 export function getReservationWhatsAppMessage(
@@ -71,24 +70,24 @@ export function getReservationWhatsAppMessage(
   const greeting = getGreeting(language, now);
   return language === "es"
     ? [
-        `${greeting}, Salvatore. Quisiera solicitar una cita de consulta para un proyecto de tatuaje.`,
+        `${greeting}, Salvatore. Quisiera solicitar una cita para un proyecto de tatuaje.`,
         details.name ? `Nombre: ${details.name}` : "",
-        `Detalles del tatuaje: ${details.tattooBrief}`,
-        details.hasPreview
-          ? "Incluyo una aproximación visual generada con IA para conversar sobre el proyecto."
-          : "No se generó una aproximación; quisiera revisar la idea durante la consulta.",
-        "Quedo atento/a a la disponibilidad. Entiendo que este mensaje es una solicitud y no confirma una cita.",
+        `Zona del cuerpo: ${details.placement}`,
+        `Idea y detalles: ${details.tattooBrief}`,
+        `Fecha que prefiero: ${details.date}`,
+        `Hora que prefiero: ${details.time}`,
+        "Entiendo que esta es una solicitud y que la cita queda confirmada cuando me respondas.",
       ]
         .filter(Boolean)
         .join("\n")
     : [
-        `${greeting}, Salvatore. I would like to request a consultation for a tattoo project.`,
+        `${greeting}, Salvatore. I would like to request an appointment for a tattoo project.`,
         details.name ? `Name: ${details.name}` : "",
-        `Tattoo details: ${details.tattooBrief}`,
-        details.hasPreview
-          ? "I am including an AI-generated visual approximation to discuss the project."
-          : "No preview was generated; I would like to review the idea during the consultation.",
-        "Please share your availability. I understand this is a request, not a confirmed appointment.",
+        `Body placement: ${details.placement}`,
+        `Idea and details: ${details.tattooBrief}`,
+        `Preferred date: ${details.date}`,
+        `Preferred time: ${details.time}`,
+        "I understand this is a request and the appointment is confirmed only after your reply.",
       ]
         .filter(Boolean)
         .join("\n");
