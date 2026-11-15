@@ -3171,7 +3171,7 @@ body,
 
 .page-portfolio .page-portfolio-note .tattoo-eyebrow {
   margin: 0 auto;
-  font-size: clamp(12px, 1vw, 16px);
+  font-size: clamp(16px, 1.7vw, 24px);
   line-height: 1.3;
 }
 
