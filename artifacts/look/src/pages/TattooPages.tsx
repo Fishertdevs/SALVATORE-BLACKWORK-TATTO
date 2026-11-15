@@ -27,6 +27,7 @@ const studioCopy = {
       title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
       specialtyLabel: "ESPECIALIDADES",
       intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
+      galleryTags: ["BLACKWORK", "DISEÑO A MEDIDA"],
       works: [
         ["BLACKWORK / CONTRASTE", "Tatuaje blackwork de alto contraste"],
         ["NEOTRIBAL / LÍNEAS FLUIDAS", "Composición de líneas fluidas estilo neotribal"],
@@ -121,6 +122,7 @@ const studioCopy = {
       title: ["SELECTED", "BLACKWORK", "WORKS"],
       specialtyLabel: "SPECIALTIES",
       intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
+      galleryTags: ["BLACKWORK", "CUSTOM DESIGN"],
       works: [
         ["BLACKWORK / CONTRAST", "High-contrast blackwork tattoo"],
         ["NEO-TRIBAL / FLOWING LINES", "Neo-tribal composition with flowing lines"],
@@ -428,6 +430,9 @@ export function PortfolioPage({ language }: StudioProps) {
           <p>{copy.intro}</p>
         </div>
       </section>
+      <div className="page-portfolio-gallery-tags" aria-label={language === "es" ? "Etiquetas de la galería" : "Gallery labels"}>
+        {copy.galleryTags.map((tag) => <span key={tag}>{tag}</span>)}
+      </div>
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (
           <article className="page-portfolio-card" key={name}>
