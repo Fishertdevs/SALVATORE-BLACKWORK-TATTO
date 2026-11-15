@@ -1053,7 +1053,7 @@ body,
 .about-center-story .page-about-editorial-side {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  height: min(88vh, 720px);
+  height: min(100vh, 760px);
   align-self: start;
   min-width: 0;
   padding: 0;
@@ -1089,7 +1089,7 @@ body,
 
 .about-center-story .page-about-editorial-beat-right-1 {
   align-self: start;
-  margin-top: clamp(4px, 2vh, 24px);
+  margin-top: clamp(24px, 5vh, 64px);
 }
 
 .about-center-story .page-about-editorial-beat-right-2 {
@@ -1114,6 +1114,8 @@ body,
 .about-center-story .page-about-editorial-side p {
   max-width: 230px;
   width: min(230px, 100%);
+  height: auto;
+  min-height: 8.5em;
   margin: 0;
   color: #111;
   font-size: clamp(13px, 1vw, 14px);
@@ -1262,7 +1264,7 @@ body,
 }
 
 .about-center-story .page-about-editorial-side h2 {
-  width: min(230px, 100%);
+  width: min(230px, calc(100% + 48px));
   max-width: 230px;
   font-size: clamp(1.1rem, 1.85vw, 1.5rem);
   letter-spacing: -.04em;
@@ -1284,7 +1286,7 @@ body,
 
 .about-center-story .page-about-editorial-beat h2,
 .about-center-story .page-about-editorial-beat p {
-  width: min(230px, 100%);
+  width: min(230px, calc(100% + 48px));
   max-width: 230px;
   margin-right: auto;
   margin-left: auto;
@@ -1310,7 +1312,7 @@ body,
   color: #E63027;
   content: attr(data-about-divider);
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(16px, 1.65vw, 22px);
   font-weight: 400;
   letter-spacing: -.04em;
   line-height: 1.1;
@@ -1320,9 +1322,31 @@ body,
   transform: translate(-50%, -50%);
 }
 
+.about-center-story .page-about-editorial-side-left::after {
+  right: -56px;
+  left: auto;
+  transform: translateY(-50%);
+}
+
+.about-center-story .page-about-editorial-side-right::after {
+  right: auto;
+  left: -56px;
+  transform: translateY(-50%);
+}
+
 @media (max-width: 900px) {
   .about-center-story .page-about-editorial-side::after {
     display: none;
+  }
+
+  .about-center-story .page-about-editorial-beat h2,
+  .about-center-story .page-about-editorial-beat p {
+    width: 100%;
+  }
+
+  .about-center-story .page-about-editorial-side p {
+    height: auto;
+    min-height: 0;
   }
 }
 
