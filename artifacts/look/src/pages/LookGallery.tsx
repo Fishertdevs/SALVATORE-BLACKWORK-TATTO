@@ -344,7 +344,7 @@ function MobileLookGallery({
   onWelcomeComplete: (isComplete: boolean) => void;
 }) {
   const copy = galleryCopy[language];
-  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-reservas", "#studio-contact"];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-reservas", "#studio-contact"];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -683,7 +683,7 @@ export default function LookGallery() {
   }, []);
 
   const copy = galleryCopy[language];
-  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-services", "#studio-reservas", "#studio-contact"];
+  const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-reservas", "#studio-contact"];
   const galleryRef = useRef<HTMLDivElement>(null);
   const fullSectionRef = useRef<HTMLDivElement>(null);
   const fullContentRef = useRef<HTMLDivElement>(null);

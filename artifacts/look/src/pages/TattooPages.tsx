@@ -60,23 +60,9 @@ const studioCopy = {
           facts: ["Geometría y repetición visual", "Equilibrio entre detalle y forma"],
         },
       ],
-      noteTitle: ["Cada pieza,", "hecha para ti."],
-      cta: "HABLEMOS DE TU DISEÑO →",
-    },
-    services: {
-      eyebrow: "SERVICIOS / 004",
-      title: ["EL TRABAJO", "en detalle"],
-      intro: "No hay una fórmula única. Cada proyecto recibe el nivel de detalle y tiempo que necesita.",
-      imageCaption: "EL CUERPO / LA LÍNEA / EL PESO",
-      items: [
-        ["01", "BLACKWORK A MEDIDA", "Diseños construidos desde cero alrededor de tu idea, tu anatomía y tu ritmo."],
-        ["02", "ESTUDIOS PEQUEÑOS", "Piezas pequeñas para comenzar una colección de tinta con intención."],
-        ["03", "COMPOSICIONES GRANDES", "Proyectos de mayor escala pensados para moverse con el cuerpo y el tiempo."],
-        ["04", "CONSULTA", "Una conversación clara para definir concepto, ubicación, tamaño y proceso."],
-      ],
-      method: "EL MÉTODO SALVATORE",
-      callout: ["PRECISIÓN", "sobre el ruido"],
-      cta: "CONOCER EL ESTUDIO →",
+      noteTitle: ["¿QUIERES SER", "UN LIENZO?"],
+      noteIntro: "Salvatore busca personas interesadas en ofrecerse como lienzo para nuevas piezas de tatuaje.",
+      cta: "OFRECERME COMO LIENZO →",
     },
     manifesto: {
       phraseLines: ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
@@ -156,23 +142,9 @@ const studioCopy = {
           facts: ["Geometry and visual repetition", "Balance between detail and form"],
         },
       ],
-      noteTitle: ["Every piece,", "made for you."],
-      cta: "LET'S TALK ABOUT YOUR DESIGN →",
-    },
-    services: {
-      eyebrow: "SERVICES / 004",
-      title: ["THE WORK", "in detail"],
-      intro: "There is no single formula. Every project receives the detail and time it needs.",
-      imageCaption: "THE BODY / THE LINE / THE WEIGHT",
-      items: [
-        ["01", "CUSTOM BLACKWORK", "Designs built from scratch around your idea, anatomy, and rhythm."],
-        ["02", "SMALL STUDIES", "Small pieces to begin an intentional collection of ink."],
-        ["03", "LARGE COMPOSITIONS", "Larger projects designed to move with the body and time."],
-        ["04", "CONSULTATION", "A clear conversation to define concept, placement, size, and process."],
-      ],
-      method: "THE SALVATORE METHOD",
-      callout: ["PRECISION", "over noise"],
-      cta: "MEET THE STUDIO →",
+      noteTitle: ["WANT TO BE", "A CANVAS?"],
+      noteIntro: "Salvatore is looking for people interested in being a canvas for new tattoo pieces.",
+      cta: "OFFER TO BE A CANVAS →",
     },
     manifesto: {
       phraseLines: ["Blackwork:", "shadow finds", "its voice", "on your skin."],
@@ -691,38 +663,17 @@ export function PortfolioPage({ language }: StudioProps) {
       </section>
       <section className="page-portfolio-note">
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
-        <a className="tattoo-red-link" href="#studio-about">{copy.cta}</a>
+        <p>{copy.noteIntro}</p>
+        <a className="tattoo-red-link" href="#studio-contact">{copy.cta}</a>
       </section>
     </StudioFrame>
   );
 }
 
-export function ServicesPage({ language }: StudioProps) {
-  const copy = studioCopy[language].services;
+export function ReservationsPage({ language }: StudioProps) {
   return (
-    <StudioFrame id="studio-services" className="page-services">
-      <section className="page-services-hero">
-        <div className="page-services-hero-copy">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <h1>{copy.title[0]}<br /><em>{copy.title[1]}.</em></h1>
-          <p>{copy.intro}</p>
-        </div>
-        <figure className="page-services-image">
-          <img src={servicesImg} alt={language === "es" ? "Detalle de tatuaje blackwork en una composición editorial" : "Blackwork tattoo detail in an editorial composition"} />
-          <figcaption>{copy.imageCaption}</figcaption>
-        </figure>
-      </section>
-      <section className="page-services-list">
-        {copy.items.map(([number, name, description]) => (
-          <article key={number}>
-            <span>{number}</span>
-            <h2>{name}</h2>
-            <p>{description}</p>
-            <span className="page-services-arrow">↗</span>
-          </article>
-        ))}
-      </section>
-      <section id="studio-reservas" className="page-services-callout reservation-callout">
+    <StudioFrame id="studio-reservas" className="page-reservations">
+      <section className="page-services-callout reservation-callout">
         <ReservationFlow language={language} />
       </section>
     </StudioFrame>
@@ -1447,7 +1398,7 @@ export function StudioHomeSections({ language }: StudioProps) {
     <div className="studio-home-sections" aria-label="Información del estudio">
       <AboutPage language={language} />
       <PortfolioPage language={language} />
-      <ServicesPage language={language} />
+      <ReservationsPage language={language} />
       <ManifestoPage language={language} />
       <FAQPage language={language} />
       <ContactPage language={language} />

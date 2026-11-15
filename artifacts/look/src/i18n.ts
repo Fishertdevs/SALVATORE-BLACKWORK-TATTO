@@ -13,7 +13,7 @@ export function persistLanguage(language: Language) {
 
 export const galleryCopy = {
   es: {
-    nav: ["INICIO", "ACERCA DE", "PORTFOLIO", "SERVICIOS", "RESERVAS", "CONTACTO"],
+    nav: ["INICIO", "ACERCA DE", "PORTFOLIO", "RESERVAS", "CONTACTO"],
     promoLabel: "Promociones y novedades",
     promoPrevious: "Aviso anterior",
     promoNext: "Aviso siguiente",
@@ -76,7 +76,7 @@ export const galleryCopy = {
     footerLegalPrivacy: "POLÍTICA DE PRIVACIDAD",
   },
   en: {
-    nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "BOOKING", "CONTACT"],
+    nav: ["HOME", "ABOUT", "PORTFOLIO", "BOOKING", "CONTACT"],
     promoLabel: "Promotions and updates",
     promoPrevious: "Previous announcement",
     promoNext: "Next announcement",
