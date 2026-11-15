@@ -28,9 +28,9 @@ const studioCopy = {
       specialtyLabel: "ESPECIALIDADES",
       intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
       works: [
-        ["HOMBRO / LLAMA NEGRA", "Tatuaje blackwork en el hombro"],
-        ["CUELLO / ESTUDIO DE ESPINAS", "Composición blackwork ornamental en el cuello"],
-        ["MANO / GUIÓN DEL VACÍO", "Tatuaje blackwork en la mano"],
+        ["BLACKWORK / CONTRASTE", "Tatuaje blackwork de alto contraste"],
+        ["NEOTRIBAL / LÍNEAS FLUIDAS", "Composición de líneas fluidas estilo neotribal"],
+        ["TRIBAL / GEOMETRÍA", "Diseño tribal de líneas negras"],
       ],
       noteTitle: ["Cada pieza,", "hecha para ti."],
       cta: "HABLEMOS DE TU DISEÑO →",
@@ -96,9 +96,9 @@ const studioCopy = {
       specialtyLabel: "SPECIALTIES",
       intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
       works: [
-        ["SHOULDER / BLACK FLAME", "Blackwork tattoo on the shoulder"],
-        ["NECK / THORN STUDY", "Ornamental blackwork composition on the neck"],
-        ["HAND / VOID SCRIPT", "Blackwork tattoo on the hand"],
+        ["BLACKWORK / CONTRAST", "High-contrast blackwork tattoo"],
+        ["NEO-TRIBAL / FLOWING LINES", "Neo-tribal composition with flowing lines"],
+        ["TRIBAL / GEOMETRY", "Black-line tribal design"],
       ],
       noteTitle: ["Every piece,", "made for you."],
       cta: "LET'S TALK ABOUT YOUR DESIGN →",
@@ -311,7 +311,6 @@ export function AboutPage({ language }: StudioProps) {
 export function PortfolioPage({ language }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
-  const classes = ["page-portfolio-card-large", "page-portfolio-card-small", "page-portfolio-card-small"];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -375,7 +374,7 @@ export function PortfolioPage({ language }: StudioProps) {
       </section>
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (
-          <article className={classes[index]} key={name}>
+          <article className="page-portfolio-card" key={name}>
             <figure>
               <img src={images[index]} alt={alt} />
             </figure>
