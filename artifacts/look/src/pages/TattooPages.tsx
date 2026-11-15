@@ -491,11 +491,7 @@ export function PortfolioPage({ language }: StudioProps) {
           gsap.set(items, hiddenState);
         }
       },
-      {
-        root,
-        rootMargin: `0px 0px -${Math.round((root?.clientHeight ?? window.innerHeight) * 0.32)}px 0px`,
-        threshold: [0, 0.2],
-      },
+      { root, threshold: [0, 0.2] },
     );
     observer.observe(keywords);
 
