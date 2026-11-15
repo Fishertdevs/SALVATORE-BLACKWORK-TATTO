@@ -3096,7 +3096,7 @@ body,
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(18px, 2.5vw, 36px);
   align-items: start;
-  width: min(100%, 900px);
+  width: min(100%, 980px);
   margin: 0 auto;
   padding: 0 clamp(24px, 4vw, 52px) 10vw;
 }
@@ -3778,7 +3778,6 @@ body,
 
   .page-portfolio-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(100%, 760px);
     gap: 24px;
     padding: 0 20px 22vw;
   }
@@ -8323,7 +8322,7 @@ body,
 }
 
 .page-portfolio .page-portfolio-title-line:last-child {
-  text-align: right;
+  text-align: left;
 }
 
 .page-portfolio .page-portfolio-hero-copy {
@@ -8370,7 +8369,7 @@ body,
 @media (max-width: 600px) {
   .page-portfolio .page-portfolio-gallery {
     grid-template-columns: minmax(0, 1fr);
-    width: min(100%, 360px);
+    max-width: 480px;
     margin: 0 auto;
   }
 }
