@@ -8084,6 +8084,7 @@ body,
 
 .page-about .page-about-editorial-side {
   position: relative;
+  z-index: 2;
 }
 
 .page-about .page-about-editorial-side::after {

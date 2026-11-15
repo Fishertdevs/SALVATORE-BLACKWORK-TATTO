@@ -1310,6 +1310,7 @@ body,
 
 .about-center-story .page-about-editorial-side {
   position: relative;
+  z-index: 2;
 }
 
 .about-center-story .page-about-editorial-side::after {
