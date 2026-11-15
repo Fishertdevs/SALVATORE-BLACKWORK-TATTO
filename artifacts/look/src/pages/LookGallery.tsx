@@ -18,6 +18,43 @@ function shouldSkipWelcome() {
   );
 }
 
+type PromoCopy = {
+  promoLabel: string;
+  promoPrevious: string;
+  promoNext: string;
+  promoSlides: ReadonlyArray<{ message: string; action: string; href: string; kind?: "social" }>;
+};
+
+function PromotionStrip({ copy }: { copy: PromoCopy }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slide = copy.promoSlides[activeIndex];
+
+  const moveSlide = (direction: -1 | 1) => {
+    setActiveIndex((current) => (current + direction + copy.promoSlides.length) % copy.promoSlides.length);
+  };
+
+  return (
+    <div className="announcement-bar" role="region" aria-label={copy.promoLabel}>
+      <button type="button" className="announcement-arrow" aria-label={copy.promoPrevious} onClick={() => moveSlide(-1)}>
+        <span aria-hidden="true">←</span>
+      </button>
+      <div className="announcement-content" aria-live="polite">
+        <span className="announcement-message">{slide.message}</span>
+        {slide.kind === "social" && (
+          <span className="announcement-social-icons" aria-label="Instagram y TikTok">
+            <SiInstagram size={13} aria-hidden="true" />
+            <SiTiktok size={13} aria-hidden="true" />
+          </span>
+        )}
+        <a className="announcement-action" href={slide.href}>{slide.action}</a>
+      </div>
+      <button type="button" className="announcement-arrow" aria-label={copy.promoNext} onClick={() => moveSlide(1)}>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  );
+}
+
 const ASCII_CHARS = "........:::=+xX#0369";
 const FONT_SIZE = 14;
 const ASPECT_W = 4;
@@ -507,24 +544,27 @@ function MobileLookGallery({
 
       {/* HEADER WITH HAMBURGER */}
       <header className={`mobile-header ${isScrolled ? 'is-scrolled' : ''} ${isMenuOpen ? 'is-menu-open' : ''}`} data-testid="mobile-header">
-        <div className="mobile-logo-text">SALVATORE BLACKWORK TATTO</div>
-        <div className="mobile-header-actions">
-          <LanguageSwitcher language={language} onChange={onLanguageChange} />
-          <button
-            type="button"
-            className="mobile-hamburger"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen
-              ? (language === "es" ? "Cerrar menú" : "Close menu")
-              : (language === "es" ? "Abrir menú" : "Open menu")}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            data-testid="button-menu-toggle"
-          >
-            <span className="mobile-hamburger-line" />
-            <span className="mobile-hamburger-line" />
-            <span className="mobile-hamburger-line" />
-          </button>
+        <PromotionStrip copy={copy} />
+        <div className="mobile-header-row">
+          <div className="mobile-logo-text">SALVATORE BLACKWORK TATTO</div>
+          <div className="mobile-header-actions">
+            <LanguageSwitcher language={language} onChange={onLanguageChange} />
+            <button
+              type="button"
+              className="mobile-hamburger"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen
+                ? (language === "es" ? "Cerrar menú" : "Close menu")
+                : (language === "es" ? "Abrir menú" : "Open menu")}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+              data-testid="button-menu-toggle"
+            >
+              <span className="mobile-hamburger-line" />
+              <span className="mobile-hamburger-line" />
+              <span className="mobile-hamburger-line" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -1352,18 +1392,21 @@ export default function LookGallery() {
   return (
     <div className="look-root">
       <nav id="hero-navbar" ref={navbarRef}>
-        <div className="nav-left">
-          <div className="nav-logo">SALVATORE BLACKWORK TATTO</div>
-        </div>
-        <div className="nav-right">
-          <ul className="nav-links">
-            {copy.nav.map((label, index) => (
-              <li key={label}>
-                <a href={navHrefs[index]}>{label}</a>
-              </li>
-            ))}
-          </ul>
-          <LanguageSwitcher language={language} onChange={handleLanguageChange} />
+        <PromotionStrip copy={copy} />
+        <div className="nav-main">
+          <div className="nav-left">
+            <div className="nav-logo">SALVATORE BLACKWORK TATTO</div>
+          </div>
+          <div className="nav-right">
+            <ul className="nav-links">
+              {copy.nav.map((label, index) => (
+                <li key={label}>
+                  <a href={navHrefs[index]}>{label}</a>
+                </li>
+              ))}
+            </ul>
+            <LanguageSwitcher language={language} onChange={handleLanguageChange} />
+          </div>
         </div>
       </nav>
       <div id="gallery-layer" ref={galleryRef} />

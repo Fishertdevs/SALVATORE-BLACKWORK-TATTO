@@ -14,6 +14,16 @@ export function persistLanguage(language: Language) {
 export const galleryCopy = {
   es: {
     nav: ["INICIO", "ACERCA DE", "PORTFOLIO", "SERVICIOS", "RESERVAS", "CONTACTO"],
+    promoLabel: "Promociones y novedades",
+    promoPrevious: "Aviso anterior",
+    promoNext: "Aviso siguiente",
+    promoSlides: [
+      { message: "10% DE DESCUENTO EN TU PRIMER TATUAJE", action: "RESERVA AQUÍ", href: "#studio-reservas" },
+      { message: "INSTAGRAM · TIKTOK", action: "CONTACTO", href: "#studio-contact", kind: "social" },
+      { message: "BLACKWORK · ORNAMENTAL · TRIBAL", action: "VER PORTAFOLIO", href: "#studio-portfolio" },
+      { message: "RECIBIMOS TODOS LOS MEDIOS DE PAGO", action: "CONSULTA AL RESERVAR", href: "#studio-reservas" },
+      { message: "¿DESEAS SER UN LIENZO? HABLEMOS DE TU IDEA", action: "ESCRÍBENOS", href: "#studio-contact" },
+    ],
     heroEyebrow: "SALVATORE — BLACKWORK",
     heroTitle: ["TATUAJE", "BLACKWORK"],
     heroFuture: ["LA TINTA ES", "ARQUITECTURA"],
@@ -67,6 +77,16 @@ export const galleryCopy = {
   },
   en: {
     nav: ["HOME", "ABOUT", "PORTFOLIO", "SERVICES", "BOOKING", "CONTACT"],
+    promoLabel: "Promotions and updates",
+    promoPrevious: "Previous announcement",
+    promoNext: "Next announcement",
+    promoSlides: [
+      { message: "GET 10% OFF YOUR FIRST TATTOO", action: "BOOK NOW", href: "#studio-reservas" },
+      { message: "INSTAGRAM · TIKTOK", action: "CONTACT", href: "#studio-contact", kind: "social" },
+      { message: "BLACKWORK · ORNAMENTAL · TRIBAL", action: "VIEW PORTFOLIO", href: "#studio-portfolio" },
+      { message: "WE ACCEPT ALL PAYMENT METHODS", action: "ASK WHEN BOOKING", href: "#studio-reservas" },
+      { message: "READY TO BE A CANVAS? LET'S TALK", action: "CONTACT US", href: "#studio-contact" },
+    ],
     heroEyebrow: "SALVATORE — BLACKWORK",
     heroTitle: ["BLACKWORK", "TATTOO"],
     heroFuture: ["INK IS", "ARCHITECTURE"],
