@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import type { Language } from "@/i18n";
-import { getBookingWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
+import { getBookingWhatsAppHref, getCanvasWhatsAppHref, getWhatsAppHref } from "@/lib/whatsapp";
 import ReservationFlow from "@/pages/ReservationFlow";
 import aboutImg from "@assets/image-Photoroom_(34)_1792364239140.png";
 import portfolioImg from "@assets/image_1792111018777.png";
@@ -60,9 +60,10 @@ const studioCopy = {
           facts: ["Geometría y repetición visual", "Equilibrio entre detalle y forma"],
         },
       ],
+      noteLabel: "CONVOCATORIA PARA LIENZOS",
       noteTitle: ["¿QUIERES SER", "UN LIENZO?"],
       noteIntro: "Salvatore busca personas interesadas en ofrecerse como lienzo para nuevas piezas de tatuaje.",
-      cta: "OFRECERME COMO LIENZO →",
+      cta: "CONTÁCTAME",
     },
     manifesto: {
       phraseLines: ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
@@ -142,9 +143,10 @@ const studioCopy = {
           facts: ["Geometry and visual repetition", "Balance between detail and form"],
         },
       ],
+      noteLabel: "CANVAS OPEN CALL",
       noteTitle: ["WANT TO BE", "A CANVAS?"],
       noteIntro: "Salvatore is looking for people interested in being a canvas for new tattoo pieces.",
-      cta: "OFFER TO BE A CANVAS →",
+      cta: "CONTACT ME",
     },
     manifesto: {
       phraseLines: ["Blackwork:", "shadow finds", "its voice", "on your skin."],
@@ -662,9 +664,20 @@ export function PortfolioPage({ language }: StudioProps) {
         ))}
       </section>
       <section className="page-portfolio-note">
+        <Eyebrow>{copy.noteLabel}</Eyebrow>
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
         <p>{copy.noteIntro}</p>
-        <a className="tattoo-red-link" href="#studio-contact">{copy.cta}</a>
+        <a
+          className="hero-side-action"
+          href={getCanvasWhatsAppHref(language)}
+          onClick={(event) => {
+            event.currentTarget.href = getCanvasWhatsAppHref(language);
+          }}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {copy.cta}
+        </a>
       </section>
     </StudioFrame>
   );

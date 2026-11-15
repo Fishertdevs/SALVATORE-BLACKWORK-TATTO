@@ -34,6 +34,16 @@ export function getWhatsAppHref(language: Language, now = new Date()) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
+export function getCanvasWhatsAppHref(language: Language, now = new Date()) {
+  const greeting = getWhatsAppGreeting(language, now);
+  const message =
+    language === "es"
+      ? `${greeting}, me interesa ser lienzo para cualquier proyecto que tengas disponible.`
+      : `${greeting}, I’m interested in being a canvas for any project you have available.`;
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+
 export function getBookingWhatsAppHref(language: Language, now = new Date()) {
   const greeting = getGreeting(language, now);
   const message =
