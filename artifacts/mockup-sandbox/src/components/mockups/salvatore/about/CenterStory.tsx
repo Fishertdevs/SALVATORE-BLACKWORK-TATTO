@@ -50,20 +50,34 @@ export function CenterStory() {
       <section ref={sectionRef} className="tattoo-page page-about about-center-story">
         <section className="page-about-hero-editorial">
           <header className="page-about-editorial-heading">
-            <h1 data-about-reveal="title">CÓMO INICIÓ ESTE PROYECTO</h1>
+            <h1 data-about-reveal="title">
+              <span>CÓMO INICIÓ</span>
+              <span>ESTE PROYECTO</span>
+            </h1>
           </header>
           <div className="page-about-editorial-grid">
             <article className="page-about-editorial-side page-about-editorial-side-left">
-              <h2 data-about-reveal="heading">Líneas precisas.<br /><em>ritmo humano.</em></h2>
-              <p data-about-reveal="copy">Salvatore Blackwork parte de una convicción: cada pieza debe nacer de una conversación y encontrar su forma en el cuerpo.</p>
+              <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
+                <h2 data-about-reveal="heading">LÍNEAS<br /><em>PRECISAS</em></h2>
+                <p data-about-reveal="copy">Cada diseño nace de una conversación.</p>
+              </div>
+              <div className="page-about-editorial-beat page-about-editorial-beat-left-2">
+                <h2 data-about-reveal="heading">RITMO<br /><em>HUMANO</em></h2>
+                <p data-about-reveal="copy">El proceso respeta tu historia y tus tiempos.</p>
+              </div>
             </article>
             <figure className="page-about-portrait">
               <img src={image} alt="Retrato editorial con tratamiento rojo sobre el rostro" />
             </figure>
             <article className="page-about-editorial-side page-about-editorial-side-right">
-              <h2 data-about-reveal="heading">Observar<br /><em>antes de marcar.</em></h2>
-              <p data-about-reveal="copy">El blackwork combina masas de sombra y espacio negativo para crear formas que siguen el movimiento real del cuerpo.</p>
-              <p data-about-reveal="copy">La anatomía, la historia y la energía de cada persona orientan el diseño antes de dibujar una sola línea.</p>
+              <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
+                <h2 data-about-reveal="heading">OBSERVAR<br /><em>PRIMERO</em></h2>
+                <p data-about-reveal="copy">La forma sigue el movimiento del cuerpo.</p>
+              </div>
+              <div className="page-about-editorial-beat page-about-editorial-beat-right-2">
+                <h2 data-about-reveal="heading">MARCAR<br /><em>CON INTENCIÓN</em></h2>
+                <p data-about-reveal="copy">Cada trazo parte de una idea clara.</p>
+              </div>
             </article>
           </div>
         </section>

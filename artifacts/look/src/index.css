@@ -7752,3 +7752,253 @@ body,
   mix-blend-mode: normal;
   filter: grayscale(1) sepia(1) saturate(7) hue-rotate(320deg) contrast(1.08) brightness(.9);
 }
+
+/* A soft ink-wash divider frames the About section without changing its white field. */
+.page-about {
+  position: relative;
+  isolation: isolate;
+  background: #fff;
+}
+
+.page-about::before,
+.page-about::after {
+  position: absolute;
+  z-index: 0;
+  right: -8%;
+  left: -8%;
+  height: clamp(72px, 9vw, 128px);
+  background:
+    linear-gradient(90deg, transparent 4%, rgba(17, 17, 17, .07) 19%, rgba(17, 17, 17, .025) 52%, rgba(17, 17, 17, .06) 84%, transparent 97%),
+    radial-gradient(ellipse 23% 54% at 15% 48%, rgba(17, 17, 17, .18), transparent 74%),
+    radial-gradient(ellipse 33% 68% at 51% 52%, rgba(17, 17, 17, .1), transparent 78%),
+    radial-gradient(ellipse 21% 58% at 87% 46%, rgba(17, 17, 17, .16), transparent 74%);
+  content: "";
+  filter: blur(20px);
+  opacity: .85;
+  pointer-events: none;
+}
+
+.page-about::before {
+  top: -34px;
+}
+
+.page-about::after {
+  bottom: -34px;
+  transform: rotate(180deg);
+}
+
+.page-about .page-about-hero-editorial {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(150px, 13vw, 190px);
+  background: transparent;
+}
+
+.page-about .page-about-editorial-heading {
+  margin: 0 auto clamp(56px, 7vw, 96px);
+  text-align: center;
+}
+
+.page-about .page-about-editorial-heading h1 {
+  display: grid;
+  justify-items: center;
+  gap: .02em;
+  color: #111;
+  font-size: clamp(1.85rem, 5.2vw, 5.6rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  white-space: normal;
+}
+
+.page-about .page-about-editorial-heading h1 span {
+  display: block;
+}
+
+.page-about .page-about-editorial-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(55vw, 820px)) minmax(0, 1fr);
+  column-gap: clamp(18px, 2.2vw, 34px);
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+.page-about .page-about-editorial-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: min(58vh, 620px);
+  align-self: start;
+  min-width: 0;
+  padding: 0;
+}
+
+.page-about .page-about-editorial-side-left {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.page-about .page-about-editorial-side-right {
+  grid-column: 3;
+  grid-row: 1;
+  padding: 0;
+  border: 0;
+}
+
+.page-about .page-about-editorial-beat {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.page-about .page-about-editorial-beat-left-1 {
+  align-self: start;
+  margin-top: clamp(48px, 9vh, 108px);
+}
+
+.page-about .page-about-editorial-beat-left-2 {
+  align-self: end;
+  margin-bottom: clamp(28px, 6vh, 76px);
+}
+
+.page-about .page-about-editorial-beat-right-1 {
+  align-self: start;
+  margin-top: clamp(4px, 2vh, 24px);
+}
+
+.page-about .page-about-editorial-beat-right-2 {
+  align-self: end;
+  margin-bottom: clamp(52px, 10vh, 120px);
+}
+
+.page-about .page-about-editorial-side h2 {
+  max-width: 100%;
+  margin: 0 0 14px;
+  color: #111;
+  font-size: clamp(1.35rem, 2.1vw, 2.5rem);
+  line-height: .9;
+  letter-spacing: -.045em;
+  overflow-wrap: normal;
+}
+
+.page-about .page-about-editorial-side h2 em {
+  color: #111;
+}
+
+.page-about .page-about-editorial-side p {
+  max-width: 230px;
+  margin: 0;
+  color: #111;
+  font-size: clamp(12px, .95vw, 14px);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .page-about .page-about-editorial-heading {
+    margin-bottom: 48px;
+  }
+
+  .page-about .page-about-editorial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+    row-gap: 36px;
+  }
+
+  .page-about .page-about-editorial-side {
+    grid-template-rows: auto auto;
+    height: auto;
+    gap: 34px;
+  }
+
+  .page-about .page-about-editorial-side-left,
+  .page-about .page-about-editorial-side-right {
+    grid-row: 1;
+    padding: 0;
+  }
+
+  .page-about .page-about-editorial-side-left {
+    grid-column: 1;
+  }
+
+  .page-about .page-about-editorial-side-right {
+    grid-column: 2;
+    border: 0;
+  }
+
+  .page-about .page-about-editorial-beat-left-1,
+  .page-about .page-about-editorial-beat-left-2,
+  .page-about .page-about-editorial-beat-right-1,
+  .page-about .page-about-editorial-beat-right-2 {
+    align-self: stretch;
+    margin: 0;
+  }
+
+  .page-about .page-about-hero-editorial .page-about-portrait {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: min(55vw, 820px);
+    height: 100vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-hero-editorial {
+    padding: 126px 20px 0;
+  }
+
+  .page-about .page-about-editorial-heading h1 {
+    font-size: clamp(1.8rem, 8.8vw, 2.8rem);
+    line-height: .92;
+  }
+
+  .page-about .page-about-editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 16px;
+    min-height: 0;
+  }
+
+  .page-about .page-about-editorial-side-left,
+  .page-about .page-about-editorial-side-right {
+    display: contents;
+  }
+
+  .page-about .page-about-editorial-beat-left-1,
+  .page-about .page-about-editorial-beat-right-1 {
+    grid-row: 1;
+  }
+
+  .page-about .page-about-editorial-beat-left-2,
+  .page-about .page-about-editorial-beat-right-2 {
+    grid-row: 2;
+  }
+
+  .page-about .page-about-editorial-beat-left-1,
+  .page-about .page-about-editorial-beat-left-2 {
+    grid-column: 1;
+  }
+
+  .page-about .page-about-editorial-beat-right-1,
+  .page-about .page-about-editorial-beat-right-2 {
+    grid-column: 2;
+  }
+
+  .page-about .page-about-editorial-side h2 {
+    margin-bottom: 10px;
+    font-size: clamp(1.1rem, 5.2vw, 1.45rem);
+    line-height: .95;
+    overflow-wrap: normal;
+  }
+
+  .page-about .page-about-editorial-side p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .page-about .page-about-hero-editorial .page-about-portrait {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: min(100%, 480px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto;
+  }
+}

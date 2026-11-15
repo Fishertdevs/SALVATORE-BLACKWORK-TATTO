@@ -15,12 +15,12 @@ import contactPortraitImg from "@assets/image-Photoroom_(32)_1789961357461.png";
 const studioCopy = {
   es: {
     about: {
-      title: "CÓMO INICIÓ ESTE PROYECTO",
-      intro: "Salvatore Blackwork parte de una convicción: cada pieza debe nacer de una conversación y encontrar su forma en el cuerpo.",
-      storyTitle: ["Líneas precisas.", "Ritmo humano."],
-      story: [
-        "El blackwork es el punto de partida: masas de sombra, espacio negativo controlado y formas que siguen el movimiento real del cuerpo.",
-        "Cada pieza comienza con una conversación. Observamos la anatomía, la historia y la energía de quien se sienta frente a nosotros antes de dibujar una sola línea.",
+      title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
+      beats: [
+        { title: ["LÍNEAS", "PRECISAS"], copy: "Cada diseño nace de una conversación." },
+        { title: ["RITMO", "HUMANO"], copy: "El proceso respeta tu historia y tus tiempos." },
+        { title: ["OBSERVAR", "PRIMERO"], copy: "La forma sigue el movimiento del cuerpo." },
+        { title: ["MARCAR", "CON INTENCIÓN"], copy: "Cada trazo parte de una idea clara." },
       ],
     },
     portfolio: {
@@ -84,12 +84,12 @@ const studioCopy = {
   },
   en: {
     about: {
-      title: "HOW THIS PROJECT BEGAN",
-      intro: "Salvatore Blackwork starts with a belief: every piece should grow from conversation and find its form on the body.",
-      storyTitle: ["Sharp lines.", "Human rhythm."],
-      story: [
-        "Blackwork is the starting point: fields of shadow, controlled negative space, and forms that follow the body's real movement.",
-        "Every piece begins with a conversation. We study the anatomy, history, and energy of the person in front of us before drawing a single line.",
+      title: ["HOW THIS PROJECT", "BEGAN"],
+      beats: [
+        { title: ["PRECISE", "LINES"], copy: "Every design begins with a conversation." },
+        { title: ["HUMAN", "RHYTHM"], copy: "The process respects your story and pace." },
+        { title: ["OBSERVE", "FIRST"], copy: "The shape follows the body's movement." },
+        { title: ["MARK", "WITH INTENT"], copy: "Every stroke starts with a clear idea." },
       ],
     },
     portfolio: {
@@ -252,20 +252,30 @@ export function AboutPage({ language }: StudioProps) {
     <StudioFrame id="studio-about" className="page-about">
       <section ref={aboutSectionRef} className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
-          <h1 data-about-reveal="title">{copy.title}</h1>
+          <h1 data-about-reveal="title">
+            <span>{copy.title[0]}</span>
+            <span>{copy.title[1]}</span>
+          </h1>
         </header>
         <div className="page-about-editorial-grid">
           <article className="page-about-editorial-side page-about-editorial-side-left">
-            <h2 data-about-reveal="heading">{copy.storyTitle[0]}<br /><em>{copy.storyTitle[1]}</em></h2>
-            <p data-about-reveal="copy">{copy.intro}</p>
+            {[copy.beats[0], copy.beats[1]].map((beat, index) => (
+              <div className={`page-about-editorial-beat page-about-editorial-beat-left-${index + 1}`} key={beat.title.join("-")}>
+                <h2 data-about-reveal="heading">{beat.title[0]}<br /><em>{beat.title[1]}</em></h2>
+                <p data-about-reveal="copy">{beat.copy}</p>
+              </div>
+            ))}
           </article>
           <figure className="page-about-portrait">
             <img src={aboutImg} alt={language === "es" ? "Retrato editorial con tratamiento rojo sobre el rostro" : "Editorial portrait with a red tint across the face"} />
           </figure>
           <article className="page-about-editorial-side page-about-editorial-side-right">
-            <h2 data-about-reveal="heading">{language === "es" ? <>OBSERVAR<br /><em>antes de marcar.</em></> : <>OBSERVE<br /><em>before marking.</em></>}</h2>
-            <p data-about-reveal="copy">{copy.story[0]}</p>
-            <p data-about-reveal="copy">{copy.story[1]}</p>
+            {[copy.beats[2], copy.beats[3]].map((beat, index) => (
+              <div className={`page-about-editorial-beat page-about-editorial-beat-right-${index + 1}`} key={beat.title.join("-")}>
+                <h2 data-about-reveal="heading">{beat.title[0]}<br /><em>{beat.title[1]}</em></h2>
+                <p data-about-reveal="copy">{beat.copy}</p>
+              </div>
+            ))}
           </article>
         </div>
       </section>
