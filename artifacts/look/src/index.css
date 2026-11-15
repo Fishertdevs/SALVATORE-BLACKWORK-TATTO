@@ -6841,9 +6841,12 @@ body,
 /* Reservations replaces the existing red services callout; it is not a new page. */
 .page-services-callout.reservation-callout {
   margin-top: clamp(2.5rem, 7vh, 4rem);
-  margin-bottom: clamp(2.5rem, 8vw, 7rem);
+  margin-bottom: clamp(1.25rem, 4vh, 1.75rem);
   padding: clamp(1.5rem, 5vw, 4.5rem);
   padding-top: clamp(2.25rem, 4vw, 3.25rem);
+  min-height: max(18rem, calc(100svh - 7rem));
+  display: flex;
+  align-items: center;
   scroll-margin-top: clamp(4rem, 9vh, 6rem);
 }
 .reservation-page.reservation-embedded {
@@ -7228,6 +7231,8 @@ body,
   .page-services-callout.reservation-callout {
     margin: clamp(1.5rem, 6vh, 2.5rem) 20px clamp(2rem, 8vw, 4rem);
     padding-top: clamp(1.25rem, 4vw, 1.5rem);
+    min-height: auto;
+    display: block;
   }
   .reservation-slider { min-height: 0; }
   .reservation-embedded .reservation-hero { padding-top: clamp(1.5rem, 7vw, 2.25rem); }

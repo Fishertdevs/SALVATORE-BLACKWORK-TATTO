@@ -7,5 +7,5 @@
 - [FAQ and widget scope](faq-and-widget-scope.md) — make only requested FAQ or WhatsApp changes and verify the affected section before saying the preview is updated.
 - [Workspace server runtime dependencies](workspace-server-runtime-dependencies.md) — server-bundled apps may need direct runtime dependencies even when a shared workspace library declares them.
 - [Manifesto and reservations placement](approved-manifesto-phrase.md) — keep the quote independent; put reservations in the existing red services callout, not a new page.
-- [Reservations visual flow](reservations-visual-flow.md) — preserve the compact title/menu, avoid AI design previews, and send proposed appointment times to WhatsApp.
+- [Reservations visual flow](reservations-visual-flow.md) — preserve the compact menu, fit the red panel on desktop, avoid AI previews, and route date requests to WhatsApp.
 - [Scroll-reveal visibility](about-reveal-intersection.md) — don't pre-clip observed text; use opacity offscreen so intersection checks can trigger replay.
