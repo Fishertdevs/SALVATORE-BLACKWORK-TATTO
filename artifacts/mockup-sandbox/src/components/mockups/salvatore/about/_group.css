@@ -1378,9 +1378,14 @@ body,
   }
 }
 
+.about-center-story .page-about-editorial-side-left .page-about-editorial-beat h2,
+.about-center-story .page-about-editorial-side-left .page-about-editorial-beat p {
+  width: min(250px, 100%);
+}
+
 @media (min-width: 901px) {
   .about-center-story .page-about-editorial-side-left {
-    transform: translateX(clamp(48px, 6vw, 72px));
+    transform: none;
   }
 
   .about-center-story .page-about-editorial-side-right {
