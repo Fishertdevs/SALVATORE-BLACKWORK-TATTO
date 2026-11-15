@@ -3095,11 +3095,11 @@ body,
 .page-portfolio-gallery {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2.5vw, 36px);
+  gap: clamp(18px, 2vw, 30px);
   align-items: start;
-  width: min(100%, 980px);
+  width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 0 clamp(24px, 4vw, 52px) 10vw;
+  padding: 0 clamp(16px, 2vw, 32px) 10vw;
 }
 
 .page-portfolio-gallery article {
