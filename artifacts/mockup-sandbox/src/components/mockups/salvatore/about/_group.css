@@ -1378,6 +1378,16 @@ body,
   }
 }
 
+@media (min-width: 901px) {
+  .about-center-story .page-about-editorial-side-left {
+    transform: translateX(clamp(48px, 6vw, 72px));
+  }
+
+  .about-center-story .page-about-editorial-side-right {
+    transform: translateX(clamp(-72px, -6vw, -48px));
+  }
+}
+
 @media (max-width: 700px) {
   .about-center-story .page-about-editorial-side h2 {
     font-size: clamp(1rem, 4.5vw, 1.2rem);

@@ -8152,6 +8152,16 @@ body,
   }
 }
 
+@media (min-width: 901px) {
+  .page-about .page-about-editorial-side-left {
+    transform: translateX(clamp(48px, 6vw, 72px));
+  }
+
+  .page-about .page-about-editorial-side-right {
+    transform: translateX(clamp(-72px, -6vw, -48px));
+  }
+}
+
 .page-about .page-about-editorial-side p {
   font-size: clamp(1.1rem, 1.35vw, 1.4rem);
   line-height: 1.45;
