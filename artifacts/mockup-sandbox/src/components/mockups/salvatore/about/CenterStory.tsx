@@ -55,11 +55,11 @@ export function CenterStory() {
           <div className="page-about-editorial-grid">
             <article className="page-about-editorial-side page-about-editorial-side-left">
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
-                <h2 data-about-reveal="heading">UNA IDEA<br /><em>EN COMÚN</em></h2>
+                <h2 data-about-reveal="heading">UNA IDEA <em>COMÚN</em></h2>
                 <p data-about-reveal="copy">Salvatore Blackwork nació para convertir ideas personales en piezas pensadas para el cuerpo.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-left-2">
-                <h2 data-about-reveal="heading">UNA VISIÓN<br /><em>PROPIA</em></h2>
+                <h2 data-about-reveal="heading">VISIÓN <em>PROPIA</em></h2>
                 <p data-about-reveal="copy">La propuesta une contraste, líneas precisas y composición a medida en un lenguaje visual sobrio.</p>
               </div>
             </article>
@@ -68,11 +68,11 @@ export function CenterStory() {
             </figure>
             <article className="page-about-editorial-side page-about-editorial-side-right">
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
-                <h2 data-about-reveal="heading">EL DIÁLOGO<br /><em>PRIMERO</em></h2>
+                <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>
                 <p data-about-reveal="copy">Cada proyecto comienza escuchando la historia, las referencias y la intención de quien lo llevará.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-right-2">
-                <h2 data-about-reveal="heading">DISEÑO<br /><em>CON SENTIDO</em></h2>
+                <h2 data-about-reveal="heading">DISEÑO <em>CON SENTIDO</em></h2>
                 <p data-about-reveal="copy">De esa conversación surge una pieza que acompaña el movimiento y expresa una identidad propia.</p>
               </div>
             </article>

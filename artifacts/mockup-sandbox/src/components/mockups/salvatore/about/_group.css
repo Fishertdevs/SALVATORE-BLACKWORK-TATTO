@@ -1246,3 +1246,24 @@ body,
   margin-right: auto;
   margin-left: auto;
 }
+
+.about-center-story {
+  --about-face-accent: #d94b4b;
+}
+
+.about-center-story .page-about-editorial-side h2,
+.about-center-story .page-about-editorial-side h2 em {
+  color: var(--about-face-accent);
+}
+
+.about-center-story .page-about-editorial-side h2 {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .about-center-story .page-about-editorial-side h2 {
+    font-size: clamp(.8rem, 4vw, 1rem);
+  }
+}

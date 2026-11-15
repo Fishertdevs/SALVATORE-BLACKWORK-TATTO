@@ -7757,6 +7757,7 @@ body,
 .page-about {
   position: relative;
   isolation: isolate;
+  --about-face-accent: #d94b4b;
   background: #fff;
 }
 
@@ -8016,4 +8017,21 @@ body,
 .page-about .page-about-editorial-side p {
   margin-right: auto;
   margin-left: auto;
+}
+
+.page-about .page-about-editorial-side h2,
+.page-about .page-about-editorial-side h2 em {
+  color: var(--about-face-accent);
+}
+
+.page-about .page-about-editorial-side h2 {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-editorial-side h2 {
+    font-size: clamp(.8rem, 4vw, 1rem);
+  }
 }
