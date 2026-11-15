@@ -25,7 +25,7 @@ const studioCopy = {
     },
     portfolio: {
       title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
-      specialtyLabel: "ESPECIALIDADES · FUNZA",
+      specialtyLabel: "ESPECIALIDADES",
       intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
       works: [
         ["HOMBRO / LLAMA NEGRA", "Tatuaje blackwork en el hombro"],
@@ -93,7 +93,7 @@ const studioCopy = {
     },
     portfolio: {
       title: ["SELECTED", "BLACKWORK", "WORKS"],
-      specialtyLabel: "SPECIALTIES · FUNZA",
+      specialtyLabel: "SPECIALTIES",
       intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
       works: [
         ["SHOULDER / BLACK FLAME", "Blackwork tattoo on the shoulder"],
