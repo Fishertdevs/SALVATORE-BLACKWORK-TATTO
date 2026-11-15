@@ -56,11 +56,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-left">
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
                 <h2 data-about-reveal="heading">IDEA <em>COMÚN</em></h2>
-                <p data-about-reveal="copy">Salvatore Blackwork nació para convertir ideas personales en piezas pensadas para el cuerpo.</p>
+                <p data-about-reveal="copy">Salvatore Blackwork nace de ideas personales.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-left-2">
                 <h2 data-about-reveal="heading">VISIÓN <em>PROPIA</em></h2>
-                <p data-about-reveal="copy">La propuesta une contraste, líneas precisas y composición a medida en un lenguaje visual sobrio.</p>
+                <p data-about-reveal="copy">Contraste y precisión definen su lenguaje visual.</p>
               </div>
             </article>
             <figure className="page-about-portrait">
@@ -69,11 +69,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-right">
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
                 <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>
-                <p data-about-reveal="copy">Cada proyecto comienza escuchando la historia, las referencias y la intención de quien lo llevará.</p>
+                <p data-about-reveal="copy">Escuchamos a cada persona antes de comenzar.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-right-2">
                 <h2 data-about-reveal="heading">DISEÑO <em>A MEDIDA</em></h2>
-                <p data-about-reveal="copy">De esa conversación surge una pieza que acompaña el movimiento y expresa una identidad propia.</p>
+                <p data-about-reveal="copy">Diseños a medida expresan cuerpo e identidad.</p>
               </div>
             </article>
           </div>

@@ -8025,7 +8025,7 @@ body,
 }
 
 .page-about .page-about-editorial-side h2 {
-  font-size: clamp(1.15rem, 2.2vw, 2.2rem);
+  font-size: clamp(1.1rem, 1.85vw, 1.5rem);
   letter-spacing: -.04em;
   line-height: 1.15;
   text-transform: uppercase;
@@ -8038,7 +8038,7 @@ body,
 
 @media (max-width: 700px) {
   .page-about .page-about-editorial-side h2 {
-    font-size: clamp(.85rem, 4.2vw, 1.1rem);
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
   }
 }
 
