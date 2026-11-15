@@ -55,7 +55,7 @@ export function CenterStory() {
           <div className="page-about-editorial-grid">
             <article
               className="page-about-editorial-side page-about-editorial-side-left"
-              data-about-divider="ORIGEN / VISIÓN"
+              data-about-divider="ORIGEN · VISIÓN"
             >
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
                 <h2 data-about-reveal="heading">IDEA <em>COMÚN</em></h2>
@@ -71,7 +71,7 @@ export function CenterStory() {
             </figure>
             <article
               className="page-about-editorial-side page-about-editorial-side-right"
-              data-about-divider="ESCUCHA / DISEÑO"
+              data-about-divider="DIÁLOGO · DISEÑO"
             >
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
                 <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>

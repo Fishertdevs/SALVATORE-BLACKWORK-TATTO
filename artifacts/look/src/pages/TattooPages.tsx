@@ -276,7 +276,7 @@ export function AboutPage({ language }: StudioProps) {
         <div className="page-about-editorial-grid">
           <article
             className="page-about-editorial-side page-about-editorial-side-left"
-            data-about-divider={language === "es" ? "ORIGEN / VISIÓN" : "ORIGIN / VISION"}
+            data-about-divider={language === "es" ? "ORIGEN · VISIÓN" : "ORIGIN · VISION"}
           >
             {[copy.beats[0], copy.beats[1]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-left-${index + 1}`} key={beat.title.join("-")}>
@@ -290,7 +290,7 @@ export function AboutPage({ language }: StudioProps) {
           </figure>
           <article
             className="page-about-editorial-side page-about-editorial-side-right"
-            data-about-divider={language === "es" ? "ESCUCHA / DISEÑO" : "LISTENING / DESIGN"}
+            data-about-divider={language === "es" ? "DIÁLOGO · DISEÑO" : "DIALOGUE · DESIGN"}
           >
             {[copy.beats[2], copy.beats[3]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-right-${index + 1}`} key={beat.title.join("-")}>
