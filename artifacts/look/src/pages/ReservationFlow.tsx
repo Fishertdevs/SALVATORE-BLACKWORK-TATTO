@@ -80,7 +80,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [activeStep, setActiveStep] = useState(0);
-  const [hasOpenedStepContent, setHasOpenedStepContent] = useState(false);
+  const [hasOpenedStepContent, setHasOpenedStepContent] = useState(true);
   const [requestError, setRequestError] = useState("");
   const [submittedHref, setSubmittedHref] = useState("");
 
