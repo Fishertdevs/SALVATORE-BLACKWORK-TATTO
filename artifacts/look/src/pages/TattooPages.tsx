@@ -606,7 +606,9 @@ export function PortfolioPage({ language }: StudioProps) {
       >
         {copy.galleryTags.map((tag) => (
           <span className="tattoo-eyebrow" aria-label={tag} key={tag}>
-            {tag.replace("Ñ", "N\u0303")}
+            {tag === "DISEÑO A MEDIDA" ? (
+              <>DISE<span className="page-portfolio-n-tilde">N</span>O A MEDIDA</>
+            ) : tag}
           </span>
         ))}
       </div>
