@@ -7887,7 +7887,7 @@ body,
   max-width: 230px;
   width: min(230px, 100%);
   height: auto;
-  min-height: 8.5em;
+  min-height: 9em;
   margin: 0;
   color: #111;
   font-size: clamp(13px, 1vw, 14px);
@@ -8034,7 +8034,7 @@ body,
 .page-about .page-about-editorial-side h2 {
   width: min(230px, 100%);
   max-width: 230px;
-  font-size: clamp(1.1rem, 1.85vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
   letter-spacing: -.04em;
   line-height: 1.15;
   text-transform: uppercase;
@@ -8097,14 +8097,14 @@ body,
 }
 
 .page-about .page-about-editorial-side-left::after {
-  right: -56px;
+  right: -110px;
   left: auto;
   transform: translateY(-50%);
 }
 
 .page-about .page-about-editorial-side-right::after {
   right: auto;
-  left: -56px;
+  left: -110px;
   transform: translateY(-50%);
 }
 
@@ -8121,6 +8121,16 @@ body,
   .page-about .page-about-editorial-side p {
     height: auto;
     min-height: 0;
+  }
+}
+
+@media (min-width: 901px) {
+  .page-about .page-about-editorial-side-left {
+    transform: translateX(clamp(20px, 3vw, 32px));
+  }
+
+  .page-about .page-about-editorial-side-right {
+    transform: translateX(clamp(-32px, -3vw, -20px));
   }
 }
 
