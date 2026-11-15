@@ -24,7 +24,7 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
+      title: ["OBRAS BLACKWORK", "SELECCIONADAS"],
       specialtyLabel: "ESPECIALIDADES",
       intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
       works: [
@@ -117,7 +117,7 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      title: ["SELECTED", "BLACKWORK", "WORKS"],
+      title: ["SELECTED BLACKWORK", "WORKS"],
       specialtyLabel: "SPECIALTIES",
       intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
       works: [
@@ -430,8 +430,7 @@ export function PortfolioPage({ language }: StudioProps) {
         <div>
           <h1>
             <span className="page-portfolio-title-line">{copy.title[0]}</span>
-            <span className="page-portfolio-title-line">{copy.title[1]}</span>
-            <span className="page-portfolio-title-line">{copy.title[2]}.</span>
+            <span className="page-portfolio-title-line">{copy.title[1]}.</span>
           </h1>
         </div>
         <div className="page-portfolio-hero-copy">
