@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["LÍNEAS", "PRECISAS"], copy: "Cada diseño nace de una conversación." },
-        { title: ["RITMO", "HUMANO"], copy: "El proceso respeta tu historia y tus tiempos." },
-        { title: ["OBSERVAR", "PRIMERO"], copy: "La forma sigue el movimiento del cuerpo." },
-        { title: ["MARCAR", "CON INTENCIÓN"], copy: "Cada trazo parte de una idea clara." },
+        { title: ["UNA IDEA", "EN COMÚN"], copy: "Salvatore Blackwork nació para convertir ideas personales en piezas pensadas para el cuerpo." },
+        { title: ["UNA VISIÓN", "PROPIA"], copy: "La propuesta une contraste, líneas precisas y composición a medida en un lenguaje visual sobrio." },
+        { title: ["EL DIÁLOGO", "PRIMERO"], copy: "Cada proyecto comienza escuchando la historia, las referencias y la intención de quien lo llevará." },
+        { title: ["DISEÑO", "CON SENTIDO"], copy: "De esa conversación surge una pieza que acompaña el movimiento y expresa una identidad propia." },
       ],
     },
     portfolio: {
@@ -86,10 +86,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["PRECISE", "LINES"], copy: "Every design begins with a conversation." },
-        { title: ["HUMAN", "RHYTHM"], copy: "The process respects your story and pace." },
-        { title: ["OBSERVE", "FIRST"], copy: "The shape follows the body's movement." },
-        { title: ["MARK", "WITH INTENT"], copy: "Every stroke starts with a clear idea." },
+        { title: ["A SHARED", "IDEA"], copy: "Salvatore Blackwork was born to turn personal ideas into pieces designed around the body." },
+        { title: ["A DISTINCT", "VISION"], copy: "The approach brings contrast, precise lines, and custom composition into a restrained visual language." },
+        { title: ["DIALOGUE", "COMES FIRST"], copy: "Every project begins by listening to the story, references, and intent of the person wearing it." },
+        { title: ["DESIGN", "WITH PURPOSE"], copy: "That conversation shapes a piece that moves with the body and expresses a distinct identity." },
       ],
     },
     portfolio: {
@@ -215,14 +215,28 @@ export function AboutPage({ language }: StudioProps) {
           activeTargets.add(element);
           gsap.killTweensOf(element);
           const isTitle = element.dataset.aboutReveal === "title";
+          const isHeading = element.dataset.aboutReveal === "heading";
+          const beat = element.closest<HTMLElement>(".page-about-editorial-beat");
+          const headingDirection = beat?.classList.contains("page-about-editorial-beat-right-1") ||
+            beat?.classList.contains("page-about-editorial-beat-right-2") ? 14 : -14;
+          const isLowerBeat = beat?.classList.contains("page-about-editorial-beat-left-2") ||
+            beat?.classList.contains("page-about-editorial-beat-right-2");
           gsap.fromTo(
             element,
-            isTitle ? { opacity: 0, x: -14 } : revealFrom,
+            isTitle
+              ? { opacity: 0, x: -14 }
+              : isHeading
+                ? { opacity: 0, x: headingDirection, y: 14, scale: .97, filter: "blur(8px)" }
+                : revealFrom,
             {
-              ...(isTitle ? { opacity: 1, x: 0 } : revealTo),
+              ...(isTitle
+                ? { opacity: 1, x: 0 }
+                : isHeading
+                  ? { opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" }
+                  : revealTo),
               duration: 1.2,
               ease: "power3.out",
-              delay: isTitle ? 0 : element.dataset.aboutReveal === "heading" ? 0.18 : 0.32,
+              delay: isTitle ? 0 : isHeading ? 0.14 + (isLowerBeat ? 0.12 : 0) : 0.32,
             },
           );
         } else if (!entry.isIntersecting) {

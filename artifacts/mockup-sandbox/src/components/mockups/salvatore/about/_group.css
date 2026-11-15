@@ -873,7 +873,12 @@ body,
 }
 
 .about-center-story [data-about-reveal="heading"] {
-  --about-reveal-delay: .18s;
+  --about-reveal-delay: .14s;
+}
+
+.about-center-story .page-about-editorial-beat-left-2 [data-about-reveal="heading"],
+.about-center-story .page-about-editorial-beat-right-2 [data-about-reveal="heading"] {
+  --about-reveal-delay: .26s;
 }
 
 .about-center-story [data-about-reveal="copy"] {
@@ -883,6 +888,33 @@ body,
 @keyframes about-hero-text-reveal {
   from { clip-path: inset(0 100% 0 0); }
   to { clip-path: inset(0 0 0 0); }
+}
+
+.about-center-story [data-about-reveal="title"].about-hero-reveal.is-revealing {
+  animation: about-hero-title-reveal 1.2s cubic-bezier(.33, 1, .68, 1) both;
+}
+
+.about-center-story .page-about-editorial-side-left [data-about-reveal="heading"].about-hero-reveal.is-revealing {
+  animation: about-story-heading-left 1.2s cubic-bezier(.33, 1, .68, 1) var(--about-reveal-delay) both;
+}
+
+.about-center-story .page-about-editorial-side-right [data-about-reveal="heading"].about-hero-reveal.is-revealing {
+  animation: about-story-heading-right 1.2s cubic-bezier(.33, 1, .68, 1) var(--about-reveal-delay) both;
+}
+
+@keyframes about-hero-title-reveal {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes about-story-heading-left {
+  from { opacity: 0; transform: translate(-14px, 14px) scale(.97); filter: blur(8px); }
+  to { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0); }
+}
+
+@keyframes about-story-heading-right {
+  from { opacity: 0; transform: translate(14px, 14px) scale(.97); filter: blur(8px); }
+  to { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -993,22 +1025,22 @@ body,
 
 .about-center-story .page-about-editorial-heading {
   margin: 0 auto clamp(56px, 7vw, 96px);
+  overflow: visible;
+  padding-inline: clamp(4px, 1vw, 16px);
   text-align: center;
 }
 
 .about-center-story .page-about-editorial-heading h1 {
-  display: grid;
-  justify-items: center;
-  gap: .02em;
-  color: #111;
-  font-size: clamp(1.85rem, 5.2vw, 5.6rem);
-  line-height: .88;
-  letter-spacing: -.055em;
-  white-space: normal;
-}
-
-.about-center-story .page-about-editorial-heading h1 span {
   display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: .08em .04em .16em;
+  color: #111;
+  font-size: clamp(1rem, 5.2vw, 4.9rem);
+  line-height: 1.18;
+  letter-spacing: -.05em;
+  overflow: visible;
+  white-space: nowrap;
 }
 
 .about-center-story .page-about-editorial-grid {
@@ -1141,8 +1173,8 @@ body,
   }
 
   .about-center-story .page-about-editorial-heading h1 {
-    font-size: clamp(1.8rem, 8.8vw, 2.8rem);
-    line-height: .92;
+    font-size: clamp(.9rem, 5.2vw, 1.35rem);
+    line-height: 1.18;
   }
 
   .about-center-story .page-about-editorial-grid {
@@ -1198,4 +1230,19 @@ body,
     aspect-ratio: 2 / 3;
     margin: 0 auto;
   }
+}
+
+.about-center-story .page-about-editorial-beat {
+  align-items: center;
+  text-align: center;
+}
+
+.about-center-story .page-about-editorial-side h2,
+.about-center-story .page-about-editorial-side p {
+  text-align: center;
+}
+
+.about-center-story .page-about-editorial-side p {
+  margin-right: auto;
+  margin-left: auto;
 }

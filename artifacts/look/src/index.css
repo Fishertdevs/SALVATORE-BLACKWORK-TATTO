@@ -8002,3 +8002,18 @@ body,
     margin: 0 auto;
   }
 }
+
+.page-about .page-about-editorial-beat {
+  align-items: center;
+  text-align: center;
+}
+
+.page-about .page-about-editorial-side h2,
+.page-about .page-about-editorial-side p {
+  text-align: center;
+}
+
+.page-about .page-about-editorial-side p {
+  margin-right: auto;
+  margin-left: auto;
+}
