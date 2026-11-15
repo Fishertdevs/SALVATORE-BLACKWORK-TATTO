@@ -8362,7 +8362,7 @@ body,
   width: min(100%, 980px);
   justify-content: center;
   gap: clamp(16px, 2vw, 26px);
-  margin: 0 auto 26px;
+  margin: clamp(110px, 18vh, 180px) auto 26px;
   padding: 0 clamp(24px, 4vw, 52px);
 }
 
