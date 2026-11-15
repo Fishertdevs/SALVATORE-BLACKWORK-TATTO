@@ -53,7 +53,10 @@ export function CenterStory() {
             <h1 data-about-reveal="title">CÓMO INICIÓ ESTE PROYECTO</h1>
           </header>
           <div className="page-about-editorial-grid">
-            <article className="page-about-editorial-side page-about-editorial-side-left">
+            <article
+              className="page-about-editorial-side page-about-editorial-side-left"
+              data-about-divider="ORIGEN / VISIÓN"
+            >
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
                 <h2 data-about-reveal="heading">IDEA <em>COMÚN</em></h2>
                 <p data-about-reveal="copy">Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo.</p>
@@ -66,7 +69,10 @@ export function CenterStory() {
             <figure className="page-about-portrait">
               <img src={image} alt="Retrato editorial con tratamiento rojo sobre el rostro" />
             </figure>
-            <article className="page-about-editorial-side page-about-editorial-side-right">
+            <article
+              className="page-about-editorial-side page-about-editorial-side-right"
+              data-about-divider="ESCUCHA / DISEÑO"
+            >
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
                 <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>
                 <p data-about-reveal="copy">Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel.</p>

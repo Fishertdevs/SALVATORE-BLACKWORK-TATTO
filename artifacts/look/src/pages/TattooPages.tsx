@@ -274,7 +274,10 @@ export function AboutPage({ language }: StudioProps) {
           </h1>
         </header>
         <div className="page-about-editorial-grid">
-          <article className="page-about-editorial-side page-about-editorial-side-left">
+          <article
+            className="page-about-editorial-side page-about-editorial-side-left"
+            data-about-divider={language === "es" ? "ORIGEN / VISIÓN" : "ORIGIN / VISION"}
+          >
             {[copy.beats[0], copy.beats[1]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-left-${index + 1}`} key={beat.title.join("-")}>
                 <h2 data-about-reveal="heading">{beat.title[0]}{" "}<em>{beat.title[1]}</em></h2>
@@ -285,7 +288,10 @@ export function AboutPage({ language }: StudioProps) {
           <figure className="page-about-portrait">
             <img src={aboutImg} alt={language === "es" ? "Retrato editorial con tratamiento rojo sobre el rostro" : "Editorial portrait with a red tint across the face"} />
           </figure>
-          <article className="page-about-editorial-side page-about-editorial-side-right">
+          <article
+            className="page-about-editorial-side page-about-editorial-side-right"
+            data-about-divider={language === "es" ? "ESCUCHA / DISEÑO" : "LISTENING / DESIGN"}
+          >
             {[copy.beats[2], copy.beats[3]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-right-${index + 1}`} key={beat.title.join("-")}>
                 <h2 data-about-reveal="heading">{beat.title[0]}{" "}<em>{beat.title[1]}</em></h2>

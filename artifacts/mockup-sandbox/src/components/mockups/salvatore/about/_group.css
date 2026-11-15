@@ -1298,6 +1298,40 @@ body,
   }
 }
 
+.about-center-story .page-about-editorial-side {
+  position: relative;
+}
+
+@media (min-width: 901px) {
+  .about-center-story .page-about-editorial-side-left {
+    transform: translateX(clamp(24px, 3vw, 44px));
+  }
+
+  .about-center-story .page-about-editorial-side-right {
+    transform: translateX(clamp(-44px, -3vw, -24px));
+  }
+
+  .about-center-story .page-about-editorial-side::after {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    padding: 7px 10px;
+    border: 1px solid rgba(230, 48, 39, .28);
+    border-radius: 999px;
+    background: #fff;
+    color: #E63027;
+    content: attr(data-about-divider);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    line-height: 1;
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+  }
+}
+
 @media (max-width: 700px) {
   .about-center-story .page-about-editorial-side h2 {
     font-size: clamp(1rem, 4.5vw, 1.2rem);
