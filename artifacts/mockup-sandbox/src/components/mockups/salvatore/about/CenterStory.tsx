@@ -56,11 +56,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-left">
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
                 <h2 data-about-reveal="heading">IDEA <em>COMÚN</em></h2>
-                <p data-about-reveal="copy">Salvatore Blackwork nació para plasmar ideas personales en la piel.</p>
+                <p data-about-reveal="copy">Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-left-2">
                 <h2 data-about-reveal="heading">VISIÓN <em>PROPIA</em></h2>
-                <p data-about-reveal="copy">Contraste, líneas precisas y composición a medida definen su lenguaje visual.</p>
+                <p data-about-reveal="copy">El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía.</p>
               </div>
             </article>
             <figure className="page-about-portrait">
@@ -69,11 +69,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-right">
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
                 <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>
-                <p data-about-reveal="copy">Cada proyecto parte de tu historia, tus referencias y cómo quieres llevarlo.</p>
+                <p data-about-reveal="copy">Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-right-2">
                 <h2 data-about-reveal="heading">DISEÑO <em>A MEDIDA</em></h2>
-                <p data-about-reveal="copy">Cada diseño acompaña el movimiento del cuerpo y expresa una identidad propia.</p>
+                <p data-about-reveal="copy">A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia.</p>
               </div>
             </article>
           </div>

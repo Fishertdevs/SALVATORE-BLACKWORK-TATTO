@@ -1262,6 +1262,8 @@ body,
 }
 
 .about-center-story .page-about-editorial-side h2 {
+  width: min(230px, calc(100% + 48px));
+  max-width: 230px;
   font-size: clamp(1.1rem, 1.85vw, 1.5rem);
   letter-spacing: -.04em;
   line-height: 1.15;
@@ -1271,6 +1273,13 @@ body,
 
 .about-center-story .page-about-editorial-side h2 em {
   text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .about-center-story .page-about-editorial-side h2 {
+    width: 100%;
+    max-width: 230px;
+  }
 }
 
 @media (max-width: 700px) {

@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nació para plasmar ideas personales en la piel." },
-        { title: ["VISIÓN", "PROPIA"], copy: "Contraste, líneas precisas y composición a medida definen su lenguaje visual." },
-        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto parte de tu historia, tus referencias y cómo quieres llevarlo." },
-        { title: ["DISEÑO", "A MEDIDA"], copy: "Cada diseño acompaña el movimiento del cuerpo y expresa una identidad propia." },
+        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo." },
+        { title: ["VISIÓN", "PROPIA"], copy: "El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía." },
+        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel." },
+        { title: ["DISEÑO", "A MEDIDA"], copy: "A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia." },
       ],
     },
     portfolio: {
@@ -86,10 +86,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork was created to bring personal ideas to life on skin." },
-        { title: ["DISTINCT", "VISION"], copy: "Contrast, precise lines, and custom composition define its visual language." },
-        { title: ["OPEN", "DIALOGUE"], copy: "Each project starts with your story, references, and how you want to wear it." },
-        { title: ["CUSTOM", "DESIGN"], copy: "Each design follows the body’s movement and expresses a distinct identity." },
+        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork turns personal stories into blackwork designs that feel natural on the body." },
+        { title: ["DISTINCT", "VISION"], copy: "The studio builds a visual language through contrast, precise lines, and compositions shaped for each anatomy." },
+        { title: ["OPEN", "DIALOGUE"], copy: "Each project begins with a conversation about your story, references, and what you want to express through your tattoo." },
+        { title: ["CUSTOM", "DESIGN"], copy: "From there, we create a custom piece that moves with the body and expresses a distinct visual identity." },
       ],
     },
     portfolio: {
