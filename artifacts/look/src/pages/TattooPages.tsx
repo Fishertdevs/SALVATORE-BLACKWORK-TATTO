@@ -272,6 +272,9 @@ export function AboutPage({ language }: StudioProps) {
           <h1 data-about-reveal="title">
             {copy.title.join(" ")}
           </h1>
+          <p className="page-about-editorial-kicker" data-about-reveal="heading">
+            {language === "es" ? "HISTORIAS · BLACKWORK · IDENTIDAD" : "STORIES · BLACKWORK · IDENTITY"}
+          </p>
         </header>
         <div className="page-about-editorial-grid">
           <article

@@ -51,6 +51,9 @@ export function CenterStory() {
         <section className="page-about-hero-editorial">
           <header className="page-about-editorial-heading">
             <h1 data-about-reveal="title">CÓMO INICIÓ ESTE PROYECTO</h1>
+            <p className="page-about-editorial-kicker" data-about-reveal="heading">
+              HISTORIAS · BLACKWORK · IDENTIDAD
+            </p>
           </header>
           <div className="page-about-editorial-grid">
             <article

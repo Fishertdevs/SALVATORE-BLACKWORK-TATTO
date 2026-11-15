@@ -7634,7 +7634,7 @@ body,
 }
 
 .page-about .page-about-editorial-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(0, min(50vw, 760px)) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(44vw, 680px)) minmax(0, 1fr);
   min-height: 100vh;
   align-items: stretch;
 }
@@ -8032,7 +8032,7 @@ body,
 }
 
 .page-about .page-about-editorial-side h2 {
-  width: min(230px, calc(100% + 48px));
+  width: min(230px, 100%);
   max-width: 230px;
   font-size: clamp(1.1rem, 1.85vw, 1.5rem);
   letter-spacing: -.04em;
@@ -8060,7 +8060,7 @@ body,
 
 .page-about .page-about-editorial-beat h2,
 .page-about .page-about-editorial-beat p {
-  width: min(230px, calc(100% + 48px));
+  width: min(230px, 100%);
   max-width: 230px;
   margin-right: auto;
   margin-left: auto;
@@ -8121,6 +8121,25 @@ body,
   .page-about .page-about-editorial-side p {
     height: auto;
     min-height: 0;
+  }
+}
+
+.page-about .page-about-editorial-kicker {
+  margin: 18px auto 0;
+  color: #E63027;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(16px, 1.65vw, 22px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .page-about .page-about-editorial-kicker {
+    margin-top: 12px;
+    font-size: clamp(13px, 4vw, 17px);
   }
 }
 
