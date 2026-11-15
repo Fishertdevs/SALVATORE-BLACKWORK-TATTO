@@ -368,6 +368,7 @@ export function PortfolioPage({ language }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
+  const portfolioKeywordsRef = useRef<HTMLDivElement | null>(null);
   const [activeStyleIndex, setActiveStyleIndex] = useState<number | null>(null);
   const [activeStyleSlide, setActiveStyleSlide] = useState(0);
 
@@ -454,6 +455,58 @@ export function PortfolioPage({ language }: StudioProps) {
     };
   }, [language]);
 
+  useEffect(() => {
+    const keywords = portfolioKeywordsRef.current;
+    if (!keywords || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const items = Array.from(
+      keywords.querySelectorAll<HTMLElement>(".page-portfolio-keyword"),
+    );
+    if (!items.length) return;
+
+    const root = document.getElementById("fullscreen-section");
+    const hiddenState = { autoAlpha: 0, y: 24, rotateX: -16, filter: "blur(6px)" };
+    let entrance: gsap.core.Tween | undefined;
+    gsap.set(items, hiddenState);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        entrance?.kill();
+        gsap.killTweensOf(items);
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+          entrance = gsap.to(items, {
+            autoAlpha: 1,
+            y: 0,
+            rotateX: 0,
+            filter: "blur(0px)",
+            duration: .8,
+            stagger: .12,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        } else if (!entry.isIntersecting) {
+          gsap.set(items, hiddenState);
+        }
+      },
+      {
+        root,
+        rootMargin: `0px 0px -${Math.round((root?.clientHeight ?? window.innerHeight) * 0.32)}px 0px`,
+        threshold: [0, 0.2],
+      },
+    );
+    observer.observe(keywords);
+
+    return () => {
+      observer.disconnect();
+      entrance?.kill();
+      gsap.killTweensOf(items);
+      gsap.set(items, { clearProps: "all" });
+    };
+  }, [language]);
+
   const moveStyleSlide = (direction: number) => {
     setActiveStyleSlide((current) => (current + direction + 2) % 2);
   };
@@ -473,10 +526,11 @@ export function PortfolioPage({ language }: StudioProps) {
       </section>
       <div
         className="page-portfolio-keywords"
+        ref={portfolioKeywordsRef}
         aria-label={language === "es" ? "Palabras clave del estudio" : "Studio keywords"}
       >
         {copy.keywords.map((keyword, index) => (
-          <span className="tattoo-eyebrow" key={keyword}>
+          <span className="tattoo-eyebrow page-portfolio-keyword" key={keyword}>
             {keyword}
             {index < copy.keywords.length - 1 && <span className="page-portfolio-keyword-separator" aria-hidden="true">·</span>}
           </span>

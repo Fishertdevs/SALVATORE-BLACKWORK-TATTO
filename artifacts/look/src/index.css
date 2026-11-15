@@ -8363,9 +8363,10 @@ body,
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  perspective: 800px;
   column-gap: clamp(14px, 1.8vw, 24px);
   row-gap: 14px;
-  margin: clamp(64px, 10vh, 100px) auto clamp(54px, 8vh, 88px);
+  margin: clamp(0px, 1vh, 12px) auto clamp(54px, 8vh, 88px);
   padding: 0 clamp(24px, 4vw, 52px);
 }
 
