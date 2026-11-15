@@ -404,10 +404,9 @@ export function PortfolioPage({ language }: StudioProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
-        entrance?.kill();
-        gsap.killTweensOf(animatedElements);
-
         if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+          entrance?.kill();
+          gsap.killTweensOf(animatedElements);
           entrance = gsap.timeline();
           entrance
             .to(titleLines, {
@@ -437,10 +436,6 @@ export function PortfolioPage({ language }: StudioProps) {
               ease: "power2.out",
               overwrite: true,
             }, "-=.38");
-        } else if (!entry.isIntersecting) {
-          gsap.set(titleLines, hiddenTitleState);
-          gsap.set(eyebrow, hiddenEyebrowState);
-          gsap.set(intro, hiddenIntroState);
         }
       },
       { root, threshold: [0, 0.12] },
