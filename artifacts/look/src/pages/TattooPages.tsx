@@ -512,7 +512,7 @@ export function PortfolioPage({ language }: StudioProps) {
     );
     if (!tags.length || !visuals.length) return;
 
-    const targets = [tagRow, ...visuals];
+    const targets = [tagRow, gallery];
     const hiddenTagState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
     const hiddenVisualState = { autoAlpha: 0, y: 32, scale: .97, filter: "blur(7px)" };
     const activeTweens = new Map<HTMLElement, gsap.core.Tween>();
@@ -523,7 +523,7 @@ export function PortfolioPage({ language }: StudioProps) {
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target as HTMLElement;
-          const targetItems = target === tagRow ? tags : [target];
+          const targetItems = target === tagRow ? tags : visuals;
           const hiddenState = target === tagRow ? hiddenTagState : hiddenVisualState;
 
           if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
@@ -539,12 +539,13 @@ export function PortfolioPage({ language }: StudioProps) {
                   ease: "power3.out",
                   overwrite: true,
                 })
-              : gsap.to(target, {
+              : gsap.to(visuals, {
                   autoAlpha: 1,
                   y: 0,
                   scale: 1,
                   filter: "blur(0px)",
-                  duration: .9,
+                  duration: .82,
+                  stagger: .84,
                   ease: "power3.out",
                   overwrite: true,
                 });
