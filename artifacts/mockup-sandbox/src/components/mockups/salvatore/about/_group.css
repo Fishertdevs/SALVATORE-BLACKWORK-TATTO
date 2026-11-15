@@ -847,7 +847,7 @@ body,
 }
 
 .about-center-story .page-about-hero-editorial .page-about-portrait {
-  width: min(55vw, 820px);
+  width: 100%;
   height: 100vh;
   align-self: end;
   background: #fff;
@@ -1378,18 +1378,18 @@ body,
   }
 }
 
-.about-center-story .page-about-editorial-side-left .page-about-editorial-beat h2,
-.about-center-story .page-about-editorial-side-left .page-about-editorial-beat p {
+.about-center-story .page-about-editorial-beat h2,
+.about-center-story .page-about-editorial-beat p {
   width: min(250px, 100%);
 }
 
 @media (min-width: 901px) {
   .about-center-story .page-about-editorial-side-left {
-    transform: none;
+    transform: translateX(clamp(12px, 1.6vw, 20px));
   }
 
   .about-center-story .page-about-editorial-side-right {
-    transform: translateX(clamp(-72px, -6vw, -48px));
+    transform: translateX(clamp(-20px, -1.6vw, -12px));
   }
 }
 

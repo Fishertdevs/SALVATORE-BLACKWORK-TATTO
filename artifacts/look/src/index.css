@@ -7816,7 +7816,7 @@ body,
 }
 
 .page-about .page-about-editorial-grid {
-  grid-template-columns: minmax(0, 1fr) minmax(0, min(55vw, 820px)) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(44vw, 680px)) minmax(0, 1fr);
   column-gap: clamp(18px, 2.2vw, 34px);
   min-height: 100vh;
   align-items: stretch;
@@ -8152,18 +8152,18 @@ body,
   }
 }
 
-.page-about .page-about-editorial-side-left .page-about-editorial-beat h2,
-.page-about .page-about-editorial-side-left .page-about-editorial-beat p {
+.page-about .page-about-editorial-beat h2,
+.page-about .page-about-editorial-beat p {
   width: min(250px, 100%);
 }
 
 @media (min-width: 901px) {
   .page-about .page-about-editorial-side-left {
-    transform: none;
+    transform: translateX(clamp(12px, 1.6vw, 20px));
   }
 
   .page-about .page-about-editorial-side-right {
-    transform: translateX(clamp(-72px, -6vw, -48px));
+    transform: translateX(clamp(-20px, -1.6vw, -12px));
   }
 }
 
