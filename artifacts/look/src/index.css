@@ -6778,6 +6778,27 @@ body,
 .reservation-datetime > div { display: grid; gap: .45rem; }
 .reservation-contact-form input[type="date"],
 .reservation-contact-form input[type="time"] { min-width: 0; }
+.reservation-embedded .reservation-wizard-fields textarea {
+  width: 100%;
+  min-height: 86px;
+  padding: .6rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--rf-line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--rf-ink);
+  font: inherit;
+  font-size: .88rem;
+  resize: vertical;
+}
+.reservation-embedded .reservation-wizard-fields textarea::placeholder {
+  color: rgba(255, 248, 201, .75);
+}
+.reservation-embedded .reservation-wizard-fields textarea:focus-visible {
+  outline: 2px solid var(--rf-ink);
+  outline-offset: 3px;
+  border-color: transparent;
+}
 .reservation-confirmation-note { margin: 1.25rem 0 0; padding: .85rem 1rem; border-left: 2px solid var(--rf-red); background: rgba(255,255,255,.32); font-size: .75rem; line-height: 1.5; }
 .reservation-whatsapp-button { justify-self: start; min-width: min(100%, 260px); margin-top: 1rem; }
 .reservation-privacy-note { max-width: 500px; margin: .65rem 0 0; color: var(--rf-muted); font-size: .66rem; line-height: 1.55; }
