@@ -371,34 +371,73 @@ export function PortfolioPage({ language }: StudioProps) {
 
   useEffect(() => {
     const title = portfolioHeroRef.current?.querySelector("h1");
-    if (!title || typeof IntersectionObserver === "undefined") return;
+    const eyebrow = portfolioHeroRef.current?.querySelector<HTMLElement>(
+      ".page-portfolio-hero-copy .tattoo-eyebrow",
+    );
+    const intro = portfolioHeroRef.current?.querySelector<HTMLElement>(
+      ".page-portfolio-hero-copy p:not(.tattoo-eyebrow)",
+    );
+    if (!title || !eyebrow || !intro || typeof IntersectionObserver === "undefined") return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const root = document.getElementById("fullscreen-section");
     const titleLines = Array.from(title.querySelectorAll<HTMLElement>(".page-portfolio-title-line"));
-    let entrance: gsap.core.Tween | undefined;
-    const hiddenState = { autoAlpha: 0, y: 32, filter: "blur(6px)" };
-    gsap.set(titleLines, hiddenState);
+    const animatedElements = [...titleLines, eyebrow, intro];
+    let entrance: gsap.core.Timeline | undefined;
+    const hiddenTitleState = { autoAlpha: 0, y: 34, scale: .96, filter: "blur(8px)" };
+    const hiddenEyebrowState = {
+      autoAlpha: 0,
+      y: 24,
+      rotateX: -32,
+      transformOrigin: "50% 100%",
+      filter: "blur(7px)",
+    };
+    const hiddenIntroState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
+    gsap.set(titleLines, hiddenTitleState);
+    gsap.set(eyebrow, hiddenEyebrowState);
+    gsap.set(intro, hiddenIntroState);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry) return;
         entrance?.kill();
-        gsap.killTweensOf(titleLines);
+        gsap.killTweensOf(animatedElements);
 
         if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-          entrance = gsap.to(titleLines, {
-            autoAlpha: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 1,
-            stagger: 0.14,
-            ease: "power3.out",
-            overwrite: true,
-          });
+          entrance = gsap.timeline();
+          entrance
+            .to(titleLines, {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              filter: "blur(0px)",
+              duration: 1.05,
+              stagger: 0.14,
+              ease: "power4.out",
+              overwrite: true,
+            })
+            .to(eyebrow, {
+              autoAlpha: 1,
+              y: 0,
+              rotateX: 0,
+              filter: "blur(0px)",
+              duration: .9,
+              ease: "power3.out",
+              overwrite: true,
+            }, "-=.5")
+            .to(intro, {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: .9,
+              ease: "power2.out",
+              overwrite: true,
+            }, "-=.38");
         } else if (!entry.isIntersecting) {
-          gsap.set(titleLines, hiddenState);
+          gsap.set(titleLines, hiddenTitleState);
+          gsap.set(eyebrow, hiddenEyebrowState);
+          gsap.set(intro, hiddenIntroState);
         }
       },
       { root, threshold: [0, 0.12] },
@@ -408,8 +447,8 @@ export function PortfolioPage({ language }: StudioProps) {
     return () => {
       observer.disconnect();
       entrance?.kill();
-      gsap.killTweensOf(titleLines);
-      gsap.set(titleLines, { clearProps: "all" });
+      gsap.killTweensOf(animatedElements);
+      gsap.set(animatedElements, { clearProps: "all" });
     };
   }, [language]);
 
