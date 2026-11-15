@@ -35,8 +35,9 @@ const studioCopy = {
       stylePanelLabel: "GUÍA DE ESTILO",
       openStyleLabel: "Explorar estilo",
       closeStyleLabel: "Cerrar guía de estilo",
-      previousStyleLabel: "Estilo anterior",
-      nextStyleLabel: "Siguiente estilo",
+      styleFactsLabel: "DATOS CLAVE",
+      previousStyleLabel: "Texto anterior",
+      nextStyleLabel: "Siguiente texto",
       styleDetails: [
         {
           title: "BLACKWORK",
@@ -128,8 +129,9 @@ const studioCopy = {
       stylePanelLabel: "STYLE GUIDE",
       openStyleLabel: "Explore style",
       closeStyleLabel: "Close style guide",
-      previousStyleLabel: "Previous style",
-      nextStyleLabel: "Next style",
+      styleFactsLabel: "KEY DETAILS",
+      previousStyleLabel: "Previous text",
+      nextStyleLabel: "Next text",
       styleDetails: [
         {
           title: "BLACKWORK",
@@ -362,9 +364,8 @@ export function PortfolioPage({ language }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
-  const styleDialogRef = useRef<HTMLDialogElement | null>(null);
   const [activeStyleIndex, setActiveStyleIndex] = useState<number | null>(null);
-  const activeStyle = activeStyleIndex === null ? null : copy.styleDetails[activeStyleIndex];
+  const [activeStyleSlide, setActiveStyleSlide] = useState(0);
 
   useEffect(() => {
     const title = portfolioHeroRef.current?.querySelector("h1");
@@ -410,18 +411,8 @@ export function PortfolioPage({ language }: StudioProps) {
     };
   }, [language]);
 
-  useEffect(() => {
-    const dialog = styleDialogRef.current;
-    if (!dialog || activeStyleIndex === null || dialog.open) return;
-    dialog.showModal();
-  }, [activeStyleIndex]);
-
-  const moveStyle = (direction: number) => {
-    setActiveStyleIndex((current) => {
-      if (current === null) return null;
-      const count = copy.styleDetails.length;
-      return (current + direction + count) % count;
-    });
+  const moveStyleSlide = (direction: number) => {
+    setActiveStyleSlide((current) => (current + direction + 2) % 2);
   };
 
   return (
@@ -441,75 +432,80 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (
           <article className="page-portfolio-card" key={name}>
-            <button
-              className="page-portfolio-card-trigger"
-              type="button"
-              aria-label={`${copy.openStyleLabel}: ${name}`}
-              onClick={() => setActiveStyleIndex(index)}
-            >
-              <figure>
+            <div className={`page-portfolio-card-visual${activeStyleIndex === index ? " is-open" : ""}`}>
+              <button
+                className="page-portfolio-card-trigger"
+                type="button"
+                aria-label={`${activeStyleIndex === index ? copy.closeStyleLabel : copy.openStyleLabel}: ${name}`}
+                aria-expanded={activeStyleIndex === index}
+                onClick={() => {
+                  if (activeStyleIndex === index) {
+                    setActiveStyleIndex(null);
+                  } else {
+                    setActiveStyleIndex(index);
+                    setActiveStyleSlide(0);
+                  }
+                }}
+              >
                 <img src={images[index]} alt={alt} />
-              </figure>
-              <span className="page-portfolio-meta">
-                <strong>{name}</strong>
-                <span aria-hidden="true">↗</span>
-              </span>
-            </button>
+              </button>
+              {activeStyleIndex === index && (
+                <div
+                  className="page-portfolio-style-overlay"
+                  role="region"
+                  aria-live="polite"
+                  aria-labelledby={`portfolio-style-title-${index}`}
+                >
+                  <button
+                    className="page-portfolio-style-close"
+                    type="button"
+                    aria-label={copy.closeStyleLabel}
+                    onClick={() => setActiveStyleIndex(null)}
+                  >
+                    ×
+                  </button>
+                  <div className="page-portfolio-style-text" key={`${index}-${activeStyleSlide}`}>
+                    <Eyebrow>
+                      {copy.stylePanelLabel} · {String(activeStyleSlide + 1).padStart(2, "0")} / 02
+                    </Eyebrow>
+                    <h3 id={`portfolio-style-title-${index}`}>{copy.styleDetails[index].title}</h3>
+                    {activeStyleSlide === 0 ? (
+                      <>
+                        <strong className="page-portfolio-style-subtitle">{copy.styleDetails[index].subtitle}</strong>
+                        <p>{copy.styleDetails[index].description}</p>
+                      </>
+                    ) : (
+                      <>
+                        <strong className="page-portfolio-style-subtitle">{copy.styleFactsLabel}</strong>
+                        <ul>
+                          {copy.styleDetails[index].facts.map((fact) => <li key={fact}>{fact}</li>)}
+                        </ul>
+                      </>
+                    )}
+                    <nav className="page-portfolio-style-controls" aria-label={copy.stylePanelLabel}>
+                      <button
+                        type="button"
+                        aria-label={copy.previousStyleLabel}
+                        onClick={() => moveStyleSlide(-1)}
+                      >
+                        ←
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={copy.nextStyleLabel}
+                        onClick={() => moveStyleSlide(1)}
+                      >
+                        →
+                      </button>
+                    </nav>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="page-portfolio-meta"><strong>{name}</strong></div>
           </article>
         ))}
       </section>
-      {activeStyle && activeStyleIndex !== null && (
-        <dialog
-          className="page-portfolio-style-dialog"
-          ref={styleDialogRef}
-          aria-labelledby="portfolio-style-title"
-          onCancel={(event) => {
-            event.preventDefault();
-            setActiveStyleIndex(null);
-          }}
-          onClick={(event) => {
-            if (event.target === event.currentTarget) setActiveStyleIndex(null);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === "ArrowLeft") {
-              event.preventDefault();
-              moveStyle(-1);
-            } else if (event.key === "ArrowRight") {
-              event.preventDefault();
-              moveStyle(1);
-            }
-          }}
-        >
-          <button
-            className="page-portfolio-style-close"
-            type="button"
-            aria-label={copy.closeStyleLabel}
-            onClick={() => setActiveStyleIndex(null)}
-          >
-            ×
-          </button>
-          <div className="page-portfolio-style-layout">
-            <figure className="page-portfolio-style-image">
-              <img src={images[activeStyleIndex]} alt={copy.works[activeStyleIndex][1]} />
-            </figure>
-            <article className="page-portfolio-style-copy" key={activeStyle.title}>
-              <Eyebrow>
-                {copy.stylePanelLabel} · {String(activeStyleIndex + 1).padStart(2, "0")} / {String(copy.styleDetails.length).padStart(2, "0")}
-              </Eyebrow>
-              <h2 id="portfolio-style-title">{activeStyle.title}</h2>
-              <h3>{activeStyle.subtitle}</h3>
-              <p>{activeStyle.description}</p>
-              <ul>
-                {activeStyle.facts.map((fact) => <li key={fact}>{fact}</li>)}
-              </ul>
-              <nav className="page-portfolio-style-controls" aria-label={copy.stylePanelLabel}>
-                <button type="button" onClick={() => moveStyle(-1)}>← {copy.previousStyleLabel}</button>
-                <button type="button" onClick={() => moveStyle(1)}>{copy.nextStyleLabel} →</button>
-              </nav>
-            </article>
-          </div>
-        </dialog>
-      )}
       <section className="page-portfolio-note">
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
         <a className="tattoo-red-link" href="#studio-about">{copy.cta}</a>

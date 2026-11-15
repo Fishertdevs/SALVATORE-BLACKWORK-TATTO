@@ -3096,7 +3096,9 @@ body,
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(18px, 2.5vw, 36px);
   align-items: start;
-  padding: 0 7vw 10vw;
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 52px) 10vw;
 }
 
 .page-portfolio-gallery article {
@@ -3776,6 +3778,7 @@ body,
 
   .page-portfolio-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 760px);
     gap: 24px;
     padding: 0 20px 22vw;
   }
@@ -8294,6 +8297,7 @@ body,
 }
 
 .page-portfolio .page-portfolio-hero h1 {
+  width: 100%;
   color: #111;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-size: clamp(1rem, 5.2vw, 4.9rem);
@@ -8303,9 +8307,23 @@ body,
   text-transform: uppercase;
 }
 
+.page-portfolio .page-portfolio-hero > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
 .page-portfolio .page-portfolio-title-line {
   display: block;
+  white-space: nowrap;
   will-change: transform, opacity, filter;
+}
+
+.page-portfolio .page-portfolio-title-line:first-child {
+  text-align: left;
+}
+
+.page-portfolio .page-portfolio-title-line:last-child {
+  text-align: right;
 }
 
 .page-portfolio .page-portfolio-hero-copy {
@@ -8352,14 +8370,18 @@ body,
 @media (max-width: 600px) {
   .page-portfolio .page-portfolio-gallery {
     grid-template-columns: minmax(0, 1fr);
-    max-width: 480px;
+    width: min(100%, 360px);
     margin: 0 auto;
   }
 }
 
 .page-portfolio-card-trigger {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: block;
   width: 100%;
+  height: 100%;
   padding: 0;
   border: 0;
   background: transparent;
@@ -8372,6 +8394,114 @@ body,
 .page-portfolio-style-dialog button:focus-visible {
   outline: 2px solid #E63027;
   outline-offset: 4px;
+}
+
+.page-portfolio-card-visual {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #e7dfaa;
+}
+
+.page-portfolio-card-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.page-portfolio-style-overlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(14px, 2vw, 24px);
+  overflow: auto;
+  background: linear-gradient(180deg, rgb(8 8 8 / 6%) 8%, rgb(8 8 8 / 42%) 42%, rgb(8 8 8 / 92%) 100%);
+  color: #fff;
+}
+
+.page-portfolio-style-overlay .tattoo-eyebrow {
+  margin: 0 0 10px;
+  color: #f3b4ab;
+  font-size: 9px;
+}
+
+.page-portfolio-style-overlay h3 {
+  margin: 0;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.page-portfolio-style-subtitle {
+  display: block;
+  margin: 10px 0;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .12em;
+}
+
+.page-portfolio-style-overlay p,
+.page-portfolio-style-overlay li {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.page-portfolio-style-overlay p {
+  margin: 0;
+}
+
+.page-portfolio-style-overlay ul {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 0;
+  padding-left: 14px;
+}
+
+.page-portfolio-style-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 18%);
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.page-portfolio-style-text {
+  animation: portfolio-style-copy-in 320ms ease both;
+}
+
+.page-portfolio-style-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.page-portfolio-style-controls button {
+  display: grid;
+  width: 34px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 65%);
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .page-portfolio-style-dialog {
@@ -8550,6 +8680,30 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .page-portfolio-style-copy {
+    animation: none;
+  }
+}
+
+.page-portfolio-style-overlay .page-portfolio-style-close {
+  border-color: rgb(255 255 255 / 70%);
+  background: rgb(0 0 0 / 18%);
+  color: #fff;
+}
+
+.page-portfolio-style-overlay .page-portfolio-style-controls button {
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 65%);
+  background: transparent;
+  color: #fff;
+  text-transform: none;
+}
+
+.page-portfolio-style-overlay button:focus-visible {
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-portfolio-style-text {
     animation: none;
   }
 }
