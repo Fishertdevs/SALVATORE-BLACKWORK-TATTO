@@ -7757,7 +7757,7 @@ body,
 .page-about {
   position: relative;
   isolation: isolate;
-  --about-face-accent: #d94b4b;
+  --about-face-accent: #E63027;
   background: #fff;
 }
 
@@ -7825,7 +7825,7 @@ body,
 .page-about .page-about-editorial-side {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  height: min(58vh, 620px);
+  height: min(88vh, 720px);
   align-self: start;
   min-width: 0;
   padding: 0;
@@ -7851,12 +7851,12 @@ body,
 
 .page-about .page-about-editorial-beat-left-1 {
   align-self: start;
-  margin-top: clamp(48px, 9vh, 108px);
+  margin-top: clamp(24px, 5vh, 64px);
 }
 
 .page-about .page-about-editorial-beat-left-2 {
   align-self: end;
-  margin-bottom: clamp(28px, 6vh, 76px);
+  margin-bottom: clamp(18px, 4vh, 52px);
 }
 
 .page-about .page-about-editorial-beat-right-1 {
@@ -7866,7 +7866,7 @@ body,
 
 .page-about .page-about-editorial-beat-right-2 {
   align-self: end;
-  margin-bottom: clamp(52px, 10vh, 120px);
+  margin-bottom: clamp(18px, 4vh, 52px);
 }
 
 .page-about .page-about-editorial-side h2 {
@@ -8025,13 +8025,24 @@ body,
 }
 
 .page-about .page-about-editorial-side h2 {
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  letter-spacing: -.025em;
+  font-size: clamp(1.15rem, 2.2vw, 2.2rem);
+  letter-spacing: -.04em;
+  line-height: 1.15;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.page-about .page-about-editorial-side h2 em {
+  text-transform: uppercase;
 }
 
 @media (max-width: 700px) {
   .page-about .page-about-editorial-side h2 {
-    font-size: clamp(.8rem, 4vw, 1rem);
+    font-size: clamp(.85rem, 4.2vw, 1.1rem);
   }
+}
+
+.page-about .page-about-editorial-side p {
+  font-size: clamp(1.1rem, 1.35vw, 1.4rem);
+  line-height: 1.45;
 }

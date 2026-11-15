@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["UNA IDEA", "COMÚN"], copy: "Salvatore Blackwork nació para convertir ideas personales en piezas pensadas para el cuerpo." },
+        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nació para convertir ideas personales en piezas pensadas para el cuerpo." },
         { title: ["VISIÓN", "PROPIA"], copy: "La propuesta une contraste, líneas precisas y composición a medida en un lenguaje visual sobrio." },
         { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza escuchando la historia, las referencias y la intención de quien lo llevará." },
-        { title: ["DISEÑO", "CON SENTIDO"], copy: "De esa conversación surge una pieza que acompaña el movimiento y expresa una identidad propia." },
+        { title: ["DISEÑO", "A MEDIDA"], copy: "De esa conversación surge una pieza que acompaña el movimiento y expresa una identidad propia." },
       ],
     },
     portfolio: {
@@ -86,10 +86,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["IDEAS", "SHARED"], copy: "Salvatore Blackwork was born to turn personal ideas into pieces designed around the body." },
+        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork was born to turn personal ideas into pieces designed around the body." },
         { title: ["DISTINCT", "VISION"], copy: "The approach brings contrast, precise lines, and custom composition into a restrained visual language." },
         { title: ["OPEN", "DIALOGUE"], copy: "Every project begins by listening to the story, references, and intent of the person wearing it." },
-        { title: ["PURPOSEFUL", "DESIGN"], copy: "That conversation shapes a piece that moves with the body and expresses a distinct identity." },
+        { title: ["CUSTOM", "DESIGN"], copy: "That conversation shapes a piece that moves with the body and expresses a distinct identity." },
       ],
     },
     portfolio: {
