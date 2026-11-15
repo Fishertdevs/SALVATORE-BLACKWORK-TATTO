@@ -8349,7 +8349,7 @@ body,
   text-align: center;
 }
 
-.page-portfolio .page-portfolio-hero-copy p {
+.page-portfolio .page-portfolio-hero-copy p:not(.tattoo-eyebrow) {
   margin: 0;
   font-size: clamp(16px, 1.25vw, 18px);
   font-weight: 300;
@@ -8358,7 +8358,7 @@ body,
 }
 
 .page-portfolio .page-portfolio-gallery-tags {
-  display: flex;
+  display: none;
   width: min(100%, 980px);
   justify-content: center;
   gap: clamp(16px, 2vw, 26px);
