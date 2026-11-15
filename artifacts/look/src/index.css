@@ -8358,7 +8358,7 @@ body,
 }
 
 .page-portfolio .page-portfolio-gallery-tags {
-  display: none;
+  display: flex;
   width: min(100%, 980px);
   justify-content: center;
   gap: clamp(16px, 2vw, 26px);
