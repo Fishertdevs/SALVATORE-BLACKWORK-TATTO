@@ -24,7 +24,7 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
+      title: "ÁREAS DE ESPECIALIZACIÓN",
       intro: "Una selección de tatuajes blackwork creados a medida, pensados para integrarse con la forma y el movimiento de cada cuerpo.",
       works: [
         ["HOMBRO / LLAMA NEGRA", "Tatuaje blackwork en el hombro"],
@@ -91,7 +91,7 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      title: ["SELECTED", "BLACKWORK", "WORKS"],
+      title: "AREAS OF SPECIALIZATION",
       intro: "A selection of custom blackwork tattoos, designed to follow each body's shape and movement.",
       works: [
         ["SHOULDER / BLACK FLAME", "Blackwork tattoo on the shoulder"],
@@ -315,7 +315,16 @@ export function PortfolioPage({ language }: StudioProps) {
     <StudioFrame id="studio-portfolio" className="page-portfolio">
       <section className="page-portfolio-hero">
         <div>
-          <h1>{copy.title[0]}<br />{copy.title[1]}<br />{copy.title[2]}.</h1>
+          <h1 className="page-portfolio-arched-title" aria-label={copy.title}>
+            <svg viewBox="0 0 1200 220" role="img" aria-hidden="true">
+              <defs>
+                <path id="portfolio-title-arc" d="M 60 170 Q 600 -20 1140 170" />
+              </defs>
+              <text>
+                <textPath href="#portfolio-title-arc" startOffset="50%">{copy.title}</textPath>
+              </text>
+            </svg>
+          </h1>
         </div>
         <p>{copy.intro}</p>
       </section>

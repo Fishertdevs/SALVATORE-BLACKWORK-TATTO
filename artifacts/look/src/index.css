@@ -8321,14 +8321,54 @@ body,
   line-height: 1.45;
 }
 
+.page-portfolio .page-portfolio-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  text-align: center;
+}
+
+.page-portfolio .page-portfolio-hero > div {
+  width: 100%;
+}
+
 .page-portfolio .page-portfolio-hero h1 {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
   color: #111;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1rem, 5.2vw, 4.9rem);
   font-weight: 400;
-  letter-spacing: -.05em;
-  line-height: 1.18;
-  text-transform: uppercase;
+  line-height: 1;
+}
+
+.page-portfolio-arched-title svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.page-portfolio-arched-title text {
+  fill: #111;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: 66px;
+  font-weight: 400;
+  letter-spacing: -2.5px;
+}
+
+.page-portfolio-arched-title textPath {
+  text-anchor: middle;
+}
+
+.page-portfolio .page-portfolio-hero > p {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .page-portfolio .page-portfolio-hero h1 em {
@@ -8336,13 +8376,6 @@ body,
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
   font-style: normal;
   font-weight: 400;
-}
-
-@media (max-width: 700px) {
-  .page-portfolio .page-portfolio-hero h1 {
-    font-size: clamp(.9rem, 5.2vw, 1.35rem);
-    line-height: 1.18;
-  }
 }
 
 .page-portfolio .page-portfolio-meta {
