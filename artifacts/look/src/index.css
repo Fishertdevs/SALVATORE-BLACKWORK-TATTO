@@ -8454,6 +8454,14 @@ body,
   background: #e7dfaa;
 }
 
+@media (min-width: 901px) {
+  .page-portfolio-gallery figure,
+  .page-portfolio-card-visual {
+    height: clamp(280px, 30vw, 420px);
+    aspect-ratio: auto;
+  }
+}
+
 .page-portfolio-card-trigger img {
   display: block;
   width: 100%;
