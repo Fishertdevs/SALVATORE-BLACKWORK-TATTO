@@ -1114,7 +1114,7 @@ body,
 
 .about-center-story .page-about-editorial-side p {
   max-width: 250px;
-  width: min(250px, 100%);
+  width: min(250px, calc(100% + 56px));
   height: auto;
   min-height: 9em;
   margin: 0;
@@ -1286,7 +1286,7 @@ body,
 }
 
 .about-center-story .page-about-editorial-beat h2 {
-  width: min(250px, calc(100% + 40px));
+  width: min(250px, calc(100% + 56px));
   max-width: 250px;
   margin-right: auto;
   margin-left: auto;
@@ -1294,7 +1294,7 @@ body,
 }
 
 .about-center-story .page-about-editorial-beat p {
-  width: min(250px, 100%);
+  width: min(250px, calc(100% + 56px));
   max-width: 250px;
   margin-right: auto;
   margin-left: auto;
