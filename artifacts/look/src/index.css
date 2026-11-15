@@ -3072,10 +3072,11 @@ body,
 }
 
 .page-portfolio-hero {
-  display: flex;
-  justify-content: space-between;
-  gap: 6vw;
-  align-items: end;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: clamp(16px, 2.5vw, 30px);
+  text-align: center;
   padding: 9vw 7vw 8vw;
 }
 
@@ -3649,7 +3650,6 @@ body,
   }
 
   .page-portfolio-hero {
-    display: block;
   }
 
   .page-portfolio-hero > p {
@@ -8299,15 +8299,16 @@ body,
   width: 100%;
   color: #111;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1rem, 5.2vw, 4.9rem);
+  font-size: clamp(1.25rem, 4.6vw, 4.4rem);
   font-weight: 400;
   letter-spacing: -.05em;
   line-height: 1.18;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .page-portfolio .page-portfolio-hero > div:first-child {
-  flex: 1;
+  width: 100%;
   min-width: 0;
 }
 
@@ -8318,17 +8319,17 @@ body,
 }
 
 .page-portfolio .page-portfolio-title-line:first-child {
-  text-align: left;
+  text-align: center;
 }
 
 .page-portfolio .page-portfolio-title-line:last-child {
-  text-align: left;
+  text-align: center;
 }
 
 .page-portfolio .page-portfolio-hero-copy {
-  max-width: 380px;
-  margin: 0 0 10px;
-  transform: translateY(-clamp(18px, 3vw, 40px));
+  max-width: 720px;
+  margin: 0 auto;
+  transform: none;
 }
 
 .page-portfolio .page-portfolio-hero-copy .tattoo-eyebrow {

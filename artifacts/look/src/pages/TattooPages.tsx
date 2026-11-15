@@ -420,9 +420,7 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-hero" ref={portfolioHeroRef}>
         <div>
           <h1>
-            <span className="page-portfolio-title-line">{copy.title[0]}</span>
-            <span className="page-portfolio-title-line">{copy.title[1]}</span>
-            <span className="page-portfolio-title-line">{copy.title[2]}.</span>
+            <span className="page-portfolio-title-line">{copy.title.join(" ")}.</span>
           </h1>
         </div>
         <div className="page-portfolio-hero-copy">
