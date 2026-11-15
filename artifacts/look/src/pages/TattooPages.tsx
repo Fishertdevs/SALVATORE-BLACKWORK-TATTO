@@ -30,7 +30,32 @@ const studioCopy = {
       works: [
         ["BLACKWORK / CONTRASTE", "Tatuaje blackwork de alto contraste"],
         ["NEOTRIBAL / LÍNEAS FLUIDAS", "Composición de líneas fluidas estilo neotribal"],
-        ["TRIBAL / GEOMETRÍA", "Diseño tribal de líneas negras"],
+        ["ORNAMENTAL / GEOMETRÍA", "Diseño ornamental de líneas geométricas"],
+      ],
+      stylePanelLabel: "GUÍA DE ESTILO",
+      openStyleLabel: "Explorar estilo",
+      closeStyleLabel: "Cerrar guía de estilo",
+      previousStyleLabel: "Estilo anterior",
+      nextStyleLabel: "Siguiente estilo",
+      styleDetails: [
+        {
+          title: "BLACKWORK",
+          subtitle: "CONTRASTE Y TINTA NEGRA",
+          description: "El blackwork utiliza la tinta negra como protagonista. Combina líneas, formas sólidas y espacios negativos para construir diseños gráficos que se adaptan a la zona del cuerpo.",
+          facts: ["Contraste marcado entre tinta y piel", "Composición personalizada para cada zona"],
+        },
+        {
+          title: "NEOTRIBAL",
+          subtitle: "LÍNEAS FLUIDAS Y MOVIMIENTO",
+          description: "El neotribal reinterpreta formas tribales con trazos dinámicos, puntas orgánicas y curvas que acompañan la anatomía y el movimiento del cuerpo.",
+          facts: ["Formas expresivas y fluidas", "Diseño pensado para seguir el cuerpo"],
+        },
+        {
+          title: "ORNAMENTAL",
+          subtitle: "PATRÓN, SIMETRÍA Y DETALLE",
+          description: "El estilo ornamental se construye con patrones, simetrías y detalles decorativos. La composición se ajusta a la ubicación y escala de cada tatuaje.",
+          facts: ["Geometría y repetición visual", "Equilibrio entre detalle y forma"],
+        },
       ],
       noteTitle: ["Cada pieza,", "hecha para ti."],
       cta: "HABLEMOS DE TU DISEÑO →",
@@ -98,7 +123,32 @@ const studioCopy = {
       works: [
         ["BLACKWORK / CONTRAST", "High-contrast blackwork tattoo"],
         ["NEO-TRIBAL / FLOWING LINES", "Neo-tribal composition with flowing lines"],
-        ["TRIBAL / GEOMETRY", "Black-line tribal design"],
+        ["ORNAMENTAL / GEOMETRY", "Ornamental design with geometric lines"],
+      ],
+      stylePanelLabel: "STYLE GUIDE",
+      openStyleLabel: "Explore style",
+      closeStyleLabel: "Close style guide",
+      previousStyleLabel: "Previous style",
+      nextStyleLabel: "Next style",
+      styleDetails: [
+        {
+          title: "BLACKWORK",
+          subtitle: "CONTRAST AND BLACK INK",
+          description: "Blackwork puts black ink at the center of the design. It combines lines, solid shapes, and negative space to create graphic work tailored to the body area.",
+          facts: ["Strong contrast between ink and skin", "Custom composition for each placement"],
+        },
+        {
+          title: "NEO-TRIBAL",
+          subtitle: "FLOWING LINES AND MOVEMENT",
+          description: "Neo-tribal reinterprets tribal forms with dynamic strokes, organic points, and curves that follow the body's anatomy and movement.",
+          facts: ["Expressive, fluid forms", "Designed to follow the body"],
+        },
+        {
+          title: "ORNAMENTAL",
+          subtitle: "PATTERN, SYMMETRY, AND DETAIL",
+          description: "Ornamental tattooing uses patterns, symmetry, and decorative detail. The composition is adapted to the placement and scale of each tattoo.",
+          facts: ["Geometry and visual repetition", "Balance between detail and form"],
+        },
       ],
       noteTitle: ["Every piece,", "made for you."],
       cta: "LET'S TALK ABOUT YOUR DESIGN →",
@@ -312,6 +362,9 @@ export function PortfolioPage({ language }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
+  const styleDialogRef = useRef<HTMLDialogElement | null>(null);
+  const [activeStyleIndex, setActiveStyleIndex] = useState<number | null>(null);
+  const activeStyle = activeStyleIndex === null ? null : copy.styleDetails[activeStyleIndex];
 
   useEffect(() => {
     const title = portfolioHeroRef.current?.querySelector("h1");
@@ -357,6 +410,20 @@ export function PortfolioPage({ language }: StudioProps) {
     };
   }, [language]);
 
+  useEffect(() => {
+    const dialog = styleDialogRef.current;
+    if (!dialog || activeStyleIndex === null || dialog.open) return;
+    dialog.showModal();
+  }, [activeStyleIndex]);
+
+  const moveStyle = (direction: number) => {
+    setActiveStyleIndex((current) => {
+      if (current === null) return null;
+      const count = copy.styleDetails.length;
+      return (current + direction + count) % count;
+    });
+  };
+
   return (
     <StudioFrame id="studio-portfolio" className="page-portfolio">
       <section className="page-portfolio-hero" ref={portfolioHeroRef}>
@@ -375,13 +442,75 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (
           <article className="page-portfolio-card" key={name}>
-            <figure>
-              <img src={images[index]} alt={alt} />
-            </figure>
-            <div className="page-portfolio-meta"><strong>{name}</strong></div>
+            <button
+              className="page-portfolio-card-trigger"
+              type="button"
+              aria-label={`${copy.openStyleLabel}: ${name}`}
+              onClick={() => setActiveStyleIndex(index)}
+            >
+              <figure>
+                <img src={images[index]} alt={alt} />
+              </figure>
+              <span className="page-portfolio-meta">
+                <strong>{name}</strong>
+                <span aria-hidden="true">↗</span>
+              </span>
+            </button>
           </article>
         ))}
       </section>
+      {activeStyle && activeStyleIndex !== null && (
+        <dialog
+          className="page-portfolio-style-dialog"
+          ref={styleDialogRef}
+          aria-labelledby="portfolio-style-title"
+          onCancel={(event) => {
+            event.preventDefault();
+            setActiveStyleIndex(null);
+          }}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setActiveStyleIndex(null);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              moveStyle(-1);
+            } else if (event.key === "ArrowRight") {
+              event.preventDefault();
+              moveStyle(1);
+            }
+          }}
+        >
+          <button
+            className="page-portfolio-style-close"
+            type="button"
+            aria-label={copy.closeStyleLabel}
+            onClick={() => setActiveStyleIndex(null)}
+          >
+            ×
+          </button>
+          <div className="page-portfolio-style-layout">
+            <figure className="page-portfolio-style-image">
+              <img src={images[activeStyleIndex]} alt={copy.works[activeStyleIndex][1]} />
+            </figure>
+            <article className="page-portfolio-style-copy" key={activeStyle.title}>
+              <Eyebrow>
+                {copy.stylePanelLabel} · {String(activeStyleIndex + 1).padStart(2, "0")} / {String(copy.styleDetails.length).padStart(2, "0")}
+              </Eyebrow>
+              <h2 id="portfolio-style-title">{activeStyle.title}</h2>
+              <h3>{activeStyle.subtitle}</h3>
+              <p>{activeStyle.description}</p>
+              <ul>
+                {activeStyle.facts.map((fact) => <li key={fact}>{fact}</li>)}
+              </ul>
+              <nav className="page-portfolio-style-controls" aria-label={copy.stylePanelLabel}>
+                <button type="button" onClick={() => moveStyle(-1)}>← {copy.previousStyleLabel}</button>
+                <button type="button" onClick={() => moveStyle(1)}>{copy.nextStyleLabel} →</button>
+              </nav>
+            </article>
+          </div>
+        </dialog>
+      )}
       <section className="page-portfolio-note">
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
         <a className="tattoo-red-link" href="#studio-about">{copy.cta}</a>
