@@ -8320,3 +8320,35 @@ body,
   font-size: clamp(1.1rem, 1.35vw, 1.4rem);
   line-height: 1.45;
 }
+
+.page-portfolio .page-portfolio-hero h1 {
+  color: #111;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-size: clamp(1rem, 5.2vw, 4.9rem);
+  font-weight: 400;
+  letter-spacing: -.05em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.page-portfolio .page-portfolio-hero h1 em {
+  color: #111;
+  font-family: 'Beautique Display', 'Helvetica Neue', serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .page-portfolio .page-portfolio-hero h1 {
+    font-size: clamp(.9rem, 5.2vw, 1.35rem);
+    line-height: 1.18;
+  }
+}
+
+.page-portfolio .page-portfolio-meta {
+  justify-content: flex-start;
+}
+
+.page-portfolio .page-portfolio-meta strong {
+  text-align: left;
+}

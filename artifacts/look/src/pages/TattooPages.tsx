@@ -24,17 +24,15 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      eyebrow: "PORTFOLIO / 003",
-      title: ["ESTUDIOS", "blackwork", "SELECCIONADOS"],
-      intro: "Una selección de composiciones hechas a medida, pensadas para vivir con el cuerpo y no solo sobre él.",
+      title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
+      intro: "Una selección de tatuajes blackwork creados a medida, pensados para integrarse con la forma y el movimiento de cada cuerpo.",
       works: [
-        ["BW—01", "HOMBRO / LLAMA NEGRA", "Tatuaje blackwork de hombro"],
-        ["BW—02", "CUELLO / ESTUDIO DE ESPINAS", "Tatuaje blackwork de cuello"],
-        ["BW—03", "MANO / GUION DEL VACÍO", "Tatuaje blackwork de mano"],
+        ["HOMBRO / LLAMA NEGRA", "Tatuaje blackwork en el hombro"],
+        ["CUELLO / ESTUDIO DE ESPINAS", "Composición blackwork ornamental en el cuello"],
+        ["MANO / GUIÓN DEL VACÍO", "Tatuaje blackwork en la mano"],
       ],
-      note: "NO HAY DOS IGUALES",
-      noteTitle: ["Tu marca,", "tu lenguaje."],
-      cta: "CUÉNTANOS TU IDEA →",
+      noteTitle: ["Cada pieza,", "hecha para ti."],
+      cta: "HABLEMOS DE TU DISEÑO →",
     },
     services: {
       eyebrow: "SERVICIOS / 004",
@@ -93,17 +91,15 @@ const studioCopy = {
       ],
     },
     portfolio: {
-      eyebrow: "PORTFOLIO / 003",
-      title: ["SELECTED", "blackwork", "STUDIES"],
-      intro: "A selection of custom compositions made to live with the body, not simply sit on it.",
+      title: ["SELECTED", "BLACKWORK", "WORKS"],
+      intro: "A selection of custom blackwork tattoos, designed to follow each body's shape and movement.",
       works: [
-        ["BW—01", "SHOULDER / BLACK FLAME", "Editorial blackwork shoulder tattoo"],
-        ["BW—02", "NECK / THORN STUDY", "Editorial blackwork neck tattoo"],
-        ["BW—03", "HAND / VOID SCRIPT", "Editorial blackwork hand tattoo"],
+        ["SHOULDER / BLACK FLAME", "Blackwork tattoo on the shoulder"],
+        ["NECK / THORN STUDY", "Ornamental blackwork composition on the neck"],
+        ["HAND / VOID SCRIPT", "Blackwork tattoo on the hand"],
       ],
-      note: "NO TWO ARE ALIKE",
-      noteTitle: ["Your mark,", "your language."],
-      cta: "TELL US YOUR IDEA →",
+      noteTitle: ["Every piece,", "made for you."],
+      cta: "LET'S TALK ABOUT YOUR DESIGN →",
     },
     services: {
       eyebrow: "SERVICES / 004",
@@ -319,23 +315,21 @@ export function PortfolioPage({ language }: StudioProps) {
     <StudioFrame id="studio-portfolio" className="page-portfolio">
       <section className="page-portfolio-hero">
         <div>
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <h1>{copy.title[0]}<br /><em>{copy.title[1]}</em><br />{copy.title[2]}.</h1>
+          <h1>{copy.title[0]}<br />{copy.title[1]}<br />{copy.title[2]}.</h1>
         </div>
         <p>{copy.intro}</p>
       </section>
       <section className="page-portfolio-gallery">
-        {copy.works.map(([code, name, alt], index) => (
-          <article className={classes[index]} key={code}>
+        {copy.works.map(([name, alt], index) => (
+          <article className={classes[index]} key={name}>
             <figure>
               <img src={images[index]} alt={alt} />
             </figure>
-            <div className="page-portfolio-meta"><span>{code}</span><strong>{name}</strong></div>
+            <div className="page-portfolio-meta"><strong>{name}</strong></div>
           </article>
         ))}
       </section>
       <section className="page-portfolio-note">
-        <Eyebrow>{copy.note}</Eyebrow>
         <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
         <a className="tattoo-red-link" href="#studio-about">{copy.cta}</a>
       </section>
