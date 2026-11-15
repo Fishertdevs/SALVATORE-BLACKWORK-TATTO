@@ -26,7 +26,7 @@ const studioCopy = {
     portfolio: {
       title: ["OBRAS", "BLACKWORK", "SELECCIONADAS"],
       specialtyLabel: "ESPECIALIDADES",
-      intro: "Salvatore es tatuador en Funza y trabaja blackwork, ornamental y neotribal. Cada proyecto empieza escuchando tu idea y considerando la zona del cuerpo para crear un diseño propio, con contraste y líneas precisas. Cada pieza busca acompañar tu anatomía y expresar tu identidad en la piel.",
+      intro: "Salvatore es tatuador en Funza y desarrolla proyectos de blackwork, ornamental y neotribal. Cada proceso comienza con una conversación para conocer tu idea, tus referencias y lo que quieres expresar. A partir de ahí, considera la ubicación y el movimiento del cuerpo para crear un diseño original, pensado para tu anatomía y para el flujo natural de la zona. Trabaja con tinta negra, líneas precisas, contraste y espacios negativos para construir composiciones equilibradas, desde piezas pequeñas hasta proyectos de mayor escala. El tamaño, la ubicación y cada detalle se definen contigo para que el resultado tenga identidad propia y se sienta parte de ti.",
       galleryTags: ["BLACKWORK", "DISEÑO A MEDIDA"],
       works: [
         ["BLACKWORK / CONTRASTE", "Tatuaje blackwork de alto contraste"],
@@ -121,7 +121,7 @@ const studioCopy = {
     portfolio: {
       title: ["SELECTED", "BLACKWORK", "WORKS"],
       specialtyLabel: "SPECIALTIES",
-      intro: "Salvatore is a tattoo artist based in Funza, working in blackwork, ornamental, and neo-tribal styles. Every project starts by listening to your idea and considering placement, then shaping an original design with precise lines and contrast. Each piece is created to follow your anatomy and express your identity.",
+      intro: "Salvatore is a tattoo artist in Funza who develops blackwork, ornamental, and neo-tribal projects. Each process begins with a conversation about your idea, references, and what you want to express. He then considers placement and body movement to create an original design shaped for your anatomy and the natural flow of the area. Black ink, precise lines, contrast, and negative space build balanced compositions, from small pieces to larger projects. Size, placement, and every detail are defined with you so the result feels personal and true to you.",
       galleryTags: ["BLACKWORK", "CUSTOM DESIGN"],
       works: [
         ["BLACKWORK / CONTRAST", "High-contrast blackwork tattoo"],
@@ -431,7 +431,7 @@ export function PortfolioPage({ language }: StudioProps) {
         </div>
       </section>
       <div className="page-portfolio-gallery-tags" aria-label={language === "es" ? "Etiquetas de la galería" : "Gallery labels"}>
-        {copy.galleryTags.map((tag) => <span key={tag}>{tag}</span>)}
+        {copy.galleryTags.map((tag) => <span className="tattoo-eyebrow" key={tag}>{tag}</span>)}
       </div>
       <section className="page-portfolio-gallery">
         {copy.works.map(([name, alt], index) => (

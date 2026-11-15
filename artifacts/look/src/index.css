@@ -8299,7 +8299,7 @@ body,
   width: 100%;
   color: #111;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.25rem, 4vw, 4.2rem);
+  font-size: clamp(1.6rem, 4.4vw, 4.8rem);
   font-weight: 400;
   letter-spacing: -.05em;
   line-height: 1.18;
@@ -8327,7 +8327,7 @@ body,
 }
 
 .page-portfolio .page-portfolio-hero-copy {
-  max-width: 720px;
+  max-width: 820px;
   margin: 0 auto;
   transform: none;
 }
@@ -8355,19 +8355,15 @@ body,
 }
 
 .page-portfolio .page-portfolio-gallery-tags span {
-  padding: 8px 13px;
-  border: 1px solid rgb(230 48 39 / 48%);
-  border-radius: 999px;
-  color: #E63027;
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  line-height: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
 }
 
 @media (max-width: 700px) {
   .page-portfolio .page-portfolio-hero h1 {
-    font-size: clamp(.75rem, 4.4vw, 1.35rem);
+    font-size: clamp(.9rem, 4.8vw, 1.6rem);
     line-height: 1.18;
   }
 }
