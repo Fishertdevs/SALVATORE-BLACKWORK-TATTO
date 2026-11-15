@@ -7834,6 +7834,7 @@ body,
 .page-about .page-about-editorial-side-left {
   grid-column: 1;
   grid-row: 1;
+  padding: 0;
 }
 
 .page-about .page-about-editorial-side-right {
@@ -7884,8 +7885,8 @@ body,
 }
 
 .page-about .page-about-editorial-side p {
-  max-width: 230px;
-  width: min(230px, 100%);
+  max-width: 250px;
+  width: min(250px, 100%);
   height: auto;
   min-height: 9em;
   margin: 0;
@@ -8032,8 +8033,8 @@ body,
 }
 
 .page-about .page-about-editorial-side h2 {
-  width: min(230px, 100%);
-  max-width: 230px;
+  width: min(250px, calc(100% + 40px));
+  max-width: 250px;
   font-size: clamp(1.1rem, 1.7vw, 1.5rem);
   letter-spacing: -.04em;
   line-height: 1.15;
@@ -8058,10 +8059,17 @@ body,
   }
 }
 
-.page-about .page-about-editorial-beat h2,
+.page-about .page-about-editorial-beat h2 {
+  width: min(250px, calc(100% + 40px));
+  max-width: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
 .page-about .page-about-editorial-beat p {
-  width: min(230px, 100%);
-  max-width: 230px;
+  width: min(250px, 100%);
+  max-width: 250px;
   margin-right: auto;
   margin-left: auto;
   text-align: center;
@@ -8097,14 +8105,14 @@ body,
 }
 
 .page-about .page-about-editorial-side-left::after {
-  right: -110px;
+  right: -24px;
   left: auto;
   transform: translateY(-50%);
 }
 
 .page-about .page-about-editorial-side-right::after {
   right: auto;
-  left: -110px;
+  left: -24px;
   transform: translateY(-50%);
 }
 
@@ -8124,15 +8132,6 @@ body,
   }
 }
 
-@media (min-width: 901px) {
-  .page-about .page-about-editorial-side-left {
-    transform: translateX(clamp(20px, 3vw, 32px));
-  }
-
-  .page-about .page-about-editorial-side-right {
-    transform: translateX(clamp(-32px, -3vw, -20px));
-  }
-}
 
 .page-about .page-about-editorial-kicker {
   margin: 18px auto 0;

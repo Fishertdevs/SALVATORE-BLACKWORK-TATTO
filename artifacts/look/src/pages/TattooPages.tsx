@@ -186,7 +186,9 @@ export function AboutPage({ language }: StudioProps) {
     const section = aboutSectionRef.current;
     if (!section || typeof IntersectionObserver === "undefined") return;
 
-    const targets = Array.from(section.querySelectorAll<HTMLElement>("[data-about-reveal]"));
+    const targets = Array.from(
+      section.querySelectorAll<HTMLElement>('[data-about-reveal]:not([data-about-reveal="copy"])'),
+    );
     if (!targets.length) return;
 
     const revealFrom = {

@@ -14,7 +14,9 @@ export function CenterStory() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) return;
 
-    const targets = Array.from(section.querySelectorAll<HTMLElement>("[data-about-reveal]"));
+    const targets = Array.from(
+      section.querySelectorAll<HTMLElement>('[data-about-reveal]:not([data-about-reveal="copy"])'),
+    );
     const activeTargets = new WeakSet<HTMLElement>();
     targets.forEach((target) => target.classList.add("about-hero-reveal"));
 
