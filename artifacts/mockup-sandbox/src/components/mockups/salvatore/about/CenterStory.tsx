@@ -56,11 +56,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-left">
               <div className="page-about-editorial-beat page-about-editorial-beat-left-1">
                 <h2 data-about-reveal="heading">IDEA <em>COMÚN</em></h2>
-                <p data-about-reveal="copy">Salvatore Blackwork nace de ideas personales.</p>
+                <p data-about-reveal="copy">Salvatore Blackwork nació para plasmar ideas personales en la piel.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-left-2">
                 <h2 data-about-reveal="heading">VISIÓN <em>PROPIA</em></h2>
-                <p data-about-reveal="copy">Contraste y precisión definen su lenguaje visual.</p>
+                <p data-about-reveal="copy">Contraste, líneas precisas y composición a medida definen su lenguaje visual.</p>
               </div>
             </article>
             <figure className="page-about-portrait">
@@ -69,11 +69,11 @@ export function CenterStory() {
             <article className="page-about-editorial-side page-about-editorial-side-right">
               <div className="page-about-editorial-beat page-about-editorial-beat-right-1">
                 <h2 data-about-reveal="heading">DIÁLOGO <em>DIRECTO</em></h2>
-                <p data-about-reveal="copy">Escuchamos a cada persona antes de comenzar.</p>
+                <p data-about-reveal="copy">Cada proyecto parte de tu historia, tus referencias y cómo quieres llevarlo.</p>
               </div>
               <div className="page-about-editorial-beat page-about-editorial-beat-right-2">
                 <h2 data-about-reveal="heading">DISEÑO <em>A MEDIDA</em></h2>
-                <p data-about-reveal="copy">Diseños a medida expresan cuerpo e identidad.</p>
+                <p data-about-reveal="copy">Cada diseño acompaña el movimiento del cuerpo y expresa una identidad propia.</p>
               </div>
             </article>
           </div>

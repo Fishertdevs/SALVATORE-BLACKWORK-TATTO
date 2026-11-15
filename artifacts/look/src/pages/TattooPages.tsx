@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace de ideas personales." },
-        { title: ["VISIÓN", "PROPIA"], copy: "Contraste y precisión definen su lenguaje visual." },
-        { title: ["DIÁLOGO", "DIRECTO"], copy: "Escuchamos a cada persona antes de comenzar." },
-        { title: ["DISEÑO", "A MEDIDA"], copy: "Diseños a medida expresan cuerpo e identidad." },
+        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nació para plasmar ideas personales en la piel." },
+        { title: ["VISIÓN", "PROPIA"], copy: "Contraste, líneas precisas y composición a medida definen su lenguaje visual." },
+        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto parte de tu historia, tus referencias y cómo quieres llevarlo." },
+        { title: ["DISEÑO", "A MEDIDA"], copy: "Cada diseño acompaña el movimiento del cuerpo y expresa una identidad propia." },
       ],
     },
     portfolio: {
@@ -86,10 +86,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork grew from personal ideas." },
-        { title: ["DISTINCT", "VISION"], copy: "Contrast and precision define its visual language." },
-        { title: ["OPEN", "DIALOGUE"], copy: "We listen to each person before beginning." },
-        { title: ["CUSTOM", "DESIGN"], copy: "Custom designs express body and identity." },
+        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork was created to bring personal ideas to life on skin." },
+        { title: ["DISTINCT", "VISION"], copy: "Contrast, precise lines, and custom composition define its visual language." },
+        { title: ["OPEN", "DIALOGUE"], copy: "Each project starts with your story, references, and how you want to wear it." },
+        { title: ["CUSTOM", "DESIGN"], copy: "Each design follows the body’s movement and expresses a distinct identity." },
       ],
     },
     portfolio: {

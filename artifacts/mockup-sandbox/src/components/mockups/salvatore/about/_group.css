@@ -1113,9 +1113,10 @@ body,
 
 .about-center-story .page-about-editorial-side p {
   max-width: 230px;
+  width: min(230px, calc(100% + 48px));
   margin: 0;
   color: #111;
-  font-size: clamp(12px, .95vw, 14px);
+  font-size: clamp(13px, 1vw, 14px);
   line-height: 1.45;
 }
 
@@ -1134,6 +1135,10 @@ body,
     grid-template-rows: auto auto;
     height: auto;
     gap: 34px;
+  }
+
+  .about-center-story .page-about-editorial-side p {
+    width: 100%;
   }
 
   .about-center-story .page-about-editorial-side-left,
