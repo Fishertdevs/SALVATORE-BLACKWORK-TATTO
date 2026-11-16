@@ -395,7 +395,8 @@ export function PortfolioPage({ language }: StudioProps) {
   const [activeStyleSlide, setActiveStyleSlide] = useState(0);
 
   useEffect(() => {
-    const title = portfolioHeroRef.current?.querySelector("h1");
+    const hero = portfolioHeroRef.current;
+    const title = hero?.querySelector("h1");
     const eyebrow = portfolioHeroRef.current?.querySelector<HTMLElement>(
       ".page-portfolio-hero-copy .tattoo-eyebrow",
     );
@@ -406,8 +407,12 @@ export function PortfolioPage({ language }: StudioProps) {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const isMobile = Boolean(hero?.closest(".mobile-look-root"));
     const root = document.getElementById("fullscreen-section");
-    const titleLines = Array.from(title.querySelectorAll<HTMLElement>(".page-portfolio-title-line"));
+    const titleSelector = isMobile
+      ? ".page-portfolio-title-line-mobile"
+      : ".page-portfolio-title-line-desktop";
+    const titleLines = Array.from(title.querySelectorAll<HTMLElement>(titleSelector));
     const animatedElements = [...titleLines, eyebrow, intro];
     let entrance: gsap.core.Timeline | undefined;
     const hiddenTitleState = { autoAlpha: 0, y: 34, scale: .96, filter: "blur(8px)" };
@@ -458,6 +463,12 @@ export function PortfolioPage({ language }: StudioProps) {
               ease: "power2.out",
               overwrite: true,
             }, "-=.38");
+        } else if (isMobile) {
+          entrance?.kill();
+          gsap.killTweensOf(animatedElements);
+          gsap.set(titleLines, hiddenTitleState);
+          gsap.set(eyebrow, hiddenEyebrowState);
+          gsap.set(intro, hiddenIntroState);
         }
       },
       { root, threshold: [0, 0.12] },
@@ -599,7 +610,15 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-hero" ref={portfolioHeroRef}>
         <div>
           <h1>
-            <span className="page-portfolio-title-line">{copy.title.join(" ")}.</span>
+            <span className="page-portfolio-title-line page-portfolio-title-line-desktop">
+              {copy.title.join(" ")}.
+            </span>
+            <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
+              {copy.title.slice(0, 2).join(" ")}
+            </span>
+            <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
+              {copy.title.slice(2).join(" ")}.
+            </span>
           </h1>
         </div>
         <div className="page-portfolio-hero-copy">
