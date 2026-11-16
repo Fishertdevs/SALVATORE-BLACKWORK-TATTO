@@ -28,12 +28,11 @@ const copy = {
     idea: "¿Qué pieza tienes en mente?",
     ideaPlaceholder: "Estilo, tamaño aproximado y detalles que quieras compartir.",
     date: "Fecha que prefieres",
-    time: "Hora preferida · Colombia",
     timePeriodLabel: "Horario preferido · Colombia",
     chooseTimePeriod: "ELIGE UN HORARIO",
     timePeriods: { morning: "MAÑANA", afternoon: "TARDE", night: "NOCHE" },
     projectIntro: "Comparte lo esencial. El diseño se conversa y desarrolla directamente con Salvatore.",
-    scheduleIntro: "Indica el día y la hora que te funcionan. Salvatore revisará su agenda y te confirmará por WhatsApp.",
+    scheduleIntro: "Elige el día y la franja que prefieres. Salvatore confirmará la hora exacta por WhatsApp.",
     scheduleIntroMobile: "Elige si prefieres mañana, tarde o noche. Salvatore confirmará la hora exacta por WhatsApp.",
     confirmIntro: "Revisa los datos. Al continuar, se abrirá WhatsApp con tu solicitud lista para enviar.",
     request: "ENVIAR SOLICITUD POR WHATSAPP",
@@ -65,12 +64,11 @@ const copy = {
     idea: "What piece do you have in mind?",
     ideaPlaceholder: "Style, approximate size, and any details you’d like to share.",
     date: "Preferred date",
-    time: "Preferred time · Colombia",
     timePeriodLabel: "Preferred time · Colombia",
     chooseTimePeriod: "CHOOSE A TIME OF DAY",
     timePeriods: { morning: "MORNING", afternoon: "AFTERNOON", night: "EVENING" },
     projectIntro: "Share the essentials. The design will be discussed and developed directly with Salvatore.",
-    scheduleIntro: "Choose a day and time that work for you. Salvatore will check his schedule and confirm on WhatsApp.",
+    scheduleIntro: "Choose your preferred day and time of day. Salvatore will confirm the exact time on WhatsApp.",
     scheduleIntroMobile: "Choose morning, afternoon, or evening. Salvatore will confirm the exact time on WhatsApp.",
     confirmIntro: "Review your details. Continue to open WhatsApp with your request ready to send.",
     request: "SEND REQUEST ON WHATSAPP",
@@ -102,8 +100,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [placement, setPlacement] = useState("");
   const [tattooBrief, setTattooBrief] = useState("");
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [mobileTimePeriod, setMobileTimePeriod] = useState<TimePeriod | "">("");
+  const [timePeriod, setTimePeriod] = useState<TimePeriod | "">("");
   const [isTimePeriodOpen, setIsTimePeriodOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => {
@@ -179,17 +176,16 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   };
 
   const continueFromSchedule = () => {
-    if (!date || (!time && !mobileTimePeriod)) {
+    if (!date || !timePeriod) {
       setRequestError(text.required);
       return;
     }
     selectStep(2);
   };
 
-  const selectMobileTimePeriod = (period: TimePeriod) => {
-    setMobileTimePeriod(period);
+  const selectTimePeriod = (period: TimePeriod) => {
+    setTimePeriod(period);
     setIsTimePeriodOpen(false);
-    setTime("");
     clearMessages();
   };
 
@@ -209,7 +205,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       setRequestError(text.required);
       return;
     }
-    if (!date || (!time && !mobileTimePeriod)) {
+    if (!date || !timePeriod) {
       setHasOpenedStepContent(true);
       setActiveStep(1);
       setRequestError(text.required);
@@ -221,8 +217,8 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       placement: placement.trim(),
       tattooBrief: tattooBrief.trim(),
       date,
-      time: mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : time,
-      timeIsPeriod: Boolean(mobileTimePeriod),
+      time: text.timePeriods[timePeriod],
+      timeIsPeriod: true,
     });
     setSubmittedHref(href);
     window.open(href, "_blank", "noopener,noreferrer");
@@ -428,42 +424,29 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                         </div>
                       )}
                     </div>
-                    <label className="reservation-desktop-picker">
-                      <span><Clock3 size={14} aria-hidden="true" />{text.time}</span>
-                      <input
-                        className="reservation-native-time"
-                        type="time"
-                        value={time}
-                        onChange={(event) => {
-                          const nextTime = event.target.value;
-                          setTime(nextTime);
-                          setMobileTimePeriod("");
-                          clearMessages();
-                        }}
-                        required
-                      />
-                    </label>
-                    <div className="reservation-mobile-picker reservation-mobile-time-picker">
-                      <span className="reservation-mobile-picker-label">{text.timePeriodLabel}</span>
+                    <div className="reservation-time-period-picker">
+                      <span className="reservation-time-period-label">
+                        <Clock3 size={14} aria-hidden="true" />{text.timePeriodLabel}
+                      </span>
                       <button
                         type="button"
-                        className="reservation-mobile-time-trigger"
+                        className="reservation-time-period-trigger"
                         aria-expanded={isTimePeriodOpen}
-                        aria-controls="reservation-mobile-time-options"
+                        aria-controls="reservation-time-period-options"
                         onClick={() => setIsTimePeriodOpen((open) => !open)}
                       >
-                        <span>{mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : text.chooseTimePeriod}</span>
+                        <span>{timePeriod ? text.timePeriods[timePeriod] : text.chooseTimePeriod}</span>
                         <ChevronDown size={16} aria-hidden="true" />
                       </button>
                       {isTimePeriodOpen && (
-                        <div className="reservation-mobile-time-options" id="reservation-mobile-time-options" role="group" aria-label={text.timePeriodLabel}>
+                        <div className="reservation-time-period-options" id="reservation-time-period-options" role="group" aria-label={text.timePeriodLabel}>
                           {(["morning", "afternoon", "night"] as const).map((period) => (
                             <button
                               key={period}
                               type="button"
-                              className={`reservation-time-period-option${mobileTimePeriod === period ? " is-selected" : ""}`}
-                              aria-pressed={mobileTimePeriod === period}
-                              onClick={() => selectMobileTimePeriod(period)}
+                              className={`reservation-time-period-option${timePeriod === period ? " is-selected" : ""}`}
+                              aria-pressed={timePeriod === period}
+                              onClick={() => selectTimePeriod(period)}
                             >
                               {text.timePeriods[period]}
                             </button>
@@ -499,7 +482,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <div className="reservation-contact-form reservation-contact-quick">
                     <p className="reservation-confirmation-note">
                       <strong>{name}</strong><br />
-                      {placement} · {date} · {mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : time}<br />
+                      {placement} · {date} · {timePeriod ? text.timePeriods[timePeriod] : ""}<br />
                       {tattooBrief}
                     </p>
                     <p className="reservation-confirmation-note">{text.notice}</p>
