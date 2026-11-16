@@ -384,7 +384,7 @@ export function AboutPage({ language, isMobile = false }: StudioProps) {
   );
 }
 
-export function PortfolioPage({ language }: StudioProps) {
+export function PortfolioPage({ language, isMobile = false }: StudioProps) {
   const copy = studioCopy[language].portfolio;
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
@@ -407,7 +407,6 @@ export function PortfolioPage({ language }: StudioProps) {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const isMobile = Boolean(hero?.closest(".mobile-look-root"));
     const root = document.getElementById("fullscreen-section");
     const titleSelector = isMobile
       ? ".page-portfolio-title-line-mobile"
@@ -610,15 +609,20 @@ export function PortfolioPage({ language }: StudioProps) {
       <section className="page-portfolio-hero" ref={portfolioHeroRef}>
         <div>
           <h1>
-            <span className="page-portfolio-title-line page-portfolio-title-line-desktop">
-              {copy.title.join(" ")}.
-            </span>
-            <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
-              {copy.title.slice(0, 2).join(" ")}
-            </span>
-            <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
-              {copy.title.slice(2).join(" ")}.
-            </span>
+            {isMobile ? (
+              <>
+                <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
+                  {copy.title.slice(0, 2).join(" ")}
+                </span>
+                <span className="page-portfolio-title-line page-portfolio-title-line-mobile">
+                  {copy.title.slice(2).join(" ")}.
+                </span>
+              </>
+            ) : (
+              <span className="page-portfolio-title-line page-portfolio-title-line-desktop">
+                {copy.title.join(" ")}.
+              </span>
+            )}
           </h1>
         </div>
         <div className="page-portfolio-hero-copy">
@@ -1488,9 +1492,12 @@ export function ContactPage({ language }: StudioProps) {
 
 export function StudioHomeSections({ language, isMobile = false }: StudioProps) {
   return (
-    <div className="studio-home-sections" aria-label="Información del estudio">
+    <div
+      className={`studio-home-sections${isMobile ? " studio-home-sections--mobile" : ""}`}
+      aria-label="Información del estudio"
+    >
       <AboutPage language={language} isMobile={isMobile} />
-      <PortfolioPage language={language} />
+      <PortfolioPage language={language} isMobile={isMobile} />
       <ReservationsPage language={language} />
       <ManifestoPage language={language} />
       <FAQPage language={language} />

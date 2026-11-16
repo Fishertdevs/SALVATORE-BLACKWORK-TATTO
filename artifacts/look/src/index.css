@@ -9355,6 +9355,15 @@ body,
 }
 
 @media (max-width: 767px) {
+  .studio-home-sections--mobile .page-portfolio-title-line-desktop {
+    display: none;
+  }
+
+  .studio-home-sections--mobile .page-portfolio-title-line-mobile {
+    display: block;
+    white-space: nowrap;
+  }
+
   .mobile-look-root .page-portfolio .page-portfolio-title-line-desktop {
     display: none;
   }
@@ -9364,7 +9373,8 @@ body,
     white-space: nowrap;
   }
 
-  .mobile-look-root .page-portfolio .page-portfolio-hero h1 {
+  .mobile-look-root .page-portfolio .page-portfolio-hero h1,
+  .studio-home-sections--mobile .page-portfolio .page-portfolio-hero h1 {
     font-size: clamp(1.5rem, 8.5vw, 2.2rem);
     line-height: 0.96;
     letter-spacing: -0.055em;
