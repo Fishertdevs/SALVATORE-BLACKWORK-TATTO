@@ -3339,14 +3339,19 @@ body,
 
 .page-manifesto {
   position: relative;
+  display: block;
+  min-height: 0;
+  overflow: visible;
+  padding: 0;
+  color: #E63027;
+  background: #fff;
+}
+
+.page-manifesto-slide {
   display: grid;
   min-height: 100svh;
   align-items: center;
-  justify-items: stretch;
-  overflow: hidden;
   padding: clamp(110px, 15vh, 180px) clamp(28px, 8vw, 120px);
-  color: #E63027;
-  background: #fff;
 }
 
 .page-manifesto-quote {
@@ -3701,6 +3706,11 @@ body,
   }
 
   .page-manifesto {
+    min-height: 0;
+    padding: 0;
+  }
+
+  .page-manifesto-slide {
     min-height: 100svh;
     padding: 120px 28px;
   }

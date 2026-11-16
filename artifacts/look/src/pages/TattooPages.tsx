@@ -66,7 +66,11 @@ const studioCopy = {
       cta: "CONTÁCTAME",
     },
     manifesto: {
-      phraseLines: ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
+      phrases: [
+        ["Blackwork:", "la sombra", "encuentra su voz", "en tu piel."],
+        ["Ornamental:", "la geometría", "encuentra su equilibrio", "en tu piel."],
+        ["Neotribal:", "el movimiento", "encuentra su forma", "en tu piel."],
+      ],
     },
     contact: {
       eyebrow: "CONTACTO / 006",
@@ -149,7 +153,11 @@ const studioCopy = {
       cta: "CONTACT ME",
     },
     manifesto: {
-      phraseLines: ["Blackwork:", "shadow finds", "its voice", "on your skin."],
+      phrases: [
+        ["Blackwork:", "shadow finds", "its voice", "on your skin."],
+        ["Ornamental:", "geometry finds", "its balance", "on your skin."],
+        ["Neo-tribal:", "movement finds", "its shape", "on your skin."],
+      ],
     },
     contact: {
       eyebrow: "CONTACT / 006",
@@ -697,16 +705,13 @@ export function ManifestoPage({ language }: StudioProps) {
   const copy = studioCopy[language].manifesto;
   useEffect(() => {
     const section = document.getElementById("studio-manifesto");
-    const lineGroups = section
-      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-line")).map((line) =>
-          Array.from(line.querySelectorAll<HTMLElement>(".page-manifesto-word")),
-        )
+    const slides = section
+      ? Array.from(section.querySelectorAll<HTMLElement>(".page-manifesto-slide"))
       : [];
-    const words = lineGroups.flat();
 
     if (
       !section ||
-      words.length === 0 ||
+      slides.length === 0 ||
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ||
       typeof IntersectionObserver === "undefined"
     ) {
@@ -719,18 +724,26 @@ export function ManifestoPage({ language }: StudioProps) {
       rotateX: -48,
       filter: "blur(10px)",
     };
-    gsap.set(words, hiddenState);
-    let entranceTimeline: gsap.core.Timeline | undefined;
+    const slideWords = slides.map((slide) =>
+      Array.from(slide.querySelectorAll<HTMLElement>(".page-manifesto-word")),
+    );
+    slideWords.forEach((words) => gsap.set(words, hiddenState));
+    const timelines = new Map<HTMLElement, gsap.core.Timeline>();
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return;
-        entranceTimeline?.kill();
-        gsap.killTweensOf(words);
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
-          entranceTimeline = gsap.timeline();
-          lineGroups.forEach((lineWords, index) => {
-            entranceTimeline?.to(
-              lineWords,
+      (entries) => {
+        entries.forEach((entry) => {
+          const slide = entry.target as HTMLElement;
+          const wordsByLine = slideWords[slides.indexOf(slide)];
+          if (!wordsByLine) return;
+          const timeline = timelines.get(slide);
+          timeline?.kill();
+          gsap.killTweensOf(wordsByLine.flat());
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.12) {
+            const entrance = gsap.timeline();
+            timelines.set(slide, entrance);
+            wordsByLine.forEach((lineWords, index) => {
+              entrance.to(
+                lineWords,
               {
                 autoAlpha: 1,
                 yPercent: 0,
@@ -741,38 +754,48 @@ export function ManifestoPage({ language }: StudioProps) {
                 ease: "power4.out",
                 overwrite: true,
               },
-              index === 0 ? 0 : ">-0.58",
-            );
-          });
-        } else {
-          gsap.set(words, hiddenState);
-        }
+                index === 0 ? 0 : ">-0.58",
+              );
+            });
+          } else {
+            gsap.set(wordsByLine.flat(), hiddenState);
+          }
+        });
       },
       { root: document.getElementById("fullscreen-section"), threshold: [0, 0.12] },
     );
-    observer.observe(section);
+    slides.forEach((slide) => observer.observe(slide));
 
     return () => {
       observer.disconnect();
-      entranceTimeline?.kill();
-      gsap.killTweensOf(words);
-      gsap.set(words, { clearProps: "all" });
+      timelines.forEach((timeline) => timeline.kill());
+      slideWords.forEach((words) => {
+        gsap.killTweensOf(words.flat());
+        gsap.set(words.flat(), { clearProps: "all" });
+      });
     };
   }, [language]);
 
   return (
     <StudioFrame id="studio-manifesto" className="page-manifesto">
-      <h1 className="page-manifesto-quote" aria-label={copy.phraseLines.join(" ")}>
-        {copy.phraseLines.map((line) => (
-          <span className="page-manifesto-line" key={line} aria-hidden="true">
-            <span className="page-manifesto-line-inner">
-              {line.split(/\s+/).map((word) => (
-                <span className="page-manifesto-word" key={word}>{word}</span>
+      {copy.phrases.map((phrase, index) => {
+        const Heading = index === 0 ? "h1" : "h2";
+        return (
+          <article className="page-manifesto-slide" key={phrase[0]}>
+            <Heading className="page-manifesto-quote" aria-label={phrase.join(" ")}>
+              {phrase.map((line) => (
+                <span className="page-manifesto-line" key={line} aria-hidden="true">
+                  <span className="page-manifesto-line-inner">
+                    {line.split(/\s+/).map((word) => (
+                      <span className="page-manifesto-word" key={word}>{word}</span>
+                    ))}
+                  </span>
+                </span>
               ))}
-            </span>
-          </span>
-        ))}
-      </h1>
+            </Heading>
+          </article>
+        );
+      })}
     </StudioFrame>
   );
 }
