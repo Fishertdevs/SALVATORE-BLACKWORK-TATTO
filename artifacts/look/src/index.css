@@ -9275,6 +9275,11 @@ body,
     text-transform: uppercase;
   }
 
+  .mobile-look-root .page-about .page-about-editorial-trigger-4 {
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: -0.045em;
+  }
+
   .mobile-look-root .page-about .page-about-editorial-beat-left-1 .page-about-editorial-trigger,
   .mobile-look-root .page-about .page-about-editorial-beat-right-1 .page-about-editorial-trigger {
     color: #000000;
