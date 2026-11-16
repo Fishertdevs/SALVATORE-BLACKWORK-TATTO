@@ -367,6 +367,13 @@ function MobileLookGallery({
 }) {
   const copy = galleryCopy[language];
   const navHrefs = ["#home-hero", "#studio-about", "#studio-portfolio", "#studio-reservas", "#studio-contact"];
+  const homeLabel = language === "es" ? "INICIO" : "HOME";
+  const mobileNavItems = [
+    { label: homeLabel, href: navHrefs[0] },
+    ...copy.nav
+      .filter((label) => label !== homeLabel)
+      .map((label, index) => ({ label, href: navHrefs[index + 1] ?? "#studio-contact" })),
+  ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -616,11 +623,11 @@ function MobileLookGallery({
         data-testid="mobile-menu-overlay"
       >
         <nav className="mobile-menu-links">
-          {copy.nav.map((label, index) => (
+          {mobileNavItems.map(({ label, href }, index) => (
             <a
-              key={label}
-              href={navHrefs[index]}
-              className="mobile-menu-link"
+              key={href}
+              href={href}
+              className={`mobile-menu-link${index === 0 ? " mobile-menu-link-home" : ""}`}
               onClick={() => setIsMenuOpen(false)}
               tabIndex={isMenuOpen ? 0 : -1}
               data-testid={`link-mobile-nav-${index}`}
