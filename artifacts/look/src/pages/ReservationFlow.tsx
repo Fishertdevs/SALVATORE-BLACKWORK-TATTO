@@ -4,18 +4,17 @@ import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
 type ReservationFlowProps = { language: Language };
+type TimePeriod = "morning" | "afternoon" | "night";
 
 const copy = {
   es: {
     eyebrow: "RESERVA TU PROYECTO",
     title: "Una idea en tu piel.",
     intro: "Cuéntame tu idea y la fecha que prefieres. Salvatore define el diseño y confirma la cita por WhatsApp.",
-    steps: ["TU PROYECTO", "FECHA Y HORA", "WHATSAPP"],
+    steps: ["TU PROYECTO", "FECHA Y FRANJA", "WHATSAPP"],
     exit: "Cerrar",
     back: "VOLVER",
     continue: "CONTINUAR",
-    hour: "HORA",
-    minute: "MIN",
     chooseDate: "ELIGE UNA FECHA",
     previousMonth: "Mes anterior",
     nextMonth: "Mes siguiente",
@@ -30,12 +29,15 @@ const copy = {
     ideaPlaceholder: "Estilo, tamaño aproximado y detalles que quieras compartir.",
     date: "Fecha que prefieres",
     time: "Hora preferida · Colombia",
+    timePeriodLabel: "Horario preferido · Colombia",
+    timePeriods: { morning: "MAÑANA", afternoon: "TARDE", night: "NOCHE" },
     projectIntro: "Comparte lo esencial. El diseño se conversa y desarrolla directamente con Salvatore.",
     scheduleIntro: "Indica el día y la hora que te funcionan. Salvatore revisará su agenda y te confirmará por WhatsApp.",
+    scheduleIntroMobile: "Elige si prefieres mañana, tarde o noche. Salvatore confirmará la hora exacta por WhatsApp.",
     confirmIntro: "Revisa los datos. Al continuar, se abrirá WhatsApp con tu solicitud lista para enviar.",
     request: "ENVIAR SOLICITUD POR WHATSAPP",
     requestMobile: "ENVIAR SOLICITUD",
-    notice: "La fecha y hora son una solicitud; la cita solo queda confirmada cuando Salvatore responda.",
+    notice: "La fecha y el horario son una solicitud; Salvatore confirmará la hora exacta por WhatsApp.",
     required: "Completa los campos para continuar.",
     sent: "Si WhatsApp no se abrió, continúa desde aquí:",
     openWhatsApp: "ABRIR WHATSAPP",
@@ -45,12 +47,10 @@ const copy = {
     eyebrow: "BOOK YOUR PROJECT",
     title: "An idea on your skin.",
     intro: "Share your idea and preferred date. Salvatore creates the design and confirms your appointment on WhatsApp.",
-    steps: ["YOUR PROJECT", "DATE & TIME", "WHATSAPP"],
+    steps: ["YOUR PROJECT", "DATE & TIME WINDOW", "WHATSAPP"],
     exit: "Close",
     back: "BACK",
     continue: "CONTINUE",
-    hour: "HOUR",
-    minute: "MIN",
     chooseDate: "CHOOSE A DATE",
     previousMonth: "Previous month",
     nextMonth: "Next month",
@@ -65,12 +65,15 @@ const copy = {
     ideaPlaceholder: "Style, approximate size, and any details you’d like to share.",
     date: "Preferred date",
     time: "Preferred time · Colombia",
+    timePeriodLabel: "Preferred time · Colombia",
+    timePeriods: { morning: "MORNING", afternoon: "AFTERNOON", night: "EVENING" },
     projectIntro: "Share the essentials. The design will be discussed and developed directly with Salvatore.",
     scheduleIntro: "Choose a day and time that work for you. Salvatore will check his schedule and confirm on WhatsApp.",
+    scheduleIntroMobile: "Choose morning, afternoon, or evening. Salvatore will confirm the exact time on WhatsApp.",
     confirmIntro: "Review your details. Continue to open WhatsApp with your request ready to send.",
     request: "SEND REQUEST ON WHATSAPP",
     requestMobile: "SEND REQUEST",
-    notice: "Your preferred date and time are a request; the appointment is confirmed only after Salvatore replies.",
+    notice: "Your preferred date and time period are a request; Salvatore will confirm the exact time on WhatsApp.",
     required: "Complete the fields to continue.",
     sent: "If WhatsApp didn’t open, continue here:",
     openWhatsApp: "OPEN WHATSAPP",
@@ -98,8 +101,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [tattooBrief, setTattooBrief] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [mobileHour, setMobileHour] = useState("");
-  const [mobileMinute, setMobileMinute] = useState("");
+  const [mobileTimePeriod, setMobileTimePeriod] = useState<TimePeriod | "">("");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => {
     const now = new Date();
@@ -173,24 +175,16 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   };
 
   const continueFromSchedule = () => {
-    if (!date || !time) {
+    if (!date || (!time && !mobileTimePeriod)) {
       setRequestError(text.required);
       return;
     }
     selectStep(2);
   };
 
-  const updateMobileTime = (part: "hour" | "minute", value: string) => {
-    const sanitizedValue = value.replace(/\D/g, "").slice(0, 2);
-    const nextHour = part === "hour" ? sanitizedValue : mobileHour;
-    const nextMinute = part === "minute" ? sanitizedValue : mobileMinute;
-    setMobileHour(nextHour);
-    setMobileMinute(nextMinute);
-    const isValidTime = nextHour.length === 2
-      && nextMinute.length === 2
-      && Number(nextHour) <= 23
-      && Number(nextMinute) <= 59;
-    setTime(isValidTime ? `${nextHour}:${nextMinute}` : "");
+  const selectMobileTimePeriod = (period: TimePeriod) => {
+    setMobileTimePeriod(period);
+    setTime("");
     clearMessages();
   };
 
@@ -210,7 +204,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       setRequestError(text.required);
       return;
     }
-    if (!date || !time) {
+    if (!date || (!time && !mobileTimePeriod)) {
       setHasOpenedStepContent(true);
       setActiveStep(1);
       setRequestError(text.required);
@@ -222,7 +216,8 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
       placement: placement.trim(),
       tattooBrief: tattooBrief.trim(),
       date,
-      time,
+      time: mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : time,
+      timeIsPeriod: Boolean(mobileTimePeriod),
     });
     setSubmittedHref(href);
     window.open(href, "_blank", "noopener,noreferrer");
@@ -340,7 +335,10 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <h2 id="reservation-date-title">{text.dateTitle}</h2>
                 </div>
                 <div className="reservation-contact-grid">
-                  <p className="reservation-contact-intro">{text.scheduleIntro}</p>
+                  <p className="reservation-contact-intro reservation-schedule-intro">
+                    <span className="reservation-schedule-intro-desktop">{text.scheduleIntro}</span>
+                    <span className="reservation-schedule-intro-mobile">{text.scheduleIntroMobile}</span>
+                  </p>
                   <div className="reservation-contact-form reservation-wizard-fields">
                     <label className="reservation-desktop-picker">
                       <span><CalendarDays size={14} aria-hidden="true" />{text.date}</span>
@@ -434,50 +432,26 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                         onChange={(event) => {
                           const nextTime = event.target.value;
                           setTime(nextTime);
-                          setMobileHour(nextTime.slice(0, 2));
-                          setMobileMinute(nextTime.slice(3, 5));
+                          setMobileTimePeriod("");
                           clearMessages();
                         }}
                         required
                       />
                     </label>
                     <div className="reservation-mobile-picker reservation-mobile-time-picker">
-                      <span className="reservation-mobile-picker-label">{text.time}</span>
-                      <div className="reservation-mobile-time-panel">
-                        <div className="reservation-mobile-time-controls">
-                          <label>
-                            <span>{text.hour}</span>
-                            <input
-                              type="text"
-                              inputMode="numeric"
-                              aria-label={text.hour}
-                              value={mobileHour}
-                              onChange={(event) => updateMobileTime("hour", event.target.value)}
-                              placeholder="HH"
-                              maxLength={2}
-                              pattern="[0-9]{2}"
-                              required
-                            />
-                          </label>
-                          <span className="reservation-mobile-time-separator">:</span>
-                          <label>
-                            <span>{text.minute}</span>
-                            <input
-                              type="text"
-                              inputMode="numeric"
-                              aria-label={text.minute}
-                              value={mobileMinute}
-                              onChange={(event) => updateMobileTime("minute", event.target.value)}
-                              placeholder="MM"
-                              maxLength={2}
-                              pattern="[0-9]{2}"
-                              required
-                            />
-                          </label>
-                        </div>
-                        <span className="reservation-mobile-time-format">
-                          {language === "es" ? "FORMATO 24 H · HH:MM" : "24-HOUR FORMAT · HH:MM"}
-                        </span>
+                      <span className="reservation-mobile-picker-label">{text.timePeriodLabel}</span>
+                      <div className="reservation-mobile-time-periods" role="group" aria-label={text.timePeriodLabel}>
+                        {(["morning", "afternoon", "night"] as const).map((period) => (
+                          <button
+                            key={period}
+                            type="button"
+                            className={`reservation-time-period${mobileTimePeriod === period ? " is-selected" : ""}`}
+                            aria-pressed={mobileTimePeriod === period}
+                            onClick={() => selectMobileTimePeriod(period)}
+                          >
+                            {text.timePeriods[period]}
+                          </button>
+                        ))}
                       </div>
                     </div>
                     {requestError && <p className="reservation-alert" role="alert">{requestError}</p>}
@@ -508,7 +482,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                   <div className="reservation-contact-form reservation-contact-quick">
                     <p className="reservation-confirmation-note">
                       <strong>{name}</strong><br />
-                      {placement} · {date} · {time}<br />
+                      {placement} · {date} · {mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : time}<br />
                       {tattooBrief}
                     </p>
                     <p className="reservation-confirmation-note">{text.notice}</p>

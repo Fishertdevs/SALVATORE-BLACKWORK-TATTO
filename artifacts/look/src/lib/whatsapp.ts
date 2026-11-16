@@ -60,6 +60,7 @@ export type ReservationWhatsAppDetails = {
   tattooBrief: string;
   date: string;
   time: string;
+  timeIsPeriod?: boolean;
 };
 
 export function getReservationWhatsAppMessage(
@@ -75,7 +76,10 @@ export function getReservationWhatsAppMessage(
         `Zona del cuerpo: ${details.placement}`,
         `Idea y detalles: ${details.tattooBrief}`,
         `Fecha que prefiero: ${details.date}`,
-        `Hora que prefiero: ${details.time}`,
+        details.timeIsPeriod
+          ? `Franja que prefiero: ${details.time}`
+          : `Hora que prefiero: ${details.time}`,
+        details.timeIsPeriod ? "Salvatore confirmará la hora exacta." : "",
         "Entiendo que esta es una solicitud y que la cita queda confirmada cuando me respondas.",
       ]
         .filter(Boolean)
@@ -86,7 +90,10 @@ export function getReservationWhatsAppMessage(
         `Body placement: ${details.placement}`,
         `Idea and details: ${details.tattooBrief}`,
         `Preferred date: ${details.date}`,
-        `Preferred time: ${details.time}`,
+        details.timeIsPeriod
+          ? `Preferred time of day: ${details.time}`
+          : `Preferred time: ${details.time}`,
+        details.timeIsPeriod ? "Salvatore will confirm the exact time." : "",
         "I understand this is a request and the appointment is confirmed only after your reply.",
       ]
         .filter(Boolean)
