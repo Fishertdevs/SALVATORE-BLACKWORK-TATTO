@@ -386,6 +386,9 @@ export function AboutPage({ language, isMobile = false }: StudioProps) {
 
 export function PortfolioPage({ language, isMobile = false }: StudioProps) {
   const copy = studioCopy[language].portfolio;
+  const mobileNoteTitle = language === "es"
+    ? ["¿QUIERES", "SER UN", "LIENZO?"]
+    : ["WANT TO", "BE A", "CANVAS?"];
   const images = [portfolioImg, servicesImg, contactImg];
   const portfolioHeroRef = useRef<HTMLElement | null>(null);
   const portfolioKeywordsRef = useRef<HTMLDivElement | null>(null);
@@ -579,8 +582,8 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
     const activeTweens = new Map<HTMLElement, gsap.core.Tween>();
     if (!isMobile) {
       gsap.set(tags, hiddenTagState);
-      gsap.set(visuals, hiddenVisualState);
     }
+    gsap.set(visuals, hiddenVisualState);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -620,7 +623,7 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
             activeTweens.get(target)?.kill();
             activeTweens.delete(target);
             gsap.killTweensOf(targetItems);
-            if (isMobile) {
+            if (isMobile && target === tagRow) {
               gsap.set(targetItems, { clearProps: "all" });
             } else {
               gsap.set(targetItems, hiddenState);
@@ -779,7 +782,17 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
       </section>
       <section className="page-portfolio-note">
         <Eyebrow>{copy.noteLabel}</Eyebrow>
-        <h2>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></h2>
+        <h2>
+          {isMobile ? (
+            mobileNoteTitle.map((line, index) =>
+              index === 2
+                ? <em className="page-portfolio-note-title-mobile" key={line}>{line}</em>
+                : <span className="page-portfolio-note-title-mobile" key={line}>{line}</span>,
+            )
+          ) : (
+            <>{copy.noteTitle[0]}<br /><em>{copy.noteTitle[1]}</em></>
+          )}
+        </h2>
         <p>{copy.noteIntro}</p>
         <a
           className="hero-side-action"

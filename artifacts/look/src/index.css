@@ -9383,4 +9383,37 @@ body,
     line-height: 0.96;
     letter-spacing: -0.055em;
   }
+
+  .studio-home-sections--mobile .page-portfolio .page-portfolio-note h2 {
+    margin: 32px auto 28px;
+    font-size: clamp(2.6rem, 14vw, 4rem);
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+  .studio-home-sections--mobile .page-portfolio-note-title-mobile {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .studio-home-sections--mobile .page-portfolio .page-portfolio-note p {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .studio-home-sections--mobile .page-portfolio .page-portfolio-note .hero-side-action {
+    display: flex;
+    width: max-content;
+    margin: 32px auto 0;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #E63027;
+    color: #E63027;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 }
