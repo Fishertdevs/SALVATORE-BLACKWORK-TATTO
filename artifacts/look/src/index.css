@@ -8935,51 +8935,61 @@ body,
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(14px, 2vw, 24px);
+  align-items: center;
+  justify-content: center;
+  padding: clamp(48px, 6vw, 68px) clamp(18px, 4vw, 36px) 28px;
   overflow: auto;
-  background: linear-gradient(180deg, rgb(8 8 8 / 6%) 8%, rgb(8 8 8 / 42%) 42%, rgb(8 8 8 / 92%) 100%);
+  background: linear-gradient(180deg, rgb(8 8 8 / 18%) 0%, rgb(8 8 8 / 48%) 36%, rgb(8 8 8 / 84%) 100%);
   color: #fff;
+  text-align: center;
 }
 
 .page-portfolio-style-overlay .tattoo-eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: #f3b4ab;
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .page-portfolio-style-overlay h3 {
   margin: 0;
   font-family: 'Beautique Display', 'Helvetica Neue', serif;
-  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 400;
   line-height: 1;
 }
 
 .page-portfolio-style-subtitle {
   display: block;
-  margin: 10px 0;
-  font-size: 9px;
+  margin: 14px 0;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: .12em;
 }
 
 .page-portfolio-style-overlay p,
 .page-portfolio-style-overlay li {
-  font-size: 11px;
+  font-size: clamp(12px, 1.05vw, 14px);
   font-weight: 300;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .page-portfolio-style-overlay p {
-  margin: 0;
+  max-width: 56ch;
+  margin: 0 auto;
 }
 
 .page-portfolio-style-overlay ul {
   display: grid;
-  gap: 8px;
-  margin: 2px 0 0;
-  padding-left: 14px;
+  max-width: 38ch;
+  gap: 9px;
+  margin: 12px auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-portfolio-style-overlay li {
+  padding-top: 9px;
+  border-top: 1px solid rgb(255 255 255 / 36%);
 }
 
 .page-portfolio-style-close {
@@ -9002,24 +9012,6 @@ body,
 
 .page-portfolio-style-text {
   animation: portfolio-style-copy-in 320ms ease both;
-}
-
-.page-portfolio-style-controls {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-}
-
-.page-portfolio-style-controls button {
-  display: grid;
-  width: 34px;
-  height: 30px;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 65%);
-  background: transparent;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .page-portfolio-style-dialog {
@@ -9136,25 +9128,6 @@ body,
   letter-spacing: .04em;
 }
 
-.page-portfolio-style-controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.page-portfolio-style-controls button {
-  padding: 10px 0;
-  border: 0;
-  border-bottom: 1px solid #E63027;
-  background: transparent;
-  color: #111;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
 @keyframes portfolio-style-copy-in {
   from {
     opacity: 0;
@@ -9206,14 +9179,6 @@ body,
   border-color: rgb(255 255 255 / 70%);
   background: rgb(0 0 0 / 18%);
   color: #fff;
-}
-
-.page-portfolio-style-overlay .page-portfolio-style-controls button {
-  padding: 0;
-  border: 1px solid rgb(255 255 255 / 65%);
-  background: transparent;
-  color: #fff;
-  text-transform: none;
 }
 
 .page-portfolio-style-overlay button:focus-visible {

@@ -38,26 +38,24 @@ const studioCopy = {
       openStyleLabel: "Explorar estilo",
       closeStyleLabel: "Cerrar guía de estilo",
       styleFactsLabel: "DATOS CLAVE",
-      previousStyleLabel: "Texto anterior",
-      nextStyleLabel: "Siguiente texto",
       styleDetails: [
         {
           title: "BLACKWORK",
           subtitle: "CONTRASTE Y TINTA NEGRA",
-          description: "El blackwork utiliza la tinta negra como protagonista. Combina líneas, formas sólidas y espacios negativos para construir diseños gráficos que se adaptan a la zona del cuerpo.",
-          facts: ["Contraste marcado entre tinta y piel", "Composición personalizada para cada zona"],
+          description: "El blackwork pone la tinta negra en el centro de la composición. Alterna líneas definidas, áreas sólidas y espacios negativos para crear contraste sin perder legibilidad. Cada pieza se compone según el tamaño y la ubicación elegidos.",
+          facts: ["Contraste entre tinta y piel", "Equilibrio de líneas y masas negras", "Escala y ubicación definidas para cada zona"],
         },
         {
           title: "NEOTRIBAL",
           subtitle: "LÍNEAS FLUIDAS Y MOVIMIENTO",
-          description: "El neotribal reinterpreta formas tribales con trazos dinámicos, puntas orgánicas y curvas que acompañan la anatomía y el movimiento del cuerpo.",
-          facts: ["Formas expresivas y fluidas", "Diseño pensado para seguir el cuerpo"],
+          description: "El neotribal reinterpreta formas tribales con líneas negras de ritmo variable, puntas orgánicas y curvas. La composición acompaña la anatomía y el movimiento del cuerpo, siguiendo la zona elegida para crear una pieza original.",
+          facts: ["Trazos fluidos y direccionales", "Puntas orgánicas y curvas", "Composición personalizada para la anatomía"],
         },
         {
           title: "ORNAMENTAL",
           subtitle: "PATRÓN, SIMETRÍA Y DETALLE",
-          description: "El estilo ornamental se construye con patrones, simetrías y detalles decorativos. La composición se ajusta a la ubicación y escala de cada tatuaje.",
-          facts: ["Geometría y repetición visual", "Equilibrio entre detalle y forma"],
+          description: "El estilo ornamental construye la composición con patrones, simetrías y detalles decorativos. La repetición, la escala y la ubicación se ajustan para equilibrar la ornamentación con la forma del cuerpo.",
+          facts: ["Geometría y repetición visual", "Simetría adaptada a la zona", "Equilibrio entre detalle, escala y forma"],
         },
       ],
       noteLabel: "CONVOCATORIA PARA LIENZOS",
@@ -125,26 +123,24 @@ const studioCopy = {
       openStyleLabel: "Explore style",
       closeStyleLabel: "Close style guide",
       styleFactsLabel: "KEY DETAILS",
-      previousStyleLabel: "Previous text",
-      nextStyleLabel: "Next text",
       styleDetails: [
         {
           title: "BLACKWORK",
           subtitle: "CONTRAST AND BLACK INK",
-          description: "Blackwork puts black ink at the center of the design. It combines lines, solid shapes, and negative space to create graphic work tailored to the body area.",
-          facts: ["Strong contrast between ink and skin", "Custom composition for each placement"],
+          description: "Blackwork puts black ink at the center of the composition. It balances defined lines, solid areas, and negative space to create contrast while preserving clarity. Each piece is composed around the chosen size and placement.",
+          facts: ["Contrast between ink and skin", "Balanced lines and solid black areas", "Scale and placement chosen for each area"],
         },
         {
           title: "NEO-TRIBAL",
           subtitle: "FLOWING LINES AND MOVEMENT",
-          description: "Neo-tribal reinterprets tribal forms with dynamic strokes, organic points, and curves that follow the body's anatomy and movement.",
-          facts: ["Expressive, fluid forms", "Designed to follow the body"],
+          description: "Neo-tribal reinterprets tribal forms with black lines of varied rhythm, organic points, and curves. The composition follows the body's anatomy and movement, adapting to the chosen placement to create an original piece.",
+          facts: ["Fluid, directional strokes", "Organic points and curves", "Composition shaped for the body's anatomy"],
         },
         {
           title: "ORNAMENTAL",
           subtitle: "PATTERN, SYMMETRY, AND DETAIL",
-          description: "Ornamental tattooing uses patterns, symmetry, and decorative detail. The composition is adapted to the placement and scale of each tattoo.",
-          facts: ["Geometry and visual repetition", "Balance between detail and form"],
+          description: "Ornamental tattooing builds compositions from patterns, symmetry, and decorative detail. Repetition, scale, and placement are adjusted to balance ornamentation with the body's shape.",
+          facts: ["Geometry and visual repetition", "Symmetry adapted to placement", "Balance between detail, scale, and form"],
         },
       ],
       noteLabel: "CANVAS OPEN CALL",
@@ -396,6 +392,21 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
   const portfolioGalleryRef = useRef<HTMLElement | null>(null);
   const [activeStyleIndex, setActiveStyleIndex] = useState<number | null>(null);
   const [activeStyleSlide, setActiveStyleSlide] = useState(0);
+
+  useEffect(() => {
+    if (
+      activeStyleIndex === null ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return undefined;
+    }
+
+    const rotation = window.setInterval(() => {
+      setActiveStyleSlide((current) => (current + 1) % 2);
+    }, 7000);
+
+    return () => window.clearInterval(rotation);
+  }, [activeStyleIndex]);
 
   useEffect(() => {
     const hero = portfolioHeroRef.current;
@@ -732,10 +743,6 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
     };
   }, [isMobile, language]);
 
-  const moveStyleSlide = (direction: number) => {
-    setActiveStyleSlide((current) => (current + direction + 2) % 2);
-  };
-
   return (
     <StudioFrame id="studio-portfolio" className="page-portfolio">
       <section className="page-portfolio-hero" ref={portfolioHeroRef}>
@@ -813,7 +820,7 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
                 <div
                   className="page-portfolio-style-overlay"
                   role="region"
-                  aria-live="polite"
+                  aria-live="off"
                   aria-labelledby={`portfolio-style-title-${index}`}
                 >
                   <button
@@ -842,22 +849,6 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
                         </ul>
                       </>
                     )}
-                    <nav className="page-portfolio-style-controls" aria-label={copy.stylePanelLabel}>
-                      <button
-                        type="button"
-                        aria-label={copy.previousStyleLabel}
-                        onClick={() => moveStyleSlide(-1)}
-                      >
-                        ←
-                      </button>
-                      <button
-                        type="button"
-                        aria-label={copy.nextStyleLabel}
-                        onClick={() => moveStyleSlide(1)}
-                      >
-                        →
-                      </button>
-                    </nav>
                   </div>
                 </div>
               )}

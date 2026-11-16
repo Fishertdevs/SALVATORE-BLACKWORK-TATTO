@@ -1,0 +1,220 @@
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/__mockup/images/HelveticaNeueLight.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("/__mockup/images/HelveticaNeueMedium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Beautique Display";
+  src: url("/__mockup/images/BeautiqueDisplay-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.style-guide-preview {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  place-items: center;
+  padding: 18px;
+  background: #f6f4ec;
+  color: #fff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.style-guide-preview-card {
+  position: relative;
+  width: min(100%, 430px);
+  height: 100%;
+  min-height: 584px;
+  overflow: hidden;
+  background: #171515;
+}
+
+.style-guide-preview-card > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.style-guide-preview .page-portfolio-style-overlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(14px, 2vw, 24px);
+  overflow: auto;
+  background: linear-gradient(180deg, rgb(8 8 8 / 6%) 8%, rgb(8 8 8 / 42%) 42%, rgb(8 8 8 / 92%) 100%);
+  color: #fff;
+}
+
+.style-guide-preview .page-portfolio-style-overlay .tattoo-eyebrow {
+  margin: 0 0 10px;
+  color: #f3b4ab;
+  font-size: 9px;
+}
+
+.style-guide-preview .page-portfolio-style-overlay h3 {
+  margin: 0;
+  font-family: "Beautique Display", serif;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.style-guide-preview .page-portfolio-style-subtitle {
+  display: block;
+  margin: 10px 0;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .12em;
+}
+
+.style-guide-preview .page-portfolio-style-overlay p,
+.style-guide-preview .page-portfolio-style-overlay li {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+.style-guide-preview .page-portfolio-style-overlay p {
+  margin: 0;
+}
+
+.style-guide-preview .page-portfolio-style-overlay ul {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 0;
+  padding-left: 14px;
+}
+
+.style-guide-preview .page-portfolio-style-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 18%);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.style-guide-preview .page-portfolio-style-text {
+  animation: portfolio-style-copy-in 320ms ease both;
+}
+
+.style-guide-preview .page-portfolio-style-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.style-guide-preview .page-portfolio-style-controls button {
+  display: grid;
+  width: 34px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 65%);
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay {
+  justify-content: center;
+  align-items: center;
+  padding: 64px 28px 36px;
+  text-align: center;
+  background: linear-gradient(180deg, rgb(8 8 8 / 14%) 0%, rgb(8 8 8 / 50%) 35%, rgb(8 8 8 / 78%) 100%);
+}
+
+.style-guide-preview--auto .page-portfolio-style-text {
+  width: min(100%, 340px);
+  margin: auto;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay .tattoo-eyebrow {
+  margin-bottom: 12px;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay h3 {
+  font-size: clamp(2.4rem, 8vw, 3.4rem);
+}
+
+.style-guide-preview--auto .page-portfolio-style-subtitle {
+  margin: 14px 0;
+  font-size: 10px;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay p,
+.style-guide-preview--auto .page-portfolio-style-overlay li {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay ul {
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.style-guide-preview--auto .page-portfolio-style-overlay li {
+  padding-top: 9px;
+  border-top: 1px solid rgb(255 255 255 / 36%);
+}
+
+.style-guide-preview--auto .page-portfolio-style-close {
+  width: 42px;
+  height: 42px;
+  font-size: 26px;
+}
+
+.style-guide-preview .portfolio-style-copy-in {
+  animation: portfolio-style-copy-in 320ms ease both;
+}
+
+@keyframes portfolio-style-copy-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 560px) {
+  .style-guide-preview {
+    min-height: 100svh;
+    padding: 0;
+  }
+
+  .style-guide-preview-card {
+    min-height: 100svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .style-guide-preview .page-portfolio-style-text,
+  .style-guide-preview .portfolio-style-copy-in {
+    animation: none;
+  }
+}
