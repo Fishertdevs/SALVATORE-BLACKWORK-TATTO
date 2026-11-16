@@ -157,9 +157,8 @@
 
   .reservation-embedded .reservation-mobile-time-panel {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .75rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: .45rem;
     padding: .65rem .75rem;
     border: 1px solid rgba(255, 248, 201, .48);
     border-radius: 14px;
@@ -168,131 +167,56 @@
       linear-gradient(135deg, rgba(11, 10, 10, .18), rgba(11, 10, 10, .06));
   }
 
-  .reservation-embedded .reservation-mobile-time-readout {
-    display: grid;
-    gap: .18rem;
-  }
-
-  .reservation-embedded .reservation-mobile-time-readout span {
-    color: rgba(255, 248, 201, .72);
+  .reservation-embedded .reservation-mobile-time-format {
+    color: rgba(255, 248, 201, .68);
     font-size: .48rem;
-    letter-spacing: .13em;
+    letter-spacing: .1em;
+    text-align: center;
   }
 
-  .reservation-embedded .reservation-mobile-time-readout strong {
-    color: #FFF8C9;
-    font-size: clamp(1.35rem, 7vw, 1.8rem);
-    font-variant-numeric: tabular-nums;
-    font-weight: 500;
-    letter-spacing: .02em;
-    line-height: 1;
+  .reservation-embedded .reservation-mobile-time-picker .reservation-mobile-picker-label {
+    display: block;
   }
 
   .reservation-embedded .reservation-mobile-time-controls {
     display: flex;
-    align-items: center;
-    gap: .35rem;
+    justify-content: center;
+    align-items: end;
+    gap: .25rem;
   }
 
-  .reservation-embedded .reservation-time-part-button {
+  .reservation-embedded .reservation-mobile-time-controls label {
     display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    justify-items: start;
-    gap: .2rem .4rem;
-    min-width: 62px;
-    padding: .4rem .5rem;
+    gap: .2rem;
+    color: rgba(255, 248, 201, .72);
+    font-size: .45rem;
+    letter-spacing: .1em;
+    text-align: center;
+  }
+
+  .reservation-embedded .reservation-mobile-time-controls input {
+    box-sizing: border-box;
+    width: 48px;
+    height: 38px;
+    padding: 0;
     border: 1px solid rgba(255, 248, 201, .55);
-    border-radius: 10px;
+    border-radius: 9px;
     background: rgba(11, 10, 10, .2);
     color: #FFF8C9;
     font: inherit;
-    text-align: left;
-  }
-
-  .reservation-embedded .reservation-time-part-button > span {
-    grid-column: 1 / -1;
-    color: rgba(255, 248, 201, .72);
-    font-size: .44rem;
-    letter-spacing: .1em;
-    line-height: 1;
-  }
-
-  .reservation-embedded .reservation-time-part-button strong {
-    font-size: .92rem;
+    font-size: .88rem;
     font-variant-numeric: tabular-nums;
-    font-weight: 500;
+    text-align: center;
   }
 
-  .reservation-embedded .reservation-time-part-button svg {
-    color: rgba(255, 248, 201, .75);
+  .reservation-embedded .reservation-mobile-time-controls input::placeholder {
+    color: rgba(255, 248, 201, .58);
   }
 
-  .reservation-embedded .reservation-time-part-button.is-open,
-  .reservation-embedded .reservation-time-part-button:focus-visible {
+  .reservation-embedded .reservation-mobile-time-controls input:focus-visible {
     border-color: #E63027;
-    background: rgba(230, 48, 39, .18);
-    outline: none;
-  }
-
-  .reservation-embedded .reservation-time-options {
-    grid-column: 1 / -1;
-    display: grid;
-    gap: .45rem;
-    padding: .55rem;
-    border: 1px solid rgba(255, 248, 201, .72);
-    border-radius: 12px;
-    background: #FFF8C9;
-    color: #0B0A0A;
-  }
-
-  .reservation-embedded .reservation-time-options-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: rgba(11, 10, 10, .62);
-    font-size: .5rem;
-    font-weight: 600;
-    letter-spacing: .12em;
-  }
-
-  .reservation-embedded .reservation-time-options-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: .22rem;
-    max-height: 168px;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: .1rem;
-    scrollbar-color: #E63027 rgba(11, 10, 10, .08);
-    scrollbar-width: thin;
-  }
-
-  .reservation-embedded .reservation-time-option {
-    display: grid;
-    min-width: 0;
-    min-height: 30px;
-    place-items: center;
-    padding: 0;
-    border: 1px solid rgba(11, 10, 10, .12);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, .58);
-    color: #0B0A0A;
-    font: inherit;
-    font-size: .68rem;
-    font-variant-numeric: tabular-nums;
-    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
-  }
-
-  .reservation-embedded .reservation-time-option.is-selected {
-    border-color: #E63027;
-    background: #E63027;
-    color: #FFF8C9;
-  }
-
-  .reservation-embedded .reservation-time-option:focus-visible {
-    outline: 2px solid #0B0A0A;
-    outline-offset: 1px;
+    outline: 2px solid rgba(230, 48, 39, .5);
+    outline-offset: 2px;
   }
 
   .reservation-embedded .reservation-mobile-time-separator {
