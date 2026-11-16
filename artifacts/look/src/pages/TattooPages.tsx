@@ -576,9 +576,95 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
     );
     if (!tags.length || !visuals.length) return;
 
-    const targets = [tagRow, gallery];
     const hiddenTagState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
     const hiddenVisualState = { autoAlpha: 0, y: 32, scale: .97, filter: "blur(7px)" };
+
+    if (isMobile) {
+      const pending = new Set<HTMLElement>();
+      const revealed = new Set<HTMLElement>();
+      let activeImage: HTMLElement | null = null;
+      let activeTween: gsap.core.Tween | undefined;
+      let scrollDirection: 1 | -1 = 1;
+      let previousScrollY = window.scrollY;
+
+      const trackScrollDirection = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY !== previousScrollY) {
+          scrollDirection = currentScrollY > previousScrollY ? 1 : -1;
+          previousScrollY = currentScrollY;
+        }
+      };
+
+      const startNextReveal = () => {
+        if (activeImage || pending.size === 0) return;
+        const ordered = [...pending].sort(
+          (left, right) => visuals.indexOf(left) - visuals.indexOf(right),
+        );
+        const next = scrollDirection === 1
+          ? ordered[0]
+          : ordered[ordered.length - 1];
+        if (!next) return;
+
+        pending.delete(next);
+        activeImage = next;
+        activeTween = gsap.fromTo(
+          next,
+          hiddenVisualState,
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.82,
+            ease: "power3.out",
+            overwrite: true,
+            onComplete: () => {
+              if (activeImage !== next) return;
+              revealed.add(next);
+              activeImage = null;
+              activeTween = undefined;
+              startNextReveal();
+            },
+          },
+        );
+      };
+
+      gsap.set(visuals, hiddenVisualState);
+      window.addEventListener("scroll", trackScrollDirection, { passive: true });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const image = entry.target as HTMLElement;
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+              if (!revealed.has(image) && activeImage !== image) pending.add(image);
+            } else {
+              pending.delete(image);
+              revealed.delete(image);
+              if (activeImage === image) {
+                activeTween?.kill();
+                activeTween = undefined;
+                activeImage = null;
+              }
+              gsap.killTweensOf(image);
+              gsap.set(image, hiddenVisualState);
+            }
+          });
+          startNextReveal();
+        },
+        { root: null, threshold: [0, 0.15] },
+      );
+      visuals.forEach((visual) => observer.observe(visual));
+
+      return () => {
+        observer.disconnect();
+        window.removeEventListener("scroll", trackScrollDirection);
+        activeTween?.kill();
+        gsap.killTweensOf(visuals);
+        gsap.set(visuals, { clearProps: "all" });
+      };
+    }
+
+    const targets = [tagRow, gallery];
     const activeTweens = new Map<HTMLElement, gsap.core.Tween>();
     if (!isMobile) {
       gsap.set(tags, hiddenTagState);
