@@ -9825,9 +9825,9 @@ body,
   }
 
   .page-manifesto-slide {
-    min-height: 100svh;
+    min-height: auto;
     align-items: start;
-    padding: clamp(72px, 12vh, 96px) 20px 40px;
+    padding: 64px 20px 24px;
   }
 
   .page-manifesto-quote {
