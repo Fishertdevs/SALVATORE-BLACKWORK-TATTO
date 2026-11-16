@@ -407,7 +407,7 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const root = document.getElementById("fullscreen-section");
+    const root = isMobile ? null : document.getElementById("fullscreen-section");
     const titleSelector = isMobile
       ? ".page-portfolio-title-line-mobile"
       : ".page-portfolio-title-line-desktop";
@@ -423,9 +423,11 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
       filter: "blur(7px)",
     };
     const hiddenIntroState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
-    gsap.set(titleLines, hiddenTitleState);
-    gsap.set(eyebrow, hiddenEyebrowState);
-    gsap.set(intro, hiddenIntroState);
+    if (!isMobile) {
+      gsap.set(titleLines, hiddenTitleState);
+      gsap.set(eyebrow, hiddenEyebrowState);
+      gsap.set(intro, hiddenIntroState);
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -434,40 +436,69 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
           entrance?.kill();
           gsap.killTweensOf(animatedElements);
           entrance = gsap.timeline();
-          entrance
-            .to(titleLines, {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              filter: "blur(0px)",
-              duration: 1.05,
-              stagger: 0.14,
-              ease: "power4.out",
-              overwrite: true,
-            })
-            .to(eyebrow, {
-              autoAlpha: 1,
-              y: 0,
-              rotateX: 0,
-              filter: "blur(0px)",
-              duration: .9,
-              ease: "power3.out",
-              overwrite: true,
-            }, "-=.5")
-            .to(intro, {
-              autoAlpha: 1,
-              y: 0,
-              filter: "blur(0px)",
-              duration: .9,
-              ease: "power2.out",
-              overwrite: true,
-            }, "-=.38");
+          if (isMobile) {
+            entrance
+              .fromTo(titleLines, hiddenTitleState, {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                duration: 0.9,
+                stagger: 0.12,
+                ease: "power3.out",
+                overwrite: true,
+              })
+              .fromTo(eyebrow, hiddenEyebrowState, {
+                autoAlpha: 1,
+                y: 0,
+                rotateX: 0,
+                filter: "blur(0px)",
+                duration: 0.75,
+                ease: "power3.out",
+                overwrite: true,
+              }, "-=.38")
+              .fromTo(intro, hiddenIntroState, {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.75,
+                ease: "power2.out",
+                overwrite: true,
+              }, "-=.3");
+          } else {
+            entrance
+              .to(titleLines, {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                duration: 1.05,
+                stagger: 0.14,
+                ease: "power4.out",
+                overwrite: true,
+              })
+              .to(eyebrow, {
+                autoAlpha: 1,
+                y: 0,
+                rotateX: 0,
+                filter: "blur(0px)",
+                duration: .9,
+                ease: "power3.out",
+                overwrite: true,
+              }, "-=.5")
+              .to(intro, {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: .9,
+                ease: "power2.out",
+                overwrite: true,
+              }, "-=.38");
+          }
         } else if (isMobile) {
           entrance?.kill();
           gsap.killTweensOf(animatedElements);
-          gsap.set(titleLines, hiddenTitleState);
-          gsap.set(eyebrow, hiddenEyebrowState);
-          gsap.set(intro, hiddenIntroState);
+          gsap.set(animatedElements, { clearProps: "all" });
         }
       },
       { root, threshold: [0, 0.12] },
