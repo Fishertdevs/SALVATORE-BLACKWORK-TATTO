@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo.", mobileCopy: "Historias personales convertidas en blackwork." },
-        { title: ["VISIÓN", "PROPIA"], copy: "El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía.", mobileCopy: "Contraste y líneas precisas, pensados para tu cuerpo." },
-        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel.", mobileCopy: "Hablamos de tu historia y de lo que quieres expresar." },
-        { title: ["DISEÑO", "A MEDIDA"], copy: "A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia.", mobileCopy: "Diseños a medida que acompañan el movimiento de tu cuerpo." },
+        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo.", mobileCopy: "Transformamos historias personales en diseños blackwork originales que se integran con naturalidad a tu cuerpo." },
+        { title: ["VISIÓN", "PROPIA"], copy: "El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía.", mobileCopy: "Creamos un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para tu anatomía." },
+        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel.", mobileCopy: "Cada proyecto comienza conversando sobre tu historia, tus referencias y lo que quieres expresar en la piel." },
+        { title: ["DISEÑO", "A MEDIDA"], copy: "A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia.", mobileCopy: "Diseñamos una pieza a medida que acompaña el movimiento de tu cuerpo y expresa tu identidad." },
       ],
     },
     portfolio: {
@@ -104,10 +104,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork turns personal stories into blackwork designs that feel natural on the body.", mobileCopy: "Personal stories transformed into blackwork." },
-        { title: ["DISTINCT", "VISION"], copy: "The studio builds a visual language through contrast, precise lines, and compositions shaped for each anatomy.", mobileCopy: "Precise lines and contrast, shaped for your body." },
-        { title: ["OPEN", "DIALOGUE"], copy: "Each project begins with a conversation about your story, references, and what you want to express through your tattoo.", mobileCopy: "We talk about your story and what you want to express." },
-        { title: ["CUSTOM", "DESIGN"], copy: "From there, we create a custom piece that moves with the body and expresses a distinct visual identity.", mobileCopy: "Custom designs that move with your body." },
+        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork turns personal stories into blackwork designs that feel natural on the body.", mobileCopy: "We transform personal stories into original blackwork designs that feel natural on your body." },
+        { title: ["DISTINCT", "VISION"], copy: "The studio builds a visual language through contrast, precise lines, and compositions shaped for each anatomy.", mobileCopy: "We build a distinctive visual language with contrast, precise lines, and compositions shaped for your anatomy." },
+        { title: ["OPEN", "DIALOGUE"], copy: "Each project begins with a conversation about your story, references, and what you want to express through your tattoo.", mobileCopy: "Every project begins with a conversation about your story, references, and what you want your tattoo to express." },
+        { title: ["CUSTOM", "DESIGN"], copy: "From there, we create a custom piece that moves with the body and expresses a distinct visual identity.", mobileCopy: "We create a custom piece that follows your body's movement and expresses your individual identity." },
       ],
     },
     portfolio: {
