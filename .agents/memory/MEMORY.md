@@ -9,3 +9,4 @@
 - [Manifesto and reservations placement](approved-manifesto-phrase.md) — keep Blackwork independent and add scroll-driven Ornamental and Neotribal phrases.
 - [Reservations visual flow](reservations-visual-flow.md) — preserve the compact menu, fit the red panel on desktop, avoid AI previews, and route date requests to WhatsApp.
 - [Scroll-reveal visibility](about-reveal-intersection.md) — don't pre-clip observed text; use opacity offscreen so intersection checks can trigger replay.
+- [Mobile-only site adjustments](mobile-only-adjustments.md) — keep future visual changes scoped to phone layouts unless the user explicitly asks otherwise.

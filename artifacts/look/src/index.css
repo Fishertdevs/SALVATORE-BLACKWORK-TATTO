@@ -4067,12 +4067,12 @@ body,
   margin: 0;
   color: #E63027;
   font-family: 'Beautique Display', serif;
-  font-size: clamp(30px, 9.5vw, 42px);
+  font-size: clamp(22px, 8.8vw, 40px);
   font-weight: 400;
   line-height: 0.9;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.035em;
   -webkit-text-stroke: 0.2px currentColor;
   width: fit-content;
   max-width: 100%;
@@ -4090,10 +4090,10 @@ body,
   padding: 0 6px;
   color: #161616;
   font-family: 'Beautique Display', serif;
-  font-size: 14px;
+  font-size: clamp(10px, 4.5vw, 14px);
   font-weight: 700;
   line-height: 1.15;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
@@ -4279,7 +4279,7 @@ body,
   font-family: 'Beautique Display', serif;
   max-width: none;
   min-width: 0;
-  font-size: 16px;
+  font-size: clamp(10px, 3.8vw, 16px);
   font-weight: 400;
   line-height: 1;
   color: #000000;
@@ -4298,6 +4298,37 @@ body,
 
 .mobile-header.is-menu-open .mobile-logo-text {
   color: #FFFFFF;
+}
+
+@media (max-width: 360px) {
+  .mobile-header .announcement-bar {
+    min-height: 40px;
+    grid-template-columns: 24px minmax(0, 1fr) 24px;
+    padding-inline: 4px;
+  }
+
+  .mobile-header .announcement-arrow {
+    width: 24px;
+    height: 40px;
+  }
+
+  .mobile-header .announcement-content {
+    flex-wrap: wrap;
+    gap: 2px 4px;
+    line-height: 1.1;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .mobile-header .announcement-message {
+    flex: 0 0 100%;
+  }
+
+  .mobile-header .announcement-action {
+    max-width: 100%;
+    overflow: visible;
+    text-overflow: clip;
+  }
 }
 
 .mobile-header.is-menu-open .language-option {
