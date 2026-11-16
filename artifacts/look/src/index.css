@@ -4603,9 +4603,6 @@ body,
     text-overflow: clip;
   }
 
-  .mobile-menu-overlay {
-    padding-top: 110px;
-  }
 }
 
 .mobile-header.is-menu-open .language-option {
@@ -4689,7 +4686,7 @@ body,
 
 .mobile-menu-overlay {
   position: fixed;
-  top: 0;
+  top: 92px;
   left: 0;
   width: 100%;
   height: auto;
@@ -4698,7 +4695,7 @@ body,
   z-index: 90;
   display: flex;
   flex-direction: column;
-   padding: 104px 16px 18px;
+  padding: 18px 16px;
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
   pointer-events: none;
@@ -4714,11 +4711,17 @@ body,
   transition-delay: 0s;
 }
 
+@media (max-width: 360px) {
+  .mobile-menu-overlay {
+    top: 98px;
+  }
+}
+
 .mobile-menu-links {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 0;
 }
 
 .mobile-menu-link {
