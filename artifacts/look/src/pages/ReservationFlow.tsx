@@ -261,7 +261,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
             aria-live="polite"
           >
             {hasOpenedStepContent && activeStep === 0 && (
-              <section className="reservation-process reservation-slide" aria-labelledby="reservation-start-title">
+              <section className="reservation-process reservation-slide reservation-start-step" aria-labelledby="reservation-start-title">
                 <div className="reservation-section-heading reservation-start-heading">
                   <button type="button" className="reservation-exit-button reservation-exit-button-top" onClick={() => setHasOpenedStepContent(false)}>
                     <ArrowLeft size={14} aria-hidden="true" />{text.exit}

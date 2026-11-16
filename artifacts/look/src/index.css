@@ -9775,3 +9775,30 @@ body,
     display: none;
   }
 }
+
+@media (max-width: 760px) {
+  .reservation-embedded .reservation-start-heading {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .reservation-embedded .reservation-start-heading-spacer {
+    display: none;
+  }
+
+  .reservation-embedded .reservation-start-heading-title {
+    width: 100%;
+  }
+
+  .reservation-embedded .reservation-start-heading-title .reservation-index,
+  .reservation-embedded .reservation-start-heading-title h2 {
+    text-align: center;
+  }
+
+  .reservation-embedded .reservation-start-step > .reservation-contact-grid > .reservation-contact-intro {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
