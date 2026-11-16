@@ -57,7 +57,7 @@
     padding: .55rem .75rem;
     border: 1px solid rgba(255, 248, 201, .55);
     border-radius: 12px;
-    background: linear-gradient(125deg, rgba(255, 248, 201, .14), rgba(11, 10, 10, .12));
+    background: rgba(11, 10, 10, .08);
     color: #FFF8C9;
     font: inherit;
     font-size: .75rem;
@@ -159,36 +159,63 @@
     display: block;
   }
 
-  .reservation-embedded .reservation-mobile-time-periods {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: .38rem;
-  }
-
-  .reservation-embedded .reservation-time-period {
-    display: grid;
-    min-width: 0;
-    min-height: 44px;
-    place-items: center;
-    padding: .5rem .2rem;
-    border: 1px solid rgba(255, 248, 201, .58);
-    border-radius: 11px;
-    background: rgba(11, 10, 10, .16);
+  .reservation-embedded .reservation-mobile-time-trigger {
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    align-items: center;
+    justify-content: space-between;
+    gap: .7rem;
+    padding: .55rem .75rem;
+    border: 1px solid rgba(255, 248, 201, .55);
+    border-radius: 12px;
+    background: rgba(11, 10, 10, .08);
     color: #FFF8C9;
     font: inherit;
-    font-size: clamp(.52rem, 2.5vw, .68rem);
-    letter-spacing: .04em;
-    text-align: center;
-    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+    font-size: .75rem;
+    text-align: left;
   }
 
-  .reservation-embedded .reservation-time-period.is-selected {
-    border-color: #FFF8C9;
+  .reservation-embedded .reservation-mobile-time-trigger svg {
+    flex: 0 0 auto;
+    color: #FFF8C9;
+  }
+
+  .reservation-embedded .reservation-mobile-time-options {
+    display: grid;
+    gap: .12rem;
+    margin-top: .35rem;
+    padding: .32rem;
+    border: 1px solid rgba(255, 248, 201, .7);
+    border-radius: 12px;
     background: #FFF8C9;
     color: #0B0A0A;
   }
 
-  .reservation-embedded .reservation-time-period:focus-visible {
+  .reservation-embedded .reservation-time-period-option {
+    display: flex;
+    width: 100%;
+    min-height: 38px;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .5rem .7rem;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #0B0A0A;
+    font: inherit;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-align: left;
+    transition: background-color .15s ease, color .15s ease;
+  }
+
+  .reservation-embedded .reservation-time-period-option.is-selected {
+    background: rgba(11, 10, 10, .1);
+    font-weight: 600;
+  }
+
+  .reservation-embedded .reservation-time-period-option:focus-visible {
     outline: 2px solid #0B0A0A;
     outline-offset: 2px;
   }

@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock3, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, ChevronLeft, ChevronRight, Clock3, MapPin } from "lucide-react";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
@@ -30,6 +30,7 @@ const copy = {
     date: "Fecha que prefieres",
     time: "Hora preferida · Colombia",
     timePeriodLabel: "Horario preferido · Colombia",
+    chooseTimePeriod: "ELIGE UN HORARIO",
     timePeriods: { morning: "MAÑANA", afternoon: "TARDE", night: "NOCHE" },
     projectIntro: "Comparte lo esencial. El diseño se conversa y desarrolla directamente con Salvatore.",
     scheduleIntro: "Indica el día y la hora que te funcionan. Salvatore revisará su agenda y te confirmará por WhatsApp.",
@@ -66,6 +67,7 @@ const copy = {
     date: "Preferred date",
     time: "Preferred time · Colombia",
     timePeriodLabel: "Preferred time · Colombia",
+    chooseTimePeriod: "CHOOSE A TIME OF DAY",
     timePeriods: { morning: "MORNING", afternoon: "AFTERNOON", night: "EVENING" },
     projectIntro: "Share the essentials. The design will be discussed and developed directly with Salvatore.",
     scheduleIntro: "Choose a day and time that work for you. Salvatore will check his schedule and confirm on WhatsApp.",
@@ -102,6 +104,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [mobileTimePeriod, setMobileTimePeriod] = useState<TimePeriod | "">("");
+  const [isTimePeriodOpen, setIsTimePeriodOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => {
     const now = new Date();
@@ -156,6 +159,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     setHasOpenedStepContent(true);
     setActiveStep(step);
     setRequestError("");
+    setIsTimePeriodOpen(false);
     if (!hasOpenedStepContent) {
       window.setTimeout(() => {
         document.getElementById("reservation-step-content")?.scrollIntoView({
@@ -184,6 +188,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
 
   const selectMobileTimePeriod = (period: TimePeriod) => {
     setMobileTimePeriod(period);
+    setIsTimePeriodOpen(false);
     setTime("");
     clearMessages();
   };
@@ -440,19 +445,31 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                     </label>
                     <div className="reservation-mobile-picker reservation-mobile-time-picker">
                       <span className="reservation-mobile-picker-label">{text.timePeriodLabel}</span>
-                      <div className="reservation-mobile-time-periods" role="group" aria-label={text.timePeriodLabel}>
-                        {(["morning", "afternoon", "night"] as const).map((period) => (
-                          <button
-                            key={period}
-                            type="button"
-                            className={`reservation-time-period${mobileTimePeriod === period ? " is-selected" : ""}`}
-                            aria-pressed={mobileTimePeriod === period}
-                            onClick={() => selectMobileTimePeriod(period)}
-                          >
-                            {text.timePeriods[period]}
-                          </button>
-                        ))}
-                      </div>
+                      <button
+                        type="button"
+                        className="reservation-mobile-time-trigger"
+                        aria-expanded={isTimePeriodOpen}
+                        aria-controls="reservation-mobile-time-options"
+                        onClick={() => setIsTimePeriodOpen((open) => !open)}
+                      >
+                        <span>{mobileTimePeriod ? text.timePeriods[mobileTimePeriod] : text.chooseTimePeriod}</span>
+                        <ChevronDown size={16} aria-hidden="true" />
+                      </button>
+                      {isTimePeriodOpen && (
+                        <div className="reservation-mobile-time-options" id="reservation-mobile-time-options" role="group" aria-label={text.timePeriodLabel}>
+                          {(["morning", "afternoon", "night"] as const).map((period) => (
+                            <button
+                              key={period}
+                              type="button"
+                              className={`reservation-time-period-option${mobileTimePeriod === period ? " is-selected" : ""}`}
+                              aria-pressed={mobileTimePeriod === period}
+                              onClick={() => selectMobileTimePeriod(period)}
+                            >
+                              {text.timePeriods[period]}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     {requestError && <p className="reservation-alert" role="alert">{requestError}</p>}
                     <div className="reservation-slide-actions">
