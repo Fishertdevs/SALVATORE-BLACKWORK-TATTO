@@ -9808,3 +9808,9 @@ body,
     display: inline;
   }
 }
+
+@media (max-width: 760px) {
+  #studio-reservas.page-reservations {
+    scroll-margin-top: clamp(76px, 12vh, 96px);
+  }
+}
