@@ -1434,10 +1434,14 @@ export function ContactPage({ language }: StudioProps) {
           <div className="page-contact-copy-column">
             <header className="page-contact-heading">
               <h1>
-                {language === "es" && <span className="page-contact-question page-contact-question-open" aria-hidden="true">?</span>}
-                {copy.title[0].replace(/^¿/, "")}{" "}
-                {copy.title[1].replace(/\?$/, "")}
-                <span className="page-contact-question" aria-hidden="true">?</span>
+                <span className="page-contact-title-line">
+                  {language === "es" && <span className="page-contact-question page-contact-question-open" aria-hidden="true">?</span>}
+                  {copy.title[0].replace(/^¿/, "")}
+                </span>{" "}
+                <span className="page-contact-title-line">
+                  {copy.title[1].replace(/\?$/, "")}
+                  <span className="page-contact-question" aria-hidden="true">?</span>
+                </span>
               </h1>
             </header>
 

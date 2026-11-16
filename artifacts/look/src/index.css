@@ -9753,3 +9753,25 @@ body,
     text-transform: uppercase;
   }
 }
+
+@media (max-width: 600px) {
+  .page-contact-heading {
+    margin-bottom: 22px;
+  }
+
+  .page-contact-heading h1 {
+    font-size: clamp(1.5rem, 8vw, 2.25rem);
+    line-height: 1.05;
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .page-contact-heading h1 .page-contact-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .page-contact-form-layout > .page-contact-portrait {
+    display: none;
+  }
+}
