@@ -9816,9 +9816,14 @@ body,
 }
 
 @media (max-width: 600px) {
-  .page-manifesto-slide {
+  #studio-reservas.page-reservations {
     min-height: auto;
-    padding: 52px 20px;
+  }
+
+  .page-manifesto-slide {
+    min-height: 100svh;
+    align-items: start;
+    padding: clamp(72px, 12vh, 96px) 20px 40px;
   }
 
   .page-manifesto-quote {
