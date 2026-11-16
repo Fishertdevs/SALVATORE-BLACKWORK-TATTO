@@ -7,6 +7,28 @@ import { galleryCopy, getInitialLanguage, persistLanguage } from "@/i18n";
 import type { Language } from "@/i18n";
 import mainImg from "@assets/image-Photoroom_(30)_1789700945504.png";
 
+const seoMetadata = {
+  es: {
+    title: "Tatuajes Blackwork en Funza | Salvatore Blackwork Tattoo",
+    description:
+      "Tatuajes personalizados en blackwork, ornamental y neotribal en Funza, Colombia. Salvatore diseña cada pieza para tu anatomía. Consulta y agenda por WhatsApp.",
+    locale: "es_CO",
+    documentLanguage: "es-CO",
+  },
+  en: {
+    title: "Blackwork Tattoos in Funza | Salvatore Blackwork Tattoo",
+    description:
+      "Custom blackwork, ornamental, and neo-tribal tattoos in Funza, Colombia. Salvatore designs pieces for your anatomy. Explore the portfolio and book on WhatsApp.",
+    locale: "en_US",
+    documentLanguage: "en",
+  },
+} satisfies Record<Language, {
+  title: string;
+  description: string;
+  locale: string;
+  documentLanguage: string;
+}>;
+
 const appBasePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -672,6 +694,23 @@ export default function LookGallery() {
   );
   const [language, setLanguage] = useState<Language>(() => getInitialLanguage());
   const [isWelcomeComplete, setIsWelcomeComplete] = useState(() => shouldSkipWelcome());
+  useEffect(() => {
+    const metadata = seoMetadata[language];
+    document.documentElement.lang = metadata.documentLanguage;
+    document.title = metadata.title;
+
+    const setContent = (selector: string, content: string) => {
+      const element = document.querySelector<HTMLMetaElement>(selector);
+      if (element) element.content = content;
+    };
+
+    setContent("#meta-description", metadata.description);
+    setContent("#og-title", metadata.title);
+    setContent("#og-description", metadata.description);
+    setContent("#twitter-title", metadata.title);
+    setContent("#twitter-description", metadata.description);
+    setContent('meta[property="og:locale"]', metadata.locale);
+  }, [language]);
   const handleLanguageChange = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
     persistLanguage(nextLanguage);
