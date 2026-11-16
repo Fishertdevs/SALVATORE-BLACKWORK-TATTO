@@ -9213,11 +9213,9 @@ body,
     min-width: 0;
     align-self: center;
     justify-self: stretch;
-    padding: 10px 7px;
-    border: 1px solid rgba(17, 17, 17, 0.12);
-    background: rgba(255, 248, 242, 0.93);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 3px 14px rgba(17, 17, 17, 0.08);
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 
   .mobile-look-root .page-about .page-about-editorial-beat-left-1 {
@@ -9243,31 +9241,18 @@ body,
   .mobile-look-root .page-about .page-about-editorial-side h2 {
     width: 100%;
     max-width: none;
-    margin-bottom: 6px;
-    font-size: clamp(0.68rem, 3.5vw, 0.9rem);
-    line-height: 1;
+    margin: 0;
+    padding: 6px 4px;
+    color: #E63027;
+    font-size: clamp(0.82rem, 4vw, 1.05rem);
+    line-height: 1.05;
     letter-spacing: -0.035em;
     white-space: normal;
     text-wrap: balance;
+    text-shadow: 0 1px 2px rgba(255, 248, 242, 0.95), 0 0 12px rgba(255, 248, 242, 0.9);
   }
 
   .mobile-look-root .page-about .page-about-editorial-side p {
-    width: 100%;
-    max-width: none;
-    min-height: 0;
-    font-size: clamp(11px, 3.1vw, 12px);
-    line-height: 1.3;
-  }
-
-  .mobile-look-root .page-about .page-about-editorial-desktop-copy {
     display: none;
   }
-
-  .mobile-look-root .page-about .page-about-editorial-mobile-copy {
-    display: block;
-  }
-}
-
-.page-about .page-about-editorial-mobile-copy {
-  display: none;
 }
