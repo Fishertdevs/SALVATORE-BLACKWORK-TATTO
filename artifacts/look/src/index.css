@@ -9814,3 +9814,27 @@ body,
     scroll-margin-top: clamp(76px, 12vh, 96px);
   }
 }
+
+@media (max-width: 600px) {
+  .page-manifesto-slide {
+    min-height: auto;
+    padding: 52px 20px;
+  }
+
+  .page-manifesto-quote {
+    font-size: clamp(1.8rem, 9.2vw, 2.6rem);
+    line-height: 1;
+  }
+
+  .page-manifesto-line:nth-child(2) {
+    margin-left: clamp(12px, 4vw, 24px);
+  }
+
+  .page-manifesto-line:nth-child(3) {
+    margin-left: clamp(20px, 6vw, 36px);
+  }
+
+  .page-manifesto-line:nth-child(4) {
+    margin-left: clamp(8px, 4vw, 24px);
+  }
+}
