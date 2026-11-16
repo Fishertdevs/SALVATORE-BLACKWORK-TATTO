@@ -9355,6 +9355,10 @@ body,
 }
 
 @media (max-width: 767px) {
+  .studio-home-sections--mobile .page-portfolio .page-portfolio-hero {
+    padding-top: calc(18vw + 12px);
+  }
+
   .studio-home-sections--mobile .page-portfolio-title-line-desktop {
     display: none;
   }
