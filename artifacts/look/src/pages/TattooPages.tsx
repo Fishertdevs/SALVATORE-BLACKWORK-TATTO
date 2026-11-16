@@ -308,7 +308,11 @@ export function AboutPage({ language }: StudioProps) {
       <section ref={aboutSectionRef} className="page-about-hero page-about-hero-editorial">
         <header className="page-about-editorial-heading">
           <h1 data-about-reveal="title">
-            {copy.title.join(" ")}
+            {copy.title.map((line) => (
+              <span className="page-about-editorial-title-line" key={line}>
+                {line}
+              </span>
+            ))}
           </h1>
           <p className="page-about-editorial-kicker" data-about-reveal="heading">
             {language === "es" ? "HISTORIAS · BLACKWORK · IDENTIDAD" : "STORIES · BLACKWORK · IDENTITY"}
