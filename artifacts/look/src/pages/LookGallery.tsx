@@ -686,7 +686,7 @@ function MobileLookGallery({
         </p>
       </section>
 
-      <StudioHomeSections language={language} />
+      <StudioHomeSections language={language} isMobile />
 
       <SiteFooter copy={copy} language={language} />
 

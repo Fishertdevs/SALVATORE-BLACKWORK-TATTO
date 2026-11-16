@@ -9252,7 +9252,79 @@ body,
     text-shadow: 0 1px 2px rgba(255, 248, 242, 0.95), 0 0 12px rgba(255, 248, 242, 0.9);
   }
 
+  .mobile-look-root .page-about .page-about-editorial-trigger {
+    display: block;
+    width: 100%;
+    border: 0;
+    padding: 6px 4px;
+    background: transparent;
+    font-family: 'Beautique Display', 'Helvetica Neue', serif;
+    font-size: clamp(0.82rem, 4vw, 1.05rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 180ms ease, text-shadow 180ms ease;
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-trigger em {
+    color: inherit;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-beat-left-1 .page-about-editorial-trigger,
+  .mobile-look-root .page-about .page-about-editorial-beat-right-1 .page-about-editorial-trigger {
+    color: #171515;
+    text-shadow: 0 1px 8px rgba(255, 248, 242, 0.95);
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-beat-left-2 .page-about-editorial-trigger,
+  .mobile-look-root .page-about .page-about-editorial-beat-right-2 .page-about-editorial-trigger {
+    color: #FFFFFF;
+    text-shadow: 0 1px 8px rgba(17, 17, 17, 0.92);
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-trigger:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid #E63027;
+    outline-offset: 2px;
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-trigger[aria-expanded="true"] {
+    color: #171515;
+    text-shadow: 0 1px 8px rgba(255, 248, 242, 0.95);
+  }
+
   .mobile-look-root .page-about .page-about-editorial-side p {
     display: none;
+  }
+
+  .mobile-look-root .page-about .page-about-editorial-side .page-about-editorial-detail:not([hidden]) {
+    display: block;
+    width: calc(100% - 12px);
+    margin: 5px auto 0;
+    padding: 7px 6px;
+    border-left: 2px solid #E63027;
+    background: rgba(255, 248, 242, 0.9);
+    color: #171515;
+    font-size: clamp(10px, 3vw, 11.5px);
+    line-height: 1.25;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    animation: about-beat-detail-in 220ms ease both;
+  }
+
+  @keyframes about-beat-detail-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
