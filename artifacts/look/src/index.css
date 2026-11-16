@@ -9145,8 +9145,12 @@ body,
 }
 
 @media (max-width: 700px) {
+  .mobile-look-root .page-about .page-about-hero-editorial {
+    padding-top: 96px;
+  }
+
   .mobile-look-root .page-about .page-about-editorial-heading {
-    margin: 0 auto 28px;
+    margin: 0 auto 56px;
     padding-inline: 0;
     text-align: center;
   }
