@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock3, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, ChevronLeft, ChevronRight, Clock3, MapPin } from "lucide-react";
 import { getReservationWhatsAppHref } from "@/lib/whatsapp";
 import type { Language } from "@/i18n";
 
@@ -100,6 +100,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
   const [time, setTime] = useState("");
   const [mobileHour, setMobileHour] = useState("");
   const [mobileMinute, setMobileMinute] = useState("");
+  const [openTimeField, setOpenTimeField] = useState<"hour" | "minute" | null>(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [calendarMonth, setCalendarMonth] = useState(() => {
     const now = new Date();
@@ -157,6 +158,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     setHasOpenedStepContent(true);
     setActiveStep(step);
     setRequestError("");
+    setOpenTimeField(null);
     if (!hasOpenedStepContent) {
       window.setTimeout(() => {
         document.getElementById("reservation-step-content")?.scrollIntoView({
@@ -189,6 +191,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
     setMobileHour(nextHour);
     setMobileMinute(nextMinute);
     setTime(nextHour && nextMinute ? `${nextHour}:${nextMinute}` : "");
+    setOpenTimeField(null);
     clearMessages();
   };
 
@@ -449,30 +452,53 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                           <strong>{mobileHour || "--"}:{mobileMinute || "--"}</strong>
                         </div>
                         <div className="reservation-mobile-time-controls">
-                          <label>
-                            <span>{text.hour}</span>
-                            <select
-                              aria-label={text.hour}
-                              value={mobileHour}
-                              onChange={(event) => updateMobileTime("hour", event.target.value)}
-                            >
-                              <option value="">--</option>
-                              {mobileHours.map((hour) => <option value={hour} key={hour}>{hour}</option>)}
-                            </select>
-                          </label>
-                          <span className="reservation-mobile-time-separator">:</span>
-                          <label>
-                            <span>{text.minute}</span>
-                            <select
-                              aria-label={text.minute}
-                              value={mobileMinute}
-                              onChange={(event) => updateMobileTime("minute", event.target.value)}
-                            >
-                              <option value="">--</option>
-                              {mobileMinutes.map((minute) => <option value={minute} key={minute}>{minute}</option>)}
-                            </select>
-                          </label>
+                          <button
+                            type="button"
+                            className={`reservation-time-part-button${openTimeField === "hour" ? " is-open" : ""}`}
+                            aria-label={`${text.hour}: ${mobileHour || "--"}`}
+                            aria-expanded={openTimeField === "hour"}
+                            aria-controls="reservation-time-options"
+                            onClick={() => setOpenTimeField(openTimeField === "hour" ? null : "hour")}
+                          >
+                            <span>{text.hour}</span><strong>{mobileHour || "--"}</strong><ChevronDown size={12} aria-hidden="true" />
+                          </button>
+                          <button
+                            type="button"
+                            className={`reservation-time-part-button${openTimeField === "minute" ? " is-open" : ""}`}
+                            aria-label={`${text.minute}: ${mobileMinute || "--"}`}
+                            aria-expanded={openTimeField === "minute"}
+                            aria-controls="reservation-time-options"
+                            onClick={() => setOpenTimeField(openTimeField === "minute" ? null : "minute")}
+                          >
+                            <span>{text.minute}</span><strong>{mobileMinute || "--"}</strong><ChevronDown size={12} aria-hidden="true" />
+                          </button>
                         </div>
+                        {openTimeField && (
+                          <div className="reservation-time-options" id="reservation-time-options">
+                            <div className="reservation-time-options-heading">
+                              <span>{openTimeField === "hour" ? text.hour : text.minute}</span>
+                              <span>{openTimeField === "hour" ? "00–23" : "00–59"}</span>
+                            </div>
+                            <div className="reservation-time-options-grid" role="group" aria-label={openTimeField === "hour" ? text.hour : text.minute}>
+                              {(openTimeField === "hour" ? mobileHours : mobileMinutes).map((value) => {
+                                const selectedValue = openTimeField === "hour" ? mobileHour : mobileMinute;
+                                return (
+                                  <button
+                                    key={value}
+                                    type="button"
+                                    className={`reservation-time-option${selectedValue === value ? " is-selected" : ""}`}
+                                    aria-pressed={selectedValue === value}
+                                    onClick={() => {
+                                      if (openTimeField) updateMobileTime(openTimeField, value);
+                                    }}
+                                  >
+                                    {value}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                     {requestError && <p className="reservation-alert" role="alert">{requestError}</p>}
