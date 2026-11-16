@@ -7511,6 +7511,39 @@ body,
   }
 }
 
+.reservation-embedded .reservation-exit-button-mobile {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .reservation-embedded .reservation-start-heading .reservation-exit-button-top {
+    display: none !important;
+  }
+
+  .reservation-embedded .reservation-project-actions {
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: .9rem !important;
+  }
+
+  .reservation-embedded .reservation-project-actions > span {
+    display: none;
+  }
+
+  .reservation-embedded .reservation-project-actions .reservation-exit-button-mobile {
+    display: inline-flex !important;
+    gap: .3rem !important;
+    font-size: .65rem !important;
+    letter-spacing: .07em !important;
+  }
+
+  .reservation-embedded .reservation-project-actions .reservation-primary-button {
+    gap: .3rem !important;
+    font-size: .65rem !important;
+    letter-spacing: .07em !important;
+  }
+}
+
 /* About section: extend the portrait's rendered red across the whole story. */
 .page-about {
   background: #BC2820;

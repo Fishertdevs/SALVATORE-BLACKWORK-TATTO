@@ -182,7 +182,7 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
             {hasOpenedStepContent && activeStep === 0 && (
               <section className="reservation-process reservation-slide" aria-labelledby="reservation-start-title">
                 <div className="reservation-section-heading reservation-start-heading">
-                  <button type="button" className="reservation-exit-button" onClick={() => setHasOpenedStepContent(false)}>
+                  <button type="button" className="reservation-exit-button reservation-exit-button-top" onClick={() => setHasOpenedStepContent(false)}>
                     <ArrowLeft size={14} aria-hidden="true" />{text.exit}
                   </button>
                   <div className="reservation-start-heading-title">
@@ -229,8 +229,15 @@ export default function ReservationFlow({ language }: ReservationFlowProps) {
                       />
                     </label>
                     {requestError && <p className="reservation-alert" role="alert">{requestError}</p>}
-                    <div className="reservation-slide-actions">
+                    <div className="reservation-slide-actions reservation-project-actions">
                       <span />
+                      <button
+                        type="button"
+                        className="reservation-exit-button reservation-exit-button-mobile"
+                        onClick={() => setHasOpenedStepContent(false)}
+                      >
+                        <ArrowLeft size={14} aria-hidden="true" />{text.exit}
+                      </button>
                       <button type="button" className="reservation-primary-button" onClick={continueFromProject}>
                         {text.continue}<ArrowRight size={17} aria-hidden="true" />
                       </button>
