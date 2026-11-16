@@ -487,11 +487,11 @@ function MobileLookGallery({
       const title = hero.querySelector(".mobile-hero-title");
       const keywords = hero.querySelector(".mobile-hero-kicker");
       const actions = hero.querySelectorAll(".mobile-hero-side-action");
-      const elements = [title, keywords, ...Array.from(actions)].filter(Boolean);
+      const clipTargets = [keywords, ...Array.from(actions)].filter(Boolean);
       const replayElements = keywords ? [keywords] : [];
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        gsap.set(elements, { clipPath: "inset(0px 0% 0px 0px)" });
+        gsap.set(clipTargets, { clipPath: "inset(0px 0% 0px 0px)" });
         return;
       }
 
@@ -501,7 +501,14 @@ function MobileLookGallery({
         ease: "power3.out",
       };
       const tl = gsap.timeline();
-      if (title) tl.to(title, reveal, 0.8);
+      if (title) {
+        tl.fromTo(title, { opacity: 0, y: 6 }, {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out",
+        }, 0.8);
+      }
       if (keywords) tl.to(keywords, reveal, 1.3);
       tl.to(actions, {
         ...reveal,
