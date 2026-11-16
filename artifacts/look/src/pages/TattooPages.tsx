@@ -17,10 +17,10 @@ const studioCopy = {
     about: {
       title: ["CÓMO INICIÓ", "ESTE PROYECTO"],
       beats: [
-        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo." },
-        { title: ["VISIÓN", "PROPIA"], copy: "El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía." },
-        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel." },
-        { title: ["DISEÑO", "A MEDIDA"], copy: "A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia." },
+        { title: ["IDEA", "COMÚN"], copy: "Salvatore Blackwork nace para transformar historias personales en diseños blackwork que se integran de forma natural al cuerpo.", mobileCopy: "Historias personales convertidas en blackwork." },
+        { title: ["VISIÓN", "PROPIA"], copy: "El estudio desarrolla un lenguaje visual propio con contraste, líneas precisas y composiciones pensadas para cada anatomía.", mobileCopy: "Contraste y líneas precisas, pensados para tu cuerpo." },
+        { title: ["DIÁLOGO", "DIRECTO"], copy: "Cada proyecto comienza con una conversación sobre tu historia, tus referencias y lo que quieres expresar en la piel.", mobileCopy: "Hablamos de tu historia y de lo que quieres expresar." },
+        { title: ["DISEÑO", "A MEDIDA"], copy: "A partir de ese intercambio, creamos una pieza a medida que acompaña el movimiento y expresa una identidad visual propia.", mobileCopy: "Diseños a medida que acompañan el movimiento de tu cuerpo." },
       ],
     },
     portfolio: {
@@ -104,10 +104,10 @@ const studioCopy = {
     about: {
       title: ["HOW THIS PROJECT", "BEGAN"],
       beats: [
-        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork turns personal stories into blackwork designs that feel natural on the body." },
-        { title: ["DISTINCT", "VISION"], copy: "The studio builds a visual language through contrast, precise lines, and compositions shaped for each anatomy." },
-        { title: ["OPEN", "DIALOGUE"], copy: "Each project begins with a conversation about your story, references, and what you want to express through your tattoo." },
-        { title: ["CUSTOM", "DESIGN"], copy: "From there, we create a custom piece that moves with the body and expresses a distinct visual identity." },
+        { title: ["SHARED", "IDEA"], copy: "Salvatore Blackwork turns personal stories into blackwork designs that feel natural on the body.", mobileCopy: "Personal stories, transformed into blackwork." },
+        { title: ["DISTINCT", "VISION"], copy: "The studio builds a visual language through contrast, precise lines, and compositions shaped for each anatomy.", mobileCopy: "Precise lines and contrast, shaped for your body." },
+        { title: ["OPEN", "DIALOGUE"], copy: "Each project begins with a conversation about your story, references, and what you want to express through your tattoo.", mobileCopy: "We talk about your story and what you want to express." },
+        { title: ["CUSTOM", "DESIGN"], copy: "From there, we create a custom piece that moves with the body and expresses a distinct visual identity.", mobileCopy: "Custom designs made to move with your body." },
       ],
     },
     portfolio: {
@@ -326,7 +326,10 @@ export function AboutPage({ language }: StudioProps) {
             {[copy.beats[0], copy.beats[1]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-left-${index + 1}`} key={beat.title.join("-")}>
                 <h2 data-about-reveal="heading">{beat.title[0]}{" "}<em>{beat.title[1]}</em></h2>
-                <p data-about-reveal="copy">{beat.copy}</p>
+                <p data-about-reveal="copy">
+                  <span className="page-about-editorial-desktop-copy">{beat.copy}</span>
+                  <span className="page-about-editorial-mobile-copy">{beat.mobileCopy}</span>
+                </p>
               </div>
             ))}
           </article>
@@ -340,7 +343,10 @@ export function AboutPage({ language }: StudioProps) {
             {[copy.beats[2], copy.beats[3]].map((beat, index) => (
               <div className={`page-about-editorial-beat page-about-editorial-beat-right-${index + 1}`} key={beat.title.join("-")}>
                 <h2 data-about-reveal="heading">{beat.title[0]}{" "}<em>{beat.title[1]}</em></h2>
-                <p data-about-reveal="copy">{beat.copy}</p>
+                <p data-about-reveal="copy">
+                  <span className="page-about-editorial-desktop-copy">{beat.copy}</span>
+                  <span className="page-about-editorial-mobile-copy">{beat.mobileCopy}</span>
+                </p>
               </div>
             ))}
           </article>
