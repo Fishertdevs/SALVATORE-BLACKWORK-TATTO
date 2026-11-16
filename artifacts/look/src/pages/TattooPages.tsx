@@ -235,7 +235,6 @@ export function AboutPage({ language, isMobile = false }: StudioProps) {
               type="button"
               aria-expanded={isExpanded}
               aria-controls={detailId}
-              data-about-reveal="heading"
               onClick={() => setActiveAboutBeat((active) => active === beatIndex ? null : beatIndex)}
             >
               {beat.title[0]}{" "}<em>{beat.title[1]}</em>
