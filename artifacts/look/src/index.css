@@ -4328,6 +4328,10 @@ body,
     overflow: visible;
     text-overflow: clip;
   }
+
+  .mobile-menu-overlay {
+    padding-top: 98px;
+  }
 }
 
 .mobile-header.is-menu-open .language-option {
@@ -4420,7 +4424,7 @@ body,
   z-index: 90;
   display: flex;
   flex-direction: column;
-  padding: 72px 16px 18px;
+  padding: 92px 16px 18px;
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
   pointer-events: none;
