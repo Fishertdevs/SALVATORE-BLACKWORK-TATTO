@@ -9820,6 +9820,10 @@ body,
     min-height: auto;
   }
 
+  #studio-manifesto .page-manifesto-slide:not(:first-child) {
+    display: none;
+  }
+
   .page-manifesto-slide {
     min-height: 100svh;
     align-items: start;
