@@ -577,8 +577,10 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
     const hiddenTagState = { autoAlpha: 0, y: 18, filter: "blur(5px)" };
     const hiddenVisualState = { autoAlpha: 0, y: 32, scale: .97, filter: "blur(7px)" };
     const activeTweens = new Map<HTMLElement, gsap.core.Tween>();
-    gsap.set(tags, hiddenTagState);
-    gsap.set(visuals, hiddenVisualState);
+    if (!isMobile) {
+      gsap.set(tags, hiddenTagState);
+      gsap.set(visuals, hiddenVisualState);
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -590,8 +592,8 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
             activeTweens.get(target)?.kill();
             gsap.killTweensOf(targetItems);
-            const tween = target === tagRow
-              ? gsap.to(tags, {
+            const visibleState = target === tagRow
+              ? {
                   autoAlpha: 1,
                   y: 0,
                   filter: "blur(0px)",
@@ -599,8 +601,8 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
                   stagger: .12,
                   ease: "power3.out",
                   overwrite: true,
-                })
-              : gsap.to(visuals, {
+                }
+              : {
                   autoAlpha: 1,
                   y: 0,
                   scale: 1,
@@ -609,17 +611,27 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
                   stagger: .84,
                   ease: "power3.out",
                   overwrite: true,
-                });
+                };
+            const tween = isMobile
+              ? gsap.fromTo(targetItems, hiddenState, visibleState)
+              : gsap.to(targetItems, visibleState);
             activeTweens.set(target, tween);
           } else if (!entry.isIntersecting) {
             activeTweens.get(target)?.kill();
             activeTweens.delete(target);
             gsap.killTweensOf(targetItems);
-            gsap.set(targetItems, hiddenState);
+            if (isMobile) {
+              gsap.set(targetItems, { clearProps: "all" });
+            } else {
+              gsap.set(targetItems, hiddenState);
+            }
           }
         });
       },
-      { root: document.getElementById("fullscreen-section"), threshold: [0, 0.15] },
+      {
+        root: isMobile ? null : document.getElementById("fullscreen-section"),
+        threshold: [0, 0.15],
+      },
     );
 
     targets.forEach((target) => observer.observe(target));
@@ -629,7 +641,7 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
       gsap.killTweensOf([...tags, ...visuals]);
       gsap.set([...tags, ...visuals], { clearProps: "all" });
     };
-  }, [language]);
+  }, [isMobile, language]);
 
   const moveStyleSlide = (direction: number) => {
     setActiveStyleSlide((current) => (current + direction + 2) % 2);
@@ -661,18 +673,20 @@ export function PortfolioPage({ language, isMobile = false }: StudioProps) {
           <p>{copy.intro}</p>
         </div>
       </section>
-      <div
-        className="page-portfolio-keywords"
-        ref={portfolioKeywordsRef}
-        aria-label={language === "es" ? "Palabras clave del estudio" : "Studio keywords"}
-      >
-        {copy.keywords.map((keyword, index) => (
-          <span className="tattoo-eyebrow page-portfolio-keyword" key={keyword}>
-            {keyword}
-            {index < copy.keywords.length - 1 && <span className="page-portfolio-keyword-separator" aria-hidden="true">·</span>}
-          </span>
-        ))}
-      </div>
+      {!isMobile && (
+        <div
+          className="page-portfolio-keywords"
+          ref={portfolioKeywordsRef}
+          aria-label={language === "es" ? "Palabras clave del estudio" : "Studio keywords"}
+        >
+          {copy.keywords.map((keyword, index) => (
+            <span className="tattoo-eyebrow page-portfolio-keyword" key={keyword}>
+              {keyword}
+              {index < copy.keywords.length - 1 && <span className="page-portfolio-keyword-separator" aria-hidden="true">·</span>}
+            </span>
+          ))}
+        </div>
+      )}
       <div
         className="page-portfolio-gallery-tags"
         ref={galleryTagsRef}
